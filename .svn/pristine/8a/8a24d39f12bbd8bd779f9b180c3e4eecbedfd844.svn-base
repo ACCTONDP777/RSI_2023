@@ -1,0 +1,162 @@
+﻿@model IEnumerable<RSI.Models.Entity.C_MTL_PARTSEntity>
+@{
+    ViewBag.Title = RSI.Models.Entity.Employee.GetSiteName(Request.QueryString["phase_id"], Request.QueryString["BU"]);
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var groups_id = Model.GroupBy(p => p.GROUP_ID).ToList();
+}
+@section custom_style{
+    <style>
+        .table > tbody > tr > td {
+            vertical-align: inherit;
+            border: 1px solid rgb(200,200,200);
+        }
+
+        .confirmTable th {
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .confirmTable th, td {
+            padding: 8px;
+            border: 1px #ddd solid;
+        }
+    </style>
+}
+@Html.Partial("~/Views/RSI/BasicPage.cshtml", ViewData["h_Product_Info"])
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Portfolio Summary Report
+        </h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+        </div>
+    </div>
+    <div class="box-body">
+        <table class="confirmTable">
+            <thead>
+                <tr class="bg-light-blue">
+                    <th style="width:140px;">Material Group</th>
+                    @*<th style="width:90px;">Part Type</th>*@
+                    @for (var i = 0; i < groups_id.Count(); i++)
+                    {
+                        var name = RSI.Models.Manager.H_Product_DetailManager.GetGroupName(groups_id[i].Select(p => p.RSI_NO).FirstOrDefault(), groups_id[i].Select(p => p.GROUP_ID).FirstOrDefault());
+                        name = String.IsNullOrEmpty(name) ? String.Format("Portfolio{0}", i + 1) : name;
+                        var url = String.Format("/RSI/PM/PortfolioDetail?rsi_no={0}&group_id={1}&bu={2}", groups_id[i].FirstOrDefault().RSI_NO, groups_id[i].Key, ((RSI.Models.Entity.H_Product_InfoEntity)ViewData["h_Product_Info"]).BU);
+                        <th style="width:100px;"><a style="color:white; text-decoration: underline;" href="@url" onclick="window.open(this.href, '_blank', 'width=1000,height=800,scrollbars=yes,resizable=yes'); return false;" data-group_id="@groups_id[i].Key">@name</a></th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Portfolio Description</td>
+                    @*<td></td>*@
+                    @for (var i = 0; i < groups_id.Count(); i++)
+                    {
+                        <td class="text-right">@RSI.Models.Manager.H_Product_DetailManager.GetGroupDesc(groups_id[i].Select(p => p.RSI_NO).FirstOrDefault(), groups_id[i].Select(p => p.GROUP_ID).FirstOrDefault())</td>
+                    }
+                </tr>
+                @*@for (var i = 0; i < groups_id[0].Count(); i++)
+                {
+                    var mtl_group = groups_id[0].ToList()[i].MTL_GROUP;
+                    <tr>
+                        <td>@groups_id[0].Where(p => p.MTL_GROUP == mtl_group).Select(p => p.MTL_GROUP).FirstOrDefault()</td>
+                        @for (var j = 0; j < groups_id.Count(); j++)
+                        {
+                            var numbervalue = groups_id[j].Where(p => p.MTL_GROUP == mtl_group).Select(p => p.MTL_GROUP_TOTAL).FirstOrDefault();
+                            var colorvalue = numbervalue > 0 ? "blue" : numbervalue == 0 ? "gray" : "red";
+                            <td class="text-right" style="color: @colorvalue;">@numbervalue.ToString("N")</td>
+                        }
+                    </tr>
+                }
+                <tr>
+                    <td>Total</td>
+                    @for (var i = 0; i < groups_id.Count(); i++)
+                    {
+                        var totalvalue = groups_id[i].Select(p => p.MTL_GROUP_TOTAL).Sum();
+                        var colorvalue = totalvalue > 0 ? "blue" : totalvalue == 0 ? "gray" : "red";
+                        <td class="text-right" style="color: @colorvalue;">@totalvalue.ToString("N")</td>
+                    }
+                </tr>*@
+                @for (var i = 0; i < groups_id[0].Count(); i++)
+                {
+                    //var part_type = groups_id[0].ToList()[i].PART_TYPE;
+                    var mtl_group = groups_id[0].ToList()[i].MTL_GROUP;
+                    <tr>
+                        <td>@groups_id[0].Where(p => p.MTL_GROUP == mtl_group).Select(p => p.MTL_GROUP).FirstOrDefault()</td>
+                        @*<td>@groups_id[0].Where(p => p.PART_TYPE == part_type && p.MTL_GROUP == mtl_group).Select(p => p.MTL_GROUP).FirstOrDefault()</td>*@
+                        @*<td>@groups_id[0].Where(p => p.PART_TYPE == part_type && p.MTL_GROUP == mtl_group).Select(p => p.PART_TYPE).FirstOrDefault()</td>*@
+                        @for (var j = 0; j < groups_id.Count(); j++)
+                        {
+                            var numbervalue = groups_id[j].Where(p => p.MTL_GROUP == mtl_group).Select(p => p.MTL_GROUP_TOTAL).FirstOrDefault();
+                            //var numbervalue = groups_id[j].Where(p => p.PART_TYPE == part_type && p.MTL_GROUP == mtl_group).Select(p => p.MTL_GROUP_TOTAL).FirstOrDefault();
+                            var colorvalue = numbervalue > 0 ? "blue" : numbervalue == 0 ? "gray" : "red";
+                            <td class="text-right" style="color: @colorvalue;">@numbervalue.ToString("N")</td>
+                        }
+                    </tr>
+                }
+                <tr>
+                    <td>Total</td>
+                    @*<td></td>*@
+                    @for (var i = 0; i < groups_id.Count(); i++)
+                    {
+                        var totalvalue = groups_id[i].Select(p => p.MTL_GROUP_TOTAL).Sum();
+                        var colorvalue = totalvalue > 0 ? "blue" : totalvalue == 0 ? "gray" : "red";
+                        <td class="text-right" style="color: @colorvalue;">@totalvalue.ToString("N")</td>
+                    }
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- /.box-body -->
+</div>
+
+<div class="row">
+    <div class="col-sm-12 text-center">
+        <button class="btn bg-green btn-modal" data-toggle="modal" data-target="#myModal">Close-out Confirmation</button>
+        @{
+            var bu = RSI.Models.Entity.Validate.DecryptValue(Request.QueryString["BU"]);
+            var export_part_type = RSI.Models.Entity.Validate.DecryptValue(Request.QueryString["part_type"]);
+            var dt = RSI.Models.Entity.RSI_ConfigEntityDAL.GetExportExcelConfig(bu, export_part_type, Request.QueryString["phase_id"]);
+            var exportexcel = dt.Rows.Count > 0 ? dt.Rows[0]["attribute5"] == null ? "hidden" : dt.Rows[0]["attribute5"].ToString() == "N" ? "hidden" : "" : "hidden";
+            var priceidentity = dt.Rows.Count > 0 ? dt.Rows[0]["attribute4"].ToString() : String.Empty;
+        }
+        <button class="btn bg-light-blue btn-exportExcel @exportexcel">Export</button>
+    </div>
+</div>
+
+<form id="exportExcel" action="ExportExcel" method="post">
+    <input type="hidden" name="rsi_no" id="rsi_no" />
+    <input type="hidden" name="projectname" id="projectname" />
+    <input type="hidden" name="bu" id="bu" />
+    <input type="hidden" name="part_type" id="part_type" />
+    <input type="hidden" name="phase_id" id="phase_id" value="@Request.QueryString["phase_id"]" />
+    <input type="hidden" name="form_no" id="form_no" value="@Request.QueryString["form_no"].ToString()" />
+    <input type="hidden" name="page_name" id="page_name" value="Confirm" />
+</form>
+
+
+@Html.Action("Index", "Process")
+@section custom_script{
+    <script>
+        $(document).on('click', '.btn-exportExcel', function () {
+            var rsi_no = $("#RSI_NO").val();
+            $("#rsi_no").val(rsi_no);
+            var projectname = $("#PROJECT_NAME").val();
+            $("#projectname").val(projectname);
+            var bu = $('#BU').val();
+            var part_type = $('#PartType').val();
+            var phase_id = '@Request.QueryString["phase_id"]';
+            $("#exportExcel #bu").val(bu);
+            $("#exportExcel #part_type").val(part_type);
+            $("#exportExcel #phase_id").val(phase_id);
+            $("#exportExcel").submit();
+        });
+
+    </script>
+}
+
+

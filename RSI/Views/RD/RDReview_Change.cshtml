@@ -1,0 +1,147 @@
+﻿@{
+    ViewBag.Title = "料號轉換";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/bundles/style")
+    @Styles.RenderFormat("<link href='{0}' rel='stylsheet' type='text/css' media='print' />", "~/bundles/style/print")
+    <link href="@Url.Content("~/Content/Css/dataTables.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Css/iCheck/all.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/Third-Part/intro.js-2.5.0/introjs.css")" rel="stylesheet" />
+    <style>
+        table tbody tr td.whitespacepre {
+            white-space: pre !important;
+        }
+
+        .typeahead {
+            z-index: 1051;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" style="padding-top:15px; padding-bottom:15px;">
+        <input type="hidden" id="rsi_no" value="@Request.QueryString["rsi_no"]" />
+        <input type="hidden" id="bu" value="@Request.QueryString["bu"]" />
+        <div class="row">
+            <div class="col-sm-offset-6 col-sm-6">
+                <form class="form-horizontal" data-intro="Hello Form!" data-step="2">
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-4">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="searchtype" value="bom" checked> BOM
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="searchtype" value="rsi"> RSI No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group bomcontent">
+                        <label for="partno" class="col-sm-3 control-label" style="margin-right:0px;"><span class="text-danger" style="font-size:14px;">＊</span>Product Part No</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="partno" data-provide="typeahead" placeholder="請填入9%料號">
+                        </div>
+                    </div>
+                    <div class="form-group rsicontent hidden">
+                        <label for="partno" class="col-sm-3 control-label" style="margin-right:0px;"><span class="text-danger" style="font-size:14px;">＊</span>Query conditions</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="queryconditions" data-provide="typeahead" placeholder="RSI NO/BU RFQ No/RD Member">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="partlevel" class="col-sm-3 control-label" style="margin-right:0px;">Part Level</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="partlevel" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group bomcontent">
+                        <label for="plant" class="col-sm-3 control-label" style="margin-right:0px;"><span class="text-danger" style="font-size:14px;">＊</span>Mfg Plant</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" id="plant"></select>
+                        </div>
+                    </div>
+                    <div class="form-group rsicontent hidden">
+                        <label for="plant" class="col-sm-3 control-label" style="margin-right:0px;"><span class="text-danger" style="font-size:14px;">＊</span>RSI No</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="rsino" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button type="button" class="btn btn-default btn-query">Query</button>
+                            <span id="errormessage" class="text-danger"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="table-responsive">
+                    <table id="changeTable" class="table table-bordered" style="width:100%">
+                        <thead>
+                            <tr class="bg-light-blue">
+                                <th></th>
+                                <th></th>
+                                <th>Part No</th>
+                                <th>Level</th>
+                                <th>English Name</th>
+                                <th>Part Type</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="table-responsive">
+                    <table id="otherTable" class="table table-bordered" style="width:100%">
+                        <thead>
+                            <tr class="bg-light-blue">
+                                <th></th>
+                                <th></th>
+                                <th>Part No</th>
+                                <th>Level</th>
+                                <th>English Name</th>
+                                <th>Part Type</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12" style="padding-top:15px;">
+                <div class="text-center">
+                    <button class="btn btn-primary btn-confirm" id = "btnConfirm">Comfirm</button>
+                    &nbsp;
+                    <button class="btn btn-default btn-cancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @{
+        string version = RSI.Models.Entity.RSI_ConfigEntityDAL.GetVersion();
+    }
+
+    @Scripts.Render("~/bundles/script")
+    <script src="@Url.Content("~/Content/Scripts/jquery.dataTables.min.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Scripts/dataTables.bootstrap.min.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Css/iCheck/icheck.min.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Third-Part/Bootstrap-3-Typeahead-master/bootstrap3-typeahead.min.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Third-Part/intro.js-2.5.0/intro.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/RDReviewChange.js?" + version)"></script>
+</body>
+</html>

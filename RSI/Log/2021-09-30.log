@@ -1,0 +1,52 @@
+2021-09-30 12:10:00,354 [ 5] INFO  --Begin:確認RSI是否有啟動過表單 - 【Check_RSI_Status】:select count(*) as count
+                                   from gpo.rsi_h_product_info t 
+                                  where rfq_no = :rfq_no 
+                                    and rfq_ver = :rfq_ver
+                                    and eval_status = 'N' 
+
+2021-09-30 12:10:00,791 [ 5] INFO  --End:確認RSI是否有啟動過表單 - Completed
+2021-09-30 12:10:00,791 [ 5] INFO  --Begin: - 【InsertLog】:INSERT INTO RSI_H_SQL_LOG(PKG_NAME, PRC_NAME, STEP_NAME, SQL_LOG, LM_TIME, LM_USER) 
+                                    VALUES (:para1, :para2, :para3, :para4, sysdate, 'SYSTEM') 
+
+2021-09-30 12:10:00,807 [ 5] INFO   --End: - Completed
+2021-09-30 12:10:00,807 [ 5] INFO  --Begin:確認RSI是否存在 - 【Check_RSI_Exists】:select count(*) as count
+                                   from gpo.rsi_h_product_info t 
+                                  where rfq_no = :rfq_no 
+                                    and rfq_ver = :rfq_ver 
+
+2021-09-30 12:10:00,807 [ 5] INFO  --End:確認RSI是否存在 - Completed
+2021-09-30 12:10:00,823 [ 5] INFO  --Begin:GetRSI_NO - 【GetRSI_NO】:select max(rsi_no) rsi_no from RSI_H_PRODUCT_INFO where rsi_no like :rsi_no
+
+2021-09-30 12:10:00,823 [ 5] INFO  --End:GetRSI_NO - Completed
+2021-09-30 12:10:00,823 [ 5] INFO  --Begin:InsertH_Product_Info方法 - 【InsertH_Product_Info】:INSERT INTO RSI_H_PRODUCT_INFO
+                                  (RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, 
+                                   TP, MODEL, REF_PRODUCT_RFQ, APPLY_REASON, RFQ_TYPE, BL_NIT, POWER, PM, PL_RD,
+                                   ACD_RD, EE_RD, OM_RD, PACKING_RD, TP_ACD_RD, TP_EE_RD, TP_OM_RD,
+                                   REQUEST_DATE, RSI_STATUS, REF_PRODUCT, REF_PRODUCT_MFG, REF_RSI_NO, CREATED_DATE,
+                                   REF_RFQ_NO, REF_RFQ_VER, EVAL_ACD, EVAL_OM, EVAL_EE, EVAL_PACKING, EVAL_TPACD, EVAL_TPOM,
+                                   EVAL_TPEE, EVAL_STATUS, BIDDING_PROJECT, SOURCING_POOL_NAME, PROCESS_TYPE, PRODUCT_COMBINATION_NAME, 
+                                   PRODUCT_TYPE_NAME, PROCESS_CLASS, ARRAY_FAB, JI_FAB, MODULE_FAB, SIZE_INCH, SURFACE_TREATMENT, 
+                                   SOP_YEAR, SOP_QUARTERLY, SOP_MONTH, RESOLUTION, PM_LCD_TYPE, PM_BRIGHTNESS, FCST_QTY, SAMPLE_REQUEST, SAMPLE_REQUEST_DATE, SAMPLE_REQUEST_QTY) 
+                                VALUES 
+                                  (:rsi_no, :bu, :project_name, :rfq_no, :rfq_ver, :apply_type, :lcm, :tp, :model, :ref_product_rfq,
+                                   :apply_reason, :rfq_type, :bl_nit, :power, :pm, :pl_rd, :acd_rd, :ee_rd, :om_rd, :packing_rd,
+                                   :tp_acd_rd, :tp_ee_rd, :tp_om_rd, TO_DATE(:request_date,  'yyyy/mm/dd'), 
+                                   :rsi_status, :ref_product, :ref_product_mfg, :ref_rsi_no, SYSDATE,
+                                   :ref_rfq_no, :ref_rfq_ver, :eval_acd, :eval_om, :eval_ee, :eval_packing, :eval_tpacd, :eval_tpom,
+                                   :eval_tpee, :eval_status , :bidding_project, :sourcing_pool_name, :process_type, :product_combination_name, 
+                                   :product_type_name, :process_class, :array_fab, :ji_fab, :module_fab, :size_inch, :surface_treatment, 
+                                   :sop_year, :sop_quarterly, :sop_month, :resolution, :pm_lcd_type, :pm_brightness, :fcst_qty, :sample_request, :sample_request_date, :sample_request_qty) 
+
+2021-09-30 12:10:00,838 [ 5] INFO  --End:InsertH_Product_Info方法 - Completed
+2021-09-30 13:53:59,686 [ 7] INFO  --Begin:Reassign_Product_Info_RD_Member方法-RFQ_NO:202109297936,RFQ_VER:1 - 【Reassign_Product_Info_RD_Member】:update gpo.rsi_h_product_info    set        acd_rd = :acd_rd,        ee_rd = :ee_rd,        om_rd = :om_rd,        packing_rd = :packing_rd,        tp_acd_rd = :tp_acd_rd,        tp_ee_rd = :tp_ee_rd,        tp_om_rd = :tp_om_rd,    rfq_no = :rfq_no  where rsi_no = (select distinct rsi_no                    from gpo.rsi_h_product_info                   where rfq_no = :rfq_no                     and rfq_ver = :rfq_ver                ) 
+
+2021-09-30 13:54:00,296 [ 7] INFO  --End:Reassign_Product_Info_RD_Member方法-RFQ_NO:202109297936,RFQ_VER:1 - Completed
+2021-09-30 13:54:00,296 [ 7] INFO  --Begin:Reassign_RD_Member方法 - 【Reassign_RD_Member】:update gpo.rsi_h_form_header h set h.rd = (   select case when h.part_type = 'ACD' then i.acd_rd               when h.part_type = 'EE'  then i.ee_rd               when h.part_type = 'OM'  then i.om_rd               when h.part_type = 'PACKING' then i.packing_rd               when h.part_type = 'TPACD'   then i.tp_acd_rd               when h.part_type = 'TPEE'    then i.tp_ee_rd               when h.part_type = 'TPOM'    then i.tp_om_rd          else null end "RD"   from gpo.rsi_h_product_info i  where (1 = 1)    and h.rsi_no = i.rsi_no ), h.pl_rd = (   select pl_rd   from gpo.rsi_h_product_info i  where(1 = 1)    and h.rsi_no = i.rsi_no ) where h.rsi_no = (select distinct rsi_no                     from gpo.rsi_h_product_info                    where rfq_no = :rfq_no                      and rfq_ver = :rfq_ver                   ) 
+
+2021-09-30 13:54:00,327 [ 7] INFO  --End:Reassign_RD_Member方法 - Completed
+2021-09-30 13:54:00,327 [ 7] INFO  --Begin:Update_Rsi_H_Form_Header_RD_Member方法 - 【Update_Rsi_H_Form_Header_RD_Member】:update gpo.rsi_h_form_header fh    set fh.rd_boss = (select e.boss_no from gfin.emp_data_all e where e.emp_no = fh.rd),        fh.rd_manager = (select e.boss_no from gfin.emp_data_all e where e.emp_no = (select e.boss_no from gfin.emp_data_all e where e.emp_no = fh.rd))  where fh.form_no in (select form_no                        from gpo.rsi_h_form_header                       where rsi_no = (select distinct rsi_no                                         from gpo.rsi_h_product_info                                        where rfq_no = :rfq_no                                          and rfq_ver = :rfq_ver ))    and fh.form_status = 'UA' 
+
+2021-09-30 13:54:00,342 [ 7] INFO  --End:Update_Rsi_H_Form_Header_RD_Member方法 - Completed
+2021-09-30 13:54:00,358 [ 7] INFO  --Begin:Update_Rsi_H_Form_Approve_RD_Member方法 - 【Update_Rsi_H_Form_Approve_RD_Member】:update gpo.rsi_h_form_approve fa    set fa.app_assigner =        (select case                  when (fa.phase_id = '10') then                   fh.rd                  when (fa.phase_id = '20') then                   fh.rd_boss                  when (fa.phase_id = '25') then                   fh.rd_manager                  when (fa.phase_id = '30' and fh.bu not in ('TV','PD')) then                   fh.pm                  when (fa.phase_id = '30' and fh.bu in ('TV','PD')) then                   fh.pl_rd                  else                   null                end           from gpo.rsi_h_form_header fh           join gpo.c_pms_bgbu_mapping m             on fh.bu = m.bu            and m.active = 'Y'          where fh.form_no = fa.form_no)  where fa.form_no in (select form_no                         from gpo.rsi_h_form_header                        where rsi_no = (select distinct rsi_no                                          from gpo.rsi_h_product_info                                         where rfq_no = :rfq_no                                           and rfq_ver = :rfq_ver ))    and fa.app_status = 'U' 
+
+2021-09-30 13:54:00,374 [ 7] INFO  --End:Update_Rsi_H_Form_Approve_RD_Member方法 - Completed

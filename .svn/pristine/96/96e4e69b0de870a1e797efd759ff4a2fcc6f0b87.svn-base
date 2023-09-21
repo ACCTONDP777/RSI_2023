@@ -1,0 +1,277 @@
+﻿
+@{
+    ViewBag.Title = "表單";
+    ViewBag.SubTitle = "各式表單應用";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section custom_css_reference {
+    <link href="@Url.Content("~/Content/Css/daterangepicker.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Css/bootstrap-datepicker.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Css/iCheck/all.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Css/select2.min.css")" rel="stylesheet" type="text/css" />
+}
+
+@section custom_script_reference {
+    <script src="@Url.Content("~/Content/Scripts/select2.full.min.js")"></script>
+    <script src="@Url.Content("~/Content/Scripts/jquery.inputmask.js")"></script>
+    <script src="@Url.Content("~/Content/Scripts/jquery.inputmask.date.extensions.js")"></script>
+    <script src="@Url.Content("~/Content/Scripts/jquery.inputmask.extensions.js")"></script>
+    <script src="@Url.Content("~/Content/Scripts/bootstrap-datepicker.min.js")"></script>
+    <script src="@Url.Content("~/Content/Scripts/jquery.slimscroll.min.js")"></script>
+    <script src="@Url.Content("~/Content/Scripts/fastclick.js")"></script>
+    <script src="@Url.Content("~/Content/Scripts/moment.js")"></script>
+    <script src="@Url.Content("~/Content/Scripts/daterangepicker.js")"></script>
+    <script src="@Url.Content("~/Content/Scripts/icheck.min.js")"></script>
+    <script src="@Url.Content("~/Content/Scripts/bootstrap-filestyle.min.js")"></script>
+}
+
+@section custom_script {
+    $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Datemask dd/mm/yyyy
+    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    //Money Euro
+    $('[data-mask]').inputmask()
+
+    //Date range picker
+    $('#reservation').daterangepicker()
+
+    //Date picker
+    $('#datepicker').datepicker({
+    autoclose: true
+    })
+
+    //Flat blue color scheme for iCheck
+    $('input[type="checkbox"].flat-blue, input[type="radio"].flat-blue').iCheck({
+    checkboxClass: 'icheckbox_flat-blue',
+    radioClass: 'iradio_flat-blue'
+    })
+
+    })
+}
+
+<!--------------------------
+  | 內容 |
+  -------------------------->
+<!-- 表單-基本輸入 -->
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">基本輸入</h3>
+    </div>
+    <div class="box-body">
+        <form role="form">
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label>文字輸入</label>
+                    <input type="text" class="form-control" placeholder="">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>有圖示文字輸入</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>有單位文字輸入</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                        <span class="input-group-addon">公分</span>
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>有按鈕文字輸入</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 form-group has-success">
+                    <label><i class="fa fa-check"></i> 檢查成功</label>
+                    <input type="text" class="form-control" placeholder="">
+                    <span class="help-block">正確</span>
+                </div>
+                <div class="col-md-3 form-group has-warning">
+                    <label><i class="fa fa-bell-o"></i> 檢查警告</label>
+                    <input type="text" class="form-control" placeholder="">
+                    <span class="help-block">警告</span>
+                </div>
+                <div class="col-md-3 form-group has-error">
+                    <label><i class="fa fa-times-circle-o"></i> 檢查失敗</label>
+                    <input type="text" class="form-control" placeholder="">
+                    <span class="help-block">錯誤</span>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>Disabled</label>
+                    <input type="text" class="form-control" disabled>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>文字輸入框</label>
+                <textarea class="form-control" rows="3" placeholder=""></textarea>
+            </div>
+        </form>
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer">
+        <button type="submit" class="btn btn-default">取消</button>
+        <button type="submit" class="btn btn-primary">送出</button>
+    </div>
+</div>
+<!-- /.box -->
+<!-- 選擇題 -->
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title">選擇題</h3>
+    </div>
+    <div class="box-body">
+        <form role="form">
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <label>單選題</label>
+                    <select class="form-control select2">
+                        <option selected="selected">A</option>
+                        <option>B</option>
+                        <option>C</option>
+                    </select>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label>複選題</label>
+                    <select class="form-control select2" multiple="multiple" data-placeholder="請選擇">
+                        <option>A</option>
+                        <option>B</option>
+                        <option>C</option>
+                        <option disabled="disabled">D (Disabled)</option>
+                    </select>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label>Disabled</label>
+                    <select class="form-control select2" disabled="disabled">
+                        <option selected="selected">A</option>
+                        <option>B</option>
+                        <option>C</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer">
+        更多設定請參考<a href="https://select2.github.io" target="_blank">Select2 plugin</a>
+    </div>
+</div>
+<!-- /.box -->
+<!-- 勾選框 -->
+<div class="box box-success">
+    <div class="box-header with-border">
+        <h3 class="box-title">勾選框</h3>
+    </div>
+    <div class="box-body">
+        <form role="form">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>Checkbox</label>
+                    <div class="input-group">
+                        <label>
+                            <input type="checkbox" class="flat-blue" checked> Checked
+                        </label>
+                        <label>
+                            <input type="checkbox" class="flat-blue"> Normal
+                        </label>
+                        <label>
+                            <input type="checkbox" class="flat-blue" disabled> Disabled
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>Radio</label>
+                    <div class="input-group">
+                        <label>
+                            <input type="radio" name="r1" class="flat-blue" checked> Checked
+                        </label>
+                        <label>
+                            <input type="radio" name="r1" class="flat-blue"> Normal
+                        </label>
+                        <label>
+                            <input type="radio" name="r1" class="flat-blue" disabled> Disabled
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer">
+        更多設定請參考<a href="http://fronteed.com/iCheck" target="_blank">iCheck plugin</a>
+    </div>
+</div>
+<!-- /.box -->
+<!-- 日期 -->
+<div class="box box-info">
+    <div class="box-header with-border">
+        <h3 class="box-title">日期</h3>
+    </div>
+    <div class="box-body">
+        <form role="form">
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <label>Popup</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" class="form-control pull-right" id="datepicker">
+                    </div>
+                    <!-- /.input group -->
+                </div>
+                <div class="col-md-4 form-group">
+                    <label>Date range</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" class="form-control pull-right" id="reservation">
+                    </div>
+                    <!-- /.input group -->
+                </div>
+                <div class="col-md-4 form-group">
+                    <label>Date masks</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                    </div>
+                    <!-- /.input group -->
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- /.box-body -->
+</div>
+<!-- /.box -->
+<!-- 上傳 -->
+<div class="box box-danger">
+    <div class="box-header with-border">
+        <h3 class="box-title">上傳</h3>
+    </div>
+    <div class="box-body">
+        <form role="form">
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    <label class="control-label">檔案上傳</label>
+                    <input type="file" class="filestyle" data-buttonName="btn-primary">
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- /.box-body -->
+</div>
+<!-- /.box -->

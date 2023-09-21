@@ -1,0 +1,281 @@
+﻿@model RSI.Models.Entity.H_Product_InfoEntity
+@using System.Data;
+@{
+    Layout = null;
+}
+
+<div class="box box-primary" style="background: transparent;">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Basic Information
+        </h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+        </div>
+    </div>
+    <div class="box-body">
+        <form role="form">
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label>Request Date</label>
+                    @Html.TextBoxFor(m => m.REQUEST_DATE, "{0:yyyy/MM/dd}", new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>RSI No</label>
+                    @Html.TextBoxFor(m => m.RSI_NO, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>Part Type</label>
+                    @Html.TextBoxFor(m => m.PartType, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-md-3 form-group">
+                    <label data-toggle="tooltip" data-placement="right" title="Detail material cost is necessary">Bidding Project</label>
+                    <br />
+                    <label class="radio-inline">
+                        @{
+                    var radio1 = Model.BIDDING_PROJECT == "Y" ? "checked" : "";
+                    var radio2 = Model.BIDDING_PROJECT == "N" ? "checked" : "";
+                        }
+                        <input type="radio" name="bidding_project" id="bidding_project_radio1" value="Y" disabled @radio1> Y
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="bidding_project" id="bidding_project_radio2" value="N" disabled @radio2> N
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label>BU</label>
+                    @{
+                var bu_poolName = string.Concat(Model.BU, "-", Model.SOURCING_POOL_NAME);
+                if (string.IsNullOrEmpty(Model.SOURCING_POOL_NAME))
+                {
+                    bu_poolName = Model.BU;
+                }
+                    }
+                    <input type="text" value="@bu_poolName" class="form-control" disabled="disabled" />
+                    @Html.TextBoxFor(m => m.BU, new { @class = "form-control hidden", disabled = "disabled" })
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>BU RFQ No</label>
+                    @Html.TextBoxFor(m => m.PROJECT_NAME, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>PLM RFQ No</label>
+                    @Html.TextBoxFor(m => m.RFQ_NO, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>PLM RFQ Version </label>
+                    @Html.TextBoxFor(m => m.RFQ_VER, new { @class = "form-control", disabled = "disabled" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label>Product Apply Type</label>
+                    @Html.TextBoxFor(m => m.APPLY_TYPE, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>Model</label>
+                    @Html.TextBoxFor(m => m.MODEL, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>RSI Quick valuation Ref. part(9X)</label>
+                    @Html.TextBoxFor(m => m.REF_PRODUCT, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>Case</label>
+                    <div class="input-group">
+                        <label>
+                            @Html.RadioButton("RFQ_TYPE", Model.RFQ_TYPE, Model.RFQ_TYPE.IsEmpty() ? false : Model.RFQ_TYPE.Equals("一般件"), new { @class = "flat-blue", disabled = "disabled" }) 一般件
+                        </label>
+                        <label>
+                            @Html.RadioButton("RFQ_TYPE", Model.RFQ_TYPE, Model.RFQ_TYPE.IsEmpty() ? false : Model.RFQ_TYPE.Equals("急件"), new { @class = "flat-blue", disabled = "disabled" })急件
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label>Array Fab</label>
+                    @Html.TextBoxFor(m => m.ARRAY_FAB, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>JI Fab</label>
+                    @Html.TextBoxFor(m => m.JI_FAB, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>Module Fab</label>
+                    @Html.TextBoxFor(m => m.MODULE_FAB, new { @class = "form-control", disabled = "disabled" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label>MP Schedule</label>
+                    @{var mp_date = string.Concat(Model.SOP_YEAR, "/", Model.SOP_MONTH);}
+                    <input type="text" value="@mp_date" class="form-control" disabled="disabled" />
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>Size</label>
+                    @Html.TextBoxFor(m => m.SIZE_INCH, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>POL</label>
+                    @Html.TextBoxFor(m => m.SURFACE_TREATMENT, new { @class = "form-control", disabled = "disabled" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label>PM</label>
+                    @Html.TextBoxFor(m => m.PM_NAME, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>PL RD</label>
+                    @Html.TextBoxFor(m => m.PLRD_NAME, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>BLU 亮度</label>
+                    @{
+                var disable = false;
+                if (!String.IsNullOrEmpty(Model.REF_PRODUCT))
+                {
+                    var ref_product = Model.REF_PRODUCT.Split('.');
+                    disable = ref_product[0].Equals("91");
+                }
+                    }
+                    @Html.TextBoxFor(m => m.BL_NIT, Model.PartType.Equals("OM") && Request.QueryString["phase_id"] == "10" && !disable ? new { @class = "form-control" } : (object)new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>Cell 穿透率</label>
+                    @Html.TextBoxFor(m => m.POWER, Model.PartType.Equals("ACD") && Request.QueryString["phase_id"] == "10" ? new { @class = "form-control" } : (object)new { @class = "form-control", disabled = "disabled" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label>ACD RD</label>
+                    <div class="input-group">
+                        @Html.TextBoxFor(m => m.ACDRD_NAME, new { @class = "form-control", disabled = "disabled" })
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" disabled onclick="RDMemberLinkToRFQ()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>EE RD</label>
+                    <div class="input-group">
+                        @Html.TextBoxFor(m => m.EERD_NAME, new { @class = "form-control", disabled = "disabled" })
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" disabled onclick="RDMemberLinkToRFQ()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>OM RD</label>
+                    <div class="input-group">
+                        @Html.TextBoxFor(m => m.OMRD_NAME, new { @class = "form-control", disabled = "disabled" })
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" disabled onclick="RDMemberLinkToRFQ()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>Packing RD</label>
+                    <div class="input-group">
+                        @Html.TextBoxFor(m => m.PACKINGRD_NAME, new { @class = "form-control", disabled = "disabled" })
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" disabled onclick="RDMemberLinkToRFQ()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label>TP ACD RD</label>
+                    <div class="input-group">
+                        @Html.TextBoxFor(m => m.TP_ACDRD_NAME, new { @class = "form-control", disabled = "disabled" })
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" disabled onclick="RDMemberLinkToRFQ()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>TP EE RD</label>
+                    <div class="input-group">
+                        @Html.TextBoxFor(m => m.TP_EERD_NAME, new { @class = "form-control", disabled = "disabled" })
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" disabled onclick="RDMemberLinkToRFQ()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>TP OM RD</label>
+                    <div class="input-group">
+                        @Html.TextBoxFor(m => m.TP_OMRD_NAME, new { @class = "form-control", disabled = "disabled" })
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" disabled onclick="RDMemberLinkToRFQ()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <label>Apply Reason</label>
+                    @Html.TextAreaFor(m => m.APPLY_REASON, new { @class = "form-control", disabled = "disabled", rows = "3" })
+                </div>
+            </div>
+            <!-- /.box -->
+        </form>
+    </div>
+    <!-- /.box-body -->
+</div>
+@{
+    var iframeurl = System.Configuration.ConfigurationManager.AppSettings["RFQProductInfoUrl"] + "?sbu_id={0}&sRSI_9X={1}&sVERSION={2}&sRFQ_NO={3}";
+    iframeurl = String.Format(iframeurl, Model.BU, Model.REF_PRODUCT_RFQ, Model.RFQ_VER, Model.RFQ_NO);
+}
+
+@{
+    DataTable fcst_dt = RSI.Models.Manager.H_Product_InfoManager.GetFCSTPage();
+    var FCST_visable = "";
+    if (fcst_dt != null)
+    {
+        FCST_visable = fcst_dt.Select(string.Format("BU = '{0}' ", Model.BU)).Count() > 0 ? "" : "hidden";
+    }
+}
+
+@{
+    var iframeurl_fcst = System.Configuration.ConfigurationManager.AppSettings["FCSTIframeUrl"] + "?rfq_action_plan_no={0}";
+    iframeurl_fcst = String.Format(iframeurl_fcst, Model.PROJECT_NAME);
+}
+
+<div class="box box-primary collapsed-box" style="background: transparent;">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            Page Description<button class="btn bg-light-blue btn-sm" style="margin-left:5px;" onclick="tips(@Request.QueryString["phase_id"])"><i class="fa fa-info-circle" aria-hidden="true"></i> Info</button>
+            <a class="btn bg-light-blue btn-sm" href="@iframeurl" target="_blank">Product Info.</a>
+            <a class="btn bg-light-blue btn-sm @FCST_visable" href="@iframeurl_fcst" target="_blank">FCST Qty Info.</a>
+        </h3>
+    </div>
+</div>
+<script>
+        function RDMemberLinkToRFQ() {
+            var url = '@System.Configuration.ConfigurationManager.AppSettings["RFQReassignRDMemberURL"]?sRFQ_No={0}&sVersion={1}&sEmp_Id={2}';
+            var rfq_no = '@Model.RFQ_NO';
+            var version = '@Model.RFQ_VER';
+            var emp_no = '@RSI.Models.Entity.Employee.EmpNO';
+            url = url.replace('{0}', rfq_no).replace('{1}', version).replace('{2}', emp_no);
+            window.open(url, '_blank');
+            var url = '/RSI/';
+            window.location.href = url;
+    }
+
+    function RFQReflash() {
+        var url = '/RSI/';
+        window.location.href = url;
+    }
+
+    function tips(phase_id) {
+        var url = '/RSI/RSI/Tips?phase_id={0}'.replace('{0}', phase_id);
+        window.open(url, '_blank', 'width=500, height=600, scrollbars=yes');
+    }
+</script>

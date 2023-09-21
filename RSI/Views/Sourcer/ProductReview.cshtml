@@ -1,0 +1,970 @@
+﻿@model RSI.Models.Entity.H_Product_InfoEntity
+@{
+    /**/
+
+    ViewBag.Title = RSI.Models.Entity.Employee.GetSiteName(Request.QueryString["phase_id"], Request.QueryString["BU"]);
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section custom_css_reference {
+    <link href="@Url.Content("~/Content/Css/iCheck/all.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/Css/dataTables.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Third-Part/FixedColumns-3.2.4/css/fixedColumns.bootstrap.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/Third-Part/Buttons-1.5.1/css/buttons.bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/Third-Part/Select-1.2.6/css/select.bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/Third-Part/JQueryUI/jquery-ui.min.css")" rel="stylesheet" />
+}
+@section custom_style{
+    <style>
+        .table > thead > tr > th {
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        table tbody tr td.whitespacepre {
+            white-space: pre !important;
+        }
+
+        .text-ellipsis {
+            max-width: 170px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .text-ellipsis:hover {
+            white-space: normal;
+        }
+
+        table.dataTable tbody > tr.selected td, table.dataTable tbody > tr.selected > td {
+            background-color: #9e9e9e !important;
+        }
+
+        table.dataTable tbody > tr.selected td textarea, table.dataTable tbody > tr > .selected textarea {
+            color: #000;
+        }
+
+        table.dataTable tbody > tr.selected:hover td, table.dataTable tbody > tr > .selected:hover {
+            background-color: #9e9e9e;
+        }
+    </style>
+}
+@{
+    System.Data.DataTable pricetrend = RSI.Models.Entity.RSI_ConfigEntityDAL.GetPriceTrend(Model.RSI_NO.ToString());
+    List<string> pricetrendName = new List<string>();
+    if (pricetrend.Rows.Count > 0)
+    {
+        foreach (System.Data.DataRow row in pricetrend.Rows)
+        {
+            pricetrendName.Add(row["id"].ToString());
+        }
+    }
+    var pricetrendJson = Newtonsoft.Json.JsonConvert.SerializeObject(pricetrendName);
+}
+<input type="hidden" id="pricetrendJson" value="@pricetrendJson" />
+
+@Html.Partial("~/Views/RSI/BasicPage.cshtml", Model)
+
+<div id="tabs" class="nav-tabs-custom" style="background: transparent;">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="#tab1" data-toggle="tab">Normal Parts</a>
+        </li>
+        <li>
+            <a href="#tab2" data-toggle="tab">Special Parts</a>
+        </li>
+        <li>
+            <a href="#bom" data-toggle="tab">BOM</a>
+        </li>
+    </ul>
+
+    <div class="tab-content" style="background: transparent;">
+        <div id="tab1" class="active tab-pane">
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label>Ref. Model</label>
+                    <label>@Model.REF_PRODUCT</label>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table id="normalPartsTable" class="table table-bordered table-hover">
+                    <thead>
+                        <tr class="bg-light-blue">
+                            <th>Material Group</th>
+                            <th>Parts Group</th>
+                            <th>Material Parts</th>
+                            <th>Parent</th>
+                            <th>Part No</th>
+                            <th>English Name</th>
+                            <th>Part Description</th>
+                            <th>Vendor</th>
+                            <th>Maker PN</th>
+                            <th>Part Spec</th>
+                            <th>Part Type</th>
+                            <th>Release Date</th>
+                            <th>EOL</th>
+                            <th>Usage</th>
+                            <th>Owner</th>
+                            <th>Sourcer<br />Price(USD)</th>
+                            <th>
+                                <input type="checkbox" class="isassigner_all" data-tableid="#normalPartsTable">
+                                <span class="text-danger" style="font-size:18px;">*</span>PM<br />Price(USD)
+                            </th>
+                            <th>MOQ</th>
+                            <th>Mockup Fee</th>
+                            <th>Tooling Fee</th>
+                            <th>FPCA/PCBA Fee</th>
+                            <th><input type="checkbox" class="iscalculate_all" data-tableid="#normalPartsTable">Valuation</th>
+                            <th>Approved</th>
+                            <th>Sourcer<br />Amount(USD)</th>
+                            <th>PM<br />Amount(USD)</th>
+                            @{
+        if (pricetrend.Rows.Count > 0)
+        {
+            foreach (System.Data.DataRow row in pricetrend.Rows)
+            {
+                        <th data-priceid="@row["ID"].ToString()">@row["description"].ToString()</th>
+}
+}
+                            }
+                            <th>Price Source</th>
+                            <th>RD Remark</th>
+                            <th>To PM Remark</th>
+                            <th>Sourcer Remark</th>
+                            <th>Attach File</th>
+                            <th>Updated date</th>
+                            <th>Updated by</th>
+                            <th><input class="btn btn-warning btn-return" type="button" value="Return" data-tableid="#normalPartsTable" /></th>
+                            <th>PRICE_HSI_H</th>
+                            <th>PRICE_HSI_L</th>
+                            <th>ISMODIFY</th>
+                            <th>UNI_SPEC_STATUS</th>
+                            <th>SN</th>
+                            <th>modify_type</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <!-- 第二的頁籤-->
+        <div id="tab2" class="tab-pane">
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label>Ref. Model</label>
+                    <label>@Model.REF_PRODUCT</label>
+                </div>
+            </div>
+
+            <div id="specialTabs" class="nav-tabs-custom" style="background: transparent;">
+                <ul class="nav nav-tabs">
+                    @{
+                        var rsi_no = RSI.Models.Entity.Validate.DecryptValue(Request.QueryString["rsi_no"]);
+                        var groups_id = RSI.Models.Manager.H_Product_DetailManager.GetGroupID(rsi_no).ToList();
+                    }
+                    @for (int i = 1; i <= groups_id.Count(); i++)
+                    {
+                        var href = "#specialTab" + i;
+                        var name = RSI.Models.Manager.H_Product_DetailManager.GetGroupName(rsi_no, groups_id[i - 1]);
+                        name = string.IsNullOrEmpty(name) ? "Portfolio" + i : name;
+                        var className = (i == 1) ? "active" : "";
+                        <li class="@className">
+                            <a href="@href" data-toggle="tab" data-id="@i" data-group-id="@groups_id[i-1]" style="display:inline-block; padding-right:5px; border-right:0px;">@name</a>
+                        </li>
+                    }
+                </ul>
+
+                <div class="tab-content" id="specialContent" style="background: transparent;">
+                    @for (int i = 1; i <= groups_id.Count(); i++)
+                    {
+                        var id = "specialTab" + i;
+                        var className = (i == 1) ? "active tab-pane" : "tab-pane";
+                        var tableId = "specialTable" + i;
+                        <div id="@id" class="@className">
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <label>Portfolio Description</label>
+                                    <input type="text" class="form-control" style="width:500px;" value="@RSI.Models.Manager.H_Product_DetailManager.GetGroupDesc(rsi_no, groups_id[i - 1])" disabled>
+                                </div>
+                            </form>
+                            <br />
+                            <div class="table-responsive">
+                                <table id="@tableId" class="table table-bordered table-hover" data-group-id="@groups_id[i-1]">
+                                    <thead>
+                                        <tr class="bg-light-blue">
+                                            <th>Material Group</th>
+                                            <th>Parts Group</th>
+                                            <th>Material Parts</th>
+                                            <th>Parent</th>
+                                            <th>Part No</th>
+                                            <th>English Name</th>
+                                            <th>Part Description</th>
+                                            <th>Vendor</th>
+                                            <th>Maker PN</th>
+                                            <th>Part Spec</th>
+                                            <th>Part Type</th>
+                                            <th>Release Date</th>
+                                            <th>EOL</th>
+                                            <th>Usage</th>
+                                            <th>Owner</th>
+                                            <th>Sourcer<br />Price(USD)</th>
+                                            <th>
+                                                <input type="checkbox" class="isassigner_all" data-tableid="#@tableId">
+                                                <span class="text-danger" style="font-size:18px;">*</span>PM<br />Price(USD)
+                                            </th>
+                                            <th>MOQ</th>
+                                            <th>Mockup Fee</th>
+                                            <th>Tooling Fee</th>
+                                            <th>FPCA/PCBA Fee</th>
+                                            <th><input type="checkbox" class="iscalculate_all" data-tableid="#@tableId">Valuation</th>
+                                            <th>Approved</th>
+                                            <th>Sourcer<br />Amount(USD)</th>
+                                            <th>PM<br />Amount(USD)</th>
+                                            @{
+        if (pricetrend.Rows.Count > 0)
+        {
+            foreach (System.Data.DataRow row in pricetrend.Rows)
+            {
+                                        <th data-priceid="@row["ID"].ToString()">@row["description"].ToString()</th>
+}
+}
+                                            }
+                                            <th>Price Source</th>
+                                            <th>RD Remark</th>
+                                            <th>To PM Remark</th>
+                                            <th>Sourcer Remark</th>
+                                            <th>Attach File</th>
+                                            <th>Updated date</th>
+                                            <th>Updated by</th>
+                                            <th><input class="btn btn-warning btn-return" type="button" value="Return" data-tableid="#@tableId" /></th>
+                                            <th>PRICE_HSI_H</th>
+                                            <th>PRICE_HSI_L</th>
+                                            <th>ISMODIFY</th>
+                                            <th>UNI_SPEC_STATUS</th>
+                                            <th>SN</th>
+                                            <th>modify_type</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div id="bom" class="tab-pane">
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label>Ref. Model</label>
+                    <label>@Model.REF_PRODUCT</label>
+                </div>
+            </div>
+            <table id="bomTable" class="table table-bordered table-hover" style="width:100%;">
+                <thead>
+                    <tr class="bg-light-blue">
+                        <th class="text-center" style="vertical-align:middle;"><i class="fa fa-minus-circle fa-changeall" aria-hidden="true"></i></th>
+                        <th class="text-center" style="vertical-align:middle;">Partnumber_Top</th>
+                        <th class="text-center" style="vertical-align:middle;">Partnumber_Parent</th>
+                        <th class="text-center" style="vertical-align:middle;">Partnumber_Child</th>
+                        <th class="text-center" style="vertical-align:middle;">Part No</th>
+                        <th class="text-center" style="vertical-align:middle;">Partpath</th>
+                        <th class="text-center" style="vertical-align:middle;">Level</th>
+                        <th class="text-center" style="vertical-align:middle;">Material Group</th>
+                        <th class="text-center" style="vertical-align:middle;">Parts Group</th>
+                        <th class="text-center" style="vertical-align:middle;">Material Parts</th>
+                        <th class="text-center" style="vertical-align:middle;">Part Type</th>
+                        <th class="text-center" style="vertical-align:middle;">English Name</th>
+                        <th class="text-center" style="vertical-align:middle;">Part Level</th>
+                        <th class="text-center" style="vertical-align:middle;">Part Description</th>
+                        <th class="text-center" style="vertical-align:middle;">Vendor</th>
+                        <th class="text-center" style="vertical-align:middle;">Maker PN</th>
+                        <th class="text-center" style="vertical-align:middle;">Part Spec</th>
+                        <th class="text-center" style="vertical-align:middle;">Spec Def</th>
+                        <th class="text-center" style="vertical-align:middle;">Release Date</th>
+                        <th class="text-center" style="vertical-align:middle;">Usage</th>
+                        <th class="text-center" style="vertical-align:middle;">Unit</th>
+                        <th class="text-center" style="vertical-align:middle;">Eol</th>
+                        <th class="text-center" style="vertical-align:middle;">Uni Spec Stutas</th>
+                        <th class="text-center" style="vertical-align:middle;">PM Price(USD)</th>
+                        <th class="text-center" style="vertical-align:middle;">PM Amount(USD)</th>
+                        <th class="text-center" style="vertical-align:middle;">Valuation</th>
+                        <th class="text-center" style="vertical-align:middle;">Approved</th>
+                        <th class="text-center" style="vertical-align:middle;">Remark</th>
+                        <th class="text-center" style="vertical-align:middle;">Download File</th>
+                        <th class="text-center" style="vertical-align:middle;">Modify Type</th>
+                        <th class="text-center" style="vertical-align:middle;">SN</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        @{
+            //var dtProductReassingConfigCount = RSI.Models.Entity.RSI_ConfigEntityDAL.GetProductReassignConfig(Model.BU, Model.PartType, RSI.Models.Entity.Employee.EmpNO);
+            //var reassingshow = dtProductReassingConfigCount > 0 ? String.Empty : "hidden";
+            var reassingshow = "";
+        }
+        <button class="btn btn-default btn-reassign bg-purple @reassingshow">Reassign</button>
+        <button class="btn bg-red btn-rejectmodal">Reject</button>
+        <button class="btn btn-info btn-save">Save</button>
+        <button class="btn bg-green btn-modal">Submit</button>
+        @{
+            var dt = RSI.Models.Entity.RSI_ConfigEntityDAL.GetExportExcelConfig(Model.BU, Model.PartType, Request.QueryString["phase_id"]);
+            var exportexcel = dt.Rows.Count > 0 ? dt.Rows[0]["attribute5"] == null ? "hidden" : dt.Rows[0]["attribute5"].ToString() == "N" ? "hidden" : "" : "hidden";
+            var priceidentity = dt.Rows.Count > 0 ? dt.Rows[0]["attribute4"].ToString() : String.Empty;
+        }
+        <button class="btn bg-light-blue btn-exportExcel @exportexcel">Export</button>
+        <input type="hidden" id="priceidentity" value="@priceidentity" />
+        @{
+            var authorityProductSourcer = RSI.Models.Entity.RSI_ConfigEntityDAL.GetAuthorityForProductSoucer(Model.RSI_NO.ToString(), Model.PartType, RSI.Models.Entity.Employee.EmpNO);
+            var hasreport = authorityProductSourcer > 0 ? "" : "hidden";
+        }
+        <button class="btn bg-light-blue btn-detail @hasreport">Summary Report</button>
+    </div>
+</div>
+
+<form id="exportExcel" action="ExportExcel" method="post">
+    <input type="hidden" name="rsi_no" id="rsi_no" />
+    <input type="hidden" name="projectname" id="projectname" />
+    <input type="hidden" name="bu" id="bu" />
+    <input type="hidden" name="part_type" id="part_type" />
+    <input type="hidden" name="phase_id" id="phase_id" value="@Request.QueryString["phase_id"]" />
+    <input type="hidden" name="form_no" id="form_no" value="@Request.QueryString["form_no"].ToString()" />
+    <input type="hidden" name="page_name" id="page_name" value="ProductReivew" />
+</form>
+
+@Html.Action("Index", "Process")
+
+@Html.Action("DeatilApprove", "RSI", new { rsi_no = Request.QueryString["rsi_no"], part_type = Request.QueryString["part_type"], phase_id = Request.QueryString["phase_id"] })
+
+
+
+<div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Alert Message</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="SaveSuccessModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Alert Message</h4>
+            </div>
+            <div class="modal-body">
+                Save successfully
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="reAssign" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">ReAssign</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="mtl_part" />
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">EMP_NO</label>
+                        <div class="col-sm-5">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="emp_no" disabled>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" onclick="searchEmp()"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">EMP_NAME</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="emp_name" disabled>
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                            <label class="col-sm-2 control-label">Start Date</label>
+                            <div class="col-sm-7">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="startdate" style="z-index:10000;">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default calendar" type="button"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">End Date</label>
+                            <div class="col-sm-7">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="enddate" style="z-index:10000;">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default calendar" type="button"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>*@
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default resetAssign">Submit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="fileManagement" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Upload File</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="sn" />
+                <div class="row" style="padding-bottom:5px;">
+                    <div class="col-xs-2">
+                        Choose File
+                    </div>
+                    <div class="col-xs-10">
+                        <input type="file" id="file_detail" class="filestyle" name="file_detail" data-buttonName="btn-primary" />
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:5px;">
+                    <div class="col-xs-2">
+                        Remark
+                    </div>
+                    <div class="col-xs-10">
+                        <textarea class="form-control" id="fileRemark" name="remark" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:5px;">
+                    <div class="col-xs-12 text-center">
+                        <input class="btn btn-default" type="button" value="Upload" onclick="fileUpload()">
+                        <input class="btn btn-default" type="button" id="close" value="Close" data-dismiss="modal">
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table" id="fileTable" style="width:100%;">
+                        <thead>
+                            <tr class="bg-light-blue">
+                                <th></th>
+                                <th class="text-center">File Name</th>
+                                <th class="text-center">File Size(KB)</th>
+                                <th class="text-center">Upload by</th>
+                                <th class="text-center">Upload Date</th>
+                                <th class="text-center">Remark</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modal-edit" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="editTitle"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label for="partlevel" class="col-sm-3 control-label" style="margin-right: 0px;"><span class="text-danger" style="font-size:14px;">＊</span>Part Level</label>
+                        <div class="col-sm-9">
+                            <select id="partlevel" class="form-control" disabled></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="englishname" class="col-sm-3 control-label" style="margin-right: 0px;"><span class="text-danger" style="font-size:14px;">＊</span>English Name</label>
+                        <div class="col-sm-9">
+                            <select id="englishname" class="form-control" disabled></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="mtlgroup" class="col-sm-3 control-label" style="margin-right: 0px;"><span class="text-danger" style="font-size:14px;">＊</span>Material Group</label>
+                        <div class="col-sm-9">
+                            <select id="mtlgroup" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="partgroup" class="col-sm-3 control-label" style="margin-right: 0px;"><span class="text-danger" style="font-size:14px;">＊</span>Part Groups</label>
+                        <div class="col-sm-9">
+                            <select id="partgroup" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="mtlparts" class="col-sm-3 control-label" style="margin-right: 0px;"><span class="text-danger" style="font-size:14px;">＊</span>Material Parts</label>
+                        <div class="col-sm-9">
+                            <select id="mtlparts" class="form-control"></select>
+                        </div>
+                    </div>
+                    <input type="hidden" id="sn" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span id="errormessage" class="text-danger text-bold"></span>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btn-modal-save">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    string version = RSI.Models.Entity.RSI_ConfigEntityDAL.GetVersion();
+}
+
+@section custom_script_reference{
+    @Html.Partial("~/Views/RSI/LoadingPage.cshtml")
+    <script src="@Url.Content("~/Content/Css/iCheck/icheck.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Scripts/jquery.dataTables.min.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Scripts/dataTables.bootstrap.min.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Third-Part/FixedColumns-3.2.4/js/dataTables.fixedColumns.min.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Third-Part/datatables-rowsgroup-master/dataTables.rowsGroup.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Third-Part/Buttons-1.5.1/js/dataTables.buttons.min.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Third-Part/Buttons-1.5.1/js/buttons.bootstrap.min.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Third-Part/Select-1.2.6/js/dataTables.select.min.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Third-Part/Select-1.2.6/js/select.bootstrap.min.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Scripts/bootstrap-filestyle.min.js?" + version)"></script>
+}
+
+@section custom_script{
+    <script>
+        var pmprice_config = @RSI.Models.Entity.RSI_ConfigEntityDAL.GetPMPriceConfig(Model.BU);
+
+        $(document).on("click", ".btn-modal", function () {
+            var tables = $("#normalPartsTable, #specialContent table");
+            var status = false;
+            $.each(tables, function (index, value) {
+                var table_id = $(value).attr('id');
+                if (table_id === undefined)
+                    return;
+                var o_data = $(value).DataTable().rows().data();
+                o_data = o_data.filter(function (data) { return data.return === 'return' });
+                status = o_data.length > 0;
+                if (status)
+                    return false;
+            });
+
+            if (!status)
+                $('#myModal').modal("show");
+            else {
+                $("#alertModal .modal-body").html("請確認是否有勾選項目");
+                $("#alertModal").modal('show');
+            }
+        });
+
+        $(document).on("click", ".btn-rejectmodal", function () {
+            var tables = $("#normalPartsTable, #specialContent table");
+            var status = false;
+            $.each(tables, function (index, value) {
+                var table_id = $(value).attr('id');
+                if (table_id === undefined)
+                    return;
+                var o_data = $(value).DataTable().rows().data();
+                o_data = o_data.filter(function (data) { return data.return === 'return' });
+                status = o_data.length > 0;
+                if (status)
+                    return false;
+            });
+
+            if (status)
+                $('#rejectModal').modal("show");
+            else {
+                $("#alertModal .modal-body").html("請確認是否有勾選項目");
+                $("#alertModal").modal('show');
+            }
+        });
+
+        $(document).on("click", ".btn-save", function () {
+            SaveData("save");
+        });
+
+
+        function SaveData() {
+            var tables = $("#normalPartsTable, #specialContent table");
+            var sendData = [];
+            var i = 1;
+            var alert_arr = [];
+            $.each(tables, function (index, value) {
+                var table_id = $(value).attr('id');
+                if (table_id === undefined)
+                    return;
+                var o_data = $(value).DataTable().rows().data();
+                var mtl_type = $(value).attr("id").indexOf("normalParts") == 0 ? "Normal" : "Special";
+                var group_id = $(value).attr("id").indexOf("special") == 0 ? $(value).data('groupId') : "";
+                var updateData = o_data.filter(function (data) { return data.ISMODIFY === 'Y' });
+                alert_arr.push(checkPMPrice(updateData, mtl_type));
+                sendData = sendData.concat(sendUpdateData(updateData, mtl_type, group_id));
+            });
+
+            var alert_string;
+            $.each(alert_arr, function (index, value) {
+                $.each(value, function (i, v) {
+                    if (alert_string == undefined) alert_string = v + "<br />";
+                    else alert_string += v + "<br />";
+                });
+            });
+
+            if (alert_string != undefined) {
+                $('#myModal').modal('hide');
+
+                $("#alertModal .modal-body").html("");
+                $("#alertModal .modal-body").append(alert_string);
+                $("#alertModal").modal('show');
+                tableview.alertStatus();
+                return false;
+            }
+            var parameter = arguments[0];
+            var part_type = $("#PartType").val();
+            if (sendData.length > 0) {
+                $.ajax({
+                    "url": "/RSI/Sourcer/Save",
+                    "method": "POST",
+                    "async": false,
+                    "data": { "h_Product_Details": sendData, "part_type": part_type },
+                    "success": function (data) {
+                        if (parameter == "save") {
+                            $("#SaveSuccessModal").modal();
+                            reloadDataTable();
+                        }
+                    },
+                    "error": function () {
+                        alert("存檔失敗");
+                    }
+                });
+            } else {
+                $("#alertModal .modal-body").html("沒有修改無需變更");
+                $("#alertModal").modal('show');
+            }
+        }
+
+        function checkPMPrice(data, mtl_type) {
+            if (mtl_type == "Normal")
+                mtl_type = "Normal Parts";
+            if (mtl_type == "Special")
+                mtl_type = "Special Parts";
+            var result = [];
+            $.each(data, function (index, value) {
+                if (value.ISASSIGNER === 'Y' && value.ISCALCULATE == 'Y' && (value.PRICE_PM == "" || value.PRICE_PM == null || value.PRICE_PM == 0)) {
+                    var str = mtl_type + ": " + value.MTL_GROUP + ", " + value.MTL_PARTS + ", 金額為0，請確認";
+                    value.errorInfo = str;
+                    result.push(str);
+                }
+            });
+            return result;
+        }
+
+        function sendUpdateData(updateData, mtl_type, group_id) {
+            var sendData = [];
+            $.each(updateData, function (index, value) {
+                var data = {
+                    "PRICE": value.PRICE,
+                    "PRICE_PM": value.PRICE_PM,
+                    "MOQ": value.MOQ,
+                    "MOCKUP": value.MOCKUP,
+                    "TOOLING": value.TOOLING,
+                    "FPCA_PCBA": value.FPCA_PCBA,
+                    "CURRENCY": value.CURRENCY,
+                    "RATE": value.RATE,
+                    "SOURCE_NO": value.SOURCE_NO,
+                    "SOURCE": value.SOURCE,
+                    "RSI_NO": rsi_no,
+                    "MTL_TYPE": mtl_type,
+                    "SN": value.SN,
+                    "GROUP_ID": group_id,
+                    "REMARK_PM": value.REMARK_PM,
+                    "REMARK_PUR": value.REMARK_PUR,
+                    "PRICE_HIS_H": value.PRICE_HIS_H,
+                    "PRICE_HIS_L": value.PRICE_HIS_L,
+                    "ISASSIGNER": value.ISASSIGNER,
+                    "ISCALCULATE": value.ISCALCULATE,
+                    "pricetrend": value.pricetrend
+                };
+                sendData.push(data);
+            });
+            return sendData;
+        }
+
+        //$(document).on("click", ".btn-detail", function () {
+        //    var rsi_no = $("#RSI_NO").val();
+        //    var part_type = $("#PartType").val();
+        //    var bu = $("#BU").val();
+        //    var url = "/RSI/Sourcer/ManagerDetail?rsi_no={0}&part_type={1}&bu={2}";
+        //    url = url.replace("{0}", rsi_no).replace("{1}", part_type).replace("{2}", bu);
+        //    window.open(url, "_blank", "width=800,height=600,scrollbars=yes,resizable=yes");
+        //});
+
+        $(document).on('click', '.btn-exportExcel', function () {
+            var rsi_no = $("#RSI_NO").val();
+            $("#rsi_no").val(rsi_no);
+            var projectname = $("#PROJECT_NAME").val();
+            $("#projectname").val(projectname);
+            var bu = $('#BU').val();
+            var part_type = $('#PartType').val();
+            var phase_id = '@Request.QueryString["phase_id"]';
+            $("#exportExcel #bu").val(bu);
+            $("#exportExcel #part_type").val(part_type);
+            $("#exportExcel #phase_id").val(phase_id);
+            $("#exportExcel").submit();
+        });
+
+        $(document).on('click', '.btn-reassign', function () {
+            $('#reAssign').modal('show');
+        });
+
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth(); //January is 0!
+        var yyyy = today.getFullYear();
+
+        $("#startdate").datepicker({
+            dateFormat: "yy/mm/dd"
+        });
+        $("#startdate").datepicker("setDate", new Date(yyyy, mm, dd));
+        $("#enddate").datepicker({
+            dateFormat: "yy/mm/dd"
+        });
+        $("#enddate").datepicker("setDate", new Date(yyyy, mm, dd + 6));
+
+        $(document).on("click", ".calendar", function () {
+            var date = $(this).parent().prev();
+            var id_date = $(date).attr("id");
+            if (id_date !== "startdate") {
+                $(date).datepicker("show");
+            } else {
+                $(date).datepicker("show");
+            }
+        });
+
+        $(document).on("change", "#startdate", function () {
+            $("#enddate").val("");
+            var startdate = $(this).val();
+            var year = parseInt(startdate.split('/')[0]);
+            var month = parseInt(startdate.split('/')[1]) - 1;
+            var day = parseInt(startdate.split('/')[2]);
+            $("#enddate").datepicker('option', 'minDate', new Date(yyyy, month, day));
+            $("#enddate").datepicker('option', 'maxDate', new Date(yyyy, month, day + 6));
+        });
+
+        function searchEmp() {
+            var phase_id = 45;
+            var bu = $('#BU').val();
+            var part_type = $('#PartType').val();
+            var url = '/RSI/RSI/SearchEmp?phase_id={0}&part_type={1}&bu={2}';
+            url = url.replace('{0}', phase_id).replace('{1}', part_type).replace('{2}', bu);
+            window.open(url, "_blank", 'scrollbars=yes, width=1000, height=600');
+        }
+
+        function SetEmpInfo(emp_no, emp_name) {
+            $("#reAssign input#emp_no").val(emp_no);
+            $("#reAssign input#emp_name").val(emp_name);
+        }
+
+        $(document).on("change", "#reAssign input#emp_no", function () {
+            var emp_no = $(this).val();
+            var phase_id = 40;
+            var bu = $('#BU').val();
+            var part_type = $('#PartType').val();
+            $.ajax({
+                url: '/RSI/RSI/SearchEmp',
+                method: 'POST',
+                data: {
+                    search: emp_no,
+                    phase_id: phase_id,
+                    part_type: part_type,
+                    bu: bu
+                },
+                success: function (data) {
+                    if (data.length > 0) {
+                        $("#reAssign input#emp_name").val(data[0].EMP_NAME);
+                    }
+                }
+            });
+        });
+
+        $(document).on("click", "#reAssign .resetAssign", function () {
+            var rsi_no = $('#RSI_NO').val();
+            var part_type = $('#PartType').val();
+            var reassign = $("#reAssign input#emp_no").val();
+            var projectname = $("#PROJECT_NAME").val();
+            //var start_date = $("#reAssign input#startdate").val();
+            //var end_date = $("#reAssign input#enddate").val();
+            var bu = $("#BU").val();
+            var phase_id = '@Request.QueryString["phase_id"]';
+            if (reassign === "") {
+                alert("請輸入員工工號");
+                return false;
+            }
+
+            $.ajax({
+                url: '/RSI/Sourcer/ProductReview_ReSetAssign',
+                method: 'POST',
+                data: {
+                    rsi_no: rsi_no,
+                    reassign: reassign,
+                    part_type: part_type,
+                    bu: bu,
+                    //start_date: start_date,
+                    //end_date: end_date,
+                    phase_id: phase_id,
+                    projectname: projectname
+                },
+                success: function (data) {
+                    alert("指派完成");
+                    var url = '/RSI/';
+                    window.location.href = url;
+                }
+            });
+        });
+
+        $(document).on("click", ".btn-detail", function () {
+            var rsi_no = '@Request.QueryString["rsi_no"]';
+            var part_type = '@Request.QueryString["part_type"]';
+            var bu = '@Request.QueryString["BU"]';
+            var url = "/RSI/Sourcer/ManagerDetail?rsi_no={0}&part_type={1}&bu={2}";
+            url = url.replace("{0}", rsi_no).replace("{1}", part_type).replace("{2}", bu);
+            window.open(url, "_blank", "width=800,height=600,scrollbars=yes,resizable=yes");
+        });
+
+        $(document).on('click', '.iscalculate_all', function () {
+            var check_status = $(this).prop('checked');
+            var tableId = $(this).data('tableid');
+            var thisTable = $(tableId).DataTable();
+
+            thisTable.data().each(function (value) {
+                if (check_status) {
+                    if (value.ISMODIFY === 'Y')
+                        value.ISCALCULATE = 'Y';
+                }
+                else {
+                    if (value.ISMODIFY === 'Y')
+                        value.ISCALCULATE = 'N';
+                }
+            });
+
+            thisTable.rows().invalidate().draw();
+        });
+
+        $(document).on('click', '.isassigner_all', function () {
+            var check_status = $(this).prop('checked');
+            var tableId = $(this).data('tableid');
+            var thisTable = $(tableId).DataTable();
+
+            thisTable.data().each(function (value) {
+                if (check_status) {
+                    if (value.ISMODIFY === 'Y')
+                        value.ISASSIGNER = 'Y';
+                }
+                else {
+                    if (value.ISMODIFY === 'Y')
+                        value.ISASSIGNER = 'N';
+                }
+            });
+
+            thisTable.rows().invalidate().draw();
+        });
+
+        function fileManagement(sn) {
+            var rsi_no = $('#RSI_NO').val();
+            $("#fileManagement input[name='sn']").val(sn);
+            $("#fileManagement").modal('show');
+            $(fileTable).DataTable({
+                destroy: true,
+                ajax: {
+                    url: '/RSI/RD/FileManagement',
+                    method: 'GET',
+                    data: {
+                        rsi_no: rsi_no,
+                        sn: sn
+                    },
+                    dataSrc: ''
+                },
+                columns: [
+                    {
+                        data: 'FILE_ID',
+                        render: function (data, type, row) {
+                            return '<button class="btn btn-danger" data-file-id="' + data + '" onclick="fileDelete(this);"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>';
+                        }
+                    },
+                    {
+                        data: 'FILE_NAME',
+                        render: function (data, type, row) {
+                            return '<a href="/RSI/RSI/GetFile?file_id=' + row["FILE_ID"] + '&rsi_no=' + rsi_no + '&sn=' + sn + '">' + data + '</button>';
+                        }
+                    },
+                    { data: 'FILE_SIZE', class: 'text-right' },
+                    { data: 'CREATED_BY' },
+                    { data: 'CREATED_DATE' },
+                    { data: 'REMARK' }
+                ]
+            });
+        }
+
+        var fileTable = $('#fileTable');
+        function fileUpload() {
+            var data = new FormData();
+            data.append("rsi_no", $("#RSI_NO").val());
+            data.append("sn", $("#fileManagement input[name='sn']").val());
+            data.append("file", $("#file_detail").get(0).files[0]);
+            data.append("remark", $("#fileRemark").val());
+            $.ajax({
+                type: "POST",
+                url: "/RSI/RD/FileManagement",
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    $('#file_detail').val('').clone(true);
+                    $('#fileRemark').val('');
+                    $('.bootstrap-filestyle input.form-control').val('');
+                    $(fileTable).DataTable().ajax.reload(null, false);
+                    reloadDataTable();
+                }
+            })
+        }
+
+        function fileDelete(btn) {
+            var file_id = $(btn).data("fileId");
+            $.ajax({
+                type: "POST",
+                url: "/RSI/RD/DeleteFile",
+                dataType: "json",
+                data: {
+                    file_id: file_id
+                },
+                success: function (data) {
+                    $(fileTable).DataTable().ajax.reload(null, false);
+                    reloadDataTable();
+                }
+            })
+        }
+    </script>
+    <script src="@Url.Content("~/Scripts/SourcerProductReview.js?" + version)"></script>
+}
+

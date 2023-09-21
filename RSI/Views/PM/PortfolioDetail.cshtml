@@ -1,0 +1,492 @@
+﻿@model IEnumerable<RSI.Models.Entity.H_Product_DetailEntity>
+@{
+    Layout = null;
+}
+<!DOCTYPE Html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    @Styles.Render("~/bundles/style")
+    @Styles.RenderFormat("<link href='{0}' rel='stylsheet' type='text/css' media='print' />", "~/bundles/style/print")
+    <style>
+        body {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .pane-hScroll {
+            overflow: auto;
+            width: 100%;
+        }
+
+        .pane-vScroll {
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .fa {
+            cursor: pointer;
+        }
+
+        th, td {
+            word-break: break-all;
+            /*border: 1px solid red !important;*/
+        }
+        .plusicon {
+            width: 30px;
+        }
+
+        .materialgroup {
+            width: 130px;
+        }
+
+        .partsgroup {
+            width: 100px;
+        }
+
+        .materialparts {
+            width: 110px;
+        }
+
+        .parttype {
+            width: 110px;
+        }
+
+        .partno {
+            width: 120px;
+        }
+
+        .partdesc {
+            width: 165px;
+        }
+
+        .partspec {
+            width: 88px;
+        }
+
+        .usage {
+            width: 60px;
+        }
+
+        .pmprice {
+            width: 100px;
+        }
+
+        .moq {
+            width: 100px;
+        }
+
+        .mockup {
+            width: 100px;
+        }
+
+        .tooling {
+            width: 100px;
+        }
+
+        .pmamount {
+            width: 120px;
+        }
+
+        .topmremark {
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        確認估價結果
+        <div class="pane-hScroll">
+            <table>
+                <thead>
+                    <tr class="bg-light-blue ">
+                        <th class="text-center plusicon"><i class='fa fa-minus-square' id="all"></i></th>
+                        <th class="text-center materialgroup">Material Group</th>
+                        <th class="text-center partsgroup">Parts Group</th>
+                        <th class="text-center materialparts">Material Parts</th>
+                        <th class="text-center parttype">Part Type</th>
+                        <th class="text-center partno">Parent</th>
+                        <th class="text-center partno">Part No</th>
+                        <th class="text-center partdesc">Part Desc</th>
+                        <th class="text-center partspec">Part Spec</th>
+                        <th class="text-center usage">Usage</th>
+                        <th class="text-center pmprice">Price(USD)</th>
+                        <th class="text-center moq">MOQ</th>
+                        <th class="text-center mockup">Mockup Fee</th>
+                        <th class="text-center tooling">Tooling Fee</th>
+                        <th class="text-center tooling">FPCA_PCBA Fee</th>
+                        <th class="text-center pmamount">Amount(USD)</th>
+                        <th class="text-center topmremark">To PM<br />Remark</th>
+                        <th class="text-center topmremark hidden">Price<br />Group</th>
+                        <th class="text-center topmremark hidden">Group<br />ID</th>
+                    </tr>
+                </thead>
+            </table>
+            <div class="pane-vScroll">
+                <table class="datatable table  table-bordered table-hover">
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/script")
+    <script>
+        var mpprice_config = @RSI.Models.Entity.RSI_ConfigEntityDAL.GetPMPriceConfig(Request.QueryString["bu"]);
+        Array.prototype.sum = function (prop) {
+            var total = null;
+            for (var i = 0, _len = this.length; i < _len; i++) {
+                total += this[i][prop];
+            }
+            return total;
+        }
+
+        var prev_material_group, prev_parts_group, prev_price_group, prev_material_parts;
+        var total_parts_amount, total_material_amount, total_materialpart_amount;
+        var total;
+        $(function () {
+            window.moveTo(0, 0);
+            window.resizeTo(screen.width, screen.height);
+            $("table tbody").css("max-height", screen.height - 70 - 60 - 100);
+            $('body').css({ "background-image": "url(http://auhqhrap02.corpnet.auo.com/PB20/Webform/GetSpecialWaterMark.ashx)", "background-repeat": "repeat", "background-position": "center" });
+
+            var rsi_no = '@Request.QueryString["rsi_no"]';
+            var group_id = '@Request.QueryString["group_id"]';
+            $.ajax({
+                url: '/RSI/PM/PortfolioDetail',
+                method: 'POST',
+                data: {
+                    rsi_no: rsi_no,
+                    group_id: group_id
+                },
+                success: function (data) {
+                    drawtabledata(data);
+                }
+            });
+
+            $(".pane-vScroll").css("height", screen.height - 70 - 60 - 150);
+        });
+
+        function drawtabledata(data) {
+            $("table tbody").html("");
+
+            var prev_material_group, prev_parts_group, prev_material_parts, prev_part_type;
+            var pricegroup;
+            $.each(data, function (index, value) {
+                if (index != 0 && prev_material_parts != value.MTL_PARTS && pricegroup != 'MATERIAL_GROUP' && pricegroup != 'PARTS_GROUP') {
+                    var materialpart_footer = "<tr class='warning'><td class='text-center plusicon'></td>" +
+                        "<td class='materialgroup'></td><td class='partsgroup'></td><td class='materialparts' colspan='2'>{6} Total</td>" +
+                        "<td class='partno'></td><td class='partno'></td><td class='partdesc'></td><td class='partspec'></td><td class='usage text-right'></td>" +
+                        "<td class='pmprice text-right'>{0}</td><td class='moq text-right'>{1}</td><td class='mockup text-right'>{2}</td><td class='tooling text-right'>{3}</td><td class='tooling text-right'>{4}</td>" +
+                        "<td class='pmamount text-right'>{5}</td><td class='topmremark'></td><td class='topmremark hidden'></td><td class='topmremark hidden'></td></tr>";
+                    var temp_data = data.filter(function (d) { return d.MTL_GROUP === prev_material_group && d.PARTS_GROUP == prev_parts_group && d.MTL_PARTS === prev_material_parts && d.PART_TYPE == prev_part_type});
+                    var pmprice = temp_data.sum("PRICE_PM");
+                    var moq = temp_data.sum("MOQ");
+                    var mockup = temp_data.sum("MOCKUP");
+                    var tooling = temp_data.sum("TOOLING");
+                    var fpca_pcba = temp_data.sum("FPCA_PCBA");
+                    var pmamount = temp_data.sum("PMAMOUNT");
+                    materialpart_footer = materialpart_footer.replace("{0}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 4 }).format(pmprice))
+                        .replace("{1}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 4 }).format(moq))
+                        .replace("{2}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 4 }).format(mockup))
+                        .replace("{3}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 4 }).format(tooling))
+                        .replace("{4}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 4 }).format(fpca_pcba))
+                        .replace("{5}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 4 }).format(pmamount))
+                        .replace("{6}", prev_material_parts);
+                    $(".datatable tbody").append(materialpart_footer);
+                    prev_material_parts = value.MTL_PARTS;
+                }
+
+                if (index != 0 && (prev_parts_group != value.PARTS_GROUP || (prev_material_group != value.MTL_GROUP && prev_parts_group == value.PARTS_GROUP)) && (pricegroup != 'MATERIAL_GROUP')) {
+                    var partgroup_footer = "<tr class='warning'><td class='text-center plusicon'></td>" +
+                        "<td class='materialgroup'></td><td class='partsgroup' colspan='2'>{6} Total</td>" +
+                        "<td class='parttype'></td><td class='partno'></td><td class='partno'></td><td class='partdesc'></td><td class='partspec'></td><td class='usage text-right'></td>" +
+                        "<td class='pmprice text-right'>{0}</td><td class='moq text-right'>{1}</td><td class='mockup text-right'>{2}</td><td class='tooling text-right'>{3}</td><td class='tooling text-right'>{4}</td>" +
+                        "<td class='pmamount text-right'>{5}</td><td class='topmremark'></td><td class='topmremark hidden'></td><td class='topmremark hidden'></td></tr>";
+                    var temp_data = data.filter(function (d) { return d.MTL_GROUP === prev_material_group && d.PARTS_GROUP == prev_parts_group && d.PART_TYPE === prev_part_type});
+                    var pmprice = temp_data.sum("PRICE_PM");
+                    var moq = temp_data.sum("MOQ");
+                    var mockup = temp_data.sum("MOCKUP");
+                    var tooling = temp_data.sum("TOOLING");
+                    var fpca_pcba = temp_data.sum("FPCA_PCBA");
+                    var pmamount = temp_data.sum("PMAMOUNT");
+                    partgroup_footer = partgroup_footer.replace("{0}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(pmprice))
+                        .replace("{1}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(moq))
+                        .replace("{2}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(mockup))
+                        .replace("{3}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(tooling))
+                        .replace("{4}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(fpca_pcba))
+                        .replace("{5}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(pmamount))
+                        .replace("{6}", prev_parts_group);
+                    $(".datatable tbody").append(partgroup_footer);
+                    prev_parts_group = value.PARTS_GROUP;
+                }
+
+                if (index == 0 || prev_material_group != value.MTL_GROUP) {
+                    if (index != 0) {
+                        var mtlgroup_footer = "<tr class='warning'><td class='plusicon'></td><td class='materialgroup' colspan='2'>{6} Total</td>" +
+                            "<td class='materialparts'></td><td class='parttype'></td><td class='partno'></td><td class='partno'></td><td class='partdesc'></td><td class='partspec'></td>" +
+                            "<td class='usage text-right'></td><td class='pmprice text-right'>{0}</td><td class='moq text-right'>{1}</td><td class='mockup text-right'>{2}</td>" +
+                            "<td class='tooling text-right'>{3}</td><td class='tooling text-right'>{4}</td><td class='pmamount text-right'>{5}</td><td class='topmremark'></td><td class='topmremark hidden'></td><td class='topmremark hidden'></td></tr>";
+                        var temp_data = data.filter(function (d) { return d.MTL_GROUP === prev_material_group && d.PART_TYPE === prev_part_type});
+                        var pmprice = temp_data.sum("PRICE_PM");
+                        var moq = temp_data.sum("MOQ");
+                        var mockup = temp_data.sum("MOCKUP");
+                        var tooling = temp_data.sum("TOOLING");
+                        var fpca_pcba = temp_data.sum("FPCA_PCBA");
+                        var pmamount = temp_data.sum("PMAMOUNT");
+                        mtlgroup_footer = mtlgroup_footer.replace("{0}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(pmprice))
+                            .replace("{1}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(moq))
+                            .replace("{2}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(mockup))
+                            .replace("{3}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(tooling))
+                            .replace("{4}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(fpca_pcba))
+                            .replace("{5}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(pmamount))
+                            .replace("{6}", prev_material_group);
+                        $(".datatable tbody").append(mtlgroup_footer);
+                    }
+
+                    prev_material_group = value.MTL_GROUP;
+                    prev_parts_group = value.PARTS_GROUP;
+                    prev_material_parts = value.MTL_PARTS;
+                    prev_part_type = value.PART_TYPE;
+                    var mtl_header = "<tr><td class='text-center plusicon'><i class='fa fa-minus-square'></i></td>" +
+                        "<td class='materialgroup'>{0}</td><td class='partsgroup'></td><td class='materialparts'></td>" +
+                        "<td class='parttype'>{1}</td><td class='partno'></td><td class='partno'></td><td class='partdesc'></td><td class='partspec'></td><td class='usage'></td>" +
+                        "<td class='pmprice'></td><td class='moq'></td><td class='mockup'></td><td class='tooling'></td><td class='tooling'></td>" +
+                        "<td class='pmamount'></td><td class='topmremark'></td>" +
+                        "<td class='topmremark hidden'></td><td class='topmremark hidden'></td></tr>";
+                    mtl_header = mtl_header.replace("{0}", prev_material_group).replace('{1}', prev_part_type);
+                    $(".datatable tbody").append(mtl_header);
+                }
+
+
+                pricegroup = value.PRICE_GROUP != null ? value.PRICE_GROUP.toUpperCase() : '';
+                var color = value.MTL_TYPE == "Special" ? "success" : "";
+                var priceshowflag = (pricegroup == "PARTS_GROUP" || pricegroup == "MATERIAL_PARTS" || pricegroup == "MATERIAL_GROUP");
+                var trstring = "<tr class='{color}'><td class='plusicon'></td><td class='materialgroup'>{0}</td><td class='partsgroup'>{1}</td>" +
+                    "<td class='materialparts'>{2}</td><td class='parttype'>{15}</td><td class='partno'>{16}</td><td class='partno'>{3}</td><td class='partdesc'>{4}</td><td class='partspec'>{5}</td>" +
+                    "<td class='usage text-right'>{6}</td><td class='pmprice text-right'>{7}</td><td class='moq text-right'>{8}</td><td class='mockup text-right'>{9}</td>" +
+                    "<td class='tooling text-right'>{10}</td><td class='tooling text-right'>{17}</td><td class='pmamount text-right'>{11}</td><td class='topmremark'>{12}</td>" +
+                    "<td class='topmremark hidden'>{13}</td><td class='topmremark hidden'>{14}</td></tr>";
+                var part_no_string = value.PART_NO;
+                if (value.EOL_STATUS === 'Y')
+                    part_no_string += "<span class='text-danger' style='float: right; font-weight: bold;'>@@</span>";
+                if (value.UNI_SPEC_STATUS === 'Y')
+                    part_no_string += " <span class='text-danger' style='float: right; font-weight: bold;'>!</span>";
+                trstring = trstring.replace("{color}", color)
+                    .replace("{0}", value.MTL_GROUP).replace("{1}", value.PARTS_GROUP).replace("{2}", value.MTL_PARTS)
+                    .replace("{3}", value.PART_NO == null ? "" : part_no_string)
+                    .replace("{4}", value.PART_DESC == null ? "" : value.PART_DESC)
+                    .replace("{5}", value.PART_SPEC == null ? "" : value.PART_SPEC)
+                    .replace("{6}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 4 }).format(value.USAGE))
+                    .replace("{7}", priceshowflag ? "" : new Intl.NumberFormat("en-US", { maximumFractionDigits: 4 }).format(value.PRICE_PM))
+                    .replace("{8}", priceshowflag ? "" : new Intl.NumberFormat("en-US", { maximumFractionDigits: 4 }).format(value.MOQ))
+                    .replace("{9}", priceshowflag ? "" : new Intl.NumberFormat("en-US", { maximumFractionDigits: 4 }).format(value.MOCKUP))
+                    .replace("{10}", priceshowflag ? "" : new Intl.NumberFormat("en-US", { maximumFractionDigits: 4 }).format(value.TOOLING))
+                    .replace("{11}", priceshowflag ? "" : new Intl.NumberFormat("en-US", { maximumFractionDigits: 4 }).format(value.PMAMOUNT))
+                    .replace("{12}", value.REMARK_PM == null ? "" : value.REMARK_PM)
+                    .replace("{13}", value.PRICE_GROUP == null ? "" : value.PRICE_GROUP)
+                    .replace("{14}", value.GROUP_ID == null ? "" : value.GROUP_ID)
+                    .replace("{15}", value.PART_TYPE == null ? "" : value.PART_TYPE)
+                    .replace("{16}", value.PART_TYPE == null ? "" : value.PARTNUMBER_PARENT)
+                    .replace("{17}", priceshowflag ? "" : new Intl.NumberFormat("en-US", { maximumFractionDigits: 4 }).format(value.FPCA_PCBA));
+                $(".datatable tbody").append(trstring);
+            });
+
+            if (pricegroup != 'MATERIAL_GROUP' && pricegroup != 'PARTS_GROUP') {
+                var materialpart_footer = "<tr class='warning'><td class='text-center plusicon'></td>" +
+                    "<td class='materialgroup'></td><td class='partsgroup'></td><td class='materialparts' colspan='2'>{6} Total</td>" +
+                    "<td class='partno'></td><td class='partno'></td><td class='partdesc'></td><td class='partspec'></td><td class='usage text-right'></td>" +
+                    "<td class='pmprice text-right'>{0}</td><td class='moq text-right'>{1}</td><td class='mockup text-right'>{2}</td><td class='tooling text-right'>{3}</td><td class='tooling text-right'>{4}</td>" +
+                    "<td class='pmamount text-right'>{5}</td><td class='topmremark'></td><td class='topmremark hidden'></td><td class='topmremark hidden'></td></tr>";
+                var temp_data = data.filter(function (d) { return d.MTL_GROUP === prev_material_group && d.PARTS_GROUP == prev_parts_group && d.MTL_PARTS == prev_material_parts && d.PART_TYPE === prev_part_type});
+                var pmprice = temp_data.sum("PRICE_PM");
+                var moq = temp_data.sum("MOQ");
+                var mockup = temp_data.sum("MOCKUP");
+                var tooling = temp_data.sum("TOOLING");
+                var fpca_pcba = temp_data.sum("FPCA_PCBA");
+                var pmamount = temp_data.sum("PMAMOUNT");
+                materialpart_footer = materialpart_footer.replace("{0}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(pmprice))
+                    .replace("{1}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(moq))
+                    .replace("{2}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(mockup))
+                    .replace("{3}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(tooling))
+                    .replace("{4}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(fpca_pcba))
+                    .replace("{5}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(pmamount))
+                    .replace("{6}", prev_material_parts);
+                $(".datatable tbody").append(materialpart_footer);
+            }
+
+            if (pricegroup != 'MATERIAL_GROUP') {
+                var partgroup_footer = "<tr class='warning'><td class='text-center plusicon'></td>" +
+                    "<td class='materialgroup'></td><td class='partsgroup' colspan='2'>{6} Total</td>" +
+                    "<td class='materialparts'></td><td class='partno'></td><td class='partno'></td><td class='partdesc'></td><td class='partspec'></td><td class='usage text-right'></td>" +
+                    "<td class='pmprice text-right'>{0}</td><td class='moq text-right'>{1}</td><td class='mockup text-right'>{2}</td><td class='tooling text-right'>{3}</td><td class='tooling text-right'>{4}</td>" +
+                    "<td class='pmamount text-right'>{5}</td><td class='topmremark'></td><td class='topmremark hidden'></td><td class='topmremark hidden'></td></tr>";
+                var temp_data = data.filter(function (d) { return d.MTL_GROUP === prev_material_group && d.PARTS_GROUP == prev_parts_group && d.PART_TYPE === prev_part_type});
+                var pmprice = temp_data.sum("PRICE_PM");
+                var moq = temp_data.sum("MOQ");
+                var mockup = temp_data.sum("MOCKUP");
+                var tooling = temp_data.sum("TOOLING");
+                var fpca_pcba = temp_data.sum("FPCA_PCBA");
+                var pmamount = temp_data.sum("PMAMOUNT");
+                partgroup_footer = partgroup_footer.replace("{0}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(pmprice))
+                    .replace("{1}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(moq))
+                    .replace("{2}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(mockup))
+                    .replace("{3}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(tooling))
+                    .replace("{4}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(fpca_pcba))
+                    .replace("{5}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(pmamount))
+                    .replace("{6}", prev_parts_group);
+                $(".datatable tbody").append(partgroup_footer);
+            }
+
+            var mtlgroup_footer = "<tr class='warning'><td class='plusicon'></td><td class='materialgroup' colspan='2'>{6} Total</td>" +
+                "<td class='materialparts'></td><td class='parttype'></td><td class='partno'></td><td class='partno'></td><td class='partdesc'></td><td class='partspec'></td>" +
+                "<td class='usage text-right'></td><td class='pmprice text-right'>{0}</td><td class='moq text-right'>{1}</td><td class='mockup text-right'>{2}</td>" +
+                "<td class='tooling text-right'>{3}</td><td class='tooling text-right'>{4}</td><td class='pmamount text-right'>{5}</td><td class='topmremark'></td><td class='topmremark hidden'></td><td class='topmremark hidden'></td></tr>";
+            var temp_data = data.filter(function (d) { return d.MTL_GROUP === prev_material_group && d.PART_TYPE === prev_part_type });
+            var pmprice = temp_data.sum("PRICE_PM");
+            var moq = temp_data.sum("MOQ");
+            var mockup = temp_data.sum("MOCKUP");
+            var tooling = temp_data.sum("TOOLING");
+            var fpca_pcba = temp_data.sum("FPCA_PCBA");
+            var pmamount = temp_data.sum("PMAMOUNT");
+            mtlgroup_footer = mtlgroup_footer.replace("{0}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(pmprice))
+                .replace("{1}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(moq))
+                .replace("{2}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(mockup))
+                .replace("{3}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(tooling))
+                .replace("{4}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(fpca_pcba))
+                .replace("{5}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(pmamount))
+                .replace("{6}", prev_material_group);
+            $(".datatable tbody").append(mtlgroup_footer);
+
+            var total_footer = "<tr class='warning'><td class='plusicon'></td><td class='materialgroup' colspan='2'>Total</td>" +
+                "<td class='materialparts'></td><td class='parttype'></td><td class='partno'></td><td class='partno'></td><td class='partdesc'></td><td class='partspec'></td>" +
+                "<td class='usage text-right'></td><td class='pmprice text-right'>{0}</td><td class='moq text-right'>{1}</td><td class='mockup text-right'>{2}</td>" +
+                "<td class='tooling text-right'>{3}</td><td class='tooling text-right'>{4}</td><td class='pmamount text-right'>{5}</td><td class='topmremark'></td><td class='topmremark hidden'></td><td class='topmremark hidden'></td></tr>";
+            var pmprice = data.sum("PRICE_PM");
+            var moq = data.sum("MOQ");
+            var mockup = data.sum("MOCKUP");
+            var tooling = data.sum("TOOLING");
+            var fpca_pcba = data.sum("FPCA_PCBA");
+            var pmamount = data.sum("PMAMOUNT");
+            total_footer = total_footer.replace("{0}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(pmprice))
+                .replace("{1}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(moq))
+                .replace("{2}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(mockup))
+                .replace("{3}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(tooling))
+                .replace("{4}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(fpca_pcba))
+                .replace("{5}", new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(pmamount));
+            $(".datatable tbody").append(total_footer);
+
+            pricecolor();
+            mpprice_terget();
+
+            $('#all').click();
+            
+            //$("#all").removeClass("fa-minus-square").addClass("fa-plus-square");
+        }
+
+        $(document).on("click", ".fa:not('#all')", function () {
+            var thisIndex = $(".fa").index(this);
+            var thisTr = $(this).closest("tr");
+            var nextTr = (thisIndex + 1 != $(".fa").length) ? $(".fa").eq(thisIndex + 1).closest("tr") : $(".table tbody tr").last();
+            var thisTrIndex = $(".table tbody tr").index(thisTr);
+            var endTrIndex = $(".table tbody tr").index(nextTr);
+
+            var plusorminus = $(this).hasClass("fa-minus-square");
+            if (plusorminus) {
+                for (var i = thisTrIndex + 1; i < endTrIndex; i++) {
+                    var haswarning = $(".table tbody tr").eq(i).hasClass('warning');
+                    if (!haswarning) $(".table tbody tr").eq(i).addClass("hidden");
+                }
+                $(this).removeClass("fa-minus-square").addClass("fa-plus-square");
+            } else {
+                for (var i = thisTrIndex + 1; i < endTrIndex; i++) {
+                    var haswarning = $(".table tbody tr").eq(i).hasClass('warning');
+                    if (!haswarning) $(".table tbody tr").eq(i).removeClass("hidden");
+                }
+                $(this).removeClass("fa-plus-square").addClass("fa-minus-square");
+            }
+        });
+
+        $(document).on("click", "#all", function () {
+            var plusorminus = $(this).hasClass("fa-minus-square");
+            if (plusorminus) {
+                $.each($(".table tbody tr:not(:last-child)"), function (index, data) {
+                    var hasIcon = $(data).find('td').eq(0).find('i');
+                    if (hasIcon.length > 0) {
+                        $(data).find('td').eq(0).find('i').removeClass("fa-minus-square").addClass("fa-plus-square");
+                        return;
+                    }
+
+                    var hashidden = $(data).hasClass('hidden');
+                    if (!hashidden) {
+                        var haswarning = $(data).hasClass('warning');
+                        if(!haswarning) $(data).addClass('hidden');
+                    }
+                });
+
+                $(this).removeClass("fa-minus-square").addClass("fa-plus-square");
+            } else {
+                $.each($(".table tbody tr:not(:last-child)"), function (index, data) {
+                    var hashidden = $(data).hasClass('hidden');
+                    if (hashidden) {
+                        var haswarning = $(data).hasClass('warning');
+                        if (!haswarning) $(data).removeClass('hidden');
+                    }
+
+                    var hasIcon = $(data).find('td').eq(0).find('i');
+                    if (hasIcon.length > 0) {
+                        $(data).find('td').eq(0).find('i').removeClass("fa-plus-square").addClass("fa-minus-square");
+                    }
+                });
+
+                $(this).removeClass("fa-plus-square").addClass("fa-minus-square");
+            }
+        });
+
+        function pricecolor() {
+            var tds = $("table tbody tr td.text-right:not(.usage)");
+            $.each(tds, function (index, value) {
+                var price = $(value).text();
+                price = price.replace(/,/g, "");
+                if (price != "") {
+                    var numberprice = parseFloat(price);
+                    if (price > 0) {
+                        //$(value).addClass("text-primary");
+                        $(value).css("color", "blue");            
+                    } else if (price == 0) {
+                        $(value).addClass("text-muted");
+                    } else {
+                        //$(value).addClass("text-danger");
+                        $(value).css("color", "red");
+                    }
+                }
+            });
+        }
+
+        function mpprice_terget() {
+            if (mpprice_config < 4)
+                $("th.mpprice3, th.mpamount3, td.mpprice3, td.mpamount3").addClass('hidden');
+            if (mpprice_config < 3)
+                $("th.mpprice2, th.mpamount2, td.mpprice2, td.mpamount2").addClass('hidden');
+            if (mpprice_config < 2)
+                $("th.mpprice1, th.mpamount1, td.mpprice1, td.mpamount1").addClass('hidden');
+            if (mpprice_config < 1)
+                $("th.mpprice, th.mpamount, td.mpprice, td.mpamount").addClass('hidden');
+        }
+
+        $('.pane-hScroll').scroll(function () {
+            $('.pane-vScroll').width($('.pane-hScroll').width() + $('.pane-hScroll').scrollLeft());
+        });
+    </script>
+</body>
+</html>

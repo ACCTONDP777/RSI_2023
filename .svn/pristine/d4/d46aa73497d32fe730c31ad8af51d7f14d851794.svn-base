@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="EncryptValue">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strText" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EncryptValueResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EncryptValueResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DecryptValue">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strText" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DecryptValueResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DecryptValueResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="EncryptValueSoapIn">
+    <wsdl:part name="parameters" element="tns:EncryptValue" />
+  </wsdl:message>
+  <wsdl:message name="EncryptValueSoapOut">
+    <wsdl:part name="parameters" element="tns:EncryptValueResponse" />
+  </wsdl:message>
+  <wsdl:message name="DecryptValueSoapIn">
+    <wsdl:part name="parameters" element="tns:DecryptValue" />
+  </wsdl:message>
+  <wsdl:message name="DecryptValueSoapOut">
+    <wsdl:part name="parameters" element="tns:DecryptValueResponse" />
+  </wsdl:message>
+  <wsdl:message name="EncryptValueHttpGetIn">
+    <wsdl:part name="strText" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EncryptValueHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DecryptValueHttpGetIn">
+    <wsdl:part name="strText" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DecryptValueHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="EncryptValueHttpPostIn">
+    <wsdl:part name="strText" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EncryptValueHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DecryptValueHttpPostIn">
+    <wsdl:part name="strText" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DecryptValueHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="MainServiceSoap">
+    <wsdl:operation name="EncryptValue">
+      <wsdl:input message="tns:EncryptValueSoapIn" />
+      <wsdl:output message="tns:EncryptValueSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DecryptValue">
+      <wsdl:input message="tns:DecryptValueSoapIn" />
+      <wsdl:output message="tns:DecryptValueSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MainServiceHttpGet">
+    <wsdl:operation name="EncryptValue">
+      <wsdl:input message="tns:EncryptValueHttpGetIn" />
+      <wsdl:output message="tns:EncryptValueHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DecryptValue">
+      <wsdl:input message="tns:DecryptValueHttpGetIn" />
+      <wsdl:output message="tns:DecryptValueHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MainServiceHttpPost">
+    <wsdl:operation name="EncryptValue">
+      <wsdl:input message="tns:EncryptValueHttpPostIn" />
+      <wsdl:output message="tns:EncryptValueHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DecryptValue">
+      <wsdl:input message="tns:DecryptValueHttpPostIn" />
+      <wsdl:output message="tns:DecryptValueHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MainServiceSoap" type="tns:MainServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EncryptValue">
+      <soap:operation soapAction="http://tempuri.org/EncryptValue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DecryptValue">
+      <soap:operation soapAction="http://tempuri.org/DecryptValue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MainServiceSoap12" type="tns:MainServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EncryptValue">
+      <soap12:operation soapAction="http://tempuri.org/EncryptValue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DecryptValue">
+      <soap12:operation soapAction="http://tempuri.org/DecryptValue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MainServiceHttpGet" type="tns:MainServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="EncryptValue">
+      <http:operation location="/EncryptValue" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DecryptValue">
+      <http:operation location="/DecryptValue" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MainServiceHttpPost" type="tns:MainServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="EncryptValue">
+      <http:operation location="/EncryptValue" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DecryptValue">
+      <http:operation location="/DecryptValue" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MainService">
+    <wsdl:port name="MainServiceSoap" binding="tns:MainServiceSoap">
+      <soap:address location="http://172.17.86.105/SRMValidate/MainService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MainServiceSoap12" binding="tns:MainServiceSoap12">
+      <soap12:address location="http://172.17.86.105/SRMValidate/MainService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MainServiceHttpGet" binding="tns:MainServiceHttpGet">
+      <http:address location="http://172.17.86.105/SRMValidate/MainService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MainServiceHttpPost" binding="tns:MainServiceHttpPost">
+      <http:address location="http://172.17.86.105/SRMValidate/MainService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

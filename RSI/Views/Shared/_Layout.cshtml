@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>@ViewBag.Title</title>
+
+    @*  Sample demo to reference JS&Css with Bundles*@
+    @Styles.Render("~/bundles/style")
+    @Styles.RenderFormat("<link href='{0}' rel='stylsheet' type='text/css' media='print' />", "~/bundles/style/print")
+    @RenderSection("custom_css_reference", required: false)
+    @RenderSection("custom_style", required: false)
+    <style type="text/css">
+        body {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        iframe body {
+            -webkit-touch-callout: initial;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        .main-header .logo {
+            width: 180px;
+        }
+        .main-header .navbar {
+            margin-left:180px;
+        }
+    </style>
+</head>
+<body class="sidebar-mini skin-blue-light fixed" oncontextmenu="return false">
+    <!-- fixed ie8不適用 -->
+
+    <div class="wrapper">
+        <!-- Main Header -->
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="@Url.Action("Index", "Demo")" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><img src="@Url.Content("~/Content/images/logo.png")"></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><img src="@Url.Content("~/Content/images/logo.png")"> <b>RSI</b></span>
+            </a>
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- Notifications Menu -->
+                        <li class="dropdown notifications-menu">
+                            <!-- Menu toggle button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-bell-o"></i>
+                                <span class="label label-danger">@Html.Action("GetToDoListCount", "RSI")</span>
+                            </a>
+                            @{
+                                var todolist = RSI.Models.Manager.To_Do_List_VManager.GetTo_Do_List_VEntities(RSI.Models.Entity.Employee.EmpNO);
+                            }
+                            <ul class="dropdown-menu">
+                                <li class="header">To do list</li>
+                                <li>
+                                    <ul class="menu">
+                                        @foreach (var item in todolist)
+                                        {
+                                            var url = "/RSI";
+                                            switch (item.PHASE_ID)
+                                            {
+                                                case "10":
+                                                    url += "/RD/RDReview";
+                                                    break;
+                                                case "20":
+                                                    url += "/RD/RDBossReview";
+                                                    break;
+                                                case "25":
+                                                    url += "/RD/RDBossReview";
+                                                    break;
+                                                case "30":
+                                                    url += "/PM/PLReview";
+                                                    break;
+                                                case "40":
+                                                    url += "/Sourcer/Index";
+                                                    break;
+                                                case "45":
+                                                    url += "/Sourcer/ProductReview";
+                                                    break;
+                                                case "50":
+                                                    url += "/Sourcer/Boss";
+                                                    break;
+                                                case "60":
+                                                    url += "/Sourcer/Boss";
+                                                    break;
+                                                case "70":
+                                                    url += "/PM/Confirm";
+                                                    break;
+                                            }
+                                            url += "?rsi_no={0}&part_type={1}&form_no={2}&phase_id={3}";
+                                            url = string.Format(url, RSI.Models.Entity.Validate.EncryptValue(item.RSI_NO.ToString()), RSI.Models.Entity.Validate.EncryptValue(item.PART_TYPE), RSI.Models.Entity.Validate.EncryptValue(item.FORM_NO.ToString()), item.PHASE_ID);
+                                            <li>
+                                                <a href="@url">
+                                                    <i class="fa fa-chevron-right text-aqua"></i> @item.PROJECT_NAME&nbsp;@item.PART_TYPE
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="#">更多</a></li>
+                            </ul>
+                        </li>
+                        <!-- User Account Menu -->
+                        <li class="dropdown user user-menu">
+                            <!-- Menu Toggle Button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                @{
+                                    var emp_no = RSI.Models.Entity.Employee.EmpNO;
+                                    var imageUrl = String.Format("http://au3hr8/photo/{0}.jpg", emp_no);
+                                }
+                                <div class="user-image"><img src="@imageUrl" alt="User Image"></div>
+                                <span class="hidden-xs">@RSI.Models.Entity.Employee.EmpName</span>
+                            </a>
+                            <ul class="dropdown-menu notifications-menu">
+                                <!-- The user image in the menu -->
+                                <li class="user-header">
+                                    <div class="img-circle"><img src="@imageUrl" alt="User Image"></div>
+                                    <p>
+                                        @Html.Action("GetEmp_EngName", "RSI")&nbsp;@RSI.Models.Entity.Employee.EmpName
+                                        <small>@Html.Action("GetDepartmentId", "RSI")</small>
+                                    </p>
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">Personal Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        @Html.ActionLink("Logout", "SingOut", "RSI", null, new { @class = "btn btn-default btn-flat" })
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Language Menu -->
+                        <li class="dropdown notifications-menu language-menu">
+                            <!-- Menu toggle button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-globe"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <ul class="menu">
+                                        <li><a href="#">English</a></li>
+                                        <li><a href="#">繁體中文</a></li>
+                                        <li><a href="#">简体中文</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar" style="width:180px;">
+            <section class="sidebar">
+                <!-- Sidebar Menu -->
+                <ul class="sidebar-menu" data-widget="tree">
+                    <li class="active"><a href="@Url.Action("Index", "Demo")"><i class="fa fa-home"></i> <span>Home</span></a></li>
+                    <li>
+                        <a href="@Url.Action("DashBoard", "RSI")">
+                            <i class="fa fa-file-text"></i> <span>DashBoard</span>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.sidebar-menu -->
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper" style="margin-left:180px;">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    @ViewBag.Title
+                    <small>@ViewBag.SubTitle</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="@Url.Action("Index", "Demo")"><i class="fa fa-home"></i> Home</a></li>
+                    <li class="active">@ViewBag.Title</li>
+                </ol>
+            </section>
+
+            <!-- Main content -->
+            <section class="content container-fluid">
+                @RenderBody()
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            @RenderSection("warning", false)
+            <!-- To the right -->
+            <div class="pull-right hidden-xs">
+                Owner: Yihui 李怡慧(8535-5550)
+            </div>
+            <!-- Default to the left -->
+            <strong>Copyright &copy; 2018 <a href="/RSI">RSI</a>.</strong> All rights reserved.
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+    <!-- REQUIRED JS SCRIPTS -->
+    @Scripts.Render("~/bundles/script")
+    @RenderSection("custom_script_reference", required: false)
+    @RenderSection("custom_script", false)
+    <script>
+        $(function () {
+            $('.content-wrapper').css({ "background-image": "url(http://auhqhrap02.corpnet.auo.com/PB20/Webform/GetSpecialWaterMark.ashx)", "background-repeat": "repeat", "background-position": "center" });
+        });
+    </script>
+</body>
+</html>

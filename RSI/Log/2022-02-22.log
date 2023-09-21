@@ -1,0 +1,2250 @@
+2022-02-22 09:02:20,059 [11] INFO  --Begin: - 【GetDashBoardRSINO】:select rsi_no from RSI_H_PRODUCT_INFO where 1=1 and project_name = :project_name  order by rsi_no desc 
+
+2022-02-22 09:02:20,746 [11] INFO   --End: - Completed
+2022-02-22 09:02:20,746 [11] INFO  --Begin:獲取DashBoard UA資訊2 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, FORM_STATUS)) > 0  
+                                                   AND ((:rsi_no is null or RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY RSI_NO DESC, DECODE(PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)  
+
+2022-02-22 09:02:20,934 [11] INFO  --End:獲取DashBoard UA資訊2 - Completed
+2022-02-22 09:02:21,059 [11] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2022-02-22 09:02:21,059 [11] INFO  --End:獲取Contract Status資訊 - Completed
+2022-02-22 09:02:21,293 [11] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 09:02:21,293 [11] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 09:02:21,293 [11] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 09:02:21,309 [11] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 09:02:21,309 [11] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2022-02-22 09:02:21,324 [11] INFO  --End:獲取Department Name資訊 - Completed
+2022-02-22 09:02:27,357 [16] INFO  --Begin: - 【GetDetailApprove】:  SELECT A.RSI_NO, A.FORM_NO, A.PART_TYPE, A.PHASE_ID, A.PHASE, A.APP_SERIAL, 
+                                          A.APP_ASSIGNER, A.APP_ASSIGNER_NAME, A.APP_ACTOR, A.APP_ACTOR_NAME,
+                                          A.STATUS, A.BEGIN_DATE, A.END_DATE,
+                                          A.APP_CONTENT, A.DIF_DAY
+                                          FROM RSI_APPROVAL_LIST_V A
+                                          WHERE A.RSI_NO = :rsi_no
+                                          AND A.PART_TYPE = :part_type 
+
+2022-02-22 09:02:27,357 [16] INFO   --End: - Completed
+2022-02-22 09:02:30,995 [18] INFO  --Begin: - 【GetDetailApprove】:  SELECT A.RSI_NO, A.FORM_NO, A.PART_TYPE, A.PHASE_ID, A.PHASE, A.APP_SERIAL, 
+                                          A.APP_ASSIGNER, A.APP_ASSIGNER_NAME, A.APP_ACTOR, A.APP_ACTOR_NAME,
+                                          A.STATUS, A.BEGIN_DATE, A.END_DATE,
+                                          A.APP_CONTENT, A.DIF_DAY
+                                          FROM RSI_APPROVAL_LIST_V A
+                                          WHERE A.RSI_NO = :rsi_no
+                                          AND A.PART_TYPE = :part_type 
+
+2022-02-22 09:02:30,995 [18] INFO   --End: - Completed
+2022-02-22 09:02:33,547 [17] INFO  --Begin: - 【GetDetailApprove】:  SELECT A.RSI_NO, A.FORM_NO, A.PART_TYPE, A.PHASE_ID, A.PHASE, A.APP_SERIAL, 
+                                          A.APP_ASSIGNER, A.APP_ASSIGNER_NAME, A.APP_ACTOR, A.APP_ACTOR_NAME,
+                                          A.STATUS, A.BEGIN_DATE, A.END_DATE,
+                                          A.APP_CONTENT, A.DIF_DAY
+                                          FROM RSI_APPROVAL_LIST_V A
+                                          WHERE A.RSI_NO = :rsi_no
+                                          AND A.PART_TYPE = :part_type 
+
+2022-02-22 09:02:33,563 [17] INFO   --End: - Completed
+2022-02-22 09:04:22,272 [15] INFO  --Begin: - 【GetDashBoardRSINO】:select rsi_no from RSI_H_PRODUCT_INFO where 1=1 and project_name = :project_name  order by rsi_no desc 
+
+2022-02-22 09:04:22,272 [15] INFO   --End: - Completed
+2022-02-22 09:04:22,272 [15] INFO  --Begin:獲取DashBoard UA資訊2 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, FORM_STATUS)) > 0  
+                                                   AND ((:rsi_no is null or RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY RSI_NO DESC, DECODE(PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)  
+
+2022-02-22 09:04:22,272 [15] INFO  --End:獲取DashBoard UA資訊2 - Completed
+2022-02-22 09:04:22,272 [15] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2022-02-22 09:04:22,288 [15] INFO  --End:獲取Contract Status資訊 - Completed
+2022-02-22 09:04:22,288 [15] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 09:04:22,288 [15] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 09:04:22,288 [15] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 09:04:22,288 [15] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 09:04:22,288 [15] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2022-02-22 09:04:22,288 [15] INFO  --End:獲取Department Name資訊 - Completed
+2022-02-22 09:04:37,328 [15] INFO  --Begin: - 【GetDetailApprove】:  SELECT A.RSI_NO, A.FORM_NO, A.PART_TYPE, A.PHASE_ID, A.PHASE, A.APP_SERIAL, 
+                                          A.APP_ASSIGNER, A.APP_ASSIGNER_NAME, A.APP_ACTOR, A.APP_ACTOR_NAME,
+                                          A.STATUS, A.BEGIN_DATE, A.END_DATE,
+                                          A.APP_CONTENT, A.DIF_DAY
+                                          FROM RSI_APPROVAL_LIST_V A
+                                          WHERE A.RSI_NO = :rsi_no
+                                          AND A.PART_TYPE = :part_type 
+
+2022-02-22 09:04:37,328 [15] INFO   --End: - Completed
+2022-02-22 09:04:44,055 [17] INFO  --Begin: - 【GetDetailApprove】:  SELECT A.RSI_NO, A.FORM_NO, A.PART_TYPE, A.PHASE_ID, A.PHASE, A.APP_SERIAL, 
+                                          A.APP_ASSIGNER, A.APP_ASSIGNER_NAME, A.APP_ACTOR, A.APP_ACTOR_NAME,
+                                          A.STATUS, A.BEGIN_DATE, A.END_DATE,
+                                          A.APP_CONTENT, A.DIF_DAY
+                                          FROM RSI_APPROVAL_LIST_V A
+                                          WHERE A.RSI_NO = :rsi_no
+                                          AND A.PART_TYPE = :part_type 
+
+2022-02-22 09:04:44,055 [17] INFO   --End: - Completed
+2022-02-22 09:08:32,509 [11] INFO  --Begin: - 【GetDashBoardRSINO】:select rsi_no from RSI_H_PRODUCT_INFO where 1=1 and project_name = :project_name  order by rsi_no desc 
+
+2022-02-22 09:08:32,509 [11] INFO   --End: - Completed
+2022-02-22 09:08:32,509 [11] INFO  --Begin:獲取DashBoard UA資訊2 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, FORM_STATUS)) > 0  
+                                                   AND ((:rsi_no is null or RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY RSI_NO DESC, DECODE(PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)  
+
+2022-02-22 09:08:32,509 [11] INFO  --End:獲取DashBoard UA資訊2 - Completed
+2022-02-22 09:08:32,509 [11] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2022-02-22 09:08:32,509 [11] INFO  --End:獲取Contract Status資訊 - Completed
+2022-02-22 09:08:32,509 [11] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 09:08:32,525 [11] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 09:08:32,525 [11] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 09:08:32,525 [11] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 09:08:32,525 [11] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2022-02-22 09:08:32,525 [11] INFO  --End:獲取Department Name資訊 - Completed
+2022-02-22 09:08:39,216 [36] INFO  --Begin: - 【GetDetailApprove】:  SELECT A.RSI_NO, A.FORM_NO, A.PART_TYPE, A.PHASE_ID, A.PHASE, A.APP_SERIAL, 
+                                          A.APP_ASSIGNER, A.APP_ASSIGNER_NAME, A.APP_ACTOR, A.APP_ACTOR_NAME,
+                                          A.STATUS, A.BEGIN_DATE, A.END_DATE,
+                                          A.APP_CONTENT, A.DIF_DAY
+                                          FROM RSI_APPROVAL_LIST_V A
+                                          WHERE A.RSI_NO = :rsi_no
+                                          AND A.PART_TYPE = :part_type 
+
+2022-02-22 09:08:39,216 [36] INFO   --End: - Completed
+2022-02-22 09:08:41,544 [15] INFO  --Begin: - 【GetDetailApprove】:  SELECT A.RSI_NO, A.FORM_NO, A.PART_TYPE, A.PHASE_ID, A.PHASE, A.APP_SERIAL, 
+                                          A.APP_ASSIGNER, A.APP_ASSIGNER_NAME, A.APP_ACTOR, A.APP_ACTOR_NAME,
+                                          A.STATUS, A.BEGIN_DATE, A.END_DATE,
+                                          A.APP_CONTENT, A.DIF_DAY
+                                          FROM RSI_APPROVAL_LIST_V A
+                                          WHERE A.RSI_NO = :rsi_no
+                                          AND A.PART_TYPE = :part_type 
+
+2022-02-22 09:08:41,544 [15] INFO   --End: - Completed
+2022-02-22 09:08:47,053 [32] INFO  --Begin: - 【GetDashBoardRSINO】:select rsi_no from RSI_H_PRODUCT_INFO where 1=1 and project_name = :project_name  order by rsi_no desc 
+
+2022-02-22 09:08:47,053 [32] INFO   --End: - Completed
+2022-02-22 09:08:47,053 [32] INFO  --Begin:獲取DashBoard UA資訊2 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, FORM_STATUS)) > 0  
+                                                   AND ((:rsi_no is null or RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY RSI_NO DESC, DECODE(PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)  
+
+2022-02-22 09:08:47,053 [32] INFO  --End:獲取DashBoard UA資訊2 - Completed
+2022-02-22 09:08:47,053 [32] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2022-02-22 09:08:47,069 [32] INFO  --End:獲取Contract Status資訊 - Completed
+2022-02-22 09:08:47,069 [32] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 09:08:47,069 [32] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 09:08:47,069 [32] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 09:08:47,069 [32] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 09:08:47,069 [32] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2022-02-22 09:08:47,069 [32] INFO  --End:獲取Department Name資訊 - Completed
+2022-02-22 09:09:04,075 [31] INFO  --Begin: - 【GetDetailApprove】:  SELECT A.RSI_NO, A.FORM_NO, A.PART_TYPE, A.PHASE_ID, A.PHASE, A.APP_SERIAL, 
+                                          A.APP_ASSIGNER, A.APP_ASSIGNER_NAME, A.APP_ACTOR, A.APP_ACTOR_NAME,
+                                          A.STATUS, A.BEGIN_DATE, A.END_DATE,
+                                          A.APP_CONTENT, A.DIF_DAY
+                                          FROM RSI_APPROVAL_LIST_V A
+                                          WHERE A.RSI_NO = :rsi_no
+                                          AND A.PART_TYPE = :part_type 
+
+2022-02-22 09:09:04,075 [31] INFO   --End: - Completed
+2022-02-22 09:09:06,887 [15] INFO  --Begin: - 【GetDetailApprove】:  SELECT A.RSI_NO, A.FORM_NO, A.PART_TYPE, A.PHASE_ID, A.PHASE, A.APP_SERIAL, 
+                                          A.APP_ASSIGNER, A.APP_ASSIGNER_NAME, A.APP_ACTOR, A.APP_ACTOR_NAME,
+                                          A.STATUS, A.BEGIN_DATE, A.END_DATE,
+                                          A.APP_CONTENT, A.DIF_DAY
+                                          FROM RSI_APPROVAL_LIST_V A
+                                          WHERE A.RSI_NO = :rsi_no
+                                          AND A.PART_TYPE = :part_type 
+
+2022-02-22 09:09:06,887 [15] INFO   --End: - Completed
+2022-02-22 16:09:33,775 [ 7] INFO  --Begin:LoginLog - 【RSI_ConfigEntityDAL】:INSERT INTO rsi_h_func_log(attribute1,created_by,created_date)
+                                 VALUES('Login',:emp_no,SYSDATE) 
+
+2022-02-22 16:09:34,353 [ 7] INFO  --End:LoginLog - Completed
+2022-02-22 16:09:34,353 [ 7] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:09:34,494 [ 7] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:09:34,588 [ 7] INFO  --Begin:GetBulletin - 【RSI_ConfigEntityDAL】:select t.*,dbms_lob.substr(t.note) as sys_note from RSI_C_PARAMETER t
+                                 where t.function='BULLETIN' 
+
+2022-02-22 16:09:34,619 [ 7] INFO  --End:GetBulletin - Completed
+2022-02-22 16:09:34,619 [ 7] INFO  --Begin:獲取FAQ資訊 - 【GetFAQ】:SELECT * FROM RSI_C_PARAMETER WHERE FUNCTION = 'FAQ' 
+
+2022-02-22 16:09:34,619 [ 7] INFO  --End:獲取FAQ資訊 - Completed
+2022-02-22 16:09:34,619 [ 7] INFO  --Begin:獲取ContactWindow資訊 - 【GetContactWindow】:SELECT DISTINCT ATTRIBUTE1, ATTRIBUTE2 FROM RSI_C_PARAMETER WHERE FUNCTION = 'Contact_Windows' 
+
+2022-02-22 16:09:34,619 [ 7] INFO  --End:獲取ContactWindow資訊 - Completed
+2022-02-22 16:09:34,853 [ 7] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:09:34,853 [ 7] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:09:34,853 [ 7] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:09:34,869 [ 7] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:09:34,869 [ 7] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2022-02-22 16:09:34,885 [ 7] INFO  --End:獲取Department Name資訊 - Completed
+2022-02-22 16:09:38,769 [ 8] INFO  --Begin: - 【Auto_Identify】:select count(*) as count
+                                                from RSI_TO_DO_LIST_V a
+                                                where a.APP_ASSIGNER = :emp_no
+                                                and a.rsi_no = :rsi_no
+                                                and a.phase_id = :phase_id 
+
+2022-02-22 16:09:38,769 [ 8] INFO   --End: - Completed
+2022-02-22 16:09:38,785 [ 8] INFO  --Begin:GetMCAConrol - 【RSI_ConfigEntityDAL】:select * from RSI_C_PARAMETER t
+                                 where t.function='MAC_CONTROL'
+                                 and t.attribute1='Y' 
+
+2022-02-22 16:09:38,785 [ 8] INFO  --End:GetMCAConrol - Completed
+2022-02-22 16:09:38,785 [ 8] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT 
+                    RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, APPLY_REASON, RFQ_TYPE, BL_NIT, POWER,
+                    PM, (SELECT DISTINCT PM ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                    PL_RD, (SELECT DISTINCT PL_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                    ACD_RD, (SELECT DISTINCT ACD_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                    EE_RD, (SELECT DISTINCT EE_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                    OM_RD, (SELECT DISTINCT OM_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                    PACKING_RD, (SELECT DISTINCT PACKING_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                    TP_ACD_RD, (SELECT DISTINCT TP_ACD_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.TP_ACD_RD) AS TP_ACDRD_NAME,
+                    TP_EE_RD, (SELECT DISTINCT TP_EE_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.TP_EE_RD) AS TP_EERD_NAME,
+                    TP_OM_RD, (SELECT DISTINCT TP_OM_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.TP_OM_RD) AS TP_OMRD_NAME,
+                    REQUEST_DATE,  :part_type PartType, REF_PRODUCT_RFQ, BIDDING_PROJECT, SOURCING_POOL_NAME, 
+                    ARRAY_FAB, JI_FAB, MODULE_FAB, SIZE_INCH, SURFACE_TREATMENT, SOP_YEAR, SOP_QUARTERLY, SOP_MONTH, RESOLUTION, PM_LCD_TYPE, PM_BRIGHTNESS,
+                    FCST_QTY, SAMPLE_REQUEST, SAMPLE_REQUEST_DATE, SAMPLE_REQUEST_QTY
+                    FROM gpo.RSI_H_PRODUCT_INFO P 
+                    WHERE P.RSI_NO =:rsi_no 
+
+2022-02-22 16:09:38,785 [ 8] INFO  --End:取得H_Product_Info資訊 - Completed
+2022-02-22 16:09:38,816 [ 8] INFO  --Begin:獲取Site Name資訊 - 【GetSiteName】:SELECT DISTINCT PHASE_ID, PHASE FROM GPO.RSI_C_FLOW_DEF WHERE PHASE_ID = :phase_id and BU = :bu 
+
+2022-02-22 16:09:38,816 [ 8] INFO  --End:獲取Site Name資訊 - Completed
+2022-02-22 16:09:38,894 [ 8] INFO  --Begin: - 【GetFCSTPage】:select attribute1 as bu from RSI_C_PARAMETER where function='FCST_PAGE'  
+
+2022-02-22 16:09:38,910 [ 8] INFO   --End: - Completed
+2022-02-22 16:09:38,910 [ 8] INFO  --Begin: - 【GetExportExcelConfig】:select * 
+                                 from gpo.rsi_c_parameter
+                                 where function = 'ExportExcel_Authority'
+                                 and decode(:BU, upper(attribute1), 1, instr(attribute1, 'ALL')) > 0   and decode(:Part_Type, upper(attribute2), 1, INSTR(attribute2, 'ALL')) > 0  and attribute3 = :Phase_ID
+                                  order by attribute3
+
+2022-02-22 16:09:38,910 [ 8] INFO   --End: - Completed
+2022-02-22 16:09:38,910 [ 8] INFO  --Begin:Upload_Flag - 【RSI_ConfigEntityDAL】:select attribute3 from RSI_C_PARAMETER
+                                 where function='BULK_UPLOAD' and attribute2 = :phase_id  
+
+2022-02-22 16:09:38,910 [ 8] INFO  --End:Upload_Flag - Completed
+2022-02-22 16:09:38,910 [ 8] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT 
+                    RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, APPLY_REASON, RFQ_TYPE, BL_NIT, POWER,
+                    PM, (SELECT DISTINCT PM ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                    PL_RD, (SELECT DISTINCT PL_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                    ACD_RD, (SELECT DISTINCT ACD_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                    EE_RD, (SELECT DISTINCT EE_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                    OM_RD, (SELECT DISTINCT OM_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                    PACKING_RD, (SELECT DISTINCT PACKING_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                    TP_ACD_RD, (SELECT DISTINCT TP_ACD_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.TP_ACD_RD) AS TP_ACDRD_NAME,
+                    TP_EE_RD, (SELECT DISTINCT TP_EE_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.TP_EE_RD) AS TP_EERD_NAME,
+                    TP_OM_RD, (SELECT DISTINCT TP_OM_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.TP_OM_RD) AS TP_OMRD_NAME,
+                    REQUEST_DATE,  :part_type PartType, REF_PRODUCT_RFQ, BIDDING_PROJECT, SOURCING_POOL_NAME, 
+                    ARRAY_FAB, JI_FAB, MODULE_FAB, SIZE_INCH, SURFACE_TREATMENT, SOP_YEAR, SOP_QUARTERLY, SOP_MONTH, RESOLUTION, PM_LCD_TYPE, PM_BRIGHTNESS,
+                    FCST_QTY, SAMPLE_REQUEST, SAMPLE_REQUEST_DATE, SAMPLE_REQUEST_QTY
+                    FROM gpo.RSI_H_PRODUCT_INFO P 
+                    WHERE P.RSI_NO =:rsi_no 
+
+2022-02-22 16:09:38,910 [ 8] INFO  --End:取得H_Product_Info資訊 - Completed
+2022-02-22 16:09:38,925 [ 8] INFO  --Begin:取得Price_Group資訊 - 【GetPrice_Group】:SELECT *
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = :price_type
+                                    AND ATTRIBUTE1 = :bu
+                                    AND DECODE( :part_type, UPPER(ATTRIBUTE2), 1, INSTR(ATTRIBUTE2, 'ALL')) > 0
+                                  ORDER BY DECODE(UPPER(ATTRIBUTE3), 'MATERIAL_GROUP', 0, 'PARTS_GROUP', 1, 'MATERIAL_PARTS', 2, 'PART_NO', 3, 4)  
+
+2022-02-22 16:09:38,925 [ 8] INFO  --End:取得Price_Group資訊 - Completed
+2022-02-22 16:09:38,941 [ 8] INFO  --Begin: - 【GetDetailApprove】:  SELECT A.RSI_NO, A.FORM_NO, A.PART_TYPE, A.PHASE_ID, A.PHASE, A.APP_SERIAL, 
+                                          A.APP_ASSIGNER, A.APP_ASSIGNER_NAME, A.APP_ACTOR, A.APP_ACTOR_NAME,
+                                          A.STATUS, A.BEGIN_DATE, A.END_DATE,
+                                          A.APP_CONTENT, A.DIF_DAY
+                                          FROM RSI_APPROVAL_LIST_V A
+                                          WHERE A.RSI_NO = :rsi_no
+                                          AND A.PART_TYPE = :part_type 
+
+2022-02-22 16:09:38,956 [ 8] INFO   --End: - Completed
+2022-02-22 16:09:38,956 [ 8] INFO  --Begin:GetVersion - 【RSI_ConfigEntityDAL】:select attribute1 from RSI_C_PARAMETER where function='VERSION_CONTROL' 
+
+2022-02-22 16:09:38,956 [ 8] INFO  --End:GetVersion - Completed
+2022-02-22 16:09:38,956 [ 8] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:09:38,956 [ 8] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:09:38,956 [ 8] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:09:38,972 [ 8] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:09:38,972 [ 8] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2022-02-22 16:09:38,972 [ 8] INFO  --End:獲取Department Name資訊 - Completed
+2022-02-22 16:09:39,347 [ 8] INFO  --Begin: - 【GetUnit】:select distinct upper(unit) unit
+                                               from rsi_r_part_info
+                                               order by unit 
+
+2022-02-22 16:09:39,347 [ 7] INFO  --Begin: - 【GetPartLevelEnglish】:select distinct m.mtl_group,
+                                                 m.parts_group,
+                                                 m.mtl_parts,
+                                                 p.part_kind_key as part_level,
+                                                 p.english_name
+                                  from rsi_r_part_info p
+                                  left join gpo.rsi_c_mtl_parts m
+                                    on p.part_kind_key = m.part_level
+                                   and p.english_name = m.english_name
+                                   and m.active = 'Y'
+                                 --where p.part_kind_key not like '9%'
+                                   where p.english_name is not null
+                                 order by p.part_kind_key 
+
+2022-02-22 16:09:39,363 [ 9] INFO  --Begin:取得Normal Parts資訊 - 【GetRDReviewNormalParts】: select b.rsi_no, 'Normal' mtl_type, '' mtl_group, '' parts_group, '' mtl_parts, '' part_type,
+                                                decode(ismodify, 'Y', substr(b.partnumber_child, 0, 2), b.partnumber_child) as part_no,
+                                                b.part_desc, b.part_level, b.english_name, '' maker_source, '' maker_part_no, '' part_spec,
+                                                '' spec_def, b.release_date, b.part_quantity as usage, b.part_unit, '' eol_status,
+                                                '' uni_spec_status, '' remark, decode(ismodify, 'Y', 'U', null) as modify_type, 0 sn, 0 parent_sn, '' file_status, '' phase_id,
+                                                b.partnumber_top, decode(ismodify, 'Y', substr(b.partnumber_child, 0, 2), b.partnumber_child) as partnumber_child,
+                                                b.partnumber_parent, decode(ismodify, 'Y', substr(b.partnumber_child, 0, 2), b.partnumber_child) as DisplayPartNo,
+                                                0 bom_level
+                                                from gpo.rsi_h_bom_all b
+                                                where rsi_no = :rsi_no
+                                                and bom_level = 0
+                                                --and not exists (select 1 from rsi_h_product_detail d where d.rsi_no = :rsi_no)
+                                                union all
+                                                select *
+                                                from (
+                                                    select d.*, LPAD(' ', (Level) * 4) || nvl(d.part_no, d.part_level) as DisplayPartNo, Level bom_level
+                                                    from (
+                                                        select distinct d.rsi_no,
+                                                        nvl(d.mtl_type, decode(s.active, 'Y', 'Special', 'Normal')) mtl_type,
+                                                        d.mtl_group,
+                                                        d.parts_group,
+                                                        d.mtl_parts,
+                                                        d.part_type, 
+                                                        d.part_no,
+                                                        d.part_desc,
+                                                        d.part_level,
+                                                        d.english_name,
+                                                        d.maker_source,
+                                                        d.maker_part_no,
+                                                        d.part_spec,
+                                                        c.SPEC_DEF,
+                                                        d.release_date,
+                                                        d.usage,
+                                                        d.part_unit,
+                                                        d.eol_status eol_status,
+                                                        d.uni_spec_status uni_spec_status,
+                                                        d.remark,
+                                                        d.modify_type,
+                                                        d.sn,
+                                                        d.parent_sn,
+                                                        decode(nvl(f.cnt,0),0,'N','Y') as file_status,
+                                                        d.phase_id,
+                                                        i.ref_product partnumber_top,
+                                                        nvl(d.part_no, d.part_level) partnumber_child, 
+                                                        d.partnumber_parent
+                                                        from gpo.rsi_h_product_detail d
+                                                        join gpo.rsi_h_product_info i on d.rsi_no = i.rsi_no
+                                                        left join gpo.rsi_c_mtl_special_parts s on s.mtl_parts = d.mtl_parts and s.active = 'Y'
+                                                        left join (select distinct mtl_parts, spec_def
+                                                                     from gpo.rsi_c_mtl_spec_def
+                                                                    where active = 'Y') c
+                                                          on d.mtl_parts = c.mtl_parts
+                                                        left join (SELECT Biz_Id,count(1) AS cnt FROM GPO.RSI_H_FILELIST GROUP BY Biz_Id) f
+                                                          on f.BIZ_ID = d.RSI_NO||'_'||d.SN
+                                                        where nvl(d.mtl_type, decode(s.active, 'Y', 'Special', 'Normal')) <> 'Special' 
+                                                        and (d.modify_type is null or d.modify_type <> 'D')
+                                                        and nvl(d.mtl_group,'-') not like 'MOH%'
+                                                        and d.rsi_no = :rsi_no
+                                                    ) d
+                                                    start with partnumber_top = partnumber_parent
+                                                    connect by nocycle prior partnumber_top = partnumber_top
+                                                                    and prior sn = parent_sn
+                                                                   --and prior partnumber_child = partnumber_parent
+                                                    order siblings by part_level desc
+                                                ) a 
+
+2022-02-22 16:09:39,363 [12] INFO  --Begin:取得Group_ID資訊 - 【GetGroupID】:SELECT DISTINCT GROUP_ID
+                                                FROM GPO.RSI_H_PRODUCT_DETAIL D 
+                                                WHERE RSI_NO = :rsi_no   --querystring取的
+                                                AND GROUP_ID IS NOT NULL
+                                                AND (MODIFY_TYPE IS NULL OR MODIFY_TYPE <> 'D')
+                                                ORDER BY GROUP_ID ASC 
+
+2022-02-22 16:09:39,378 [12] INFO  --End:取得Group_ID資訊 - Completed
+2022-02-22 16:09:39,394 [ 9] INFO  --End:取得Normal Parts資訊 - Completed
+2022-02-22 16:09:39,519 [ 8] INFO   --End: - Completed
+2022-02-22 16:09:39,535 [ 7] INFO   --End: - Completed
+2022-02-22 16:10:19,597 [12] INFO  --Begin:Update_Product_Info方法 - 【Update_Product_Info】:UPDATE RSI_H_PRODUCT_INFO SET 
+                                                BL_NIT = :bl_nit, 
+                                                POWER = :power
+                                                WHERE RSI_NO = :rsi_no 
+
+2022-02-22 16:10:19,597 [12] INFO  --End:Update_Product_Info方法 - Completed
+2022-02-22 16:10:19,597 [12] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT 
+                    RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, APPLY_REASON, RFQ_TYPE, BL_NIT, POWER,
+                    PM, (SELECT DISTINCT PM ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                    PL_RD, (SELECT DISTINCT PL_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                    ACD_RD, (SELECT DISTINCT ACD_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                    EE_RD, (SELECT DISTINCT EE_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                    OM_RD, (SELECT DISTINCT OM_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                    PACKING_RD, (SELECT DISTINCT PACKING_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                    TP_ACD_RD, (SELECT DISTINCT TP_ACD_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.TP_ACD_RD) AS TP_ACDRD_NAME,
+                    TP_EE_RD, (SELECT DISTINCT TP_EE_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.TP_EE_RD) AS TP_EERD_NAME,
+                    TP_OM_RD, (SELECT DISTINCT TP_OM_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.TP_OM_RD) AS TP_OMRD_NAME,
+                    REQUEST_DATE,  :part_type PartType, REF_PRODUCT_RFQ, BIDDING_PROJECT, SOURCING_POOL_NAME, 
+                    ARRAY_FAB, JI_FAB, MODULE_FAB, SIZE_INCH, SURFACE_TREATMENT, SOP_YEAR, SOP_QUARTERLY, SOP_MONTH, RESOLUTION, PM_LCD_TYPE, PM_BRIGHTNESS,
+                    FCST_QTY, SAMPLE_REQUEST, SAMPLE_REQUEST_DATE, SAMPLE_REQUEST_QTY
+                    FROM gpo.RSI_H_PRODUCT_INFO P 
+                    WHERE P.RSI_NO =:rsi_no 
+
+2022-02-22 16:10:19,597 [12] INFO  --End:取得H_Product_Info資訊 - Completed
+2022-02-22 16:10:19,613 [ 9] INFO  --Begin:RDCheckUpdate - 【H_Form_ApproveEntityDAL】:select * from rsi_h_product_detail
+                                 where rsi_no = :rsi_no
+                                 and (created_by = :emp_no or updated_by = :emp_no)
+                                 and nvl(modify_type, '-') <> 'D' 
+
+2022-02-22 16:10:19,628 [ 9] INFO  --End:RDCheckUpdate - Completed
+2022-02-22 16:10:31,776 [ 8] INFO  --Begin:取得Group_ID資訊 - 【GetGroupID】:SELECT DISTINCT GROUP_ID
+                                                FROM GPO.RSI_H_PRODUCT_DETAIL D 
+                                                WHERE RSI_NO = :rsi_no   --querystring取的
+                                                AND GROUP_ID IS NOT NULL
+                                                AND (MODIFY_TYPE IS NULL OR MODIFY_TYPE <> 'D')
+                                                ORDER BY GROUP_ID ASC 
+
+2022-02-22 16:10:31,776 [ 8] INFO  --End:取得Group_ID資訊 - Completed
+2022-02-22 16:10:31,792 [ 8] INFO  --Begin: - 【DeleteMOH】:delete from rsi_h_product_detail where rsi_no = :rsi_no and mtl_group like 'MOH%' and mtl_type = :mtl_type 
+
+2022-02-22 16:10:31,792 [ 8] INFO   --End: - Completed
+2022-02-22 16:10:31,792 [ 8] INFO  --Begin: - 【InsertMOHForNormal】:insert into rsi_h_product_detail
+                                              (rsi_no, mtl_group, mtl_parts, part_type, created_date, created_by, mtl_type, bu, parts_group, usage, sn)   
+                                               select a.*, RSI_H_PROD_DETAIL_sn_seq.NEXTVAL from
+                                               (select i.rsi_no, a.mtl_group, a.mtl_parts, b.part_type, sysdate, 'SYSTEM', 'Normal', i.bu, a.parts_group, 1 as usage
+                                               from rsi_h_product_info i
+                                               join gpo.c_pms_bgbu_mapping m on m.bu = i.bu
+                                               join gpo.rsi_c_mtl_parts a on a.active = 'Y'
+                                               join gpo.rsi_c_parts_type_def b on b.bg = m.bg and a.mtl_group = b.mtl_group and a.mtl_parts = b.mtl_parts and b.active = 'Y'
+                                               where a.mtl_group like 'MOH%'
+                                               and decode(b.bu, '', 1, instr(i.bu, b.bu)) > 0
+                                               and i.rsi_no = :rsi_no
+                                               and not exists (select distinct d.mtl_group, d.mtl_parts
+                                                                       from gpo.rsi_h_product_detail d
+                                                                       where d.rsi_no = :rsi_no
+                                                                       and d.mtl_type = 'Normal'
+                                                                       and d.mtl_group = a.mtl_group
+                                                                       and d.mtl_parts = a.mtl_parts)
+                                               order by i.rsi_no, a.mtl_group, a.mtl_parts) a 
+
+2022-02-22 16:10:31,792 [ 8] INFO   --End: - Completed
+2022-02-22 16:10:31,792 [ 8] INFO  --Begin: - 【UpdateChooseToSpecialStatus】:update RSI_H_PRODUCT_DETAIL a
+                                            set a.isapproved = 'Y'
+                                            where NVL(a.mtl_type, '-') = 'Normal' AND NVL(a.modify_type, '-') = 'S'
+                                            and a.rsi_no = :rsi_no 
+
+2022-02-22 16:10:31,808 [ 8] INFO   --End: - Completed
+2022-02-22 16:10:31,808 [ 8] INFO  --Begin:Update方法 - 【UpdateRDDefineOwner】:update RSI_H_PRODUCT_DETAIL d
+                                    set d.sourcer_owner = (select h.emp_no from rsi_h_authority h 
+                                                        where h.bu = d.bu 
+                                                            and h.mtl_parts = d.part_type
+                                                            and h.type='DEFAULT' 
+                                                            and h.active = 'Y'
+                                                            and h.start_date <= SYSDATE
+                                                            and h.end_date >= SYSDATE
+                                                            and rownum = 1)
+                                where d.rsi_no= :rsi_no 
+                                AND NVL(d.modify_type,'-')<>'D' 
+                                and d.mtl_parts = 'RD DEFINE'
+                                and d.part_type = :part_type 
+
+2022-02-22 16:10:31,808 [ 8] INFO  --End:Update方法 - Completed
+2022-02-22 16:10:31,808 [ 8] INFO  --Begin:Update方法 - 【Update_RSI_H_AUTHORITY】:update RSI_H_AUTHORITY h
+                                 set h.active = 'N', h.end_date = sysdate, h.flower_num = 'Process Return'
+                                 where h.type = 'ASSIGN' 
+                                 and h.rsi_no = :rsi_no 
+                                 and h.active = 'Y'
+                                 and exists (select 1 from RSI_H_PRODUCT_DETAIL d where d.rsi_no = h.rsi_no and d.sn = h.sn and d.part_type = :part_type) 
+
+2022-02-22 16:10:31,808 [ 8] INFO  --End:Update方法 - Completed
+2022-02-22 16:10:31,808 [ 8] INFO  --Begin: - 【Update_mtl_group_forSpecial】:update rsi_h_product_detail a
+                                 set (a.mtl_group,a.parts_group,a.part_type)=(select distinct mtl_group, parts_group, part_type from rsi_h_product_detail b where b.sn = a.parent_sn
+                                 and b.rsi_no = a.rsi_no and nvl(b.modify_type,'-')<>'D')
+                                 where a.rsi_no = :rsi_no
+                                 and a.mtl_group='FOLLOW60'
+                                 and nvl(a.modify_type,'-')<>'D' 
+
+2022-02-22 16:10:31,823 [ 8] INFO   --End: - Completed
+2022-02-22 16:10:31,823 [ 8] INFO  --Begin:Update方法 - 【Approve】:
+                    update RSI_H_FORM_APPROVE a
+                    set a.app_status = 'A', a.end_date= sysdate, 
+                    a.app_assigner = decode(a.app_assigner, NULL, :emp_no, a.app_assigner),
+                    a.app_actor= :emp_no, a.app_content= :p_comment
+                    where a.form_no = (select form_no from RSI_H_FORM_HEADER where rsi_no = :rsi_no and part_type = :part_type)
+                    and a.phase_id = :phase_id 
+                    and a.app_status = 'U' 
+
+2022-02-22 16:10:31,823 [ 8] INFO  --End:Update方法 - Completed
+2022-02-22 16:10:31,823 [ 8] INFO  --Begin:Update方法 - 【count_Approve】: select count(*) from gpo.rsi_h_form_approve
+                                                where (form_no, app_serial) in (select form_no, max(app_serial)
+                                                                              from gpo.rsi_h_form_header
+                                                                             where rsi_no = :rsi_no
+                                                                             and part_type = :part_type group by form_no)
+                                                and app_status = 'U' 
+
+2022-02-22 16:10:31,823 [ 8] INFO  --End:Update方法 - Completed
+2022-02-22 16:10:31,823 [ 8] INFO  --Begin:Insert方法 - 【insert_Approve】:
+                                    insert into RSI_H_FORM_APPROVE(form_no, phase_id, app_serial, app_status, begin_Date)
+                                    select fh.form_no, fd.next_phase_id, max(fa.app_serial)+1, 'U', sysdate 
+                                    from RSI_H_FORM_HEADER fh, RSI_H_FORM_APPROVE fa, RSI_C_FLOW_DEF fd
+                                    where fh.rsi_no = :rsi_no and fh.part_type = :part_type
+                                    and fh.form_no = fa.form_no
+                                    and fa.phase_id = fd.phase_id
+                                    and fh.bu = fd.bu
+                                    and fa.phase_id = :phase_id
+                                    group by fh.form_no, fd.next_phase_id
+                                    order by fd.next_phase_id
+                                
+
+2022-02-22 16:10:31,823 [ 8] INFO  --End:Insert方法 - Completed
+2022-02-22 16:10:31,839 [ 8] INFO  --Begin:Update_phase_10 - 【Update_Assigner】:
+                        update RSI_H_FORM_HEADER fh
+                        set fh.rd_boss = (select e.boss_no from gfin.emp_data_all e where e.emp_no = fh.rd),
+                            fh.rd_manager = (select e.boss_no from gfin.emp_data_all e where e.emp_no = (select e.boss_no from gfin.emp_data_all e where e.emp_no = fh.rd))
+                        where fh.form_no = (select form_no from RSI_H_FORM_HEADER where rsi_no = :rsi_no and part_type = :part_type)
+                        and fh.form_status = 'UA' 
+
+2022-02-22 16:10:31,839 [ 8] INFO  --End:Update_phase_10 - Completed
+2022-02-22 16:10:31,839 [ 8] INFO  --Begin:Update_Assigner方法 - 【Update_Assigner】:
+                    update RSI_H_FORM_APPROVE fa
+                    set fa.app_assigner = (
+					--select case fa.phase_id when '10' then fh.rd when '20' then fh.rd_boss when '30' then fh.pm when '40' then fh.sourcer when '50' then fh.sourcer_boss when '60' then fh.sourcer_manager when '70' then fh.pm else null end from RSI_H_FORM_HEADER fh where fh.form_no = fa.form_no
+					select case
+					 when (fa.phase_id = '10') then fh.rd 
+					 when (fa.phase_id = '20') then fh.rd_boss 
+                     when (fa.phase_id = '25') then fh.rd_manager 
+					 when (fa.phase_id = '30' and fh.bu not in ('TV','PD')) then fh.pm 
+					 when (fa.phase_id = '30' and fh.bu in ('TV','PD')) then fh.pl_rd
+					 --when (fa.phase_id = '30' and m.bg = 'MS') then fh.pm 
+					 --when (fa.phase_id = '30' and m.bg = 'VS') then fh.pl_rd
+					 --when (fa.phase_id = '40') then fh.sourcer 
+                     when (fa.phase_id = '45') then fh.product_sourcer 
+					 when (fa.phase_id = '50') then fh.sourcer_boss 
+					 when (fa.phase_id = '60') then fh.sourcer_manager
+					 when (fa.phase_id = '70') then fh.pm else null end 
+					 from RSI_H_FORM_HEADER fh
+					 join gpo.c_pms_bgbu_mapping m on fh.bu = m.bu and m.active = 'Y'
+					 where fh.form_no = fa.form_no
+					 )
+                     where fa.form_no = (select form_no from RSI_H_FORM_HEADER where rsi_no = :rsi_no and part_type = :part_type)
+                     and fa.app_status='U' 
+
+2022-02-22 16:10:31,839 [ 8] INFO  --End:Update_Assigner方法 - Completed
+2022-02-22 16:10:31,839 [ 8] INFO  --Begin: - 【GetSourcerPhase】:select * from RSI_H_FORM_APPROVE
+                                  where phase_id = '40'
+                                    and app_status = 'U'
+                                    and (form_no, app_serial) in (select form_no, max(app_serial) from RSI_H_FORM_HEADER where rsi_no = :rsi_no and part_type = :part_type group by form_no) 
+
+2022-02-22 16:10:31,839 [ 8] INFO   --End: - Completed
+2022-02-22 16:10:31,839 [ 8] INFO  --Begin:GetSigningNotice - 【RSI_ConfigEntityDAL】:select distinct t.attribute1,t.attribute2,t.attribute3,t.attribute4,t.attribute5,t.attribute6,t.attribute7
+                                 from RSI_C_PARAMETER t
+                                 join RSI_C_FLOW_DEF d
+                                 on t.attribute3 = decode(:attribute1, 'RESEND', d.phase_id, 'APPROVE', d.next_phase_id, d.last_phase_id)
+                                 where t.function = 'SIGNING_NOTICE' 
+                                 and t.attribute1 = :attribute1 
+                                 and d.phase_id = :phase_id
+                                 and d.bu = :bu 
+                                 and t.attribute2 = 'Y' 
+
+2022-02-22 16:10:31,839 [ 8] INFO  --End:GetSigningNotice - Completed
+2022-02-22 16:10:31,839 [ 8] INFO  --Begin: - 【GetDetailApprove】:  SELECT A.RSI_NO, A.FORM_NO, A.PART_TYPE, A.PHASE_ID, A.PHASE, A.APP_SERIAL, 
+                                          A.APP_ASSIGNER, A.APP_ASSIGNER_NAME, A.APP_ACTOR, A.APP_ACTOR_NAME,
+                                          A.STATUS, A.BEGIN_DATE, A.END_DATE,
+                                          A.APP_CONTENT, A.DIF_DAY
+                                          FROM RSI_APPROVAL_LIST_V A
+                                          WHERE A.RSI_NO = :rsi_no
+                                          AND A.PART_TYPE = :part_type 
+
+2022-02-22 16:10:31,854 [ 8] INFO   --End: - Completed
+2022-02-22 16:10:31,854 [ 8] INFO  --Begin:GetCCMail - 【RSI_ConfigEntityDAL】:select a.phase, a.phase_id, a.app_assigner,a.e_mail as mailto, decode( :attr4, 'Y', listagg(a.boss_email,';') WITHIN GROUP (ORDER BY a.seq desc), null) AS mailcc   
+                                 from (
+                                 select fd.phase,fa.phase_id,fa.app_assigner,ee.e_mail,r.seq,e.e_mail as boss_email
+                                 from RSI_H_FORM_HEADER fh
+                                 join RSI_H_FORM_APPROVE fa
+                                 on fh.form_no = fa.form_no
+                                 join RSI_H_PRODUCT_INFO p
+                                 on p.rsi_no = fh.rsi_no
+                                 join (select distinct bu, phase_id, phase from RSI_C_FLOW_DEF) fd
+                                 on fd.phase_id = fa.phase_id
+                                 and fh.bu = fd.bu
+                                 join rsi_to_do_list_v s
+                                 on s.rsi_no = fh.rsi_no and s.form_no = fh.form_no and s.APP_ASSIGNER = fa.app_assigner
+                                 and s.phase_id = fa.phase_id
+                                 left join au_dw.auo_person_reportline r
+                                 on r.emp_no = fa.app_assigner
+                                 and r.seq <= :attr5
+                                 and r.boss_level >= 20
+                                 left join gfin.emp_data_all ee
+                                 on ee.emp_no = fa.app_assigner
+                                 left join gfin.emp_data_all e
+                                 on e.emp_no = trim(r.boss_emp_no)
+                                 where fh.rsi_no = :rsi_no and fh.part_type = :part_type
+                                 and fa.app_status = 'U'
+                                 and fa.phase_id = :attr3
+                                 ) a
+                                 GROUP BY a.phase, a.phase_id, a.app_assigner, a.e_mail
+
+2022-02-22 16:10:32,761 [ 8] INFO  --End:GetCCMail - Completed
+2022-02-22 16:10:32,933 [ 8] INFO  --Begin:GetSigningNotice - 【RSI_ConfigEntityDAL】:select t.* from RSI_C_PARAMETER t
+                                 where t.function='SIGNING_NOTICE' and t.attribute1= :attribute1 and t.attribute3= :phase_id 
+
+2022-02-22 16:10:32,933 [ 8] INFO  --End:GetSigningNotice - Completed
+2022-02-22 16:10:33,011 [24] INFO  --Begin:LoginLog - 【RSI_ConfigEntityDAL】:INSERT INTO rsi_h_func_log(attribute1,created_by,created_date)
+                                 VALUES('Login',:emp_no,SYSDATE) 
+
+2022-02-22 16:10:33,011 [24] INFO  --End:LoginLog - Completed
+2022-02-22 16:10:33,011 [24] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:10:33,026 [24] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:10:33,026 [24] INFO  --Begin:GetBulletin - 【RSI_ConfigEntityDAL】:select t.*,dbms_lob.substr(t.note) as sys_note from RSI_C_PARAMETER t
+                                 where t.function='BULLETIN' 
+
+2022-02-22 16:10:33,026 [24] INFO  --End:GetBulletin - Completed
+2022-02-22 16:10:33,026 [24] INFO  --Begin:獲取FAQ資訊 - 【GetFAQ】:SELECT * FROM RSI_C_PARAMETER WHERE FUNCTION = 'FAQ' 
+
+2022-02-22 16:10:33,026 [24] INFO  --End:獲取FAQ資訊 - Completed
+2022-02-22 16:10:33,026 [24] INFO  --Begin:獲取ContactWindow資訊 - 【GetContactWindow】:SELECT DISTINCT ATTRIBUTE1, ATTRIBUTE2 FROM RSI_C_PARAMETER WHERE FUNCTION = 'Contact_Windows' 
+
+2022-02-22 16:10:33,026 [24] INFO  --End:獲取ContactWindow資訊 - Completed
+2022-02-22 16:10:33,026 [24] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:10:33,042 [24] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:10:33,042 [24] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:10:33,042 [24] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:10:33,042 [24] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2022-02-22 16:10:33,042 [24] INFO  --End:獲取Department Name資訊 - Completed
+2022-02-22 16:12:35,390 [29] INFO  --Begin:LoginLog - 【RSI_ConfigEntityDAL】:INSERT INTO rsi_h_func_log(attribute1,created_by,created_date)
+                                 VALUES('Login',:emp_no,SYSDATE) 
+
+2022-02-22 16:12:35,390 [29] INFO  --End:LoginLog - Completed
+2022-02-22 16:12:35,390 [29] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:12:35,390 [29] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:12:35,390 [29] INFO  --Begin:GetBulletin - 【RSI_ConfigEntityDAL】:select t.*,dbms_lob.substr(t.note) as sys_note from RSI_C_PARAMETER t
+                                 where t.function='BULLETIN' 
+
+2022-02-22 16:12:35,390 [29] INFO  --End:GetBulletin - Completed
+2022-02-22 16:12:35,390 [29] INFO  --Begin:獲取FAQ資訊 - 【GetFAQ】:SELECT * FROM RSI_C_PARAMETER WHERE FUNCTION = 'FAQ' 
+
+2022-02-22 16:12:35,390 [29] INFO  --End:獲取FAQ資訊 - Completed
+2022-02-22 16:12:35,406 [29] INFO  --Begin:獲取ContactWindow資訊 - 【GetContactWindow】:SELECT DISTINCT ATTRIBUTE1, ATTRIBUTE2 FROM RSI_C_PARAMETER WHERE FUNCTION = 'Contact_Windows' 
+
+2022-02-22 16:12:35,406 [29] INFO  --End:獲取ContactWindow資訊 - Completed
+2022-02-22 16:12:35,406 [29] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:12:35,406 [29] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:12:35,406 [29] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:12:35,406 [29] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:12:35,406 [29] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2022-02-22 16:12:35,422 [29] INFO  --End:獲取Department Name資訊 - Completed
+2022-02-22 16:12:37,734 [26] INFO  --Begin:獲取DashBoard UA資訊1 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V A
+                                                   JOIN (
+                                                        SELECT DISTINCT B.RSI_NO FROM GPO.RSI_H_FORM_HEADER B
+                                                        WHERE FORM_NO IN
+                                                        (SELECT A.FORM_NO    --自己簽核過表單
+                                                         FROM GPO.RSI_H_FORM_APPROVE A
+                                                         LEFT JOIN GPO.RSI_H_DETAIL_APP_LOG L ON A.FORM_NO = L.FORM_NO
+                                                         WHERE (A.APP_ASSIGNER = :emp_no OR A.APP_ACTOR = :emp_no OR L.APP_ACTOR = :emp_no)
+                                                         UNION            --下轄人員簽核過表單
+                                                         SELECT DISTINCT B.FORM_NO 
+                                                         FROM au_dw.auo_person_reportline A
+                                                         INNER JOIN GPO.RSI_H_FORM_APPROVE B ON A.EMP_NO = NVL(B.APP_ACTOR, B.APP_ASSIGNER)
+                                                         LEFT JOIN GPO.RSI_H_DETAIL_APP_LOG L ON B.FORM_NO = L.FORM_NO AND A.EMP_NO = L.APP_ACTOR
+                                                         WHERE (TRIM(A.BOSS_EMP_NO) = :emp_no)
+                                                         AND A.ACTIVE = 'Y')                
+                                                   ) B ON A.RSI_NO = B.RSI_NO 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, A.FORM_STATUS)) > 0 
+                                                   AND ((:rsi_no is null or A.RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(A.BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(A.PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(A.REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY A.RSI_NO DESC, DECODE(A.PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)   
+
+2022-02-22 16:12:37,766 [26] INFO  --End:獲取DashBoard UA資訊1 - Completed
+2022-02-22 16:12:37,812 [26] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2022-02-22 16:12:37,812 [26] INFO  --End:獲取Contract Status資訊 - Completed
+2022-02-22 16:12:37,812 [26] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:12:37,812 [26] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:12:37,812 [26] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:12:37,828 [26] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:12:37,828 [26] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2022-02-22 16:12:37,828 [26] INFO  --End:獲取Department Name資訊 - Completed
+2022-02-22 16:12:44,908 [ 8] INFO  --Begin: - 【GetDetailApprove】:  SELECT A.RSI_NO, A.FORM_NO, A.PART_TYPE, A.PHASE_ID, A.PHASE, A.APP_SERIAL, 
+                                          A.APP_ASSIGNER, A.APP_ASSIGNER_NAME, A.APP_ACTOR, A.APP_ACTOR_NAME,
+                                          A.STATUS, A.BEGIN_DATE, A.END_DATE,
+                                          A.APP_CONTENT, A.DIF_DAY
+                                          FROM RSI_APPROVAL_LIST_V A
+                                          WHERE A.RSI_NO = :rsi_no
+                                          AND A.PART_TYPE = :part_type 
+
+2022-02-22 16:12:44,908 [ 8] INFO   --End: - Completed
+2022-02-22 16:12:49,065 [22] INFO  --Begin: - 【GetDetailApprove】:  SELECT A.RSI_NO, A.FORM_NO, A.PART_TYPE, A.PHASE_ID, A.PHASE, A.APP_SERIAL, 
+                                          A.APP_ASSIGNER, A.APP_ASSIGNER_NAME, A.APP_ACTOR, A.APP_ACTOR_NAME,
+                                          A.STATUS, A.BEGIN_DATE, A.END_DATE,
+                                          A.APP_CONTENT, A.DIF_DAY
+                                          FROM RSI_APPROVAL_LIST_V A
+                                          WHERE A.RSI_NO = :rsi_no
+                                          AND A.PART_TYPE = :part_type 
+
+2022-02-22 16:12:49,065 [22] INFO   --End: - Completed
+2022-02-22 16:13:04,001 [26] INFO  --Begin: - 【GetDetailApprove】:  SELECT A.RSI_NO, A.FORM_NO, A.PART_TYPE, A.PHASE_ID, A.PHASE, A.APP_SERIAL, 
+                                          A.APP_ASSIGNER, A.APP_ASSIGNER_NAME, A.APP_ACTOR, A.APP_ACTOR_NAME,
+                                          A.STATUS, A.BEGIN_DATE, A.END_DATE,
+                                          A.APP_CONTENT, A.DIF_DAY
+                                          FROM RSI_APPROVAL_LIST_V A
+                                          WHERE A.RSI_NO = :rsi_no
+                                          AND A.PART_TYPE = :part_type 
+
+2022-02-22 16:13:04,001 [26] INFO   --End: - Completed
+2022-02-22 16:17:58,540 [35] INFO  --Begin:LoginLog - 【RSI_ConfigEntityDAL】:INSERT INTO rsi_h_func_log(attribute1,created_by,created_date)
+                                 VALUES('Login',:emp_no,SYSDATE) 
+
+2022-02-22 16:17:58,540 [35] INFO  --End:LoginLog - Completed
+2022-02-22 16:17:58,556 [35] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:17:58,556 [35] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:17:58,556 [35] INFO  --Begin:GetBulletin - 【RSI_ConfigEntityDAL】:select t.*,dbms_lob.substr(t.note) as sys_note from RSI_C_PARAMETER t
+                                 where t.function='BULLETIN' 
+
+2022-02-22 16:17:58,572 [35] INFO  --End:GetBulletin - Completed
+2022-02-22 16:17:58,572 [35] INFO  --Begin:獲取FAQ資訊 - 【GetFAQ】:SELECT * FROM RSI_C_PARAMETER WHERE FUNCTION = 'FAQ' 
+
+2022-02-22 16:17:58,572 [35] INFO  --End:獲取FAQ資訊 - Completed
+2022-02-22 16:17:58,572 [35] INFO  --Begin:獲取ContactWindow資訊 - 【GetContactWindow】:SELECT DISTINCT ATTRIBUTE1, ATTRIBUTE2 FROM RSI_C_PARAMETER WHERE FUNCTION = 'Contact_Windows' 
+
+2022-02-22 16:17:58,572 [35] INFO  --End:獲取ContactWindow資訊 - Completed
+2022-02-22 16:17:58,572 [35] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:17:58,572 [35] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:17:58,572 [35] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:17:58,572 [35] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:17:58,572 [35] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2022-02-22 16:17:58,572 [35] INFO  --End:獲取Department Name資訊 - Completed
+2022-02-22 16:17:59,936 [26] INFO  --Begin: - 【Auto_Identify】:select count(*) as count
+                                                from RSI_TO_DO_LIST_V a
+                                                where a.APP_ASSIGNER = :emp_no
+                                                and a.rsi_no = :rsi_no
+                                                and a.phase_id = :phase_id 
+
+2022-02-22 16:17:59,936 [26] INFO   --End: - Completed
+2022-02-22 16:17:59,936 [26] INFO  --Begin:GetMCAConrol - 【RSI_ConfigEntityDAL】:select * from RSI_C_PARAMETER t
+                                 where t.function='MAC_CONTROL'
+                                 and t.attribute1='Y' 
+
+2022-02-22 16:17:59,936 [26] INFO  --End:GetMCAConrol - Completed
+2022-02-22 16:17:59,936 [26] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT 
+                    RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, APPLY_REASON, RFQ_TYPE, BL_NIT, POWER,
+                    PM, (SELECT DISTINCT PM ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                    PL_RD, (SELECT DISTINCT PL_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                    ACD_RD, (SELECT DISTINCT ACD_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                    EE_RD, (SELECT DISTINCT EE_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                    OM_RD, (SELECT DISTINCT OM_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                    PACKING_RD, (SELECT DISTINCT PACKING_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                    TP_ACD_RD, (SELECT DISTINCT TP_ACD_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.TP_ACD_RD) AS TP_ACDRD_NAME,
+                    TP_EE_RD, (SELECT DISTINCT TP_EE_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.TP_EE_RD) AS TP_EERD_NAME,
+                    TP_OM_RD, (SELECT DISTINCT TP_OM_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.TP_OM_RD) AS TP_OMRD_NAME,
+                    REQUEST_DATE,  :part_type PartType, REF_PRODUCT_RFQ, BIDDING_PROJECT, SOURCING_POOL_NAME, 
+                    ARRAY_FAB, JI_FAB, MODULE_FAB, SIZE_INCH, SURFACE_TREATMENT, SOP_YEAR, SOP_QUARTERLY, SOP_MONTH, RESOLUTION, PM_LCD_TYPE, PM_BRIGHTNESS,
+                    FCST_QTY, SAMPLE_REQUEST, SAMPLE_REQUEST_DATE, SAMPLE_REQUEST_QTY
+                    FROM gpo.RSI_H_PRODUCT_INFO P 
+                    WHERE P.RSI_NO =:rsi_no 
+
+2022-02-22 16:17:59,936 [26] INFO  --End:取得H_Product_Info資訊 - Completed
+2022-02-22 16:17:59,936 [26] INFO  --Begin:獲取Site Name資訊 - 【GetSiteName】:SELECT DISTINCT PHASE_ID, PHASE FROM GPO.RSI_C_FLOW_DEF WHERE PHASE_ID = :phase_id and BU = :bu 
+
+2022-02-22 16:17:59,936 [26] INFO  --End:獲取Site Name資訊 - Completed
+2022-02-22 16:17:59,936 [26] INFO  --Begin: - 【GetFCSTPage】:select attribute1 as bu from RSI_C_PARAMETER where function='FCST_PAGE'  
+
+2022-02-22 16:17:59,936 [26] INFO   --End: - Completed
+2022-02-22 16:17:59,936 [26] INFO  --Begin: - 【GetExportExcelConfig】:select * 
+                                 from gpo.rsi_c_parameter
+                                 where function = 'ExportExcel_Authority'
+                                 and decode(:BU, upper(attribute1), 1, instr(attribute1, 'ALL')) > 0   and decode(:Part_Type, upper(attribute2), 1, INSTR(attribute2, 'ALL')) > 0  and attribute3 = :Phase_ID
+                                  order by attribute3
+
+2022-02-22 16:17:59,936 [26] INFO   --End: - Completed
+2022-02-22 16:17:59,936 [26] INFO  --Begin:Upload_Flag - 【RSI_ConfigEntityDAL】:select attribute3 from RSI_C_PARAMETER
+                                 where function='BULK_UPLOAD' and attribute2 = :phase_id  
+
+2022-02-22 16:17:59,951 [26] INFO  --End:Upload_Flag - Completed
+2022-02-22 16:17:59,951 [26] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT 
+                    RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, APPLY_REASON, RFQ_TYPE, BL_NIT, POWER,
+                    PM, (SELECT DISTINCT PM ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                    PL_RD, (SELECT DISTINCT PL_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                    ACD_RD, (SELECT DISTINCT ACD_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                    EE_RD, (SELECT DISTINCT EE_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                    OM_RD, (SELECT DISTINCT OM_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                    PACKING_RD, (SELECT DISTINCT PACKING_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                    TP_ACD_RD, (SELECT DISTINCT TP_ACD_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.TP_ACD_RD) AS TP_ACDRD_NAME,
+                    TP_EE_RD, (SELECT DISTINCT TP_EE_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.TP_EE_RD) AS TP_EERD_NAME,
+                    TP_OM_RD, (SELECT DISTINCT TP_OM_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.TP_OM_RD) AS TP_OMRD_NAME,
+                    REQUEST_DATE,  :part_type PartType, REF_PRODUCT_RFQ, BIDDING_PROJECT, SOURCING_POOL_NAME, 
+                    ARRAY_FAB, JI_FAB, MODULE_FAB, SIZE_INCH, SURFACE_TREATMENT, SOP_YEAR, SOP_QUARTERLY, SOP_MONTH, RESOLUTION, PM_LCD_TYPE, PM_BRIGHTNESS,
+                    FCST_QTY, SAMPLE_REQUEST, SAMPLE_REQUEST_DATE, SAMPLE_REQUEST_QTY
+                    FROM gpo.RSI_H_PRODUCT_INFO P 
+                    WHERE P.RSI_NO =:rsi_no 
+
+2022-02-22 16:17:59,951 [26] INFO  --End:取得H_Product_Info資訊 - Completed
+2022-02-22 16:17:59,951 [26] INFO  --Begin:取得Price_Group資訊 - 【GetPrice_Group】:SELECT *
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = :price_type
+                                    AND ATTRIBUTE1 = :bu
+                                    AND DECODE( :part_type, UPPER(ATTRIBUTE2), 1, INSTR(ATTRIBUTE2, 'ALL')) > 0
+                                  ORDER BY DECODE(UPPER(ATTRIBUTE3), 'MATERIAL_GROUP', 0, 'PARTS_GROUP', 1, 'MATERIAL_PARTS', 2, 'PART_NO', 3, 4)  
+
+2022-02-22 16:17:59,951 [26] INFO  --End:取得Price_Group資訊 - Completed
+2022-02-22 16:17:59,951 [26] INFO  --Begin: - 【GetDetailApprove】:  SELECT A.RSI_NO, A.FORM_NO, A.PART_TYPE, A.PHASE_ID, A.PHASE, A.APP_SERIAL, 
+                                          A.APP_ASSIGNER, A.APP_ASSIGNER_NAME, A.APP_ACTOR, A.APP_ACTOR_NAME,
+                                          A.STATUS, A.BEGIN_DATE, A.END_DATE,
+                                          A.APP_CONTENT, A.DIF_DAY
+                                          FROM RSI_APPROVAL_LIST_V A
+                                          WHERE A.RSI_NO = :rsi_no
+                                          AND A.PART_TYPE = :part_type 
+
+2022-02-22 16:17:59,951 [26] INFO   --End: - Completed
+2022-02-22 16:17:59,951 [26] INFO  --Begin:GetVersion - 【RSI_ConfigEntityDAL】:select attribute1 from RSI_C_PARAMETER where function='VERSION_CONTROL' 
+
+2022-02-22 16:17:59,951 [26] INFO  --End:GetVersion - Completed
+2022-02-22 16:17:59,951 [26] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:17:59,951 [26] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:17:59,951 [26] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:17:59,967 [26] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:17:59,967 [26] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2022-02-22 16:17:59,967 [26] INFO  --End:獲取Department Name資訊 - Completed
+2022-02-22 16:18:00,248 [26] INFO  --Begin: - 【GetPartLevelEnglish】:select distinct m.mtl_group,
+                                                 m.parts_group,
+                                                 m.mtl_parts,
+                                                 p.part_kind_key as part_level,
+                                                 p.english_name
+                                  from rsi_r_part_info p
+                                  left join gpo.rsi_c_mtl_parts m
+                                    on p.part_kind_key = m.part_level
+                                   and p.english_name = m.english_name
+                                   and m.active = 'Y'
+                                 --where p.part_kind_key not like '9%'
+                                   where p.english_name is not null
+                                 order by p.part_kind_key 
+
+2022-02-22 16:18:00,248 [10] INFO  --Begin: - 【GetUnit】:select distinct upper(unit) unit
+                                               from rsi_r_part_info
+                                               order by unit 
+
+2022-02-22 16:18:00,248 [33] INFO  --Begin:取得Normal Parts資訊 - 【GetRDReviewNormalParts】: select b.rsi_no, 'Normal' mtl_type, '' mtl_group, '' parts_group, '' mtl_parts, '' part_type,
+                                                decode(ismodify, 'Y', substr(b.partnumber_child, 0, 2), b.partnumber_child) as part_no,
+                                                b.part_desc, b.part_level, b.english_name, '' maker_source, '' maker_part_no, '' part_spec,
+                                                '' spec_def, b.release_date, b.part_quantity as usage, b.part_unit, '' eol_status,
+                                                '' uni_spec_status, '' remark, decode(ismodify, 'Y', 'U', null) as modify_type, 0 sn, 0 parent_sn, '' file_status, '' phase_id,
+                                                b.partnumber_top, decode(ismodify, 'Y', substr(b.partnumber_child, 0, 2), b.partnumber_child) as partnumber_child,
+                                                b.partnumber_parent, decode(ismodify, 'Y', substr(b.partnumber_child, 0, 2), b.partnumber_child) as DisplayPartNo,
+                                                0 bom_level
+                                                from gpo.rsi_h_bom_all b
+                                                where rsi_no = :rsi_no
+                                                and bom_level = 0
+                                                --and not exists (select 1 from rsi_h_product_detail d where d.rsi_no = :rsi_no)
+                                                union all
+                                                select *
+                                                from (
+                                                    select d.*, LPAD(' ', (Level) * 4) || nvl(d.part_no, d.part_level) as DisplayPartNo, Level bom_level
+                                                    from (
+                                                        select distinct d.rsi_no,
+                                                        nvl(d.mtl_type, decode(s.active, 'Y', 'Special', 'Normal')) mtl_type,
+                                                        d.mtl_group,
+                                                        d.parts_group,
+                                                        d.mtl_parts,
+                                                        d.part_type, 
+                                                        d.part_no,
+                                                        d.part_desc,
+                                                        d.part_level,
+                                                        d.english_name,
+                                                        d.maker_source,
+                                                        d.maker_part_no,
+                                                        d.part_spec,
+                                                        c.SPEC_DEF,
+                                                        d.release_date,
+                                                        d.usage,
+                                                        d.part_unit,
+                                                        d.eol_status eol_status,
+                                                        d.uni_spec_status uni_spec_status,
+                                                        d.remark,
+                                                        d.modify_type,
+                                                        d.sn,
+                                                        d.parent_sn,
+                                                        decode(nvl(f.cnt,0),0,'N','Y') as file_status,
+                                                        d.phase_id,
+                                                        i.ref_product partnumber_top,
+                                                        nvl(d.part_no, d.part_level) partnumber_child, 
+                                                        d.partnumber_parent
+                                                        from gpo.rsi_h_product_detail d
+                                                        join gpo.rsi_h_product_info i on d.rsi_no = i.rsi_no
+                                                        left join gpo.rsi_c_mtl_special_parts s on s.mtl_parts = d.mtl_parts and s.active = 'Y'
+                                                        left join (select distinct mtl_parts, spec_def
+                                                                     from gpo.rsi_c_mtl_spec_def
+                                                                    where active = 'Y') c
+                                                          on d.mtl_parts = c.mtl_parts
+                                                        left join (SELECT Biz_Id,count(1) AS cnt FROM GPO.RSI_H_FILELIST GROUP BY Biz_Id) f
+                                                          on f.BIZ_ID = d.RSI_NO||'_'||d.SN
+                                                        where nvl(d.mtl_type, decode(s.active, 'Y', 'Special', 'Normal')) <> 'Special' 
+                                                        and (d.modify_type is null or d.modify_type <> 'D')
+                                                        and nvl(d.mtl_group,'-') not like 'MOH%'
+                                                        and d.rsi_no = :rsi_no
+                                                    ) d
+                                                    start with partnumber_top = partnumber_parent
+                                                    connect by nocycle prior partnumber_top = partnumber_top
+                                                                    and prior sn = parent_sn
+                                                                   --and prior partnumber_child = partnumber_parent
+                                                    order siblings by part_level desc
+                                                ) a 
+
+2022-02-22 16:18:00,248 [30] INFO  --Begin:取得Group_ID資訊 - 【GetGroupID】:SELECT DISTINCT GROUP_ID
+                                                FROM GPO.RSI_H_PRODUCT_DETAIL D 
+                                                WHERE RSI_NO = :rsi_no   --querystring取的
+                                                AND GROUP_ID IS NOT NULL
+                                                AND (MODIFY_TYPE IS NULL OR MODIFY_TYPE <> 'D')
+                                                ORDER BY GROUP_ID ASC 
+
+2022-02-22 16:18:00,264 [30] INFO  --End:取得Group_ID資訊 - Completed
+2022-02-22 16:18:00,280 [33] INFO  --End:取得Normal Parts資訊 - Completed
+2022-02-22 16:18:00,373 [26] INFO   --End: - Completed
+2022-02-22 16:18:00,389 [10] INFO   --End: - Completed
+2022-02-22 16:18:51,252 [32] INFO  --Begin: - 【Auto_Identify】:select count(*) as count
+                                                from RSI_TO_DO_LIST_V a
+                                                where a.APP_ASSIGNER = :emp_no
+                                                and a.rsi_no = :rsi_no
+                                                and a.phase_id = :phase_id 
+
+2022-02-22 16:18:51,252 [32] INFO   --End: - Completed
+2022-02-22 16:18:51,252 [32] INFO  --Begin:GetMCAConrol - 【RSI_ConfigEntityDAL】:select * from RSI_C_PARAMETER t
+                                 where t.function='MAC_CONTROL'
+                                 and t.attribute1='Y' 
+
+2022-02-22 16:18:51,252 [32] INFO  --End:GetMCAConrol - Completed
+2022-02-22 16:18:51,252 [32] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT 
+                    RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, APPLY_REASON, RFQ_TYPE, BL_NIT, POWER,
+                    PM, (SELECT DISTINCT PM ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                    PL_RD, (SELECT DISTINCT PL_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                    ACD_RD, (SELECT DISTINCT ACD_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                    EE_RD, (SELECT DISTINCT EE_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                    OM_RD, (SELECT DISTINCT OM_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                    PACKING_RD, (SELECT DISTINCT PACKING_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                    TP_ACD_RD, (SELECT DISTINCT TP_ACD_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.TP_ACD_RD) AS TP_ACDRD_NAME,
+                    TP_EE_RD, (SELECT DISTINCT TP_EE_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.TP_EE_RD) AS TP_EERD_NAME,
+                    TP_OM_RD, (SELECT DISTINCT TP_OM_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.TP_OM_RD) AS TP_OMRD_NAME,
+                    REQUEST_DATE,  :part_type PartType, REF_PRODUCT_RFQ, BIDDING_PROJECT, SOURCING_POOL_NAME, 
+                    ARRAY_FAB, JI_FAB, MODULE_FAB, SIZE_INCH, SURFACE_TREATMENT, SOP_YEAR, SOP_QUARTERLY, SOP_MONTH, RESOLUTION, PM_LCD_TYPE, PM_BRIGHTNESS,
+                    FCST_QTY, SAMPLE_REQUEST, SAMPLE_REQUEST_DATE, SAMPLE_REQUEST_QTY
+                    FROM gpo.RSI_H_PRODUCT_INFO P 
+                    WHERE P.RSI_NO =:rsi_no 
+
+2022-02-22 16:18:51,252 [32] INFO  --End:取得H_Product_Info資訊 - Completed
+2022-02-22 16:18:51,268 [32] INFO  --Begin:獲取Site Name資訊 - 【GetSiteName】:SELECT DISTINCT PHASE_ID, PHASE FROM GPO.RSI_C_FLOW_DEF WHERE PHASE_ID = :phase_id and BU = :bu 
+
+2022-02-22 16:18:51,268 [32] INFO  --End:獲取Site Name資訊 - Completed
+2022-02-22 16:18:51,268 [32] INFO  --Begin: - 【GetFCSTPage】:select attribute1 as bu from RSI_C_PARAMETER where function='FCST_PAGE'  
+
+2022-02-22 16:18:51,268 [32] INFO   --End: - Completed
+2022-02-22 16:18:51,268 [32] INFO  --Begin: - 【GetExportExcelConfig】:select * 
+                                 from gpo.rsi_c_parameter
+                                 where function = 'ExportExcel_Authority'
+                                 and decode(:BU, upper(attribute1), 1, instr(attribute1, 'ALL')) > 0   and decode(:Part_Type, upper(attribute2), 1, INSTR(attribute2, 'ALL')) > 0  and attribute3 = :Phase_ID
+                                  order by attribute3
+
+2022-02-22 16:18:51,268 [32] INFO   --End: - Completed
+2022-02-22 16:18:51,268 [32] INFO  --Begin:Upload_Flag - 【RSI_ConfigEntityDAL】:select attribute3 from RSI_C_PARAMETER
+                                 where function='BULK_UPLOAD' and attribute2 = :phase_id  
+
+2022-02-22 16:18:51,268 [32] INFO  --End:Upload_Flag - Completed
+2022-02-22 16:18:51,268 [32] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT 
+                    RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, APPLY_REASON, RFQ_TYPE, BL_NIT, POWER,
+                    PM, (SELECT DISTINCT PM ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                    PL_RD, (SELECT DISTINCT PL_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                    ACD_RD, (SELECT DISTINCT ACD_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                    EE_RD, (SELECT DISTINCT EE_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                    OM_RD, (SELECT DISTINCT OM_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                    PACKING_RD, (SELECT DISTINCT PACKING_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                    TP_ACD_RD, (SELECT DISTINCT TP_ACD_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.TP_ACD_RD) AS TP_ACDRD_NAME,
+                    TP_EE_RD, (SELECT DISTINCT TP_EE_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.TP_EE_RD) AS TP_EERD_NAME,
+                    TP_OM_RD, (SELECT DISTINCT TP_OM_RD ||'-'|| EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.TP_OM_RD) AS TP_OMRD_NAME,
+                    REQUEST_DATE,  :part_type PartType, REF_PRODUCT_RFQ, BIDDING_PROJECT, SOURCING_POOL_NAME, 
+                    ARRAY_FAB, JI_FAB, MODULE_FAB, SIZE_INCH, SURFACE_TREATMENT, SOP_YEAR, SOP_QUARTERLY, SOP_MONTH, RESOLUTION, PM_LCD_TYPE, PM_BRIGHTNESS,
+                    FCST_QTY, SAMPLE_REQUEST, SAMPLE_REQUEST_DATE, SAMPLE_REQUEST_QTY
+                    FROM gpo.RSI_H_PRODUCT_INFO P 
+                    WHERE P.RSI_NO =:rsi_no 
+
+2022-02-22 16:18:51,268 [32] INFO  --End:取得H_Product_Info資訊 - Completed
+2022-02-22 16:18:51,268 [32] INFO  --Begin:取得Price_Group資訊 - 【GetPrice_Group】:SELECT *
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = :price_type
+                                    AND ATTRIBUTE1 = :bu
+                                    AND DECODE( :part_type, UPPER(ATTRIBUTE2), 1, INSTR(ATTRIBUTE2, 'ALL')) > 0
+                                  ORDER BY DECODE(UPPER(ATTRIBUTE3), 'MATERIAL_GROUP', 0, 'PARTS_GROUP', 1, 'MATERIAL_PARTS', 2, 'PART_NO', 3, 4)  
+
+2022-02-22 16:18:51,268 [32] INFO  --End:取得Price_Group資訊 - Completed
+2022-02-22 16:18:51,268 [32] INFO  --Begin: - 【GetDetailApprove】:  SELECT A.RSI_NO, A.FORM_NO, A.PART_TYPE, A.PHASE_ID, A.PHASE, A.APP_SERIAL, 
+                                          A.APP_ASSIGNER, A.APP_ASSIGNER_NAME, A.APP_ACTOR, A.APP_ACTOR_NAME,
+                                          A.STATUS, A.BEGIN_DATE, A.END_DATE,
+                                          A.APP_CONTENT, A.DIF_DAY
+                                          FROM RSI_APPROVAL_LIST_V A
+                                          WHERE A.RSI_NO = :rsi_no
+                                          AND A.PART_TYPE = :part_type 
+
+2022-02-22 16:18:51,268 [32] INFO   --End: - Completed
+2022-02-22 16:18:51,268 [32] INFO  --Begin:GetVersion - 【RSI_ConfigEntityDAL】:select attribute1 from RSI_C_PARAMETER where function='VERSION_CONTROL' 
+
+2022-02-22 16:18:51,268 [32] INFO  --End:GetVersion - Completed
+2022-02-22 16:18:51,283 [32] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:18:51,283 [32] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:18:51,283 [32] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:18:51,283 [32] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:18:51,283 [32] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2022-02-22 16:18:51,299 [32] INFO  --End:獲取Department Name資訊 - Completed
+2022-02-22 16:18:51,565 [39] INFO  --Begin: - 【GetPartLevelEnglish】:select distinct m.mtl_group,
+                                                 m.parts_group,
+                                                 m.mtl_parts,
+                                                 p.part_kind_key as part_level,
+                                                 p.english_name
+                                  from rsi_r_part_info p
+                                  left join gpo.rsi_c_mtl_parts m
+                                    on p.part_kind_key = m.part_level
+                                   and p.english_name = m.english_name
+                                   and m.active = 'Y'
+                                 --where p.part_kind_key not like '9%'
+                                   where p.english_name is not null
+                                 order by p.part_kind_key 
+
+2022-02-22 16:18:51,565 [38] INFO  --Begin: - 【GetUnit】:select distinct upper(unit) unit
+                                               from rsi_r_part_info
+                                               order by unit 
+
+2022-02-22 16:18:51,565 [33] INFO  --Begin:取得Normal Parts資訊 - 【GetRDReviewNormalParts】: select b.rsi_no, 'Normal' mtl_type, '' mtl_group, '' parts_group, '' mtl_parts, '' part_type,
+                                                decode(ismodify, 'Y', substr(b.partnumber_child, 0, 2), b.partnumber_child) as part_no,
+                                                b.part_desc, b.part_level, b.english_name, '' maker_source, '' maker_part_no, '' part_spec,
+                                                '' spec_def, b.release_date, b.part_quantity as usage, b.part_unit, '' eol_status,
+                                                '' uni_spec_status, '' remark, decode(ismodify, 'Y', 'U', null) as modify_type, 0 sn, 0 parent_sn, '' file_status, '' phase_id,
+                                                b.partnumber_top, decode(ismodify, 'Y', substr(b.partnumber_child, 0, 2), b.partnumber_child) as partnumber_child,
+                                                b.partnumber_parent, decode(ismodify, 'Y', substr(b.partnumber_child, 0, 2), b.partnumber_child) as DisplayPartNo,
+                                                0 bom_level
+                                                from gpo.rsi_h_bom_all b
+                                                where rsi_no = :rsi_no
+                                                and bom_level = 0
+                                                --and not exists (select 1 from rsi_h_product_detail d where d.rsi_no = :rsi_no)
+                                                union all
+                                                select *
+                                                from (
+                                                    select d.*, LPAD(' ', (Level) * 4) || nvl(d.part_no, d.part_level) as DisplayPartNo, Level bom_level
+                                                    from (
+                                                        select distinct d.rsi_no,
+                                                        nvl(d.mtl_type, decode(s.active, 'Y', 'Special', 'Normal')) mtl_type,
+                                                        d.mtl_group,
+                                                        d.parts_group,
+                                                        d.mtl_parts,
+                                                        d.part_type, 
+                                                        d.part_no,
+                                                        d.part_desc,
+                                                        d.part_level,
+                                                        d.english_name,
+                                                        d.maker_source,
+                                                        d.maker_part_no,
+                                                        d.part_spec,
+                                                        c.SPEC_DEF,
+                                                        d.release_date,
+                                                        d.usage,
+                                                        d.part_unit,
+                                                        d.eol_status eol_status,
+                                                        d.uni_spec_status uni_spec_status,
+                                                        d.remark,
+                                                        d.modify_type,
+                                                        d.sn,
+                                                        d.parent_sn,
+                                                        decode(nvl(f.cnt,0),0,'N','Y') as file_status,
+                                                        d.phase_id,
+                                                        i.ref_product partnumber_top,
+                                                        nvl(d.part_no, d.part_level) partnumber_child, 
+                                                        d.partnumber_parent
+                                                        from gpo.rsi_h_product_detail d
+                                                        join gpo.rsi_h_product_info i on d.rsi_no = i.rsi_no
+                                                        left join gpo.rsi_c_mtl_special_parts s on s.mtl_parts = d.mtl_parts and s.active = 'Y'
+                                                        left join (select distinct mtl_parts, spec_def
+                                                                     from gpo.rsi_c_mtl_spec_def
+                                                                    where active = 'Y') c
+                                                          on d.mtl_parts = c.mtl_parts
+                                                        left join (SELECT Biz_Id,count(1) AS cnt FROM GPO.RSI_H_FILELIST GROUP BY Biz_Id) f
+                                                          on f.BIZ_ID = d.RSI_NO||'_'||d.SN
+                                                        where nvl(d.mtl_type, decode(s.active, 'Y', 'Special', 'Normal')) <> 'Special' 
+                                                        and (d.modify_type is null or d.modify_type <> 'D')
+                                                        and nvl(d.mtl_group,'-') not like 'MOH%'
+                                                        and d.rsi_no = :rsi_no
+                                                    ) d
+                                                    start with partnumber_top = partnumber_parent
+                                                    connect by nocycle prior partnumber_top = partnumber_top
+                                                                    and prior sn = parent_sn
+                                                                   --and prior partnumber_child = partnumber_parent
+                                                    order siblings by part_level desc
+                                                ) a 
+
+2022-02-22 16:18:51,581 [29] INFO  --Begin:取得Group_ID資訊 - 【GetGroupID】:SELECT DISTINCT GROUP_ID
+                                                FROM GPO.RSI_H_PRODUCT_DETAIL D 
+                                                WHERE RSI_NO = :rsi_no   --querystring取的
+                                                AND GROUP_ID IS NOT NULL
+                                                AND (MODIFY_TYPE IS NULL OR MODIFY_TYPE <> 'D')
+                                                ORDER BY GROUP_ID ASC 
+
+2022-02-22 16:18:51,596 [29] INFO  --End:取得Group_ID資訊 - Completed
+2022-02-22 16:18:51,612 [33] INFO  --End:取得Normal Parts資訊 - Completed
+2022-02-22 16:18:51,690 [38] INFO   --End: - Completed
+2022-02-22 16:18:51,690 [39] INFO   --End: - Completed
+2022-02-22 16:20:14,613 [35] INFO  --Begin:GetVersion - 【RSI_ConfigEntityDAL】:select attribute1 from RSI_C_PARAMETER where function='VERSION_CONTROL' 
+
+2022-02-22 16:20:14,613 [35] INFO  --End:GetVersion - Completed
+2022-02-22 16:20:14,800 [33] INFO  --Begin: - 【GetPartLevelEnglish】:select distinct m.mtl_group,
+                                                 m.parts_group,
+                                                 m.mtl_parts,
+                                                 p.part_kind_key as part_level,
+                                                 p.english_name
+                                  from rsi_r_part_info p
+                                  left join gpo.rsi_c_mtl_parts m
+                                    on p.part_kind_key = m.part_level
+                                   and p.english_name = m.english_name
+                                   and m.active = 'Y'
+                                 --where p.part_kind_key not like '9%'
+                                   where p.english_name is not null
+                                 order by p.part_kind_key 
+
+2022-02-22 16:20:14,925 [33] INFO   --End: - Completed
+2022-02-22 16:20:32,650 [26] INFO  --Begin:GetVersion - 【RSI_ConfigEntityDAL】:select attribute1 from RSI_C_PARAMETER where function='VERSION_CONTROL' 
+
+2022-02-22 16:20:32,650 [26] INFO  --End:GetVersion - Completed
+2022-02-22 16:20:32,822 [39] INFO  --Begin: - 【GetPartLevelEnglish】:select distinct m.mtl_group,
+                                                 m.parts_group,
+                                                 m.mtl_parts,
+                                                 p.part_kind_key as part_level,
+                                                 p.english_name
+                                  from rsi_r_part_info p
+                                  left join gpo.rsi_c_mtl_parts m
+                                    on p.part_kind_key = m.part_level
+                                   and p.english_name = m.english_name
+                                   and m.active = 'Y'
+                                 --where p.part_kind_key not like '9%'
+                                   where p.english_name is not null
+                                 order by p.part_kind_key 
+
+2022-02-22 16:20:32,947 [39] INFO   --End: - Completed
+2022-02-22 16:21:18,381 [39] INFO  --Begin: - 【GetPartLevelEnglish】:select distinct m.mtl_group,
+                                                 m.parts_group,
+                                                 m.mtl_parts,
+                                                 p.part_kind_key as part_level,
+                                                 p.english_name
+                                  from rsi_r_part_info p
+                                  left join gpo.rsi_c_mtl_parts m
+                                    on p.part_kind_key = m.part_level
+                                   and p.english_name = m.english_name
+                                   and m.active = 'Y'
+                                 --where p.part_kind_key not like '9%'
+                                   where p.english_name is not null
+                                 order by p.part_kind_key 
+
+2022-02-22 16:21:18,490 [39] INFO   --End: - Completed
+2022-02-22 16:21:40,337 [29] INFO  --Begin: - 【GetPartLevelEnglish】:select distinct m.mtl_group,
+                                                 m.parts_group,
+                                                 m.mtl_parts,
+                                                 p.part_kind_key as part_level,
+                                                 p.english_name
+                                  from rsi_r_part_info p
+                                  left join gpo.rsi_c_mtl_parts m
+                                    on p.part_kind_key = m.part_level
+                                   and p.english_name = m.english_name
+                                   and m.active = 'Y'
+                                 --where p.part_kind_key not like '9%'
+                                   where p.english_name is not null
+                                 order by p.part_kind_key 
+
+2022-02-22 16:21:40,462 [29] INFO   --End: - Completed
+2022-02-22 16:22:01,999 [29] INFO  --Begin: - 【GetPartLevelEnglish】:select distinct m.mtl_group,
+                                                 m.parts_group,
+                                                 m.mtl_parts,
+                                                 p.part_kind_key as part_level,
+                                                 p.english_name
+                                  from rsi_r_part_info p
+                                  left join gpo.rsi_c_mtl_parts m
+                                    on p.part_kind_key = m.part_level
+                                   and p.english_name = m.english_name
+                                   and m.active = 'Y'
+                                 --where p.part_kind_key not like '9%'
+                                   where p.english_name is not null
+                                 order by p.part_kind_key 
+
+2022-02-22 16:22:02,061 [29] INFO   --End: - Completed
+2022-02-22 16:22:24,569 [33] INFO  --Begin: - 【GetPartLevelEnglish】:select distinct m.mtl_group,
+                                                 m.parts_group,
+                                                 m.mtl_parts,
+                                                 p.part_kind_key as part_level,
+                                                 p.english_name
+                                  from rsi_r_part_info p
+                                  left join gpo.rsi_c_mtl_parts m
+                                    on p.part_kind_key = m.part_level
+                                   and p.english_name = m.english_name
+                                   and m.active = 'Y'
+                                 --where p.part_kind_key not like '9%'
+                                   where p.english_name is not null
+                                 order by p.part_kind_key 
+
+2022-02-22 16:22:24,632 [33] INFO   --End: - Completed
+2022-02-22 16:22:43,342 [29] INFO  --Begin: - 【GetPartNo】:select * from rsi_r_part_info where part_no like :query 
+
+2022-02-22 16:22:43,342 [29] INFO   --End: - Completed
+2022-02-22 16:22:44,202 [41] INFO  --Begin: - 【GetPartLevelEnglish】:select distinct m.mtl_group,
+                                                 m.parts_group,
+                                                 m.mtl_parts,
+                                                 p.part_kind_key as part_level,
+                                                 p.english_name
+                                  from rsi_r_part_info p
+                                  left join gpo.rsi_c_mtl_parts m
+                                    on p.part_kind_key = m.part_level
+                                   and p.english_name = m.english_name
+                                   and m.active = 'Y'
+                                 --where p.part_kind_key not like '9%'
+                                   where p.english_name is not null
+                                 order by p.part_kind_key 
+
+2022-02-22 16:22:44,264 [41] INFO   --End: - Completed
+2022-02-22 16:22:44,280 [26] INFO  --Begin:GetPartNoMfg - 【H_Product_DetailEntityDAL】:select part_no_mfg, max(partnumber_top || '-' || partnumber_top_mfg) as val from (
+                                    select distinct t.partnumber_top, t.partnumber_top_mfg, t.part_no, t.part_no_mfg
+                                    from RSI_H_PARTBOM_MFG t
+                                    where t.part_no =:part_no
+                                    order by t.part_no_mfg, t.partnumber_top)
+                                 group by part_no_mfg 
+
+2022-02-22 16:22:44,342 [26] INFO  --End:GetPartNoMfg - Completed
+2022-02-22 16:23:41,893 [39] INFO  --Begin: - 【GetPartNo】:select * from rsi_r_part_info where part_no like :query 
+
+2022-02-22 16:23:42,268 [39] INFO   --End: - Completed
+2022-02-22 16:23:44,106 [41] INFO  --Begin: - 【GetPartNo】:select * from rsi_r_part_info where part_no like :query 
+
+2022-02-22 16:23:44,419 [46] INFO  --Begin: - 【GetPartNo】:select * from rsi_r_part_info where part_no like :query 
+
+2022-02-22 16:23:44,466 [41] INFO   --End: - Completed
+2022-02-22 16:23:44,560 [46] INFO   --End: - Completed
+2022-02-22 16:23:45,734 [30] INFO  --Begin: - 【GetPartLevelEnglish】:select distinct m.mtl_group,
+                                                 m.parts_group,
+                                                 m.mtl_parts,
+                                                 p.part_kind_key as part_level,
+                                                 p.english_name
+                                  from rsi_r_part_info p
+                                  left join gpo.rsi_c_mtl_parts m
+                                    on p.part_kind_key = m.part_level
+                                   and p.english_name = m.english_name
+                                   and m.active = 'Y'
+                                 --where p.part_kind_key not like '9%'
+                                   where p.english_name is not null
+                                 order by p.part_kind_key 
+
+2022-02-22 16:23:45,796 [30] INFO   --End: - Completed
+2022-02-22 16:23:45,828 [39] INFO  --Begin:GetPartNoMfg - 【H_Product_DetailEntityDAL】:select part_no_mfg, max(partnumber_top || '-' || partnumber_top_mfg) as val from (
+                                    select distinct t.partnumber_top, t.partnumber_top_mfg, t.part_no, t.part_no_mfg
+                                    from RSI_H_PARTBOM_MFG t
+                                    where t.part_no =:part_no
+                                    order by t.part_no_mfg, t.partnumber_top)
+                                 group by part_no_mfg 
+
+2022-02-22 16:23:45,828 [33] INFO  --Begin: - 【GetPartNo】:select * from rsi_r_part_info where part_no like :query 
+
+2022-02-22 16:23:45,828 [33] INFO   --End: - Completed
+2022-02-22 16:23:45,874 [39] INFO  --End:GetPartNoMfg - Completed
+2022-02-22 16:23:48,393 [26] INFO  --Begin: - 【GetPartNo】:select * from rsi_r_part_info where part_no like :query 
+
+2022-02-22 16:23:48,408 [26] INFO   --End: - Completed
+2022-02-22 16:23:48,455 [44] INFO  --Begin: - 【GetUniSpecStatus】:select nvl(active, 'Y') as uni_spec_status from RSI_C_UNIQUE_SPEC where active = 'Y' and part_no = :part_no 
+
+2022-02-22 16:23:48,455 [44] INFO   --End: - Completed
+2022-02-22 16:23:48,455 [44] INFO  --Begin: - 【GetEolStatus】:select nvl(phase_out_flag, 'Y') as eol_status from GPO.RSI_R_MTL_PHASE_OUT where item_no = :part_no 
+
+2022-02-22 16:23:48,455 [44] INFO   --End: - Completed
+2022-02-22 16:23:48,455 [44] INFO  --Begin: - 【GetProductDetailRSINOSN】:select RSI_H_PROD_DETAIL_sn_seq.nextval from dual 
+
+2022-02-22 16:23:48,455 [44] INFO   --End: - Completed
+2022-02-22 16:23:48,455 [44] INFO  --Begin:Insert 方法 - 【RSI_H_Product_Detail】:INSERT INTO GPO.RSI_H_PRODUCT_DETAIL(
+                                                RSI_NO, MTL_TYPE, MTL_GROUP, MTL_PARTS, PART_TYPE, PART_NO, PART_DESC, 
+                                                PART_LEVEL, ENGLISH_NAME, MAKER_SOURCE, MAKER_PART_NO, 
+                                                PART_SPEC, RELEASE_DATE, USAGE, EOL_STATUS, UNI_SPEC_STATUS, 
+                                                REMARK, MODIFY_TYPE, BU, Group_ID, CREATED_DATE, CREATED_BY, PART_UNIT, PARTNUMBER_PARENT,
+                                                GROUP_NAME, GROUP_DESC, PARTS_GROUP, PARENT_SN, SN, PART_NO_ORI)
+                                                VALUES(
+                                                :RSI_NO, :MTL_TYPE, :MTL_GROUP, :MTL_PARTS, :PART_TYPE, :PART_NO, :PART_DESC, 
+                                                :PART_LEVEL, :ENGLISH_NAME, substr(:MAKER_SOURCE, 0, 20), :MAKER_PART_NO, 
+                                                :PART_SPEC, to_date(:RELEASE_DATE, 'yyyy/mm/dd'), :USAGE, :EOL_STATUS, :UNI_SPEC_STATUS, 
+                                                :REMARK, :MODIFY_TYPE, :BU, :Group_ID, sysdate, :emp_no, :PART_UNIT, :PARTNUMBER_PARENT,
+                                                :GROUP_NAME, :GROUP_DESC, :PARTS_GROUP, :PARENT_SN, :SN, :PART_NO)
+
+2022-02-22 16:23:48,471 [44] INFO  --End:Insert 方法 - Completed
+2022-02-22 16:23:48,471 [44] INFO  --Begin: - 【UpdateParentPartNo】:update gpo.rsi_h_bom_all 
+                                                          set ismodify = 'Y'
+                                                          where rsi_no = :rsi_no
+                                                           and bom_level = 0 
+
+2022-02-22 16:23:48,471 [44] INFO   --End: - Completed
+2022-02-22 16:23:48,471 [44] INFO  --Begin: - 【UpdateParentPartNo】:update rsi_h_product_detail
+                                                          set partnumber_parent = substr(partnumber_parent, 0, 2)
+                                                          where rsi_no = :rsi_no
+                                                          and partnumber_parent in
+                                                          (select distinct partnumber_parent
+                                                             from GPO.RSI_H_PRODUCT_DETAIL t
+                                                            where rsi_no = :rsi_no
+                                                              and sn in ('')
+                                                              and partnumber_parent <> :parent_no) 
+
+2022-02-22 16:23:48,471 [44] INFO   --End: - Completed
+2022-02-22 16:23:48,471 [44] INFO  --Begin: - 【UpdateParentPartNo】:update rsi_h_product_detail
+                                          set part_no = substr(part_no, 0, 2),
+                                              modify_type = 'U',
+                                              eol_status = null,
+                                              uni_spec_status = null
+                                          where rsi_no = :rsi_no
+                                            and nvl(modify_type, '-') <> 'D'
+                                            and sn in ('') 
+
+2022-02-22 16:23:48,471 [44] INFO   --End: - Completed
+2022-02-22 16:23:48,486 [43] INFO  --Begin:取得Normal Parts資訊 - 【GetRDReviewNormalParts】: select b.rsi_no, 'Normal' mtl_type, '' mtl_group, '' parts_group, '' mtl_parts, '' part_type,
+                                                decode(ismodify, 'Y', substr(b.partnumber_child, 0, 2), b.partnumber_child) as part_no,
+                                                b.part_desc, b.part_level, b.english_name, '' maker_source, '' maker_part_no, '' part_spec,
+                                                '' spec_def, b.release_date, b.part_quantity as usage, b.part_unit, '' eol_status,
+                                                '' uni_spec_status, '' remark, decode(ismodify, 'Y', 'U', null) as modify_type, 0 sn, 0 parent_sn, '' file_status, '' phase_id,
+                                                b.partnumber_top, decode(ismodify, 'Y', substr(b.partnumber_child, 0, 2), b.partnumber_child) as partnumber_child,
+                                                b.partnumber_parent, decode(ismodify, 'Y', substr(b.partnumber_child, 0, 2), b.partnumber_child) as DisplayPartNo,
+                                                0 bom_level
+                                                from gpo.rsi_h_bom_all b
+                                                where rsi_no = :rsi_no
+                                                and bom_level = 0
+                                                --and not exists (select 1 from rsi_h_product_detail d where d.rsi_no = :rsi_no)
+                                                union all
+                                                select *
+                                                from (
+                                                    select d.*, LPAD(' ', (Level) * 4) || nvl(d.part_no, d.part_level) as DisplayPartNo, Level bom_level
+                                                    from (
+                                                        select distinct d.rsi_no,
+                                                        nvl(d.mtl_type, decode(s.active, 'Y', 'Special', 'Normal')) mtl_type,
+                                                        d.mtl_group,
+                                                        d.parts_group,
+                                                        d.mtl_parts,
+                                                        d.part_type, 
+                                                        d.part_no,
+                                                        d.part_desc,
+                                                        d.part_level,
+                                                        d.english_name,
+                                                        d.maker_source,
+                                                        d.maker_part_no,
+                                                        d.part_spec,
+                                                        c.SPEC_DEF,
+                                                        d.release_date,
+                                                        d.usage,
+                                                        d.part_unit,
+                                                        d.eol_status eol_status,
+                                                        d.uni_spec_status uni_spec_status,
+                                                        d.remark,
+                                                        d.modify_type,
+                                                        d.sn,
+                                                        d.parent_sn,
+                                                        decode(nvl(f.cnt,0),0,'N','Y') as file_status,
+                                                        d.phase_id,
+                                                        i.ref_product partnumber_top,
+                                                        nvl(d.part_no, d.part_level) partnumber_child, 
+                                                        d.partnumber_parent
+                                                        from gpo.rsi_h_product_detail d
+                                                        join gpo.rsi_h_product_info i on d.rsi_no = i.rsi_no
+                                                        left join gpo.rsi_c_mtl_special_parts s on s.mtl_parts = d.mtl_parts and s.active = 'Y'
+                                                        left join (select distinct mtl_parts, spec_def
+                                                                     from gpo.rsi_c_mtl_spec_def
+                                                                    where active = 'Y') c
+                                                          on d.mtl_parts = c.mtl_parts
+                                                        left join (SELECT Biz_Id,count(1) AS cnt FROM GPO.RSI_H_FILELIST GROUP BY Biz_Id) f
+                                                          on f.BIZ_ID = d.RSI_NO||'_'||d.SN
+                                                        where nvl(d.mtl_type, decode(s.active, 'Y', 'Special', 'Normal')) <> 'Special' 
+                                                        and (d.modify_type is null or d.modify_type <> 'D')
+                                                        and nvl(d.mtl_group,'-') not like 'MOH%'
+                                                        and d.rsi_no = :rsi_no
+                                                    ) d
+                                                    start with partnumber_top = partnumber_parent
+                                                    connect by nocycle prior partnumber_top = partnumber_top
+                                                                    and prior sn = parent_sn
+                                                                   --and prior partnumber_child = partnumber_parent
+                                                    order siblings by part_level desc
+                                                ) a 
+
+2022-02-22 16:23:48,486 [33] INFO  --Begin:取得Group_ID資訊 - 【GetGroupID】:SELECT DISTINCT GROUP_ID
+                                                FROM GPO.RSI_H_PRODUCT_DETAIL D 
+                                                WHERE RSI_NO = :rsi_no   --querystring取的
+                                                AND GROUP_ID IS NOT NULL
+                                                AND (MODIFY_TYPE IS NULL OR MODIFY_TYPE <> 'D')
+                                                ORDER BY GROUP_ID ASC 
+
+2022-02-22 16:23:48,486 [33] INFO  --End:取得Group_ID資訊 - Completed
+2022-02-22 16:23:48,502 [43] INFO  --End:取得Normal Parts資訊 - Completed
+2022-02-22 16:24:07,400 [42] INFO  --Begin: - 【GetPartNo】:select * from rsi_r_part_info where part_no like :query 
+
+2022-02-22 16:24:07,400 [42] INFO   --End: - Completed
+2022-02-22 16:24:08,556 [33] INFO  --Begin: - 【GetPartNo】:select * from rsi_r_part_info where part_no like :query 
+
+2022-02-22 16:24:08,556 [33] INFO   --End: - Completed
+2022-02-22 16:24:09,525 [39] INFO  --Begin: - 【GetPartNo】:select * from rsi_r_part_info where part_no like :query 
+
+2022-02-22 16:24:09,525 [39] INFO   --End: - Completed
+2022-02-22 16:24:10,759 [29] INFO  --Begin: - 【GetPartNo】:select * from rsi_r_part_info where part_no like :query 
+
+2022-02-22 16:24:10,775 [29] INFO   --End: - Completed
+2022-02-22 16:24:11,618 [43] INFO  --Begin: - 【GetPartLevelEnglish】:select distinct m.mtl_group,
+                                                 m.parts_group,
+                                                 m.mtl_parts,
+                                                 p.part_kind_key as part_level,
+                                                 p.english_name
+                                  from rsi_r_part_info p
+                                  left join gpo.rsi_c_mtl_parts m
+                                    on p.part_kind_key = m.part_level
+                                   and p.english_name = m.english_name
+                                   and m.active = 'Y'
+                                 --where p.part_kind_key not like '9%'
+                                   where p.english_name is not null
+                                 order by p.part_kind_key 
+
+2022-02-22 16:24:11,681 [43] INFO   --End: - Completed
+2022-02-22 16:24:11,697 [41] INFO  --Begin:GetPartNoMfg - 【H_Product_DetailEntityDAL】:select part_no_mfg, max(partnumber_top || '-' || partnumber_top_mfg) as val from (
+                                    select distinct t.partnumber_top, t.partnumber_top_mfg, t.part_no, t.part_no_mfg
+                                    from RSI_H_PARTBOM_MFG t
+                                    where t.part_no =:part_no
+                                    order by t.part_no_mfg, t.partnumber_top)
+                                 group by part_no_mfg 
+
+2022-02-22 16:24:11,712 [44] INFO  --Begin: - 【GetPartNo】:select * from rsi_r_part_info where part_no like :query 
+
+2022-02-22 16:24:11,712 [44] INFO   --End: - Completed
+2022-02-22 16:24:11,743 [41] INFO  --End:GetPartNoMfg - Completed
+2022-02-22 16:24:12,900 [33] INFO  --Begin: - 【GetPartLevelEnglish】:select distinct m.mtl_group,
+                                                 m.parts_group,
+                                                 m.mtl_parts,
+                                                 p.part_kind_key as part_level,
+                                                 p.english_name
+                                  from rsi_r_part_info p
+                                  left join gpo.rsi_c_mtl_parts m
+                                    on p.part_kind_key = m.part_level
+                                   and p.english_name = m.english_name
+                                   and m.active = 'Y'
+                                 --where p.part_kind_key not like '9%'
+                                   where p.english_name is not null
+                                 order by p.part_kind_key 
+
+2022-02-22 16:24:12,962 [33] INFO   --End: - Completed
+2022-02-22 16:24:12,962 [44] INFO  --Begin:GetPartNoMfg - 【H_Product_DetailEntityDAL】:select part_no_mfg, max(partnumber_top || '-' || partnumber_top_mfg) as val from (
+                                    select distinct t.partnumber_top, t.partnumber_top_mfg, t.part_no, t.part_no_mfg
+                                    from RSI_H_PARTBOM_MFG t
+                                    where t.part_no =:part_no
+                                    order by t.part_no_mfg, t.partnumber_top)
+                                 group by part_no_mfg 
+
+2022-02-22 16:24:13,025 [44] INFO  --End:GetPartNoMfg - Completed
+2022-02-22 16:24:14,962 [30] INFO  --Begin: - 【GetPartNo】:select * from rsi_r_part_info where part_no like :query 
+
+2022-02-22 16:24:14,962 [30] INFO   --End: - Completed
+2022-02-22 16:24:14,994 [39] INFO  --Begin: - 【GetUniSpecStatus】:select nvl(active, 'Y') as uni_spec_status from RSI_C_UNIQUE_SPEC where active = 'Y' and part_no = :part_no 
+
+2022-02-22 16:24:14,994 [39] INFO   --End: - Completed
+2022-02-22 16:24:14,994 [39] INFO  --Begin: - 【GetEolStatus】:select nvl(phase_out_flag, 'Y') as eol_status from GPO.RSI_R_MTL_PHASE_OUT where item_no = :part_no 
+
+2022-02-22 16:24:14,994 [39] INFO   --End: - Completed
+2022-02-22 16:24:14,994 [39] INFO  --Begin: - 【GetProductDetailRSINOSN】:select RSI_H_PROD_DETAIL_sn_seq.nextval from dual 
+
+2022-02-22 16:24:14,994 [39] INFO   --End: - Completed
+2022-02-22 16:24:14,994 [39] INFO  --Begin:Insert 方法 - 【RSI_H_Product_Detail】:INSERT INTO GPO.RSI_H_PRODUCT_DETAIL(
+                                                RSI_NO, MTL_TYPE, MTL_GROUP, MTL_PARTS, PART_TYPE, PART_NO, PART_DESC, 
+                                                PART_LEVEL, ENGLISH_NAME, MAKER_SOURCE, MAKER_PART_NO, 
+                                                PART_SPEC, RELEASE_DATE, USAGE, EOL_STATUS, UNI_SPEC_STATUS, 
+                                                REMARK, MODIFY_TYPE, BU, Group_ID, CREATED_DATE, CREATED_BY, PART_UNIT, PARTNUMBER_PARENT,
+                                                GROUP_NAME, GROUP_DESC, PARTS_GROUP, PARENT_SN, SN, PART_NO_ORI)
+                                                VALUES(
+                                                :RSI_NO, :MTL_TYPE, :MTL_GROUP, :MTL_PARTS, :PART_TYPE, :PART_NO, :PART_DESC, 
+                                                :PART_LEVEL, :ENGLISH_NAME, substr(:MAKER_SOURCE, 0, 20), :MAKER_PART_NO, 
+                                                :PART_SPEC, to_date(:RELEASE_DATE, 'yyyy/mm/dd'), :USAGE, :EOL_STATUS, :UNI_SPEC_STATUS, 
+                                                :REMARK, :MODIFY_TYPE, :BU, :Group_ID, sysdate, :emp_no, :PART_UNIT, :PARTNUMBER_PARENT,
+                                                :GROUP_NAME, :GROUP_DESC, :PARTS_GROUP, :PARENT_SN, :SN, :PART_NO)
+
+2022-02-22 16:24:14,994 [39] INFO  --End:Insert 方法 - Completed
+2022-02-22 16:24:14,994 [39] INFO  --Begin: - 【UpdateParentPartNo】:update gpo.rsi_h_bom_all 
+                                                          set ismodify = 'Y'
+                                                          where rsi_no = :rsi_no
+                                                           and bom_level = 0 
+
+2022-02-22 16:24:14,994 [39] INFO   --End: - Completed
+2022-02-22 16:24:14,994 [39] INFO  --Begin: - 【UpdateParentPartNo】:update rsi_h_product_detail
+                                                          set partnumber_parent = substr(partnumber_parent, 0, 2)
+                                                          where rsi_no = :rsi_no
+                                                          and partnumber_parent in
+                                                          (select distinct partnumber_parent
+                                                             from GPO.RSI_H_PRODUCT_DETAIL t
+                                                            where rsi_no = :rsi_no
+                                                              and sn in ('10840')
+                                                              and partnumber_parent <> :parent_no) 
+
+2022-02-22 16:24:15,009 [39] INFO   --End: - Completed
+2022-02-22 16:24:15,009 [39] INFO  --Begin: - 【UpdateParentPartNo】:update rsi_h_product_detail
+                                          set part_no = substr(part_no, 0, 2),
+                                              modify_type = 'U',
+                                              eol_status = null,
+                                              uni_spec_status = null
+                                          where rsi_no = :rsi_no
+                                            and nvl(modify_type, '-') <> 'D'
+                                            and sn in ('10840') 
+
+2022-02-22 16:24:15,009 [39] INFO   --End: - Completed
+2022-02-22 16:24:15,025 [29] INFO  --Begin:取得Normal Parts資訊 - 【GetRDReviewNormalParts】: select b.rsi_no, 'Normal' mtl_type, '' mtl_group, '' parts_group, '' mtl_parts, '' part_type,
+                                                decode(ismodify, 'Y', substr(b.partnumber_child, 0, 2), b.partnumber_child) as part_no,
+                                                b.part_desc, b.part_level, b.english_name, '' maker_source, '' maker_part_no, '' part_spec,
+                                                '' spec_def, b.release_date, b.part_quantity as usage, b.part_unit, '' eol_status,
+                                                '' uni_spec_status, '' remark, decode(ismodify, 'Y', 'U', null) as modify_type, 0 sn, 0 parent_sn, '' file_status, '' phase_id,
+                                                b.partnumber_top, decode(ismodify, 'Y', substr(b.partnumber_child, 0, 2), b.partnumber_child) as partnumber_child,
+                                                b.partnumber_parent, decode(ismodify, 'Y', substr(b.partnumber_child, 0, 2), b.partnumber_child) as DisplayPartNo,
+                                                0 bom_level
+                                                from gpo.rsi_h_bom_all b
+                                                where rsi_no = :rsi_no
+                                                and bom_level = 0
+                                                --and not exists (select 1 from rsi_h_product_detail d where d.rsi_no = :rsi_no)
+                                                union all
+                                                select *
+                                                from (
+                                                    select d.*, LPAD(' ', (Level) * 4) || nvl(d.part_no, d.part_level) as DisplayPartNo, Level bom_level
+                                                    from (
+                                                        select distinct d.rsi_no,
+                                                        nvl(d.mtl_type, decode(s.active, 'Y', 'Special', 'Normal')) mtl_type,
+                                                        d.mtl_group,
+                                                        d.parts_group,
+                                                        d.mtl_parts,
+                                                        d.part_type, 
+                                                        d.part_no,
+                                                        d.part_desc,
+                                                        d.part_level,
+                                                        d.english_name,
+                                                        d.maker_source,
+                                                        d.maker_part_no,
+                                                        d.part_spec,
+                                                        c.SPEC_DEF,
+                                                        d.release_date,
+                                                        d.usage,
+                                                        d.part_unit,
+                                                        d.eol_status eol_status,
+                                                        d.uni_spec_status uni_spec_status,
+                                                        d.remark,
+                                                        d.modify_type,
+                                                        d.sn,
+                                                        d.parent_sn,
+                                                        decode(nvl(f.cnt,0),0,'N','Y') as file_status,
+                                                        d.phase_id,
+                                                        i.ref_product partnumber_top,
+                                                        nvl(d.part_no, d.part_level) partnumber_child, 
+                                                        d.partnumber_parent
+                                                        from gpo.rsi_h_product_detail d
+                                                        join gpo.rsi_h_product_info i on d.rsi_no = i.rsi_no
+                                                        left join gpo.rsi_c_mtl_special_parts s on s.mtl_parts = d.mtl_parts and s.active = 'Y'
+                                                        left join (select distinct mtl_parts, spec_def
+                                                                     from gpo.rsi_c_mtl_spec_def
+                                                                    where active = 'Y') c
+                                                          on d.mtl_parts = c.mtl_parts
+                                                        left join (SELECT Biz_Id,count(1) AS cnt FROM GPO.RSI_H_FILELIST GROUP BY Biz_Id) f
+                                                          on f.BIZ_ID = d.RSI_NO||'_'||d.SN
+                                                        where nvl(d.mtl_type, decode(s.active, 'Y', 'Special', 'Normal')) <> 'Special' 
+                                                        and (d.modify_type is null or d.modify_type <> 'D')
+                                                        and nvl(d.mtl_group,'-') not like 'MOH%'
+                                                        and d.rsi_no = :rsi_no
+                                                    ) d
+                                                    start with partnumber_top = partnumber_parent
+                                                    connect by nocycle prior partnumber_top = partnumber_top
+                                                                    and prior sn = parent_sn
+                                                                   --and prior partnumber_child = partnumber_parent
+                                                    order siblings by part_level desc
+                                                ) a 
+
+2022-02-22 16:24:15,025 [43] INFO  --Begin:取得Group_ID資訊 - 【GetGroupID】:SELECT DISTINCT GROUP_ID
+                                                FROM GPO.RSI_H_PRODUCT_DETAIL D 
+                                                WHERE RSI_NO = :rsi_no   --querystring取的
+                                                AND GROUP_ID IS NOT NULL
+                                                AND (MODIFY_TYPE IS NULL OR MODIFY_TYPE <> 'D')
+                                                ORDER BY GROUP_ID ASC 
+
+2022-02-22 16:24:15,025 [43] INFO  --End:取得Group_ID資訊 - Completed
+2022-02-22 16:24:15,040 [29] INFO  --End:取得Normal Parts資訊 - Completed
+2022-02-22 16:28:12,958 [42] INFO  --Begin:GetVersion - 【RSI_ConfigEntityDAL】:select attribute1 from RSI_C_PARAMETER where function='VERSION_CONTROL' 
+
+2022-02-22 16:28:12,958 [42] INFO  --End:GetVersion - Completed
+2022-02-22 16:28:13,224 [25] INFO  --Begin:取得Normal Parts資訊 - 【GetRDReviewNormalParts】: select b.rsi_no, 'Normal' mtl_type, '' mtl_group, '' parts_group, '' mtl_parts, '' part_type,
+                                                decode(ismodify, 'Y', substr(b.partnumber_child, 0, 2), b.partnumber_child) as part_no,
+                                                b.part_desc, b.part_level, b.english_name, '' maker_source, '' maker_part_no, '' part_spec,
+                                                '' spec_def, b.release_date, b.part_quantity as usage, b.part_unit, '' eol_status,
+                                                '' uni_spec_status, '' remark, decode(ismodify, 'Y', 'U', null) as modify_type, 0 sn, 0 parent_sn, '' file_status, '' phase_id,
+                                                b.partnumber_top, decode(ismodify, 'Y', substr(b.partnumber_child, 0, 2), b.partnumber_child) as partnumber_child,
+                                                b.partnumber_parent, decode(ismodify, 'Y', substr(b.partnumber_child, 0, 2), b.partnumber_child) as DisplayPartNo,
+                                                0 bom_level
+                                                from gpo.rsi_h_bom_all b
+                                                where rsi_no = :rsi_no
+                                                and bom_level = 0
+                                                --and not exists (select 1 from rsi_h_product_detail d where d.rsi_no = :rsi_no)
+                                                union all
+                                                select *
+                                                from (
+                                                    select d.*, LPAD(' ', (Level) * 4) || nvl(d.part_no, d.part_level) as DisplayPartNo, Level bom_level
+                                                    from (
+                                                        select distinct d.rsi_no,
+                                                        nvl(d.mtl_type, decode(s.active, 'Y', 'Special', 'Normal')) mtl_type,
+                                                        d.mtl_group,
+                                                        d.parts_group,
+                                                        d.mtl_parts,
+                                                        d.part_type, 
+                                                        d.part_no,
+                                                        d.part_desc,
+                                                        d.part_level,
+                                                        d.english_name,
+                                                        d.maker_source,
+                                                        d.maker_part_no,
+                                                        d.part_spec,
+                                                        c.SPEC_DEF,
+                                                        d.release_date,
+                                                        d.usage,
+                                                        d.part_unit,
+                                                        d.eol_status eol_status,
+                                                        d.uni_spec_status uni_spec_status,
+                                                        d.remark,
+                                                        d.modify_type,
+                                                        d.sn,
+                                                        d.parent_sn,
+                                                        decode(nvl(f.cnt,0),0,'N','Y') as file_status,
+                                                        d.phase_id,
+                                                        i.ref_product partnumber_top,
+                                                        nvl(d.part_no, d.part_level) partnumber_child, 
+                                                        d.partnumber_parent
+                                                        from gpo.rsi_h_product_detail d
+                                                        join gpo.rsi_h_product_info i on d.rsi_no = i.rsi_no
+                                                        left join gpo.rsi_c_mtl_special_parts s on s.mtl_parts = d.mtl_parts and s.active = 'Y'
+                                                        left join (select distinct mtl_parts, spec_def
+                                                                     from gpo.rsi_c_mtl_spec_def
+                                                                    where active = 'Y') c
+                                                          on d.mtl_parts = c.mtl_parts
+                                                        left join (SELECT Biz_Id,count(1) AS cnt FROM GPO.RSI_H_FILELIST GROUP BY Biz_Id) f
+                                                          on f.BIZ_ID = d.RSI_NO||'_'||d.SN
+                                                        where nvl(d.mtl_type, decode(s.active, 'Y', 'Special', 'Normal')) <> 'Special' 
+                                                        and (d.modify_type is null or d.modify_type <> 'D')
+                                                        and nvl(d.mtl_group,'-') not like 'MOH%'
+                                                        and d.rsi_no = :rsi_no
+                                                    ) d
+                                                    start with partnumber_top = partnumber_parent
+                                                    connect by nocycle prior partnumber_top = partnumber_top
+                                                                    and prior sn = parent_sn
+                                                                   --and prior partnumber_child = partnumber_parent
+                                                    order siblings by part_level desc
+                                                ) a 
+
+2022-02-22 16:28:13,239 [25] INFO  --End:取得Normal Parts資訊 - Completed
+2022-02-22 16:28:29,802 [44] INFO  --Begin: - 【GetModelInfo】:select distinct partnumber_top as part_no, partnumber_top_mfg as part_mfg from rsi_h_partbom_mfg where part_no like: part_no and partnumber_top_mfg is not null order by 1, 2 
+
+2022-02-22 16:28:29,848 [44] INFO   --End: - Completed
+2022-02-22 16:28:31,614 [41] INFO  --Begin: - 【GetModelInfo】:select distinct partnumber_top as part_no, partnumber_top_mfg as part_mfg from rsi_h_partbom_mfg where part_no like: part_no and partnumber_top_mfg is not null order by 1, 2 
+
+2022-02-22 16:28:31,630 [41] INFO   --End: - Completed
+2022-02-22 16:28:32,552 [24] INFO  --Begin: - 【GetModelInfo】:select distinct partnumber_top as part_no, partnumber_top_mfg as part_mfg from rsi_h_partbom_mfg where part_no like: part_no and partnumber_top_mfg is not null order by 1, 2 
+
+2022-02-22 16:28:32,567 [24] INFO   --End: - Completed
+2022-02-22 16:28:35,731 [27] INFO  --Begin: - 【GetRDReviewChangeOtherTableData】:   select :rsi_no rsi_no, 'Normal' mtl_type, '' mtl_group, '' parts_group, '' mtl_parts, '' part_type, b.part_no, b.part_description as part_desc,
+                                         b.part_kind_key as part_level, b.english_name, '' maker_source, '' maker_part_no, b.release_date, 1 as usage,
+                                         b.unit as part_unit, '' eol_status, '' uni_spec_status, 'A' modify_type, 
+                                         b.part_no as partnumber_top, b.part_no as partnumber_child, b.part_no as partnumber_parent, '0' bom_isleaf, :emp_no as lm_user, b.part_no as DisplayPartNo, 0 bom_level
+                                    from rsi_r_part_info b
+                                   where b.part_no = :partno
+                                    union all
+                                        select * 
+                                        from(
+                                            select d.*, LPAD(' ', (Level-1) * 4) || d.part_no as DisplayPartNo, Level bom_level
+                                                from (
+                                                    select distinct :rsi_no rsi_no,
+                                                    'Normal' mtl_type,
+                                                    d.mtl_group,
+                                                    d.parts_group,
+                                                    d.mtl_parts,
+                                                    b.part_type, 
+                                                    d.partnumber_child as part_no,
+                                                    d.part_desc,
+                                                    d.part_level,
+                                                    d.english_name,
+                                                    '' maker_source,
+                                                    d.maker_part_no,
+                                                    d.release_date,
+                                                    d.part_quantity as usage,
+                                                    d.part_unit,
+                                                    nvl(p.phase_out_flag, 'N') eol_status,
+                                                    nvl(u.active, 'N') uni_spec_status,
+                                                    'A' modify_type,
+                                                    :partno partnumber_top,
+                                                    d.partnumber_child, 
+                                                    d.partnumber_parent,
+                                                    d.bom_isleaf,
+                                                    d.lm_user
+                                                    from gpo.rsi_h_bom_all_tmp d
+                                                    left join gpo.rsi_c_mtl_special_parts s on s.mtl_parts = d.mtl_parts and s.active = 'Y'
+                                                    left join gpo.rsi_r_mtl_phase_out p
+                                                      on d.partnumber_child = p.item_no
+                                                    left join (select * from gpo.rsi_c_unique_spec where active='Y') u
+                                                      on d.partnumber_child = u.part_no     
+                                                    left join (
+                                                        select distinct d.mtl_group, d.mtl_parts, d.part_type 
+                                                          from gpo.rsi_h_product_info i
+                                                          join gpo.c_pms_bgbu_mapping m on m.bu = i.bu
+                                                          join (select * from rsi_c_parts_type_def where active='Y') d on d.bg = m.bg 
+                                                         where rsi_no = :rsi_no
+                                                        ) b on d.mtl_group = b.mtl_group and d.mtl_parts = b.mtl_parts
+                                                    where d.lm_user = :emp_no
+                                                    ) d
+                                                where (d.bom_isleaf = 0
+                                                   or (d.bom_isleaf = 1 and mtl_group is not null))
+                                                start with d.partnumber_top = d.partnumber_parent
+                                                connect by nocycle prior d.partnumber_top = d.partnumber_top
+                                                               and prior d.partnumber_child = d.partnumber_parent
+                                                order siblings by d.part_no desc 
+                                        ) a 
+
+2022-02-22 16:28:35,762 [27] INFO   --End: - Completed
+2022-02-22 16:29:12,998 [33] INFO  --Begin:LoginLog - 【RSI_ConfigEntityDAL】:INSERT INTO rsi_h_func_log(attribute1,created_by,created_date)
+                                 VALUES('Login',:emp_no,SYSDATE) 
+
+2022-02-22 16:29:12,998 [33] INFO  --End:LoginLog - Completed
+2022-02-22 16:29:12,998 [33] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:29:13,014 [33] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:29:13,014 [33] INFO  --Begin:GetBulletin - 【RSI_ConfigEntityDAL】:select t.*,dbms_lob.substr(t.note) as sys_note from RSI_C_PARAMETER t
+                                 where t.function='BULLETIN' 
+
+2022-02-22 16:29:13,014 [33] INFO  --End:GetBulletin - Completed
+2022-02-22 16:29:13,014 [33] INFO  --Begin:獲取FAQ資訊 - 【GetFAQ】:SELECT * FROM RSI_C_PARAMETER WHERE FUNCTION = 'FAQ' 
+
+2022-02-22 16:29:13,014 [33] INFO  --End:獲取FAQ資訊 - Completed
+2022-02-22 16:29:13,014 [33] INFO  --Begin:獲取ContactWindow資訊 - 【GetContactWindow】:SELECT DISTINCT ATTRIBUTE1, ATTRIBUTE2 FROM RSI_C_PARAMETER WHERE FUNCTION = 'Contact_Windows' 
+
+2022-02-22 16:29:13,014 [33] INFO  --End:獲取ContactWindow資訊 - Completed
+2022-02-22 16:29:13,014 [33] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:29:13,014 [33] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:29:13,014 [33] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:29:13,029 [33] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:29:13,029 [33] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2022-02-22 16:29:13,029 [33] INFO  --End:獲取Department Name資訊 - Completed
+2022-02-22 16:29:15,717 [41] INFO  --Begin:LoginLog - 【RSI_ConfigEntityDAL】:INSERT INTO rsi_h_func_log(attribute1,created_by,created_date)
+                                 VALUES('Login',:emp_no,SYSDATE) 
+
+2022-02-22 16:29:15,732 [41] INFO  --End:LoginLog - Completed
+2022-02-22 16:29:15,732 [41] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:29:15,732 [41] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:29:15,732 [41] INFO  --Begin:GetBulletin - 【RSI_ConfigEntityDAL】:select t.*,dbms_lob.substr(t.note) as sys_note from RSI_C_PARAMETER t
+                                 where t.function='BULLETIN' 
+
+2022-02-22 16:29:15,732 [41] INFO  --End:GetBulletin - Completed
+2022-02-22 16:29:15,732 [41] INFO  --Begin:獲取FAQ資訊 - 【GetFAQ】:SELECT * FROM RSI_C_PARAMETER WHERE FUNCTION = 'FAQ' 
+
+2022-02-22 16:29:15,732 [41] INFO  --End:獲取FAQ資訊 - Completed
+2022-02-22 16:29:15,732 [41] INFO  --Begin:獲取ContactWindow資訊 - 【GetContactWindow】:SELECT DISTINCT ATTRIBUTE1, ATTRIBUTE2 FROM RSI_C_PARAMETER WHERE FUNCTION = 'Contact_Windows' 
+
+2022-02-22 16:29:15,732 [41] INFO  --End:獲取ContactWindow資訊 - Completed
+2022-02-22 16:29:15,732 [41] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:29:15,732 [41] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:29:15,732 [41] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:29:15,748 [41] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:29:15,748 [41] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2022-02-22 16:29:15,748 [41] INFO  --End:獲取Department Name資訊 - Completed
+2022-02-22 16:30:08,870 [40] INFO  --Begin: - 【GetUniSpecStatus】:select nvl(active, 'Y') as uni_spec_status from RSI_C_UNIQUE_SPEC where active = 'Y' and part_no = :part_no 
+
+2022-02-22 16:30:08,870 [40] INFO   --End: - Completed
+2022-02-22 16:30:08,870 [40] INFO  --Begin: - 【GetEolStatus】:select nvl(phase_out_flag, 'Y') as eol_status from GPO.RSI_R_MTL_PHASE_OUT where item_no = :part_no 
+
+2022-02-22 16:30:08,870 [40] INFO   --End: - Completed
+2022-02-22 16:30:08,870 [40] INFO  --Begin:取得Normal Parts資訊 - 【GetRDReviewNormalpartsBySN】: select d.*, LPAD(' ', (Level) * 4) || d.part_no as DisplayPartNo, Level bom_level from(
+                                                        select distinct d.rsi_no,
+                                                        nvl(d.mtl_type, decode(s.active, 'Y', 'Special', 'Normal')) mtl_type,
+                                                        d.mtl_group,
+                                                        d.mtl_parts,
+                                                        d.part_type, 
+                                                        d.part_no,
+                                                        d.part_desc,
+                                                        d.part_level,
+                                                        d.english_name,
+                                                        d.maker_source,
+                                                        d.maker_part_no,
+                                                        d.part_spec,
+                                                        c.SPEC_DEF,
+                                                        d.release_date,
+                                                        d.usage,
+                                                        d.part_unit,
+                                                        d.eol_status eol_status,
+                                                        d.uni_spec_status uni_spec_status,
+                                                        d.remark,
+                                                        d.modify_type,
+                                                        d.sn,
+                                                        d.parent_sn,
+                                                        decode(nvl(f.cnt,0),0,'N','Y') as file_status,
+                                                        d.phase_id,
+                                                        i.ref_product partnumber_top,
+                                                        d.part_no partnumber_child, 
+                                                        d.partnumber_parent
+                                                        from gpo.rsi_h_product_detail d
+                                                        join gpo.rsi_h_product_info i on d.rsi_no = i.rsi_no
+                                                        left join gpo.rsi_c_mtl_special_parts s on s.mtl_parts = d.mtl_parts and s.active = 'Y'
+                                                        left join (select distinct mtl_parts, spec_def
+                                                                     from gpo.rsi_c_mtl_spec_def
+                                                                    where active = 'Y') c
+                                                          on d.mtl_parts = c.mtl_parts
+                                                        LEFT JOIN (SELECT Biz_Id,count(1) AS cnt FROM GPO.RSI_H_FILELIST GROUP BY Biz_Id) f
+                                                          ON f.BIZ_ID = d.RSI_NO||'_'||d.SN
+                                                        where nvl(d.mtl_type, decode(s.active, 'Y', 'Special', 'Normal')) <> 'Special' 
+                                                        and (d.modify_type is null or d.modify_type <> 'D')
+                                                        and (d.modify_type is null or d.modify_type <> 'S')
+                                                        and d.rsi_no = :rsi_no)d
+                                                         start with sn = :sn
+                                                    connect by nocycle prior sn = parent_sn
+                                                    --connect by nocycle prior partnumber_child = partnumber_parent
+                                                    order siblings by part_no desc 
+
+2022-02-22 16:30:08,886 [40] INFO  --End:取得Normal Parts資訊 - Completed
+2022-02-22 16:30:08,886 [40] INFO  --Begin:Delete 方法 - 【RSI_H_Product_Detail】: UPDATE GPO.RSI_H_PRODUCT_DETAIL SET 
+                                                MODIFY_TYPE = 'D',
+                                                UPDATED_DATE = SYSDATE,
+                                                UPDATED_BY = :emp_no
+                                                WHERE RSI_NO = :RSI_NO 
+                                                AND SN = :SN 
+
+2022-02-22 16:30:08,886 [40] INFO  --End:Delete 方法 - Completed
+2022-02-22 16:30:08,886 [40] INFO  --Begin:Delete 方法 - 【RSI_H_Product_Detail】: UPDATE GPO.RSI_H_PRODUCT_DETAIL SET 
+                                                MODIFY_TYPE = 'D',
+                                                UPDATED_DATE = SYSDATE,
+                                                UPDATED_BY = :emp_no
+                                                WHERE RSI_NO = :RSI_NO 
+                                                AND SN = :SN 
+
+2022-02-22 16:30:08,886 [40] INFO  --End:Delete 方法 - Completed
+2022-02-22 16:30:08,886 [40] INFO  --Begin: - 【UpdateParentPartNo】:update gpo.rsi_h_bom_all 
+                                                          set ismodify = 'Y'
+                                                          where rsi_no = :rsi_no
+                                                           and bom_level = 0 
+
+2022-02-22 16:30:08,886 [40] INFO   --End: - Completed
+2022-02-22 16:30:08,886 [40] INFO  --Begin: - 【UpdateParentPartNo】:update rsi_h_product_detail
+                                                          set partnumber_parent = substr(partnumber_parent, 0, 2)
+                                                          where rsi_no = :rsi_no
+                                                          and partnumber_parent in
+                                                          (select distinct partnumber_parent
+                                                             from GPO.RSI_H_PRODUCT_DETAIL t
+                                                            where rsi_no = :rsi_no
+                                                              and sn in ('')
+                                                              and partnumber_parent <> :parent_no) 
+
+2022-02-22 16:30:08,886 [40] INFO   --End: - Completed
+2022-02-22 16:30:08,886 [40] INFO  --Begin: - 【UpdateParentPartNo】:update rsi_h_product_detail
+                                          set part_no = substr(part_no, 0, 2),
+                                              modify_type = 'U',
+                                              eol_status = null,
+                                              uni_spec_status = null
+                                          where rsi_no = :rsi_no
+                                            and nvl(modify_type, '-') <> 'D'
+                                            and sn in ('') 
+
+2022-02-22 16:30:08,886 [40] INFO   --End: - Completed
+2022-02-22 16:30:08,901 [41] INFO  --Begin:取得Normal Parts資訊 - 【GetRDReviewNormalParts】: select b.rsi_no, 'Normal' mtl_type, '' mtl_group, '' parts_group, '' mtl_parts, '' part_type,
+                                                decode(ismodify, 'Y', substr(b.partnumber_child, 0, 2), b.partnumber_child) as part_no,
+                                                b.part_desc, b.part_level, b.english_name, '' maker_source, '' maker_part_no, '' part_spec,
+                                                '' spec_def, b.release_date, b.part_quantity as usage, b.part_unit, '' eol_status,
+                                                '' uni_spec_status, '' remark, decode(ismodify, 'Y', 'U', null) as modify_type, 0 sn, 0 parent_sn, '' file_status, '' phase_id,
+                                                b.partnumber_top, decode(ismodify, 'Y', substr(b.partnumber_child, 0, 2), b.partnumber_child) as partnumber_child,
+                                                b.partnumber_parent, decode(ismodify, 'Y', substr(b.partnumber_child, 0, 2), b.partnumber_child) as DisplayPartNo,
+                                                0 bom_level
+                                                from gpo.rsi_h_bom_all b
+                                                where rsi_no = :rsi_no
+                                                and bom_level = 0
+                                                --and not exists (select 1 from rsi_h_product_detail d where d.rsi_no = :rsi_no)
+                                                union all
+                                                select *
+                                                from (
+                                                    select d.*, LPAD(' ', (Level) * 4) || nvl(d.part_no, d.part_level) as DisplayPartNo, Level bom_level
+                                                    from (
+                                                        select distinct d.rsi_no,
+                                                        nvl(d.mtl_type, decode(s.active, 'Y', 'Special', 'Normal')) mtl_type,
+                                                        d.mtl_group,
+                                                        d.parts_group,
+                                                        d.mtl_parts,
+                                                        d.part_type, 
+                                                        d.part_no,
+                                                        d.part_desc,
+                                                        d.part_level,
+                                                        d.english_name,
+                                                        d.maker_source,
+                                                        d.maker_part_no,
+                                                        d.part_spec,
+                                                        c.SPEC_DEF,
+                                                        d.release_date,
+                                                        d.usage,
+                                                        d.part_unit,
+                                                        d.eol_status eol_status,
+                                                        d.uni_spec_status uni_spec_status,
+                                                        d.remark,
+                                                        d.modify_type,
+                                                        d.sn,
+                                                        d.parent_sn,
+                                                        decode(nvl(f.cnt,0),0,'N','Y') as file_status,
+                                                        d.phase_id,
+                                                        i.ref_product partnumber_top,
+                                                        nvl(d.part_no, d.part_level) partnumber_child, 
+                                                        d.partnumber_parent
+                                                        from gpo.rsi_h_product_detail d
+                                                        join gpo.rsi_h_product_info i on d.rsi_no = i.rsi_no
+                                                        left join gpo.rsi_c_mtl_special_parts s on s.mtl_parts = d.mtl_parts and s.active = 'Y'
+                                                        left join (select distinct mtl_parts, spec_def
+                                                                     from gpo.rsi_c_mtl_spec_def
+                                                                    where active = 'Y') c
+                                                          on d.mtl_parts = c.mtl_parts
+                                                        left join (SELECT Biz_Id,count(1) AS cnt FROM GPO.RSI_H_FILELIST GROUP BY Biz_Id) f
+                                                          on f.BIZ_ID = d.RSI_NO||'_'||d.SN
+                                                        where nvl(d.mtl_type, decode(s.active, 'Y', 'Special', 'Normal')) <> 'Special' 
+                                                        and (d.modify_type is null or d.modify_type <> 'D')
+                                                        and nvl(d.mtl_group,'-') not like 'MOH%'
+                                                        and d.rsi_no = :rsi_no
+                                                    ) d
+                                                    start with partnumber_top = partnumber_parent
+                                                    connect by nocycle prior partnumber_top = partnumber_top
+                                                                    and prior sn = parent_sn
+                                                                   --and prior partnumber_child = partnumber_parent
+                                                    order siblings by part_level desc
+                                                ) a 
+
+2022-02-22 16:30:08,901 [41] INFO  --End:取得Normal Parts資訊 - Completed
+2022-02-22 16:30:08,901 [42] INFO  --Begin:取得Group_ID資訊 - 【GetGroupID】:SELECT DISTINCT GROUP_ID
+                                                FROM GPO.RSI_H_PRODUCT_DETAIL D 
+                                                WHERE RSI_NO = :rsi_no   --querystring取的
+                                                AND GROUP_ID IS NOT NULL
+                                                AND (MODIFY_TYPE IS NULL OR MODIFY_TYPE <> 'D')
+                                                ORDER BY GROUP_ID ASC 
+
+2022-02-22 16:30:08,901 [42] INFO  --End:取得Group_ID資訊 - Completed
+2022-02-22 16:30:20,159 [40] INFO  --Begin:LoginLog - 【RSI_ConfigEntityDAL】:INSERT INTO rsi_h_func_log(attribute1,created_by,created_date)
+                                 VALUES('Login',:emp_no,SYSDATE) 
+
+2022-02-22 16:30:20,159 [40] INFO  --End:LoginLog - Completed
+2022-02-22 16:30:20,159 [40] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:30:20,175 [40] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:30:20,175 [40] INFO  --Begin:GetBulletin - 【RSI_ConfigEntityDAL】:select t.*,dbms_lob.substr(t.note) as sys_note from RSI_C_PARAMETER t
+                                 where t.function='BULLETIN' 
+
+2022-02-22 16:30:20,175 [40] INFO  --End:GetBulletin - Completed
+2022-02-22 16:30:20,175 [40] INFO  --Begin:獲取FAQ資訊 - 【GetFAQ】:SELECT * FROM RSI_C_PARAMETER WHERE FUNCTION = 'FAQ' 
+
+2022-02-22 16:30:20,175 [40] INFO  --End:獲取FAQ資訊 - Completed
+2022-02-22 16:30:20,175 [40] INFO  --Begin:獲取ContactWindow資訊 - 【GetContactWindow】:SELECT DISTINCT ATTRIBUTE1, ATTRIBUTE2 FROM RSI_C_PARAMETER WHERE FUNCTION = 'Contact_Windows' 
+
+2022-02-22 16:30:20,175 [40] INFO  --End:獲取ContactWindow資訊 - Completed
+2022-02-22 16:30:20,175 [40] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:30:20,175 [40] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:30:20,175 [40] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:30:20,175 [40] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:30:20,175 [40] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2022-02-22 16:30:20,191 [40] INFO  --End:獲取Department Name資訊 - Completed
+2022-02-22 16:30:22,575 [44] INFO  --Begin:獲取DashBoard UA資訊1 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V A
+                                                   JOIN (
+                                                        SELECT DISTINCT B.RSI_NO FROM GPO.RSI_H_FORM_HEADER B
+                                                        WHERE FORM_NO IN
+                                                        (SELECT A.FORM_NO    --自己簽核過表單
+                                                         FROM GPO.RSI_H_FORM_APPROVE A
+                                                         LEFT JOIN GPO.RSI_H_DETAIL_APP_LOG L ON A.FORM_NO = L.FORM_NO
+                                                         WHERE (A.APP_ASSIGNER = :emp_no OR A.APP_ACTOR = :emp_no OR L.APP_ACTOR = :emp_no)
+                                                         UNION            --下轄人員簽核過表單
+                                                         SELECT DISTINCT B.FORM_NO 
+                                                         FROM au_dw.auo_person_reportline A
+                                                         INNER JOIN GPO.RSI_H_FORM_APPROVE B ON A.EMP_NO = NVL(B.APP_ACTOR, B.APP_ASSIGNER)
+                                                         LEFT JOIN GPO.RSI_H_DETAIL_APP_LOG L ON B.FORM_NO = L.FORM_NO AND A.EMP_NO = L.APP_ACTOR
+                                                         WHERE (TRIM(A.BOSS_EMP_NO) = :emp_no)
+                                                         AND A.ACTIVE = 'Y')                
+                                                   ) B ON A.RSI_NO = B.RSI_NO 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, A.FORM_STATUS)) > 0 
+                                                   AND ((:rsi_no is null or A.RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(A.BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(A.PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(A.REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY A.RSI_NO DESC, DECODE(A.PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)   
+
+2022-02-22 16:30:22,591 [44] INFO  --End:獲取DashBoard UA資訊1 - Completed
+2022-02-22 16:30:22,591 [44] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2022-02-22 16:30:22,591 [44] INFO  --End:獲取Contract Status資訊 - Completed
+2022-02-22 16:30:22,591 [44] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:30:22,606 [44] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:30:22,606 [44] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 16:30:22,606 [44] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 16:30:22,606 [44] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2022-02-22 16:30:22,606 [44] INFO  --End:獲取Department Name資訊 - Completed
+2022-02-22 16:30:30,714 [42] INFO  --Begin:獲取DashBoardLayer1資訊 - 【GetDashBoardLayer1】:SELECT * FROM
+                                                (
+                                                SELECT * FROM RSI_DASHBOARD_LAYER1_V 
+                                                 WHERE RSI_NO = :rsi_no
+                                                   AND STATUS = :form_status 
+                                                   AND PHASE_ID = :phase_id
+                                                   AND PART_TYPE = :part_type                 ) T
+                                                ORDER BY T.RSI_NO, T.PHASE_ID DESC, DECODE(T.PART_TYPE, 'ACD', 0, 'EE', 1, 'OM', 2, 'PACKING', 3, 4) 
+
+2022-02-22 16:30:32,886 [42] INFO  --End:獲取DashBoardLayer1資訊 - Completed
+2022-02-22 16:30:32,902 [42] INFO  --Begin:phase_id=10、20、25、30、70 - 【GetViewIconShow】:select distinct trim(a.boss_emp_no) as boss_emp_no, a.boss_level, a.boss_title, c.rsi_no, c.form_no, c.part_type, b.app_assigner, b.app_actor
+                                                    from au_dw.auo_person_reportline a
+                                                    join RSI_H_FORM_APPROVE b on (a.emp_no = b.app_assigner or a.emp_no = b.app_actor) and (b.phase_id <= '30' or b.phase_id = '70')
+                                                    join RSI_H_FORM_HEADER c on b.form_no = c.form_no
+                                                    where (trim(a.boss_emp_no) = :emp_no) -- EMP_NO
+                                                    -- or nvl(b.app_actor, b.app_assigner) = :emp_no)
+                                                    and a.active = 'Y'
+                                                    and c.rsi_no = :rsi_no  --RSI_NO -- DashBoard傳入
+                                                    and b.phase_id = :phase_id
+                                                  order by c.rsi_no, c.form_no, c.part_type 
+
+2022-02-22 16:30:32,918 [42] INFO  --End:phase_id=10、20、25、30、70 - Completed
+2022-02-22 16:30:38,347 [42] INFO  --Begin: - 【GetDetailApprove】:  SELECT A.RSI_NO, A.FORM_NO, A.PART_TYPE, A.PHASE_ID, A.PHASE, A.APP_SERIAL, 
+                                          A.APP_ASSIGNER, A.APP_ASSIGNER_NAME, A.APP_ACTOR, A.APP_ACTOR_NAME,
+                                          A.STATUS, A.BEGIN_DATE, A.END_DATE,
+                                          A.APP_CONTENT, A.DIF_DAY
+                                          FROM RSI_APPROVAL_LIST_V A
+                                          WHERE A.RSI_NO = :rsi_no
+                                          AND A.PART_TYPE = :part_type 
+
+2022-02-22 16:30:38,347 [42] INFO   --End: - Completed
+2022-02-22 17:44:38,345 [ 7] INFO  --Begin:獲取DashBoard UA資訊1 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V A
+                                                   JOIN (
+                                                        SELECT DISTINCT B.RSI_NO FROM GPO.RSI_H_FORM_HEADER B
+                                                        WHERE FORM_NO IN
+                                                        (SELECT A.FORM_NO    --自己簽核過表單
+                                                         FROM GPO.RSI_H_FORM_APPROVE A
+                                                         LEFT JOIN GPO.RSI_H_DETAIL_APP_LOG L ON A.FORM_NO = L.FORM_NO
+                                                         WHERE (A.APP_ASSIGNER = :emp_no OR A.APP_ACTOR = :emp_no OR L.APP_ACTOR = :emp_no)
+                                                         UNION            --下轄人員簽核過表單
+                                                         SELECT DISTINCT B.FORM_NO 
+                                                         FROM au_dw.auo_person_reportline A
+                                                         INNER JOIN GPO.RSI_H_FORM_APPROVE B ON A.EMP_NO = NVL(B.APP_ACTOR, B.APP_ASSIGNER)
+                                                         LEFT JOIN GPO.RSI_H_DETAIL_APP_LOG L ON B.FORM_NO = L.FORM_NO AND A.EMP_NO = L.APP_ACTOR
+                                                         WHERE (TRIM(A.BOSS_EMP_NO) = :emp_no)
+                                                         AND A.ACTIVE = 'Y')                
+                                                   ) B ON A.RSI_NO = B.RSI_NO 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, A.FORM_STATUS)) > 0 
+                                                   AND ((:rsi_no is null or A.RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(A.BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(A.PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(A.REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY A.RSI_NO DESC, DECODE(A.PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)   
+
+2022-02-22 17:44:39,064 [ 7] INFO  --End:獲取DashBoard UA資訊1 - Completed
+2022-02-22 17:44:39,173 [ 7] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2022-02-22 17:44:39,204 [ 7] INFO  --End:獲取Contract Status資訊 - Completed
+2022-02-22 17:44:39,423 [ 7] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 17:44:39,439 [ 7] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 17:44:39,439 [ 7] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-02-22 17:44:39,454 [ 7] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-02-22 17:44:39,454 [ 7] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2022-02-22 17:44:39,470 [ 7] INFO  --End:獲取Department Name資訊 - Completed

@@ -1,0 +1,416 @@
+﻿@model RSI.Models.Entity.H_Product_InfoEntity
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>@RSI.Models.Entity.Employee.GetSiteName(Request.QueryString["phase_id"], Request.QueryString["BU"])</title>
+    @Styles.Render("~/bundles/style")
+    @Styles.RenderFormat("<link href='{0}' rel='stylsheet' type='text/css' media='print' />", "~/bundles/style/print")
+    <link href="@Url.Content("~/Content/Css/dataTables.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Third-Part/Select-1.2.6/css/select.bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/Third-Part/FixedColumns-3.2.4/css/fixedColumns.bootstrap.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/Third-Part/Buttons-1.5.1/css/buttons.bootstrap.min.css")" rel="stylesheet" />
+    <style>
+        body {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .table > thead > tr > th {
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        table tbody tr td.whitespacepre {
+            white-space: pre !important;
+        }
+
+        .text-ellipsis {
+            max-width: 120px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .text-ellipsis:hover {
+            white-space: normal;
+        }
+
+        .fa-minus-circle, fa-plus-circle {
+            cursor: pointer;
+        }
+
+        table.dataTable tbody > tr.selected td, table.dataTable tbody > tr > .selected {
+            background-color: #9e9e9e;
+            /*color: #000;*/
+        }
+
+        table.dataTable tbody > tr.selected:hover td, table.dataTable tbody > tr > .selected:hover {
+            background-color: #9e9e9e;
+            /*color: #000;*/
+        }
+
+        .text-bold {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body oncontextmenu="return false">
+    @{
+        System.Data.DataTable pricetrend = RSI.Models.Entity.RSI_ConfigEntityDAL.GetPriceTrend(Model.RSI_NO.ToString());
+        List<string> pricetrendName = new List<string>();
+        if (pricetrend.Rows.Count > 0)
+        {
+            foreach (System.Data.DataRow row in pricetrend.Rows)
+            {
+                pricetrendName.Add(row["id"].ToString());
+            }
+        }
+        var pricetrendJson = Newtonsoft.Json.JsonConvert.SerializeObject(pricetrendName);
+
+        var dt = RSI.Models.Entity.RSI_ConfigEntityDAL.GetExportExcelConfig(Model.BU, Model.PartType, Request.QueryString["phase_id"]);
+        var exportexcel = dt.Rows.Count > 0 ? dt.Rows[0]["attribute5"] == null ? "hidden" : dt.Rows[0]["attribute5"].ToString() == "N" ? "hidden" : "" : "hidden";
+        var priceidentity = dt.Rows.Count > 0 ? dt.Rows[0]["attribute4"].ToString() : String.Empty;
+        var authorityProductSourcer = RSI.Models.Entity.RSI_ConfigEntityDAL.GetAuthorityForProductSoucer(Model.RSI_NO.ToString(), Model.PartType, RSI.Models.Entity.Employee.EmpNO);
+        var hasreport = !Request.QueryString["phase_id"].Equals("40") || authorityProductSourcer > 0 ? "" : "hidden";
+        var phase_id = Convert.ToInt32(Request.QueryString["phase_id"].ToString()) == 40 ? (authorityProductSourcer > 0 ? 45 : 40) : Convert.ToInt32(Request.QueryString["phase_id"]);
+    }
+    <input type="hidden" id="pricetrendJson" value="@pricetrendJson" />
+    <input type="hidden" name="phase_id" id="phase_id" value="@phase_id" />
+    <input type="hidden" id="priceidentity" value="@priceidentity" />
+    <header class="main-header">
+        <!-- Logo -->
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation" style="background-color: #018dae; margin-left:0px;">
+        </nav>
+    </header>
+    <div class="container-fluid" style="padding-top:15px;">
+        @Html.Partial("~/Views/RSI/BasicPage.cshtml", Model)
+
+        <div id="tabs" class="nav-tabs-custom" style="background: transparent;">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#tab1" data-toggle="tab">Normal Parts</a>
+                </li>
+                <li>
+                    <a href="#tab2" data-toggle="tab">Special Parts</a>
+                </li>
+                <li>
+                    <a href="#bom" data-toggle="tab">BOM</a>
+                </li>
+            </ul>
+
+            <div class="tab-content" style="background: transparent;">
+
+                <div id="tab1" class="active tab-pane">
+                    <div class="row">
+                        <div class="col-md-3 form-group">
+                            <label>Ref. Model</label>
+                            <label>@Model.REF_PRODUCT</label>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="normalPartsTable" class="table table-bordered table-hover">
+                            <thead>
+                                <tr class="bg-light-blue">
+                                    <th>Material Group</th>
+                                    <th>Parts Group</th>
+                                    <th>Material Parts</th>
+                                    <th>Parent</th>
+                                    <th>Part No</th>
+                                    <th>English Name</th>
+                                    <th>Part Description</th>
+                                    <th>Vendor</th>
+                                    <th>Maker PN</th>
+                                    <th>Part Spec</th>
+                                    <th>Part Type</th>
+                                    <th>Release Date</th>
+                                    <th>EOL</th>
+                                    <th>Usage</th>
+                                    <th>Owner</th>
+                                    <th>Sourcer<br />Price</th>
+                                    <th><span class="text-danger" style="font-size:18px;">*</span>PM<br />Price</th>
+                                    <th>MOQ</th>
+                                    <th>Mockup Fee</th>
+                                    <th>Tooling Fee</th>
+                                    <th>FPCA/PCBA Fee</th>
+                                    <th>Valuation</th>
+                                    <th>Approved</th>
+                                    <th>Sourcer<br />Amount</th>
+                                    <th>PM<br />Amount</th>
+                                    @{
+                                        if (pricetrend.Rows.Count > 0)
+                                        {
+                                            foreach (System.Data.DataRow row in pricetrend.Rows)
+                                            {
+                                                <th data-priceid="@row["ID"].ToString()">@row["description"].ToString()</th>
+                                            }
+                                        }
+                                    }
+                                    <th>Price Source</th>
+                                    <th>RD Remark</th>
+                                    <th>To PM Remark</th>
+                                    <th>Sourcer Remark</th>
+                                    <th>Attach File</th>
+                                    <th>Updated date</th>
+                                    <th>Updated by</th>
+                                    <th>PRICE_HSI_H</th>
+                                    <th>PRICE_HSI_L</th>
+                                    <th>ISMODIFY</th>
+                                    <th>UNI_SPEC_STATUS</th>
+                                    <th>SN</th>
+                                    <th>modify_type</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <!-- 第二的頁籤-->
+                <div id="tab2" class="tab-pane">
+                    <div class="row">
+                        <div class="col-md-3 form-group">
+                            <label>Ref. Model</label>
+                            <label>@Model.REF_PRODUCT</label>
+                        </div>
+                    </div>
+
+                    <div id="specialTabs" class="nav-tabs-custom" style="background: transparent;">
+                        <ul class="nav nav-tabs">
+                            @{
+                                var rsi_no = RSI.Models.Entity.Validate.DecryptValue(Request.QueryString["rsi_no"]);
+                                var groups_id = RSI.Models.Manager.H_Product_DetailManager.GetGroupID(rsi_no).ToList();
+                            }
+                            @for (int i = 1; i <= groups_id.Count(); i++)
+                            {
+                                var href = "#specialTab" + i;
+                                var name = RSI.Models.Manager.H_Product_DetailManager.GetGroupName(rsi_no, groups_id[i - 1]);
+                                name = string.IsNullOrEmpty(name) ? "Portfolio" + i : name;
+                                var className = (i == 1) ? "active" : "";
+                                <li class="@className">
+                                    <a href="@href" data-toggle="tab" data-id="@i" data-group-id="@groups_id[i-1]" style="display:inline-block; padding-right:5px; border-right:0px;">@name</a>
+                                </li>
+                            }
+                        </ul>
+
+                        <div class="tab-content" id="specialContent" style="background: transparent;">
+                            @for (int i = 1; i <= groups_id.Count(); i++)
+                            {
+                                var id = "specialTab" + i;
+                                var className = (i == 1) ? "active tab-pane" : "tab-pane";
+                                var tableId = "specialTable" + i;
+                                <div id="@id" class="@className">
+                                    <form class="form-inline">
+                                        <div class="form-group">
+                                            <label>Portfolio Description</label>
+                                            <input type="text" class="form-control" style="width:500px;" value="@RSI.Models.Manager.H_Product_DetailManager.GetGroupDesc(rsi_no, groups_id[i - 1])" disabled>
+                                        </div>
+                                    </form>
+                                    <br />
+                                    <div class="table-responsive">
+                                        <table id="@tableId" class="table table-bordered table-hover" data-group-id="@groups_id[i-1]">
+                                            <thead>
+                                                <tr class="bg-light-blue">
+                                                    <th>Material Group</th>
+                                                    <th>Parts Group</th>
+                                                    <th>Material Parts</th>
+                                                    <th>Parent</th>
+                                                    <th>Part No</th>
+                                                    <th>English Name</th>
+                                                    <th>Part Description</th>
+                                                    <th>Vendor</th>
+                                                    <th>Maker PN</th>
+                                                    <th>Part Spec</th>
+                                                    <th>Part Type</th>
+                                                    <th>Release Date</th>
+                                                    <th>EOL</th>
+                                                    <th>Usage</th>
+                                                    <th>Owner</th>
+                                                    <th>Sourcer<br />Price</th>
+                                                    <th><span class="text-danger" style="font-size:18px;">*</span>PM<br />Price</th>
+                                                    <th>MOQ</th>
+                                                    <th>Mockup Fee</th>
+                                                    <th>Tooling Fee</th>
+                                                    <th>FPCA/PCBA Fee</th>
+                                                    <th>Valuation</th>
+                                                    <th>Approved</th>
+                                                    <th>Sourcer<br />Amount</th>
+                                                    <th>PM<br />Amount</th>
+                                                    @{
+                                                        if (pricetrend.Rows.Count > 0)
+                                                        {
+                                                            foreach (System.Data.DataRow row in pricetrend.Rows)
+                                                            {
+                                                                <th data-priceid="@row["ID"].ToString()">@row["description"].ToString()</th>
+                                                            }
+                                                        }
+                                                    }
+                                                    <th>Price Source</th>
+                                                    <th>RD Remark</th>
+                                                    <th>To PM Remark</th>
+                                                    <th>Sourcer Remark</th>
+                                                    <th>Attach File</th>
+                                                    <th>Updated date</th>
+                                                    <th>Updated by</th>
+                                                    <th>PRICE_HSI_H</th>
+                                                    <th>PRICE_HSI_L</th>
+                                                    <th>ISMODIFY</th>
+                                                    <th>UNI_SPEC_STATUS</th>
+                                                    <th>SN</th>
+                                                    <th>modify_type</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div id="bom" class="tab-pane">
+                    <div class="row">
+                        <div class="col-md-3 form-group">
+                            <label>Ref. Model</label>
+                            <label>@Model.REF_PRODUCT</label>
+                        </div>
+                    </div>
+                    <table id="bomTable" class="table table-bordered table-hover" style="width:100%;">
+                        <thead>
+                            <tr class="bg-light-blue">
+                                <th class="text-center" style="vertical-align:middle;"><i class="fa fa-minus-circle fa-changeall" aria-hidden="true"></i></th>
+                                <th class="text-center" style="vertical-align:middle;">Partnumber_Top</th>
+                                <th class="text-center" style="vertical-align:middle;">Partnumber_Parent</th>
+                                <th class="text-center" style="vertical-align:middle;">Partnumber_Child</th>
+                                <th class="text-center" style="vertical-align:middle;">Part No</th>
+                                <th class="text-center" style="vertical-align:middle;">Partpath</th>
+                                <th class="text-center" style="vertical-align:middle;">Level</th>
+                                <th class="text-center" style="vertical-align:middle;">Material Group</th>
+                                <th class="text-center" style="vertical-align:middle;">Material Parts</th>
+                                <th class="text-center" style="vertical-align:middle;">Part Type</th>
+                                <th class="text-center" style="vertical-align:middle;">English Name</th>
+                                <th class="text-center" style="vertical-align:middle;">Part Level</th>
+                                <th class="text-center" style="vertical-align:middle;">Part Description</th>
+                                <th class="text-center" style="vertical-align:middle;">Vendor</th>
+                                <th class="text-center" style="vertical-align:middle;">Maker PN</th>
+                                <th class="text-center" style="vertical-align:middle;">Part Spec</th>
+                                <th class="text-center" style="vertical-align:middle;">Spec Def</th>
+                                <th class="text-center" style="vertical-align:middle;">Release Date</th>
+                                <th class="text-center" style="vertical-align:middle;">Usage</th>
+                                <th class="text-center" style="vertical-align:middle;">Unit</th>
+                                <th class="text-center" style="vertical-align:middle;">Eol</th>
+                                <th class="text-center" style="vertical-align:middle;">Uni Spec Stutas</th>
+                                <th class="text-center" style="vertical-align:middle;">Remark</th>
+                                <th class="text-center" style="vertical-align:middle;">Attach File</th>
+                                <th class="text-center" style="vertical-align:middle;">Modify Type</th>
+                                <th class="text-center" style="vertical-align:middle;">SN</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <button class="btn bg-light-blue btn-exportExcel @exportexcel">Export</button>
+                @{
+
+                }
+                <button class="btn bg-light-blue btn-detail @hasreport">Summary Report</button>
+            </div>
+        </div>
+
+        <form id="exportExcel" action="/RSI/Sourcer/ExportExcel" method="post">
+            <input type="hidden" name="rsi_no" id="rsi_no" />
+            <input type="hidden" name="projectname" id="projectname" />
+            <input type="hidden" name="bu" id="bu" />
+            <input type="hidden" name="part_type" id="part_type" />
+            <input type="hidden" name="phase_id" id="phase_id" value="@phase_id" />
+        </form>
+    </div>
+
+    @Html.Action("DeatilApprove", "RSI", new { rsi_no = Request.QueryString["rsi_no"], part_type = Request.QueryString["part_type"], phase_id = Request.QueryString["phase_id"] })
+
+
+
+    <div class="modal fade" id="fileManagement" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Download File</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table" id="fileTable" style="width:100%;">
+                            <thead>
+                                <tr class="bg-light-blue">
+                                    <th class="text-center">File Name</th>
+                                    <th class="text-center">File Size(KB)</th>
+                                    <th class="text-center">Upload by</th>
+                                    <th class="text-center">Upload Date</th>
+                                    <th class="text-center">Remark</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer" style="margin-left:0px;">
+        <!-- To the right -->
+        <div class="pull-right hidden-xs">
+            Owner: 採購資訊課
+        </div>
+        <!-- Default to the left -->
+        <strong>Copyright &copy; 2018 RSI.</strong> All rights reserved.
+    </footer>
+
+    @{
+        string version = RSI.Models.Entity.RSI_ConfigEntityDAL.GetVersion();
+    }
+
+    @Scripts.Render("~/bundles/script")
+    @Html.Partial("~/Views/RSI/LoadingPage.cshtml")
+    <script src="@Url.Content("~/Content/Css/iCheck/icheck.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Scripts/jquery.dataTables.min.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Scripts/dataTables.bootstrap.min.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Third-Part/Select-1.2.6/js/dataTables.select.min.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Third-Part/Select-1.2.6/js/select.bootstrap.min.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Third-Part/FixedColumns-3.2.4/js/dataTables.fixedColumns.min.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Third-Part/datatables-rowsgroup-master/dataTables.rowsGroup.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Third-Part/Buttons-1.5.1/js/dataTables.buttons.min.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Third-Part/Buttons-1.5.1/js/buttons.bootstrap.min.js?" + version)"></script>
+    <script>
+        var pmprice_config = @RSI.Models.Entity.RSI_ConfigEntityDAL.GetPMPriceConfig(Model.BU);
+        $(function () {
+            window.moveTo(0, 0);
+            window.resizeTo(screen.width, screen.height);
+
+            $('.container').css({ "background-image": "url(http://auhqhrap02.corpnet.auo.com/PB20/Webform/GetSpecialWaterMark.ashx)", "background-repeat": "repeat", "background-position": "center" });
+        });
+
+        $(document).on("click", ".btn-detail", function () {
+            var rsi_no = '@Request.QueryString["rsi_no"]';
+            var part_type = '@Request.QueryString["part_type"]';
+            var bu = '@Request.QueryString["BU"]';
+            var url = "/RSI/Sourcer/ManagerDetail?rsi_no={0}&part_type={1}&bu={2}";
+            url = url.replace("{0}", rsi_no).replace("{1}", part_type).replace("{2}", bu);
+            window.open(url, "_blank", "width=800,height=600,scrollbars=yes,resizable=yes");
+        });
+    </script>
+    <script src="@Url.Content("~/Scripts/Layer1_Sourcer.js?" + version)"></script>
+</body>
+</html>
+

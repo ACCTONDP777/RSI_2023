@@ -1,0 +1,414 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=big5">
+<meta name=ProgId content=Excel.Sheet>
+<meta name=Generator content="Microsoft Excel 12">
+<link id=Main-File rel=Main-File href="../RSI_SOP.htm">
+<link rel=File-List href=filelist.xml>
+<link rel=Stylesheet href=stylesheet.css>
+<style>
+<!--table
+	{mso-displayed-decimal-separator:"\.";
+	mso-displayed-thousand-separator:"\,";}
+@page
+	{mso-header-data:"&R&B&\0022Gill Sans MT\0022&10&K808080\200B\200CClassify\:AUO-General\200C\200B";
+	mso-footer-data:"&R&B&\0022Gill Sans MT\0022&10&K808080\200B\200CClassify\:AUO-General\200C\200B";
+	margin:.75in .7in .75in .7in;
+	mso-header-margin:.3in;
+	mso-footer-margin:.3in;}
+ruby
+	{ruby-align:left;}
+rt
+	{color:windowtext;
+	font-size:9.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:新細明體, serif;
+	mso-font-charset:136;
+	mso-char-type:none;
+	display:none;}
+-->
+</style>
+<![if !supportTabStrip]><script language="JavaScript">
+<!--
+function fnUpdateTabs()
+ {
+  if (parent.window.g_iIEVer>=4) {
+   if (parent.document.readyState=="complete"
+    && parent.frames['frTabs'].document.readyState=="complete")
+   parent.fnSetActiveSheet(3);
+  else
+   window.setTimeout("fnUpdateTabs();",150);
+ }
+}
+
+if (window.name!="frSheet")
+ window.location.replace("../RSI_SOP.htm");
+else
+ fnUpdateTabs();
+//-->
+</script>
+<![endif]>
+</head>
+
+<body link=blue vlink=purple class=xl199>
+
+<table border=0 cellpadding=0 cellspacing=0 width=1276 style='border-collapse:
+ collapse;table-layout:fixed;width:958pt'>
+ <col class=xl200 width=143 style='mso-width-source:userset;mso-width-alt:5091;
+ width:107pt'>
+ <col class=xl199 width=0 style='display:none;mso-width-source:userset;
+ mso-width-alt:3441'>
+ <col class=xl215 width=115 style='mso-width-source:userset;mso-width-alt:4096;
+ width:86pt'>
+ <col class=xl216 width=394 style='mso-width-source:userset;mso-width-alt:14023;
+ width:296pt'>
+ <col class=xl199 width=350 style='mso-width-source:userset;mso-width-alt:12458;
+ width:263pt'>
+ <col class=xl215 width=274 style='mso-width-source:userset;mso-width-alt:9756;
+ width:206pt'>
+ <tr height=22 style='height:16.2pt'>
+  <td height=22 class=xl217 width=143 style='height:16.2pt;width:107pt'><a
+  name="RANGE!A1"><font class="font6">關卡</font></a></td>
+  <td class=xl203 width=0 style='border-left:none'>Function</td>
+  <td class=xl203 width=115 style='border-left:none;width:86pt'>Item</td>
+  <td class=xl203 width=394 style='border-left:none;width:296pt'>Function</td>
+  <td class=xl203 width=350 style='border-left:none;width:263pt'><font
+  class="font6">注意事項</font></td>
+  <td class=xl203 width=274 style='border-left:none;width:206pt'>SOP</td>
+ </tr>
+ <tr height=22 style='height:16.2pt'>
+  <td rowspan=18 height=768 class=xl251 width=143 style='height:574.2pt;
+  border-top:none;width:107pt'>Sourcer Review</td>
+  <td class=xl204 style='border-top:none;border-left:none'>　</td>
+  <td class=xl204 style='border-top:none;border-left:none'><font class="font7">首頁</font></td>
+  <td class=xl205 style='border-top:none;border-left:none'>To Do list</td>
+  <td class=xl205 style='border-top:none;border-left:none'><font class="font23">整合至</font><font
+  class="font17">my auo todo</font></td>
+  <td class=xl206 style='border-top:none;border-left:none'><a
+  href="sheet006.htm#RANGE!A1"><span style='font-family:Verdana, sans-serif;
+  mso-font-charset:0'>TO DO List</span></a></td>
+ </tr>
+ <tr height=32 style='mso-height-source:userset;height:24.0pt'>
+  <td height=32 class=xl204 style='height:24.0pt;border-top:none;border-left:
+  none'>　</td>
+  <td rowspan=9 class=xl253 width=115 style='border-bottom:.5pt solid black;
+  border-top:none;width:86pt'>Normal Parts<br>
+    Special Parts<br>
+    <font class="font7">自定義材料類別</font></td>
+  <td class=xl205 style='border-top:none;border-left:none'>Sourcer Price<font
+  class="font7">是否與</font><font class="font17">QUO</font><font class="font7">價格相同</font></td>
+  <td class=xl208 width=350 style='border-top:none;border-left:none;width:263pt'><font
+  class="font7">取</font><font class="font17">QUO</font><font class="font7">最新價格，可用</font><font
+  class="font17">Quo No</font><font class="font7">反查價格資料</font></td>
+  <td rowspan=5 class=xl206 style='border-top:none'><a
+  href="sheet031.htm#RANGE!A1"><span style='font-family:Verdana, sans-serif;
+  mso-font-charset:0'>Sourcer<font class="font20">操作</font></span></a></td>
+ </tr>
+ <tr height=65 style='mso-height-source:userset;height:48.6pt'>
+  <td height=65 class=xl204 style='height:48.6pt;border-top:none;border-left:
+  none'>　</td>
+  <td class=xl208 width=394 style='border-top:none;border-left:none;width:296pt'>PM
+  Price<font class="font7">、</font><font class="font17">MP Price</font><font
+  class="font7">預設帶入</font><font class="font17">Sourcer Price<br>
+    </font><font class="font7">若</font><font class="font17">PM Price</font><font
+  class="font7">與</font><font class="font17">Sourcer Price</font><font
+  class="font7">不同時，</font><font class="font17">PM Price</font><font
+  class="font7">顯示紅字</font></td>
+  <td class=xl198 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr height=22 style='height:16.2pt'>
+  <td height=22 class=xl204 style='height:16.2pt;border-top:none;border-left:
+  none'>　</td>
+  <td class=xl205 style='border-top:none;border-left:none'><font class="font7">可決定是否計價</font></td>
+  <td class=xl208 width=350 style='border-top:none;border-left:none;width:263pt'><font
+  class="font7">若該筆料號需計價可勾選</font><font class="font17">Valuation</font></td>
+ </tr>
+ <tr height=43 style='height:32.4pt'>
+  <td height=43 class=xl204 style='height:32.4pt;border-top:none;border-left:
+  none'>　</td>
+  <td class=xl205 style='border-top:none;border-left:none'><font class="font7">歷史最高價與最低價顯示</font></td>
+  <td class=xl208 width=350 style='border-top:none;border-left:none;width:263pt'><font
+  class="font7">依據</font><font class="font17">QUO</font><font class="font7">抓取已當天兩年內之最高價與最低價。<br>
+    將游標移至</font><font class="font17">Sourcer Price</font><font class="font7">即可查看</font></td>
+ </tr>
+ <tr height=22 style='height:16.2pt'>
+  <td height=22 class=xl204 style='height:16.2pt;border-top:none;border-left:
+  none'>　</td>
+  <td class=xl205 style='border-top:none;border-left:none'><font class="font7">輸入</font><font
+  class="font17">PM Price</font><font class="font7">表示該筆材料已被</font><font
+  class="font17">Sourcer</font><font class="font7">認領</font></td>
+  <td class=xl208 width=350 style='border-top:none;border-left:none;width:263pt'>Sourcer
+  Price<font class="font7">勾勾是否勾起</font></td>
+ </tr>
+ <tr height=22 style='height:16.2pt'>
+  <td height=22 class=xl204 style='height:16.2pt;border-top:none;border-left:
+  none'>　</td>
+  <td class=xl205 style='border-top:none;border-left:none'>PM Price<font
+  class="font7">若為</font><font class="font17">0</font><font class="font7">無法送出</font></td>
+  <td class=xl208 width=350 style='border-top:none;border-left:none;width:263pt'>PM
+  price<font class="font7">為必填欄位</font></td>
+  <td class=xl210 style='border-top:none;border-left:none'><a
+  href="sheet032.htm#RANGE!A1"><span style='font-family:Verdana, sans-serif;
+  mso-font-charset:0'>Sourcer<font class="font20">資料卡控</font></span></a></td>
+ </tr>
+ <tr height=22 style='height:16.2pt'>
+  <td height=22 class=xl204 style='height:16.2pt;border-top:none;border-left:
+  none'>　</td>
+  <td class=xl205 style='border-top:none;border-left:none'><font class="font7">能查看</font><font
+  class="font17">RD</font><font class="font7">上傳檔案</font><font class="font17"><span
+  style='mso-spacerun:yes'>&nbsp;</span></font></td>
+  <td class=xl208 width=350 style='border-top:none;border-left:none;width:263pt'><font
+  class="font7">若</font><font class="font17">RD</font><font class="font7">有上傳檔案可於</font><font
+  class="font17">Download File</font><font class="font7">下載</font></td>
+  <td class=xl206 style='border-left:none'><a href="sheet023.htm#RANGE!A1"><span
+  style='font-family:Verdana, sans-serif;mso-font-charset:0'><font
+  class="font20">檔案下載</font></span></a></td>
+ </tr>
+ <tr height=43 style='height:32.4pt'>
+  <td height=43 class=xl204 style='height:32.4pt;border-top:none;border-left:
+  none'>　</td>
+  <td class=xl205 style='border-top:none;border-left:none'><font class="font7">表格資料篩選功能</font></td>
+  <td class=xl208 width=350 style='border-top:none;border-left:none;width:263pt'><font
+  class="font7">快速篩選功能只針對</font><font class="font17">Material Parts/Part
+  No/English Name </font><font class="font7">三個欄位內資料篩選</font></td>
+  <td class=xl206 style='border-top:none;border-left:none'><a
+  href="sheet016.htm#RANGE!A1"><span style='font-family:Verdana, sans-serif;
+  mso-font-charset:0'><font class="font20">表格功能</font></span></a></td>
+ </tr>
+ <tr height=86 style='height:64.8pt'>
+  <td height=86 class=xl204 style='height:64.8pt;border-top:none;border-left:
+  none'>　</td>
+  <td class=xl205 style='border-top:none;border-left:none'><font class="font7">資料操作標註提醒</font></td>
+  <td class=xl208 width=350 style='border-top:none;border-left:none;width:263pt'><font
+  class="font7">黃底：</font><font class="font17">RD</font><font class="font7">有修改過，與</font><font
+  class="font17">BOM</font><font class="font7">表不同<br>
+    紅字：</font><font class="font17">PM Price</font><font class="font7">不等於</font><font
+  class="font17">Sourcer Price<br>
+    </font><font class="font7">深紅底：存檔</font><font class="font17">/</font><font
+  class="font7">送出估價規格錯誤提醒<br>
+    深黃底：</font><font class="font17">Sourcer</font><font class="font7">主管退回</font></td>
+  <td class=xl206 style='border-top:none;border-left:none'><u style='visibility:
+  hidden;mso-ignore:visibility'>　</u></td>
+ </tr>
+ <tr height=22 style='height:16.2pt'>
+  <td height=22 class=xl204 style='height:16.2pt;border-top:none;border-left:
+  none'>　</td>
+  <td rowspan=2 class=xl204 style='border-top:none'><font class="font7">自定義材料類別</font></td>
+  <td class=xl205 style='border-top:none;border-left:none'>RD<font class="font7">自定義材料依據</font><font
+  class="font17">BU+Part Type</font><font class="font7">預設</font><font
+  class="font17">Sourcer</font><font class="font7">人員</font></td>
+  <td class=xl220 width=350 style='border-left:none;width:263pt'><font
+  class="font7">新材料定義預設人員為副</font><font class="font17">/</font><font
+  class="font7">經理</font></td>
+  <td rowspan=2 class=xl210 style='border-bottom:.5pt solid black;border-top:
+  none'><a href="sheet033.htm#RANGE!A1"><span style='font-family:Verdana, sans-serif;
+  mso-font-charset:0'><font class="font20">自定義材料</font><font class="font21">Reassign</font></span></a></td>
+ </tr>
+ <tr height=22 style='height:16.2pt'>
+  <td height=22 class=xl204 style='height:16.2pt;border-top:none;border-left:
+  none'>　</td>
+  <td class=xl221 style='border-left:none'>Sourcer<font class="font7">預設人員可以</font><font
+  class="font17">ReAssign</font><font class="font7">其他</font><font
+  class="font17">Sourcer</font></td>
+  <td class=xl208 width=350 style='border-left:none;width:263pt'><font
+  class="font7">可透過</font><font class="font17">ReAssign</font><font
+  class="font7">再指派給其他</font><font class="font17">sourcer</font><font
+  class="font7">處理</font></td>
+ </tr>
+ <tr height=65 style='height:48.6pt'>
+  <td height=65 class=xl204 style='height:48.6pt;border-top:none;border-left:
+  none'>　</td>
+  <td rowspan=5 class=xl253 width=115 style='border-bottom:.5pt solid black;
+  border-top:none;width:86pt'><font class="font7">否決</font><font class="font17">/</font><font
+  class="font7">存檔</font><font class="font17">/</font><font class="font7">送出估價</font></td>
+  <td class=xl205 style='border-left:none'><font class="font7">否決</font><font
+  class="font17">-</font><font class="font7">逐筆退回</font></td>
+  <td class=xl208 width=350 style='border-top:none;border-left:none;width:263pt'><font
+  class="font7">依據</font><font class="font17">Sourcer</font><font class="font7">選擇退回料號退回至</font><font
+  class="font17">RD</font><font class="font7">關卡修正，</font><font class="font17">RD</font><font
+  class="font7">修正完再回到</font><font class="font17">Sourcer</font><font
+  class="font7">，可於</font><font class="font17">DashBoard</font><font
+  class="font7">查看關卡停留於</font><font class="font17">Sourcer</font><font
+  class="font7">關卡</font></td>
+  <td rowspan=2 class=xl210 style='border-top:none'><a
+  href="sheet034.htm#RANGE!A1"><span style='font-family:Verdana, sans-serif;
+  mso-font-charset:0'>Sourcer<font class="font20">退回至</font><font class="font21">RD</font></span></a></td>
+ </tr>
+ <tr height=43 style='height:32.4pt'>
+  <td height=43 class=xl211 style='height:32.4pt;border-top:none;border-left:
+  none'>　</td>
+  <td class=xl205 style='border-top:none;border-left:none'><font class="font7">否決</font><font
+  class="font17">-</font><font class="font7">全部退回</font></td>
+  <td class=xl208 width=350 style='border-top:none;border-left:none;width:263pt'><font
+  class="font7">依據</font><font class="font17">PartType</font><font class="font7">退回至</font><font
+  class="font17">RD</font><font class="font7">關卡，可於</font><font class="font17">DashBoard</font><font
+  class="font7">查看關卡停留於</font><font class="font17">RD</font></td>
+ </tr>
+ <tr height=22 style='height:16.2pt'>
+  <td height=22 class=xl211 style='height:16.2pt;border-left:none'>　</td>
+  <td class=xl205 style='border-top:none;border-left:none'><font class="font7">存檔</font></td>
+  <td class=xl198 style='border-top:none;border-left:none'>*<font class="font7">為必填欄位，需填寫，否則系統無法存檔</font></td>
+  <td rowspan=2 class=xl210 style='border-bottom:.5pt solid black'><a
+  href="sheet032.htm#RANGE!A1"><span style='font-family:Verdana, sans-serif;
+  mso-font-charset:0'>Sourcer<font class="font20">資料卡控</font></span></a></td>
+ </tr>
+ <tr height=43 style='height:32.4pt'>
+  <td height=43 class=xl211 style='height:32.4pt;border-left:none'>　</td>
+  <td class=xl205 style='border-top:none;border-left:none'><font class="font7">送出估價規格</font></td>
+  <td class=xl208 width=350 style='border-top:none;border-left:none;width:263pt'>*<font
+  class="font7">為必填欄位，需填寫，否則系統無法送出估價<br>
+    若成功送出，系統會回到</font><font class="font17">To Do List</font></td>
+ </tr>
+ <tr height=65 style='height:48.6pt'>
+  <td height=65 class=xl211 style='height:48.6pt;border-left:none'>　</td>
+  <td class=xl222 width=394 style='border-left:none;width:296pt'><font
+  class="font7">送出估價規格</font><font class="font17">-</font><font class="font7">全部</font><font
+  class="font17">Sourcer</font><font class="font7">都回覆價格且</font><font
+  class="font17">Product Sourcer</font><font class="font7">確認後才會送到</font><font
+  class="font17">Product Sourcer</font><font class="font7">主管</font></td>
+  <td class=xl220 width=350 style='border-left:none;width:263pt'><font
+  class="font7">同一個</font><font class="font17">PartType</font><font
+  class="font7">需要所有料號都被</font><font class="font17">Sourcer</font><font
+  class="font7">認領且</font><font class="font17">Product Sourcer</font><font
+  class="font7">確認，才會送到</font><font class="font17">Product Sourcer</font><font
+  class="font7">主管待辦</font></td>
+  <td class=xl211 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr height=107 style='height:80.4pt'>
+  <td height=107 class=xl204 style='height:80.4pt;border-left:none'>　</td>
+  <td class=xl204 style='border-top:none;border-left:none'>DashBoard</td>
+  <td class=xl207 width=394 style='border-left:none;width:296pt'><font
+  class="font7">各專案估價進度查詢</font></td>
+  <td class=xl208 width=350 style='border-left:none;width:263pt'><font
+  class="font7">可點入</font><font class="font17">Sourcer</font><font class="font7">關卡進入：<br>
+    </font><font class="font17">LAYER</font><font class="font7">第一層看各</font><font
+  class="font17">Part Type(ACD/OM/EE/Packing)</font><font class="font7">進度<br>
+    </font><font class="font17">LAYER</font><font class="font7">第二層看各料號</font><font
+  class="font17">(BU+Material Parts)</font><font class="font7">目前處理進度</font></td>
+  <td class=xl206 style='border-left:none'><a href="sheet036.htm#RANGE!A1"><span
+  style='font-family:Verdana, sans-serif;mso-font-charset:0'>DashBoard_SourcerView</span></a></td>
+ </tr>
+ <tr height=64 style='height:48.0pt'>
+  <td rowspan=3 height=149 class=xl253 width=143 style='height:112.2pt;
+  border-top:none;width:107pt'>Sourcer Boss Review</td>
+  <td class=xl199></td>
+  <td rowspan=2 class=xl211 style='border-bottom:.5pt solid black;border-top:
+  none'><font class="font7">否決</font><font class="font17">/</font><font
+  class="font7">送出估價</font></td>
+  <td class=xl205 style='border-top:none;border-left:none'><font class="font7">否決</font></td>
+  <td class=xl208 width=350 style='border-top:none;border-left:none;width:263pt'><font
+  class="font7">勾選退回料號，表單是否被否決回</font><font class="font17">Sourcer</font><font
+  class="font7">關卡，<br>
+    可於</font><font class="font17">DashBoard</font><font class="font7">查看</font></td>
+  <td class=xl206 style='border-top:none;border-left:none'><a
+  href="sheet035.htm#RANGE!A1"><span style='font-family:Verdana, sans-serif;
+  mso-font-charset:0'>Sourcer<font class="font20">主管退回</font></span></a></td>
+ </tr>
+ <tr height=43 style='height:32.4pt'>
+  <td height=43 class=xl199 style='height:32.4pt'></td>
+  <td class=xl205 style='border-top:none;border-left:none'><font class="font7">送出估價估格</font></td>
+  <td class=xl208 width=350 style='border-top:none;border-left:none;width:263pt'><font
+  class="font7">表單是否送出估價至</font><font class="font17">Sourcer Manager</font><font
+  class="font7">關卡，可於</font><font class="font17">DashBoard</font><font
+  class="font7">查看</font></td>
+  <td class=xl204 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr height=42 style='height:31.8pt'>
+  <td height=42 class=xl199 style='height:31.8pt'></td>
+  <td class=xl211 style='border-top:none'>DashBoard</td>
+  <td class=xl205 style='border-top:none;border-left:none'>Sourcer Boss <font
+  class="font7">可</font><font class="font17">Reivew</font><font class="font7">底下同仁專案</font></td>
+  <td class=xl208 width=350 style='border-top:none;border-left:none;width:263pt'><font
+  class="font7">於</font><font class="font17">DashBoard</font><font class="font7">點入</font><font
+  class="font17">Sourcer</font><font class="font7">關卡進入</font><font
+  class="font17">LAYER</font><font class="font7">第一層，若有權限則可查看表單資料</font></td>
+  <td class=xl206 style='border-top:none;border-left:none'><a
+  href="sheet036.htm#RANGE!A1"><span style='font-family:Verdana, sans-serif;
+  mso-font-charset:0'>DashBoard_SourcerView</span></a></td>
+ </tr>
+ <tr height=48 style='mso-height-source:userset;height:36.0pt'>
+  <td rowspan=4 height=197 class=xl251 width=143 style='height:148.2pt;
+  width:107pt'>　</td>
+  <td class=xl198 style='border-left:none'>　</td>
+  <td rowspan=3 class=xl251 width=115 style='width:86pt'><font class="font7">否決</font><font
+  class="font17">/</font><font class="font7">送出估價</font><font class="font17">/</font><font
+  class="font7">價格總表</font></td>
+  <td class=xl205 style='border-top:none;border-left:none'><font class="font7">否決</font></td>
+  <td class=xl208 width=350 style='border-top:none;border-left:none;width:263pt'><font
+  class="font7">勾選退回料號，表單是否被否決回</font><font class="font17">Sourcer</font><font
+  class="font7">關卡，可於</font><font class="font17">DashBoard</font><font
+  class="font7">查看</font></td>
+  <td class=xl206 style='border-top:none;border-left:none'><a
+  href="sheet035.htm#RANGE!A1"><span style='font-family:Verdana, sans-serif;
+  mso-font-charset:0'>Sourcer<font class="font20">主管退回</font></span></a></td>
+ </tr>
+ <tr height=42 style='height:31.8pt'>
+  <td height=42 class=xl198 style='height:31.8pt;border-top:none;border-left:
+  none'>　</td>
+  <td class=xl205 style='border-top:none;border-left:none'><font class="font7">送出估價估格</font></td>
+  <td class=xl208 width=350 style='border-top:none;border-left:none;width:263pt'><font
+  class="font7">依據價格詳細度</font><font class="font17">(Price Group)</font><font
+  class="font7">，提供給</font><font class="font17">PM</font><font class="font7">的價格參考，將會依據價格詳細度將單價做加總顯示</font></td>
+  <td rowspan=2 class=xl237 width=274 style='border-top:none;width:206pt'><a
+  href="sheet037.htm#RANGE!A1"><span style='font-family:Verdana, sans-serif;
+  mso-font-charset:0'>Sourcer<font class="font20">主管</font><font class="font21">Review</font><font
+  class="font20">價格維度</font></span></a></td>
+ </tr>
+ <tr height=65 style='height:48.6pt'>
+  <td height=65 class=xl198 style='height:48.6pt;border-top:none;border-left:
+  none'>　</td>
+  <td class=xl205 style='border-top:none;border-left:none'><font class="font7">檢視價格總表</font></td>
+  <td class=xl208 width=350 style='border-top:none;border-left:none;width:263pt'><font
+  class="font7">可預覽給</font><font class="font17">PM</font><font class="font7">看到之價格詳細度，依據產品組合可選擇要給</font><font
+  class="font17">PM</font><font class="font7">看到的維度</font><font class="font17">(Material
+  Group/Parts Group/Part NO)</font></td>
+ </tr>
+ <tr height=42 style='height:31.8pt'>
+  <td height=42 class=xl198 style='height:31.8pt;border-top:none;border-left:
+  none'>　</td>
+  <td class=xl204 style='border-top:none;border-left:none'>DashBoard</td>
+  <td class=xl205 style='border-top:none;border-left:none'>Sourcer Boss <font
+  class="font7">是否可</font><font class="font17">Reivew</font><font class="font7">底下同仁專案</font></td>
+  <td class=xl208 width=350 style='border-top:none;border-left:none;width:263pt'><font
+  class="font7">於</font><font class="font17">DashBoard</font><font class="font7">點入</font><font
+  class="font17">Sourcer</font><font class="font7">關卡進入</font><font
+  class="font17">LAYER</font><font class="font7">第一層，若有權限則可查看表單資料</font></td>
+  <td class=xl206 style='border-top:none;border-left:none'><a
+  href="sheet036.htm#RANGE!A1"><span style='font-family:Verdana, sans-serif;
+  mso-font-charset:0'>DashBoard_SourcerView</span></a></td>
+ </tr>
+ <tr height=22 style='height:16.2pt'>
+  <td height=22 class=xl200 style='height:16.2pt'></td>
+  <td class=xl199></td>
+  <td class=xl215></td>
+  <td class=xl216></td>
+  <td class=xl199></td>
+  <td class=xl215></td>
+ </tr>
+ <tr height=22 style='height:16.2pt'>
+  <td height=22 class=xl200 style='height:16.2pt'></td>
+  <td class=xl199></td>
+  <td colspan=2 class=xl215 style='mso-ignore:colspan'></td>
+  <td class=xl199></td>
+  <td class=xl215></td>
+ </tr>
+ <![if supportMisalignedColumns]>
+ <tr height=0 style='display:none'>
+  <td width=143 style='width:107pt'></td>
+  <td width=0></td>
+  <td width=115 style='width:86pt'></td>
+  <td width=394 style='width:296pt'></td>
+  <td width=350 style='width:263pt'></td>
+  <td width=274 style='width:206pt'></td>
+ </tr>
+ <![endif]>
+</table>
+
+</body>
+
+</html>

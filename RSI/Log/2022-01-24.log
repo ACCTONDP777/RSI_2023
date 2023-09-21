@@ -1,0 +1,34 @@
+2022-01-24 09:33:04,134 [11] INFO  --Begin: - 【GetDashBoardRSINO】:select rsi_no from RSI_H_PRODUCT_INFO where 1=1 and project_name = :project_name  order by rsi_no desc 
+
+2022-01-24 09:33:04,587 [11] INFO   --End: - Completed
+2022-01-24 09:33:04,587 [11] INFO  --Begin:獲取DashBoard UA資訊2 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, FORM_STATUS)) > 0  
+                                                   AND ((:rsi_no is null or RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY RSI_NO DESC, DECODE(PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)  
+
+2022-01-24 09:33:04,728 [11] INFO  --End:獲取DashBoard UA資訊2 - Completed
+2022-01-24 09:33:04,837 [11] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2022-01-24 09:33:04,837 [11] INFO  --End:獲取Contract Status資訊 - Completed
+2022-01-24 09:33:05,009 [11] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-01-24 09:33:05,806 [11] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-01-24 09:33:05,806 [11] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2022-01-24 09:33:05,806 [11] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2022-01-24 09:33:05,822 [11] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2022-01-24 09:33:05,837 [11] INFO  --End:獲取Department Name資訊 - Completed

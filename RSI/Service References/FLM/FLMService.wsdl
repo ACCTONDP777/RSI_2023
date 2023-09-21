@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="FLMService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="WS2007HttpBinding_FLMService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+            <sp:IncludeTimestamp />
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <sp:EndorsingSupportingTokens xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <wsp:Policy>
+            <sp:SecureConversationToken sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+              <wsp:Policy>
+                <sp:BootstrapPolicy>
+                  <wsp:Policy>
+                    <sp:SignedParts>
+                      <sp:Body />
+                      <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+                    </sp:SignedParts>
+                    <sp:EncryptedParts>
+                      <sp:Body />
+                    </sp:EncryptedParts>
+                    <sp:TransportBinding>
+                      <wsp:Policy>
+                        <sp:TransportToken>
+                          <wsp:Policy>
+                            <sp:HttpsToken />
+                          </wsp:Policy>
+                        </sp:TransportToken>
+                        <sp:AlgorithmSuite>
+                          <wsp:Policy>
+                            <sp:Basic256 />
+                          </wsp:Policy>
+                        </sp:AlgorithmSuite>
+                        <sp:Layout>
+                          <wsp:Policy>
+                            <sp:Strict />
+                          </wsp:Policy>
+                        </sp:Layout>
+                        <sp:IncludeTimestamp />
+                      </wsp:Policy>
+                    </sp:TransportBinding>
+                    <sp:SignedEncryptedSupportingTokens>
+                      <wsp:Policy>
+                        <sp:UsernameToken sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+                          <wsp:Policy>
+                            <sp:WssUsernameToken10 />
+                          </wsp:Policy>
+                        </sp:UsernameToken>
+                      </wsp:Policy>
+                    </sp:SignedEncryptedSupportingTokens>
+                    <sp:Wss11>
+                      <wsp:Policy />
+                    </sp:Wss11>
+                    <sp:Trust13>
+                      <wsp:Policy>
+                        <sp:MustSupportIssuedTokens />
+                        <sp:RequireClientEntropy />
+                        <sp:RequireServerEntropy />
+                      </wsp:Policy>
+                    </sp:Trust13>
+                  </wsp:Policy>
+                </sp:BootstrapPolicy>
+                <sp:MustNotSendAmend />
+              </wsp:Policy>
+            </sp:SecureConversationToken>
+          </wsp:Policy>
+        </sp:EndorsingSupportingTokens>
+        <sp:Wss11 xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <wsp:Policy />
+        </sp:Wss11>
+        <sp:Trust13 xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <wsp:Policy>
+            <sp:MustSupportIssuedTokens />
+            <sp:RequireClientEntropy />
+            <sp:RequireServerEntropy />
+          </wsp:Policy>
+        </sp:Trust13>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="https://flmtest.corpnet.auo.com/FLMPublic/FLM.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="https://flmtest.corpnet.auo.com/FLMPublic/FLM.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="https://flmtest.corpnet.auo.com/FLMPublic/FLM.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Com.Auo.FLM.Basic.Lib.AppCode.Utility" />
+      <xsd:import schemaLocation="https://flmtest.corpnet.auo.com/FLMPublic/FLM.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Drawing" />
+      <xsd:import schemaLocation="https://flmtest.corpnet.auo.com/FLMPublic/FLM.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="https://flmtest.corpnet.auo.com/FLMPublic/FLM.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="FLMService_UploadFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:UploadFile" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_UploadFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UploadFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_GetFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFile" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_GetFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_GetFileforExternal_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileforExternal" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_GetFileforExternal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileforExternalResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_GetFileWithMarkStyle_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileWithMarkStyle" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_GetFileWithMarkStyle_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileWithMarkStyleResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_GetFileWithPictureMark_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileWithPictureMark" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_GetFileWithPictureMark_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileWithPictureMarkResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_ConvertToPDF_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConvertToPDF" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_ConvertToPDF_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConvertToPDFResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_DeleteFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFile" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_DeleteFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_DeleteFileByBizID_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFileByBizID" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_DeleteFileByBizID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFileByBizIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_SetFileAttribute_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetFileAttribute" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_SetFileAttribute_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetFileAttributeResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_GetFileIDByBizID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileIDByBizID" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_GetFileIDByBizID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileIDByBizIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_CheckFileID_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckFileID" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_CheckFileID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckFileIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_CheckPDFStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckPDFStatus" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_CheckPDFStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckPDFStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_GetEncryptUrl_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEncryptUrl" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_GetEncryptUrl_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEncryptUrlResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_GetPDFFileSetting_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPDFFileSetting" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_GetPDFFileSetting_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPDFFileSettingResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_GetWaterMarkerFontStyle_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWaterMarkerFontStyle" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_GetWaterMarkerFontStyle_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWaterMarkerFontStyleResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_GetFileGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileGroup" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_GetFileGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_DecryptFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:DecryptFile" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_DecryptFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DecryptFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_EncryptFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:EncryptFile" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_EncryptFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EncryptFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_EncryptFileByEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:EncryptFileByEmail" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_EncryptFileByEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EncryptFileByEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_EncryptFileWithOption_InputMessage">
+    <wsdl:part name="parameters" element="tns:EncryptFileWithOption" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_EncryptFileWithOption_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EncryptFileWithOptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_EncryptFileByEmailWithOption_InputMessage">
+    <wsdl:part name="parameters" element="tns:EncryptFileByEmailWithOption" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_EncryptFileByEmailWithOption_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EncryptFileByEmailWithOptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_CheckFileEncrypt_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckFileEncrypt" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_CheckFileEncrypt_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckFileEncryptResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_GetFileEncryptInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileEncryptInfo" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_GetFileEncryptInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileEncryptInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_GetEncryptFileByFileID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEncryptFileByFileID" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_GetEncryptFileByFileID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEncryptFileByFileIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_UpdateFileInformation_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateFileInformation" />
+  </wsdl:message>
+  <wsdl:message name="FLMService_UpdateFileInformation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateFileInformationResponse" />
+  </wsdl:message>
+  <wsdl:portType name="FLMService">
+    <wsdl:operation name="UploadFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/UploadFile" message="tns:FLMService_UploadFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/UploadFileResponse" message="tns:FLMService_UploadFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/GetFile" message="tns:FLMService_GetFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/GetFileResponse" message="tns:FLMService_GetFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFileforExternal">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/GetFileforExternal" message="tns:FLMService_GetFileforExternal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/GetFileforExternalResponse" message="tns:FLMService_GetFileforExternal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFileWithMarkStyle">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/GetFileWithMarkStyle" message="tns:FLMService_GetFileWithMarkStyle_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/GetFileWithMarkStyleResponse" message="tns:FLMService_GetFileWithMarkStyle_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFileWithPictureMark">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/GetFileWithPictureMark" message="tns:FLMService_GetFileWithPictureMark_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/GetFileWithPictureMarkResponse" message="tns:FLMService_GetFileWithPictureMark_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConvertToPDF">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/ConvertToPDF" message="tns:FLMService_ConvertToPDF_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/ConvertToPDFResponse" message="tns:FLMService_ConvertToPDF_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/DeleteFile" message="tns:FLMService_DeleteFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/DeleteFileResponse" message="tns:FLMService_DeleteFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFileByBizID">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/DeleteFileByBizID" message="tns:FLMService_DeleteFileByBizID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/DeleteFileByBizIDResponse" message="tns:FLMService_DeleteFileByBizID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetFileAttribute">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/SetFileAttribute" message="tns:FLMService_SetFileAttribute_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/SetFileAttributeResponse" message="tns:FLMService_SetFileAttribute_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFileIDByBizID">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/GetFileIDByBizID" message="tns:FLMService_GetFileIDByBizID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/GetFileIDByBizIDResponse" message="tns:FLMService_GetFileIDByBizID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckFileID">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/CheckFileID" message="tns:FLMService_CheckFileID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/CheckFileIDResponse" message="tns:FLMService_CheckFileID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckPDFStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/CheckPDFStatus" message="tns:FLMService_CheckPDFStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/CheckPDFStatusResponse" message="tns:FLMService_CheckPDFStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEncryptUrl">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/GetEncryptUrl" message="tns:FLMService_GetEncryptUrl_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/GetEncryptUrlResponse" message="tns:FLMService_GetEncryptUrl_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPDFFileSetting">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/GetPDFFileSetting" message="tns:FLMService_GetPDFFileSetting_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/GetPDFFileSettingResponse" message="tns:FLMService_GetPDFFileSetting_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWaterMarkerFontStyle">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/GetWaterMarkerFontStyle" message="tns:FLMService_GetWaterMarkerFontStyle_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/GetWaterMarkerFontStyleResponse" message="tns:FLMService_GetWaterMarkerFontStyle_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFileGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/GetFileGroup" message="tns:FLMService_GetFileGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/GetFileGroupResponse" message="tns:FLMService_GetFileGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DecryptFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/DecryptFile" message="tns:FLMService_DecryptFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/DecryptFileResponse" message="tns:FLMService_DecryptFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EncryptFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/EncryptFile" message="tns:FLMService_EncryptFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/EncryptFileResponse" message="tns:FLMService_EncryptFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EncryptFileByEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/EncryptFileByEmail" message="tns:FLMService_EncryptFileByEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/EncryptFileByEmailResponse" message="tns:FLMService_EncryptFileByEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EncryptFileWithOption">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/EncryptFileWithOption" message="tns:FLMService_EncryptFileWithOption_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/EncryptFileWithOptionResponse" message="tns:FLMService_EncryptFileWithOption_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EncryptFileByEmailWithOption">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/EncryptFileByEmailWithOption" message="tns:FLMService_EncryptFileByEmailWithOption_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/EncryptFileByEmailWithOptionResponse" message="tns:FLMService_EncryptFileByEmailWithOption_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckFileEncrypt">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/CheckFileEncrypt" message="tns:FLMService_CheckFileEncrypt_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/CheckFileEncryptResponse" message="tns:FLMService_CheckFileEncrypt_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFileEncryptInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/GetFileEncryptInfo" message="tns:FLMService_GetFileEncryptInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/GetFileEncryptInfoResponse" message="tns:FLMService_GetFileEncryptInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEncryptFileByFileID">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/GetEncryptFileByFileID" message="tns:FLMService_GetEncryptFileByFileID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/GetEncryptFileByFileIDResponse" message="tns:FLMService_GetEncryptFileByFileID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFileInformation">
+      <wsdl:input wsaw:Action="http://tempuri.org/FLMService/UpdateFileInformation" message="tns:FLMService_UpdateFileInformation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/FLMService/UpdateFileInformationResponse" message="tns:FLMService_UpdateFileInformation_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WS2007HttpBinding_FLMService" type="tns:FLMService">
+    <wsp:PolicyReference URI="#WS2007HttpBinding_FLMService_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="UploadFile">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/UploadFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFile">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/GetFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFileforExternal">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/GetFileforExternal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFileWithMarkStyle">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/GetFileWithMarkStyle" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFileWithPictureMark">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/GetFileWithPictureMark" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConvertToPDF">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/ConvertToPDF" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFile">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/DeleteFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFileByBizID">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/DeleteFileByBizID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetFileAttribute">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/SetFileAttribute" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFileIDByBizID">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/GetFileIDByBizID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckFileID">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/CheckFileID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckPDFStatus">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/CheckPDFStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEncryptUrl">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/GetEncryptUrl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPDFFileSetting">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/GetPDFFileSetting" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWaterMarkerFontStyle">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/GetWaterMarkerFontStyle" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFileGroup">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/GetFileGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DecryptFile">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/DecryptFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EncryptFile">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/EncryptFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EncryptFileByEmail">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/EncryptFileByEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EncryptFileWithOption">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/EncryptFileWithOption" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EncryptFileByEmailWithOption">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/EncryptFileByEmailWithOption" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckFileEncrypt">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/CheckFileEncrypt" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFileEncryptInfo">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/GetFileEncryptInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEncryptFileByFileID">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/GetEncryptFileByFileID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFileInformation">
+      <soap12:operation soapAction="http://tempuri.org/FLMService/UpdateFileInformation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FLMService">
+    <wsdl:port name="WS2007HttpBinding_FLMService" binding="tns:WS2007HttpBinding_FLMService">
+      <soap12:address location="https://flmtest.corpnet.auo.com/FLMPublic/FLM.svc" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>https://flmtest.corpnet.auo.com/FLMPublic/FLM.svc</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

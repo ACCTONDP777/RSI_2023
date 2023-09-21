@@ -1,0 +1,34 @@
+2021-11-16 10:14:43,511 [11] INFO  --Begin:獲取DashBoardLayer1資訊 - 【GetDashBoardLayer1】:SELECT * FROM
+                                                (
+                                                SELECT * FROM RSI_DASHBOARD_LAYER1_V 
+                                                 WHERE RSI_NO = :rsi_no
+                                                   AND STATUS = :form_status 
+                                                   AND PHASE_ID = :phase_id
+                                                   AND PART_TYPE = :part_type                 ) T
+                                                ORDER BY T.RSI_NO, T.PHASE_ID DESC, DECODE(T.PART_TYPE, 'ACD', 0, 'EE', 1, 'OM', 2, 'PACKING', 3, 4) 
+
+2021-11-16 10:14:46,355 [11] INFO  --End:獲取DashBoardLayer1資訊 - Completed
+2021-11-16 10:14:46,621 [11] INFO  --Begin:phase_id=10、20、25、30、70 - 【GetViewIconShow】:select distinct trim(a.boss_emp_no) as boss_emp_no, a.boss_level, a.boss_title, c.rsi_no, c.form_no, c.part_type, b.app_assigner, b.app_actor
+                                                    from au_dw.auo_person_reportline a
+                                                    join RSI_H_FORM_APPROVE b on (a.emp_no = b.app_assigner or a.emp_no = b.app_actor) and (b.phase_id <= '30' or b.phase_id = '70')
+                                                    join RSI_H_FORM_HEADER c on b.form_no = c.form_no
+                                                    where (trim(a.boss_emp_no) = :emp_no) -- EMP_NO
+                                                    -- or nvl(b.app_actor, b.app_assigner) = :emp_no)
+                                                    and a.active = 'Y'
+                                                    and c.rsi_no = :rsi_no  --RSI_NO -- DashBoard傳入
+                                                    and b.phase_id = :phase_id
+                                                  order by c.rsi_no, c.form_no, c.part_type 
+
+2021-11-16 10:14:46,636 [11] INFO  --End:phase_id=10、20、25、30、70 - Completed
+2021-11-16 10:14:46,636 [11] INFO  --Begin:phase_id=10、20、25、30、70 - 【GetViewIconShow】:select distinct trim(a.boss_emp_no) as boss_emp_no, a.boss_level, a.boss_title, c.rsi_no, c.form_no, c.part_type, b.app_assigner, b.app_actor
+                                                    from au_dw.auo_person_reportline a
+                                                    join RSI_H_FORM_APPROVE b on (a.emp_no = b.app_assigner or a.emp_no = b.app_actor) and (b.phase_id <= '30' or b.phase_id = '70')
+                                                    join RSI_H_FORM_HEADER c on b.form_no = c.form_no
+                                                    where (trim(a.boss_emp_no) = :emp_no) -- EMP_NO
+                                                    -- or nvl(b.app_actor, b.app_assigner) = :emp_no)
+                                                    and a.active = 'Y'
+                                                    and c.rsi_no = :rsi_no  --RSI_NO -- DashBoard傳入
+                                                    and b.phase_id = :phase_id
+                                                  order by c.rsi_no, c.form_no, c.part_type 
+
+2021-11-16 10:14:46,652 [11] INFO  --End:phase_id=10、20、25、30、70 - Completed

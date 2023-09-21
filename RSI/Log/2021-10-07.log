@@ -1,0 +1,104 @@
+2021-10-07 08:24:10,975 [11] INFO  --Begin:getCurrentHandler方法 - 【RSIWebServiceDAL】:SELECT bu,project_name,listagg(part_type || ':' || phase || '-' || assigner, '/') within group(ORDER BY part_type) AS rsi_status
+                                FROM (SELECT DISTINCT a.bu,a.Project_Name,a.PART_TYPE,DECODE(a.part_type_v,NULL,'Pending on ' || t.phase || ' for other RSI',t.phase) AS phase,
+                                                    e.eng_name as assigner
+                                        FROM (SELECT H.bu,P.Project_Name,H.RSI_NO,H.PART_TYPE,V.PART_TYPE AS part_type_v,A.FORM_NO,
+                                                    decode(A.PHASE_ID, '40', '45', A.Phase_Id) AS phase_id,
+                                                    CASE
+                                                        WHEN A.PHASE_ID IN ('40', '45') THEN
+                                                        H.Product_Sourcer
+                                                        ELSE
+                                                        A.APP_ASSIGNER
+                                                    END AS APP_ASSIGNER,
+                                                    A.APP_STATUS
+                                                FROM RSI_H_PRODUCT_INFO P
+                                                JOIN RSI_H_FORM_HEADER H
+                                                ON P.Rsi_No = H.RSI_NO
+                                                JOIN RSI_H_FORM_APPROVE A
+                                                ON H.FORM_NO = A.FORM_NO
+                                                LEFT JOIN RSI_TO_DO_LIST_V v
+                                                ON v.RSI_NO = p.rsi_no
+                                                AND v.phase_id = a.phase_id
+                                                WHERE P.RSI_STATUS = 'RSI'
+                                                AND (A.FORM_NO, A.APP_SERIAL) IN
+                                                    (SELECT FORM_NO, MAX(APP_SERIAL) AS APP_SERIAL
+                                                        FROM GPO.RSI_H_FORM_APPROVE
+                                                        WHERE APP_STATUS = 'U'
+                                                        GROUP BY FORM_NO)
+                                                AND A.App_Status = 'U') a
+                                        JOIN gfin.emp_data_all e
+                                        ON e.emp_no = a.app_assigner
+                                        JOIN (select DISTINCT bu, phase_id, phase from rsi_c_flow_def) t
+                                        ON t.bu = a.bu
+                                        AND t.phase_id = a.phase_id)
+                               where 1=1  and bu = :bu     group by bu, project_name 
+
+2021-10-07 08:24:12,959 [11] INFO  --End:getCurrentHandler方法 - Completed
+2021-10-07 08:26:15,397 [17] INFO  --Begin:getCurrentHandler方法 - 【RSIWebServiceDAL】:SELECT bu,project_name,listagg(part_type || ':' || phase || '-' || assigner, '/') within group(ORDER BY part_type) AS rsi_status
+                                FROM (SELECT DISTINCT a.bu,a.Project_Name,a.PART_TYPE,DECODE(a.part_type_v,NULL,'Pending on ' || t.phase || ' for other RSI',t.phase) AS phase,
+                                                    e.eng_name as assigner
+                                        FROM (SELECT H.bu,P.Project_Name,H.RSI_NO,H.PART_TYPE,V.PART_TYPE AS part_type_v,A.FORM_NO,
+                                                    decode(A.PHASE_ID, '40', '45', A.Phase_Id) AS phase_id,
+                                                    CASE
+                                                        WHEN A.PHASE_ID IN ('40', '45') THEN
+                                                        H.Product_Sourcer
+                                                        ELSE
+                                                        A.APP_ASSIGNER
+                                                    END AS APP_ASSIGNER,
+                                                    A.APP_STATUS
+                                                FROM RSI_H_PRODUCT_INFO P
+                                                JOIN RSI_H_FORM_HEADER H
+                                                ON P.Rsi_No = H.RSI_NO
+                                                JOIN RSI_H_FORM_APPROVE A
+                                                ON H.FORM_NO = A.FORM_NO
+                                                LEFT JOIN RSI_TO_DO_LIST_V v
+                                                ON v.RSI_NO = p.rsi_no
+                                                AND v.phase_id = a.phase_id
+                                                WHERE P.RSI_STATUS = 'RSI'
+                                                AND (A.FORM_NO, A.APP_SERIAL) IN
+                                                    (SELECT FORM_NO, MAX(APP_SERIAL) AS APP_SERIAL
+                                                        FROM GPO.RSI_H_FORM_APPROVE
+                                                        WHERE APP_STATUS = 'U'
+                                                        GROUP BY FORM_NO)
+                                                AND A.App_Status = 'U') a
+                                        JOIN gfin.emp_data_all e
+                                        ON e.emp_no = a.app_assigner
+                                        JOIN (select DISTINCT bu, phase_id, phase from rsi_c_flow_def) t
+                                        ON t.bu = a.bu
+                                        AND t.phase_id = a.phase_id)
+                               where 1=1  and bu = :bu     group by bu, project_name 
+
+2021-10-07 08:26:15,412 [17] INFO  --End:getCurrentHandler方法 - Completed
+2021-10-07 13:21:01,457 [ 7] INFO  --Begin: - 【GetDashBoardRSINO】:select rsi_no from RSI_H_PRODUCT_INFO where 1=1 and project_name = :project_name  order by rsi_no desc 
+
+2021-10-07 13:21:02,128 [ 7] INFO   --End: - Completed
+2021-10-07 13:21:02,128 [ 7] INFO  --Begin:獲取DashBoard UA資訊2 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, FORM_STATUS)) > 0  
+                                                   AND ((:rsi_no is null or RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY RSI_NO DESC, DECODE(PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)  
+
+2021-10-07 13:21:02,160 [ 7] INFO  --End:獲取DashBoard UA資訊2 - Completed
+2021-10-07 13:21:02,269 [ 7] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2021-10-07 13:21:02,269 [ 7] INFO  --End:獲取Contract Status資訊 - Completed
+2021-10-07 13:21:02,504 [ 7] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-10-07 13:21:02,519 [ 7] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-10-07 13:21:02,519 [ 7] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-10-07 13:21:02,519 [ 7] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-10-07 13:21:02,519 [ 7] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2021-10-07 13:21:02,535 [ 7] INFO  --End:獲取Department Name資訊 - Completed

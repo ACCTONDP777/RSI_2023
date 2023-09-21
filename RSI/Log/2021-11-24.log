@@ -1,0 +1,913 @@
+2021-11-24 10:16:37,982 [11] INFO  --Begin:LoginLog - 【RSI_ConfigEntityDAL】:INSERT INTO rsi_h_func_log(attribute1,created_by,created_date)
+                                 VALUES('Login',:emp_no,SYSDATE) 
+
+2021-11-24 10:16:38,560 [11] INFO  --End:LoginLog - Completed
+2021-11-24 10:16:38,576 [11] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 10:16:39,404 [11] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 10:16:39,482 [11] INFO  --Begin:GetBulletin - 【RSI_ConfigEntityDAL】:select t.*,dbms_lob.substr(t.note) as sys_note from RSI_C_PARAMETER t
+                                 where t.function='BULLETIN' 
+
+2021-11-24 10:16:39,513 [11] INFO  --End:GetBulletin - Completed
+2021-11-24 10:16:39,513 [11] INFO  --Begin:獲取FAQ資訊 - 【GetFAQ】:SELECT * FROM RSI_C_PARAMETER WHERE FUNCTION = 'FAQ' 
+
+2021-11-24 10:16:39,513 [11] INFO  --End:獲取FAQ資訊 - Completed
+2021-11-24 10:16:39,529 [11] INFO  --Begin:獲取ContactWindow資訊 - 【GetContactWindow】:SELECT DISTINCT ATTRIBUTE1, ATTRIBUTE2 FROM RSI_C_PARAMETER WHERE FUNCTION = 'Contact_Windows' 
+
+2021-11-24 10:16:39,529 [11] INFO  --End:獲取ContactWindow資訊 - Completed
+2021-11-24 10:16:39,748 [11] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 10:16:39,748 [11] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 10:16:39,763 [11] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 10:16:39,763 [11] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 10:16:39,763 [11] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2021-11-24 10:16:39,794 [11] INFO  --End:獲取Department Name資訊 - Completed
+2021-11-24 10:16:44,967 [24] INFO  --Begin:獲取DashBoard UA資訊1 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V A
+                                                   JOIN (
+                                                        SELECT DISTINCT B.RSI_NO FROM GPO.RSI_H_FORM_HEADER B
+                                                        WHERE FORM_NO IN
+                                                        (SELECT A.FORM_NO    --自己簽核過表單
+                                                         FROM GPO.RSI_H_FORM_APPROVE A
+                                                         LEFT JOIN GPO.RSI_H_DETAIL_APP_LOG L ON A.FORM_NO = L.FORM_NO
+                                                         WHERE (A.APP_ASSIGNER = :emp_no OR A.APP_ACTOR = :emp_no OR L.APP_ACTOR = :emp_no)
+                                                         UNION            --下轄人員簽核過表單
+                                                         SELECT DISTINCT B.FORM_NO 
+                                                         FROM au_dw.auo_person_reportline A
+                                                         INNER JOIN GPO.RSI_H_FORM_APPROVE B ON A.EMP_NO = NVL(B.APP_ACTOR, B.APP_ASSIGNER)
+                                                         LEFT JOIN GPO.RSI_H_DETAIL_APP_LOG L ON B.FORM_NO = L.FORM_NO AND A.EMP_NO = L.APP_ACTOR
+                                                         WHERE (TRIM(A.BOSS_EMP_NO) = :emp_no)
+                                                         AND A.ACTIVE = 'Y')                
+                                                   ) B ON A.RSI_NO = B.RSI_NO 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, A.FORM_STATUS)) > 0 
+                                                   AND ((:rsi_no is null or A.RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(A.BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(A.PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(A.REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY A.RSI_NO DESC, DECODE(A.PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)   
+
+2021-11-24 10:16:45,171 [24] INFO  --End:獲取DashBoard UA資訊1 - Completed
+2021-11-24 10:16:45,218 [24] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2021-11-24 10:16:45,218 [24] INFO  --End:獲取Contract Status資訊 - Completed
+2021-11-24 10:16:45,233 [24] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 10:16:45,233 [24] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 10:16:45,233 [24] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 10:16:45,233 [24] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 10:16:45,233 [24] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2021-11-24 10:16:45,233 [24] INFO  --End:獲取Department Name資訊 - Completed
+2021-11-24 11:19:31,426 [ 7] INFO  --Begin:獲取DashBoard UA資訊2 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, FORM_STATUS)) > 0  
+                                                   AND ((:rsi_no is null or RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY RSI_NO DESC, DECODE(PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)  
+
+2021-11-24 11:19:32,333 [ 7] INFO  --End:獲取DashBoard UA資訊2 - Completed
+2021-11-24 11:19:32,442 [ 7] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2021-11-24 11:19:32,458 [ 7] INFO  --End:獲取Contract Status資訊 - Completed
+2021-11-24 11:19:32,708 [ 7] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 11:19:33,505 [ 7] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 11:19:33,505 [ 7] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 11:19:33,520 [ 7] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 11:19:33,520 [ 7] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2021-11-24 11:19:33,551 [ 7] INFO  --End:獲取Department Name資訊 - Completed
+2021-11-24 11:39:01,978 [69] INFO  --Begin:獲取DashBoard UA資訊2 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, FORM_STATUS)) > 0  
+                                                   AND ((:rsi_no is null or RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY RSI_NO DESC, DECODE(PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)  
+
+2021-11-24 11:39:01,994 [69] INFO  --End:獲取DashBoard UA資訊2 - Completed
+2021-11-24 11:39:01,994 [69] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2021-11-24 11:39:01,994 [69] INFO  --End:獲取Contract Status資訊 - Completed
+2021-11-24 11:39:01,994 [69] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 11:39:01,994 [69] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 11:39:01,994 [69] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 11:39:02,010 [69] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 11:39:02,010 [69] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2021-11-24 11:39:02,010 [69] INFO  --End:獲取Department Name資訊 - Completed
+2021-11-24 13:19:22,451 [ 7] INFO  --Begin:獲取DashBoard UA資訊2 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, FORM_STATUS)) > 0  
+                                                   AND ((:rsi_no is null or RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY RSI_NO DESC, DECODE(PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)  
+
+2021-11-24 13:19:22,967 [ 7] INFO  --End:獲取DashBoard UA資訊2 - Completed
+2021-11-24 13:19:23,060 [ 7] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2021-11-24 13:19:23,076 [ 7] INFO  --End:獲取Contract Status資訊 - Completed
+2021-11-24 13:19:23,232 [ 7] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:19:24,076 [ 7] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:19:24,076 [ 7] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:19:24,076 [ 7] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:19:24,076 [ 7] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2021-11-24 13:19:24,092 [ 7] INFO  --End:獲取Department Name資訊 - Completed
+2021-11-24 13:22:58,363 [32] INFO  --Begin:獲取DashBoard UA資訊2 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, FORM_STATUS)) > 0  
+                                                   AND ((:rsi_no is null or RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY RSI_NO DESC, DECODE(PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)  
+
+2021-11-24 13:22:58,363 [32] INFO  --End:獲取DashBoard UA資訊2 - Completed
+2021-11-24 13:22:58,363 [32] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2021-11-24 13:22:58,363 [32] INFO  --End:獲取Contract Status資訊 - Completed
+2021-11-24 13:22:58,363 [32] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:22:58,363 [32] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:22:58,363 [32] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:22:58,378 [32] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:22:58,378 [32] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2021-11-24 13:22:58,378 [32] INFO  --End:獲取Department Name資訊 - Completed
+2021-11-24 13:23:17,887 [26] INFO  --Begin:獲取DashBoard UA資訊2 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, FORM_STATUS)) > 0  
+                                                   AND ((:rsi_no is null or RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY RSI_NO DESC, DECODE(PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)  
+
+2021-11-24 13:23:17,903 [26] INFO  --End:獲取DashBoard UA資訊2 - Completed
+2021-11-24 13:23:17,903 [26] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2021-11-24 13:23:17,903 [26] INFO  --End:獲取Contract Status資訊 - Completed
+2021-11-24 13:23:17,903 [26] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:23:17,903 [26] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:23:17,903 [26] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:23:17,903 [26] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:23:17,903 [26] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2021-11-24 13:23:17,919 [26] INFO  --End:獲取Department Name資訊 - Completed
+2021-11-24 13:25:47,056 [24] INFO  --Begin:獲取DashBoard UA資訊2 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, FORM_STATUS)) > 0  
+                                                   AND ((:rsi_no is null or RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY RSI_NO DESC, DECODE(PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)  
+
+2021-11-24 13:25:47,056 [24] INFO  --End:獲取DashBoard UA資訊2 - Completed
+2021-11-24 13:25:47,056 [24] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2021-11-24 13:25:47,056 [24] INFO  --End:獲取Contract Status資訊 - Completed
+2021-11-24 13:25:47,056 [24] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:25:47,056 [24] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:25:47,056 [24] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:25:47,072 [24] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:25:47,072 [24] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2021-11-24 13:25:47,072 [24] INFO  --End:獲取Department Name資訊 - Completed
+2021-11-24 13:25:48,495 [36] INFO  --Begin:獲取DashBoard UA資訊2 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, FORM_STATUS)) > 0  
+                                                   AND ((:rsi_no is null or RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY RSI_NO DESC, DECODE(PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)  
+
+2021-11-24 13:25:48,495 [36] INFO  --End:獲取DashBoard UA資訊2 - Completed
+2021-11-24 13:25:48,495 [36] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2021-11-24 13:25:48,495 [36] INFO  --End:獲取Contract Status資訊 - Completed
+2021-11-24 13:25:48,495 [36] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:25:48,495 [36] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:25:48,495 [36] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:25:48,511 [36] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:25:48,511 [36] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2021-11-24 13:25:48,511 [36] INFO  --End:獲取Department Name資訊 - Completed
+2021-11-24 13:25:59,258 [37] INFO  --Begin:獲取DashBoard UA資訊2 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, FORM_STATUS)) > 0  
+                                                   AND ((:rsi_no is null or RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY RSI_NO DESC, DECODE(PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)  
+
+2021-11-24 13:25:59,274 [37] INFO  --End:獲取DashBoard UA資訊2 - Completed
+2021-11-24 13:25:59,274 [37] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2021-11-24 13:25:59,274 [37] INFO  --End:獲取Contract Status資訊 - Completed
+2021-11-24 13:25:59,274 [37] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:25:59,274 [37] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:25:59,274 [37] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:25:59,290 [37] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:25:59,290 [37] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2021-11-24 13:25:59,290 [37] INFO  --End:獲取Department Name資訊 - Completed
+2021-11-24 13:26:05,459 [38] INFO  --Begin:獲取DashBoardLayer1資訊 - 【GetDashBoardLayer1】:SELECT * FROM
+                                                (
+                                                SELECT * FROM RSI_DASHBOARD_LAYER1_V 
+                                                 WHERE RSI_NO = :rsi_no
+                                                   AND STATUS = :form_status 
+                                                   AND PHASE_ID = :phase_id
+                                                   AND PART_TYPE = :part_type                 ) T
+                                                ORDER BY T.RSI_NO, T.PHASE_ID DESC, DECODE(T.PART_TYPE, 'ACD', 0, 'EE', 1, 'OM', 2, 'PACKING', 3, 4) 
+
+2021-11-24 13:26:07,788 [38] INFO  --End:獲取DashBoardLayer1資訊 - Completed
+2021-11-24 13:26:07,803 [38] INFO  --Begin:phase_id=40、50、60 - 【GetViewIconShow】:select distinct trim(a.boss_emp_no) as boss_emp_no, a.boss_level, a.boss_title, h.rsi_no, h.form_no, h.part_type, d.app_assigner, c.app_actor 
+                                                    from au_dw.auo_person_reportline a
+                                                    join RSI_H_AUTHORITY b on a.emp_no = b.emp_no
+                                                    join RSI_H_DETAIL_APP_LOG c on a.emp_no = c.app_actor
+                                                    join RSI_H_FORM_HEADER h on c.rsi_no = h.rsi_no and c.form_no = h.form_no 
+                                                    join RSI_H_FORM_APPROVE d on c.form_no = d.form_no
+                                                    where trim(a.boss_emp_no) = :emp_no    -- EMP_NO
+                                                    and a.active = 'Y'
+                                                    and b.active = 'Y'
+                                                    and sysdate >= b.start_date  
+                                                    and b.end_date > =sysdate
+                                                    and h.rsi_no = :rsi_no  --RSI_NO -- DashBoard傳入
+                                                    and d.phase_id = :phase_id
+                                                  order by h.rsi_no, h.form_no, h.part_type 
+
+2021-11-24 13:26:07,834 [38] INFO  --End:phase_id=40、50、60 - Completed
+2021-11-24 13:26:07,834 [38] INFO  --Begin:phase_id=40、50、60 - 【GetViewIconShow】:select distinct trim(a.boss_emp_no) as boss_emp_no, a.boss_level, a.boss_title, h.rsi_no, h.form_no, h.part_type, d.app_assigner, c.app_actor 
+                                                    from au_dw.auo_person_reportline a
+                                                    join RSI_H_AUTHORITY b on a.emp_no = b.emp_no
+                                                    join RSI_H_DETAIL_APP_LOG c on a.emp_no = c.app_actor
+                                                    join RSI_H_FORM_HEADER h on c.rsi_no = h.rsi_no and c.form_no = h.form_no 
+                                                    join RSI_H_FORM_APPROVE d on c.form_no = d.form_no
+                                                    where trim(a.boss_emp_no) = :emp_no    -- EMP_NO
+                                                    and a.active = 'Y'
+                                                    and b.active = 'Y'
+                                                    and sysdate >= b.start_date  
+                                                    and b.end_date > =sysdate
+                                                    and h.rsi_no = :rsi_no  --RSI_NO -- DashBoard傳入
+                                                    and d.phase_id = :phase_id
+                                                  order by h.rsi_no, h.form_no, h.part_type 
+
+2021-11-24 13:26:07,834 [38] INFO  --End:phase_id=40、50、60 - Completed
+2021-11-24 13:26:08,975 [36] INFO  --Begin:獲取DashBoardLayer1資訊 - 【GetDashBoardLayer1】:SELECT * FROM
+                                                (
+                                                SELECT * FROM RSI_DASHBOARD_LAYER1_V 
+                                                 WHERE RSI_NO = :rsi_no
+                                                   AND STATUS = :form_status 
+                                                   AND PHASE_ID = :phase_id
+                                                   AND PART_TYPE = :part_type                 ) T
+                                                ORDER BY T.RSI_NO, T.PHASE_ID DESC, DECODE(T.PART_TYPE, 'ACD', 0, 'EE', 1, 'OM', 2, 'PACKING', 3, 4) 
+
+2021-11-24 13:26:08,975 [36] INFO  --End:獲取DashBoardLayer1資訊 - Completed
+2021-11-24 13:26:08,975 [36] INFO  --Begin:phase_id=10、20、25、30、70 - 【GetViewIconShow】:select distinct trim(a.boss_emp_no) as boss_emp_no, a.boss_level, a.boss_title, c.rsi_no, c.form_no, c.part_type, b.app_assigner, b.app_actor
+                                                    from au_dw.auo_person_reportline a
+                                                    join RSI_H_FORM_APPROVE b on (a.emp_no = b.app_assigner or a.emp_no = b.app_actor) and (b.phase_id <= '30' or b.phase_id = '70')
+                                                    join RSI_H_FORM_HEADER c on b.form_no = c.form_no
+                                                    where (trim(a.boss_emp_no) = :emp_no) -- EMP_NO
+                                                    -- or nvl(b.app_actor, b.app_assigner) = :emp_no)
+                                                    and a.active = 'Y'
+                                                    and c.rsi_no = :rsi_no  --RSI_NO -- DashBoard傳入
+                                                    and b.phase_id = :phase_id
+                                                  order by c.rsi_no, c.form_no, c.part_type 
+
+2021-11-24 13:26:08,991 [36] INFO  --End:phase_id=10、20、25、30、70 - Completed
+2021-11-24 13:26:08,991 [36] INFO  --Begin:phase_id=10、20、25、30、70 - 【GetViewIconShow】:select distinct trim(a.boss_emp_no) as boss_emp_no, a.boss_level, a.boss_title, c.rsi_no, c.form_no, c.part_type, b.app_assigner, b.app_actor
+                                                    from au_dw.auo_person_reportline a
+                                                    join RSI_H_FORM_APPROVE b on (a.emp_no = b.app_assigner or a.emp_no = b.app_actor) and (b.phase_id <= '30' or b.phase_id = '70')
+                                                    join RSI_H_FORM_HEADER c on b.form_no = c.form_no
+                                                    where (trim(a.boss_emp_no) = :emp_no) -- EMP_NO
+                                                    -- or nvl(b.app_actor, b.app_assigner) = :emp_no)
+                                                    and a.active = 'Y'
+                                                    and c.rsi_no = :rsi_no  --RSI_NO -- DashBoard傳入
+                                                    and b.phase_id = :phase_id
+                                                  order by c.rsi_no, c.form_no, c.part_type 
+
+2021-11-24 13:26:08,991 [36] INFO  --End:phase_id=10、20、25、30、70 - Completed
+2021-11-24 13:26:12,988 [35] INFO  --Begin:獲取DashBoardLayer1資訊 - 【GetDashBoardLayer1】:SELECT * FROM
+                                                (
+                                                SELECT * FROM RSI_DASHBOARD_LAYER1_V 
+                                                 WHERE RSI_NO = :rsi_no
+                                                   AND STATUS = :form_status 
+                                                   AND PHASE_ID = :phase_id
+                                                   AND PART_TYPE = :part_type                 ) T
+                                                ORDER BY T.RSI_NO, T.PHASE_ID DESC, DECODE(T.PART_TYPE, 'ACD', 0, 'EE', 1, 'OM', 2, 'PACKING', 3, 4) 
+
+2021-11-24 13:26:13,003 [35] INFO  --End:獲取DashBoardLayer1資訊 - Completed
+2021-11-24 13:26:13,003 [35] INFO  --Begin:phase_id=10、20、25、30、70 - 【GetViewIconShow】:select distinct trim(a.boss_emp_no) as boss_emp_no, a.boss_level, a.boss_title, c.rsi_no, c.form_no, c.part_type, b.app_assigner, b.app_actor
+                                                    from au_dw.auo_person_reportline a
+                                                    join RSI_H_FORM_APPROVE b on (a.emp_no = b.app_assigner or a.emp_no = b.app_actor) and (b.phase_id <= '30' or b.phase_id = '70')
+                                                    join RSI_H_FORM_HEADER c on b.form_no = c.form_no
+                                                    where (trim(a.boss_emp_no) = :emp_no) -- EMP_NO
+                                                    -- or nvl(b.app_actor, b.app_assigner) = :emp_no)
+                                                    and a.active = 'Y'
+                                                    and c.rsi_no = :rsi_no  --RSI_NO -- DashBoard傳入
+                                                    and b.phase_id = :phase_id
+                                                  order by c.rsi_no, c.form_no, c.part_type 
+
+2021-11-24 13:26:13,003 [35] INFO  --End:phase_id=10、20、25、30、70 - Completed
+2021-11-24 13:26:13,003 [35] INFO  --Begin:phase_id=10、20、25、30、70 - 【GetViewIconShow】:select distinct trim(a.boss_emp_no) as boss_emp_no, a.boss_level, a.boss_title, c.rsi_no, c.form_no, c.part_type, b.app_assigner, b.app_actor
+                                                    from au_dw.auo_person_reportline a
+                                                    join RSI_H_FORM_APPROVE b on (a.emp_no = b.app_assigner or a.emp_no = b.app_actor) and (b.phase_id <= '30' or b.phase_id = '70')
+                                                    join RSI_H_FORM_HEADER c on b.form_no = c.form_no
+                                                    where (trim(a.boss_emp_no) = :emp_no) -- EMP_NO
+                                                    -- or nvl(b.app_actor, b.app_assigner) = :emp_no)
+                                                    and a.active = 'Y'
+                                                    and c.rsi_no = :rsi_no  --RSI_NO -- DashBoard傳入
+                                                    and b.phase_id = :phase_id
+                                                  order by c.rsi_no, c.form_no, c.part_type 
+
+2021-11-24 13:26:13,003 [35] INFO  --End:phase_id=10、20、25、30、70 - Completed
+2021-11-24 13:26:15,531 [38] INFO  --Begin:獲取DashBoardLayer1資訊 - 【GetDashBoardLayer1】:SELECT * FROM
+                                                (
+                                                SELECT * FROM RSI_DASHBOARD_LAYER1_V 
+                                                 WHERE RSI_NO = :rsi_no
+                                                   AND STATUS = :form_status 
+                                                   AND PHASE_ID = :phase_id
+                                                   AND PART_TYPE = :part_type                 ) T
+                                                ORDER BY T.RSI_NO, T.PHASE_ID DESC, DECODE(T.PART_TYPE, 'ACD', 0, 'EE', 1, 'OM', 2, 'PACKING', 3, 4) 
+
+2021-11-24 13:26:15,531 [38] INFO  --End:獲取DashBoardLayer1資訊 - Completed
+2021-11-24 13:26:15,531 [38] INFO  --Begin:phase_id=10、20、25、30、70 - 【GetViewIconShow】:select distinct trim(a.boss_emp_no) as boss_emp_no, a.boss_level, a.boss_title, c.rsi_no, c.form_no, c.part_type, b.app_assigner, b.app_actor
+                                                    from au_dw.auo_person_reportline a
+                                                    join RSI_H_FORM_APPROVE b on (a.emp_no = b.app_assigner or a.emp_no = b.app_actor) and (b.phase_id <= '30' or b.phase_id = '70')
+                                                    join RSI_H_FORM_HEADER c on b.form_no = c.form_no
+                                                    where (trim(a.boss_emp_no) = :emp_no) -- EMP_NO
+                                                    -- or nvl(b.app_actor, b.app_assigner) = :emp_no)
+                                                    and a.active = 'Y'
+                                                    and c.rsi_no = :rsi_no  --RSI_NO -- DashBoard傳入
+                                                    and b.phase_id = :phase_id
+                                                  order by c.rsi_no, c.form_no, c.part_type 
+
+2021-11-24 13:26:15,531 [38] INFO  --End:phase_id=10、20、25、30、70 - Completed
+2021-11-24 13:26:15,531 [38] INFO  --Begin:phase_id=10、20、25、30、70 - 【GetViewIconShow】:select distinct trim(a.boss_emp_no) as boss_emp_no, a.boss_level, a.boss_title, c.rsi_no, c.form_no, c.part_type, b.app_assigner, b.app_actor
+                                                    from au_dw.auo_person_reportline a
+                                                    join RSI_H_FORM_APPROVE b on (a.emp_no = b.app_assigner or a.emp_no = b.app_actor) and (b.phase_id <= '30' or b.phase_id = '70')
+                                                    join RSI_H_FORM_HEADER c on b.form_no = c.form_no
+                                                    where (trim(a.boss_emp_no) = :emp_no) -- EMP_NO
+                                                    -- or nvl(b.app_actor, b.app_assigner) = :emp_no)
+                                                    and a.active = 'Y'
+                                                    and c.rsi_no = :rsi_no  --RSI_NO -- DashBoard傳入
+                                                    and b.phase_id = :phase_id
+                                                  order by c.rsi_no, c.form_no, c.part_type 
+
+2021-11-24 13:26:15,531 [38] INFO  --End:phase_id=10、20、25、30、70 - Completed
+2021-11-24 13:26:18,062 [24] INFO  --Begin:獲取DashBoardLayer1資訊 - 【GetDashBoardLayer1】:SELECT * FROM
+                                                (
+                                                SELECT * FROM RSI_DASHBOARD_LAYER1_V 
+                                                 WHERE RSI_NO = :rsi_no
+                                                   AND STATUS = :form_status 
+                                                   AND PHASE_ID = :phase_id
+                                                   AND PART_TYPE = :part_type                 ) T
+                                                ORDER BY T.RSI_NO, T.PHASE_ID DESC, DECODE(T.PART_TYPE, 'ACD', 0, 'EE', 1, 'OM', 2, 'PACKING', 3, 4) 
+
+2021-11-24 13:26:18,062 [24] INFO  --End:獲取DashBoardLayer1資訊 - Completed
+2021-11-24 13:26:18,078 [24] INFO  --Begin:phase_id=10、20、25、30、70 - 【GetViewIconShow】:select distinct trim(a.boss_emp_no) as boss_emp_no, a.boss_level, a.boss_title, c.rsi_no, c.form_no, c.part_type, b.app_assigner, b.app_actor
+                                                    from au_dw.auo_person_reportline a
+                                                    join RSI_H_FORM_APPROVE b on (a.emp_no = b.app_assigner or a.emp_no = b.app_actor) and (b.phase_id <= '30' or b.phase_id = '70')
+                                                    join RSI_H_FORM_HEADER c on b.form_no = c.form_no
+                                                    where (trim(a.boss_emp_no) = :emp_no) -- EMP_NO
+                                                    -- or nvl(b.app_actor, b.app_assigner) = :emp_no)
+                                                    and a.active = 'Y'
+                                                    and c.rsi_no = :rsi_no  --RSI_NO -- DashBoard傳入
+                                                    and b.phase_id = :phase_id
+                                                  order by c.rsi_no, c.form_no, c.part_type 
+
+2021-11-24 13:26:18,078 [24] INFO  --End:phase_id=10、20、25、30、70 - Completed
+2021-11-24 13:26:18,078 [24] INFO  --Begin:phase_id=10、20、25、30、70 - 【GetViewIconShow】:select distinct trim(a.boss_emp_no) as boss_emp_no, a.boss_level, a.boss_title, c.rsi_no, c.form_no, c.part_type, b.app_assigner, b.app_actor
+                                                    from au_dw.auo_person_reportline a
+                                                    join RSI_H_FORM_APPROVE b on (a.emp_no = b.app_assigner or a.emp_no = b.app_actor) and (b.phase_id <= '30' or b.phase_id = '70')
+                                                    join RSI_H_FORM_HEADER c on b.form_no = c.form_no
+                                                    where (trim(a.boss_emp_no) = :emp_no) -- EMP_NO
+                                                    -- or nvl(b.app_actor, b.app_assigner) = :emp_no)
+                                                    and a.active = 'Y'
+                                                    and c.rsi_no = :rsi_no  --RSI_NO -- DashBoard傳入
+                                                    and b.phase_id = :phase_id
+                                                  order by c.rsi_no, c.form_no, c.part_type 
+
+2021-11-24 13:26:18,078 [24] INFO  --End:phase_id=10、20、25、30、70 - Completed
+2021-11-24 13:28:42,622 [30] INFO  --Begin:獲取DashBoard UA資訊2 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, FORM_STATUS)) > 0  
+                                                   AND ((:rsi_no is null or RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY RSI_NO DESC, DECODE(PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)  
+
+2021-11-24 13:28:42,622 [30] INFO  --End:獲取DashBoard UA資訊2 - Completed
+2021-11-24 13:28:42,622 [30] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2021-11-24 13:28:42,622 [30] INFO  --End:獲取Contract Status資訊 - Completed
+2021-11-24 13:28:42,622 [30] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:28:42,622 [30] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:28:42,638 [30] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:28:42,638 [30] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:28:42,638 [30] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2021-11-24 13:28:42,638 [30] INFO  --End:獲取Department Name資訊 - Completed
+2021-11-24 13:28:46,624 [26] INFO  --Begin:獲取DashBoard UA資訊2 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, FORM_STATUS)) > 0  
+                                                   AND ((:rsi_no is null or RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY RSI_NO DESC, DECODE(PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)  
+
+2021-11-24 13:28:46,624 [26] INFO  --End:獲取DashBoard UA資訊2 - Completed
+2021-11-24 13:28:46,624 [26] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2021-11-24 13:28:46,624 [26] INFO  --End:獲取Contract Status資訊 - Completed
+2021-11-24 13:28:46,624 [26] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:28:46,639 [26] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:28:46,639 [26] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:28:46,639 [26] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:28:46,639 [26] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2021-11-24 13:28:46,639 [26] INFO  --End:獲取Department Name資訊 - Completed
+2021-11-24 13:28:50,091 [32] INFO  --Begin:獲取DashBoard UA資訊2 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, FORM_STATUS)) > 0  
+                                                   AND ((:rsi_no is null or RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY RSI_NO DESC, DECODE(PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)  
+
+2021-11-24 13:28:50,091 [32] INFO  --End:獲取DashBoard UA資訊2 - Completed
+2021-11-24 13:28:50,091 [32] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2021-11-24 13:28:50,091 [32] INFO  --End:獲取Contract Status資訊 - Completed
+2021-11-24 13:28:50,091 [32] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:28:50,107 [32] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:28:50,107 [32] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:28:50,107 [32] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:28:50,107 [32] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2021-11-24 13:28:50,107 [32] INFO  --End:獲取Department Name資訊 - Completed
+2021-11-24 13:28:53,447 [39] INFO  --Begin:獲取DashBoard UA資訊2 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, FORM_STATUS)) > 0  
+                                                   AND ((:rsi_no is null or RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY RSI_NO DESC, DECODE(PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)  
+
+2021-11-24 13:28:53,463 [39] INFO  --End:獲取DashBoard UA資訊2 - Completed
+2021-11-24 13:28:53,463 [39] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2021-11-24 13:28:53,463 [39] INFO  --End:獲取Contract Status資訊 - Completed
+2021-11-24 13:28:53,463 [39] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:28:53,463 [39] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:28:53,463 [39] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:28:53,463 [39] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:28:53,463 [39] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2021-11-24 13:28:53,479 [39] INFO  --End:獲取Department Name資訊 - Completed
+2021-11-24 13:31:18,135 [40] INFO  --Begin:LoginLog - 【RSI_ConfigEntityDAL】:INSERT INTO rsi_h_func_log(attribute1,created_by,created_date)
+                                 VALUES('Login',:emp_no,SYSDATE) 
+
+2021-11-24 13:31:18,135 [40] INFO  --End:LoginLog - Completed
+2021-11-24 13:31:18,135 [40] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:31:18,150 [40] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:31:18,166 [40] INFO  --Begin:GetBulletin - 【RSI_ConfigEntityDAL】:select t.*,dbms_lob.substr(t.note) as sys_note from RSI_C_PARAMETER t
+                                 where t.function='BULLETIN' 
+
+2021-11-24 13:31:18,181 [40] INFO  --End:GetBulletin - Completed
+2021-11-24 13:31:18,181 [40] INFO  --Begin:獲取FAQ資訊 - 【GetFAQ】:SELECT * FROM RSI_C_PARAMETER WHERE FUNCTION = 'FAQ' 
+
+2021-11-24 13:31:18,181 [40] INFO  --End:獲取FAQ資訊 - Completed
+2021-11-24 13:31:18,181 [40] INFO  --Begin:獲取ContactWindow資訊 - 【GetContactWindow】:SELECT DISTINCT ATTRIBUTE1, ATTRIBUTE2 FROM RSI_C_PARAMETER WHERE FUNCTION = 'Contact_Windows' 
+
+2021-11-24 13:31:18,181 [40] INFO  --End:獲取ContactWindow資訊 - Completed
+2021-11-24 13:31:18,181 [40] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:31:18,181 [40] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:31:18,181 [40] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:31:18,197 [40] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:31:18,197 [40] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2021-11-24 13:31:18,197 [40] INFO  --End:獲取Department Name資訊 - Completed
+2021-11-24 13:31:20,322 [46] INFO  --Begin:獲取DashBoard UA資訊1 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V A
+                                                   JOIN (
+                                                        SELECT DISTINCT B.RSI_NO FROM GPO.RSI_H_FORM_HEADER B
+                                                        WHERE FORM_NO IN
+                                                        (SELECT A.FORM_NO    --自己簽核過表單
+                                                         FROM GPO.RSI_H_FORM_APPROVE A
+                                                         LEFT JOIN GPO.RSI_H_DETAIL_APP_LOG L ON A.FORM_NO = L.FORM_NO
+                                                         WHERE (A.APP_ASSIGNER = :emp_no OR A.APP_ACTOR = :emp_no OR L.APP_ACTOR = :emp_no)
+                                                         UNION            --下轄人員簽核過表單
+                                                         SELECT DISTINCT B.FORM_NO 
+                                                         FROM au_dw.auo_person_reportline A
+                                                         INNER JOIN GPO.RSI_H_FORM_APPROVE B ON A.EMP_NO = NVL(B.APP_ACTOR, B.APP_ASSIGNER)
+                                                         LEFT JOIN GPO.RSI_H_DETAIL_APP_LOG L ON B.FORM_NO = L.FORM_NO AND A.EMP_NO = L.APP_ACTOR
+                                                         WHERE (TRIM(A.BOSS_EMP_NO) = :emp_no)
+                                                         AND A.ACTIVE = 'Y')                
+                                                   ) B ON A.RSI_NO = B.RSI_NO 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, A.FORM_STATUS)) > 0 
+                                                   AND ((:rsi_no is null or A.RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(A.BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(A.PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(A.REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY A.RSI_NO DESC, DECODE(A.PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)   
+
+2021-11-24 13:31:20,525 [46] INFO  --End:獲取DashBoard UA資訊1 - Completed
+2021-11-24 13:31:20,525 [46] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2021-11-24 13:31:20,525 [46] INFO  --End:獲取Contract Status資訊 - Completed
+2021-11-24 13:31:20,525 [46] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:31:20,541 [46] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:31:20,541 [46] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:31:20,541 [46] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:31:20,541 [46] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2021-11-24 13:31:20,541 [46] INFO  --End:獲取Department Name資訊 - Completed
+2021-11-24 13:31:34,257 [45] INFO  --Begin:獲取DashBoard UA資訊1 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V A
+                                                   JOIN (
+                                                        SELECT DISTINCT B.RSI_NO FROM GPO.RSI_H_FORM_HEADER B
+                                                        WHERE FORM_NO IN
+                                                        (SELECT A.FORM_NO    --自己簽核過表單
+                                                         FROM GPO.RSI_H_FORM_APPROVE A
+                                                         LEFT JOIN GPO.RSI_H_DETAIL_APP_LOG L ON A.FORM_NO = L.FORM_NO
+                                                         WHERE (A.APP_ASSIGNER = :emp_no OR A.APP_ACTOR = :emp_no OR L.APP_ACTOR = :emp_no)
+                                                         UNION            --下轄人員簽核過表單
+                                                         SELECT DISTINCT B.FORM_NO 
+                                                         FROM au_dw.auo_person_reportline A
+                                                         INNER JOIN GPO.RSI_H_FORM_APPROVE B ON A.EMP_NO = NVL(B.APP_ACTOR, B.APP_ASSIGNER)
+                                                         LEFT JOIN GPO.RSI_H_DETAIL_APP_LOG L ON B.FORM_NO = L.FORM_NO AND A.EMP_NO = L.APP_ACTOR
+                                                         WHERE (TRIM(A.BOSS_EMP_NO) = :emp_no)
+                                                         AND A.ACTIVE = 'Y')                
+                                                   ) B ON A.RSI_NO = B.RSI_NO 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, A.FORM_STATUS)) > 0 
+                                                   AND ((:rsi_no is null or A.RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(A.BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(A.PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(A.REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY A.RSI_NO DESC, DECODE(A.PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)   
+
+2021-11-24 13:31:34,257 [45] INFO  --End:獲取DashBoard UA資訊1 - Completed
+2021-11-24 13:31:34,272 [45] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2021-11-24 13:31:34,272 [45] INFO  --End:獲取Contract Status資訊 - Completed
+2021-11-24 13:31:34,272 [45] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:31:34,272 [45] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:31:34,272 [45] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:31:34,272 [45] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:31:34,288 [45] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2021-11-24 13:31:34,288 [45] INFO  --End:獲取Department Name資訊 - Completed
+2021-11-24 13:31:36,975 [41] INFO  --Begin:獲取DashBoard UA資訊2 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, FORM_STATUS)) > 0  
+                                                   AND ((:rsi_no is null or RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY RSI_NO DESC, DECODE(PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)  
+
+2021-11-24 13:31:36,975 [41] INFO  --End:獲取DashBoard UA資訊2 - Completed
+2021-11-24 13:31:36,975 [41] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2021-11-24 13:31:36,975 [41] INFO  --End:獲取Contract Status資訊 - Completed
+2021-11-24 13:31:36,975 [41] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:31:36,975 [41] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:31:36,975 [41] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:31:36,991 [41] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:31:36,991 [41] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2021-11-24 13:31:36,991 [41] INFO  --End:獲取Department Name資訊 - Completed
+2021-11-24 13:49:10,167 [80] INFO  --Begin:獲取DashBoard UA資訊2 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, FORM_STATUS)) > 0  
+                                                   AND ((:rsi_no is null or RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY RSI_NO DESC, DECODE(PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)  
+
+2021-11-24 13:49:10,183 [80] INFO  --End:獲取DashBoard UA資訊2 - Completed
+2021-11-24 13:49:10,183 [80] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2021-11-24 13:49:10,183 [80] INFO  --End:獲取Contract Status資訊 - Completed
+2021-11-24 13:49:10,183 [80] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:49:10,183 [80] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:49:10,183 [80] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:49:10,183 [80] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:49:10,199 [80] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2021-11-24 13:49:10,199 [80] INFO  --End:獲取Department Name資訊 - Completed
+2021-11-24 13:49:12,574 [75] INFO  --Begin:獲取DashBoard UA資訊2 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, FORM_STATUS)) > 0  
+                                                   AND ((:rsi_no is null or RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY RSI_NO DESC, DECODE(PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)  
+
+2021-11-24 13:49:12,574 [75] INFO  --End:獲取DashBoard UA資訊2 - Completed
+2021-11-24 13:49:12,574 [75] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2021-11-24 13:49:12,574 [75] INFO  --End:獲取Contract Status資訊 - Completed
+2021-11-24 13:49:12,574 [75] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:49:12,589 [75] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:49:12,589 [75] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:49:12,589 [75] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:49:12,589 [75] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2021-11-24 13:49:12,589 [75] INFO  --End:獲取Department Name資訊 - Completed
+2021-11-24 13:51:53,647 [90] INFO  --Begin:獲取DashBoard UA資訊2 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, FORM_STATUS)) > 0  
+                                                   AND ((:rsi_no is null or RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY RSI_NO DESC, DECODE(PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)  
+
+2021-11-24 13:51:53,647 [90] INFO  --End:獲取DashBoard UA資訊2 - Completed
+2021-11-24 13:51:53,647 [90] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2021-11-24 13:51:53,647 [90] INFO  --End:獲取Contract Status資訊 - Completed
+2021-11-24 13:51:53,647 [90] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:51:53,662 [90] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:51:53,662 [90] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 13:51:53,662 [90] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 13:51:53,662 [90] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2021-11-24 13:51:53,662 [90] INFO  --End:獲取Department Name資訊 - Completed
+2021-11-24 14:08:57,954 [68] INFO  --Begin:獲取DashBoard UA資訊2 - 【GetDashBoardUA】:SELECT * FROM GPO.RSI_DASHBOARD_LIST_V 
+                                                   WHERE DECODE(:contractStatus, 'ALL', 1, INSTR(:contractStatus, FORM_STATUS)) > 0  
+                                                   AND ((:rsi_no is null or RSI_NO LIKE :rsi_no) 
+                                                   OR (:bu is null or UPPER(BU) LIKE :bu) 
+                                                   OR (:project_name is null or UPPER(PROJECT_NAME) LIKE :project_name) 
+                                                   OR (:request_name is null or UPPER(REQUEST_NAME) LIKE :request_name)) 
+                                                ORDER BY RSI_NO DESC, DECODE(PART_TYPE, '', 1 ,'ACD', 2, 'EE', 3, 'OM', 4, 'PACKING', 5, 6)  
+
+2021-11-24 14:08:57,970 [68] INFO  --End:獲取DashBoard UA資訊2 - Completed
+2021-11-24 14:08:57,970 [68] INFO  --Begin:獲取Contract Status資訊 - 【GetContractStatus】:SELECT DISTINCT ATTRIBUTE3, ATTRIBUTE2 
+                                   FROM GPO.RSI_C_PARAMETER 
+                                  WHERE FUNCTION = 'FORM_STATUS' 
+                                  ORDER BY DECODE(ATTRIBUTE2, 'UA', 0, 'AP', 1, 'CL', 2, 'RC', 3, 4) 
+
+2021-11-24 14:08:57,970 [68] INFO  --End:獲取Contract Status資訊 - Completed
+2021-11-24 14:08:57,970 [68] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 14:08:57,970 [68] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 14:08:57,970 [68] INFO  --Begin:獲取To_Do_List_V資訊 - 【GetTo_Do_List_VEntities】:SELECT * FROM RSI_TO_DO_LIST_V 
+                                                WHERE ( :emp_no is null or APP_ASSIGNER = :emp_no) 
+                                                ORDER BY PHASE_ID, HELDDAYS 
+
+2021-11-24 14:08:57,985 [68] INFO  --End:獲取To_Do_List_V資訊 - Completed
+2021-11-24 14:08:57,985 [68] INFO  --Begin:獲取Department Name資訊 - 【GetDepartmentName】: SELECT * 
+                                                FROM GFIN.EMP_DATA_ALL E, GFIN.ORG_DATA_ALL O
+                                                WHERE E.ORG_ID = O.ORG_ID
+                                                AND E.EMP_NO = :emp_no 
+
+2021-11-24 14:08:57,985 [68] INFO  --End:獲取Department Name資訊 - Completed

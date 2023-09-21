@@ -1,0 +1,389 @@
+﻿@model IEnumerable<RSI.Models.Entity.DASHBOARD_LAYER1_VEntity>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    @Styles.Render("~/bundles/style")
+    @Styles.RenderFormat("<link href='{0}' rel='stylsheet' type='text/css' media='print' />", "~/bundles/style/print")
+    <link href="@Url.Content("~/Content/Third-Part/JQueryUI/jquery-ui.min.css")" rel="stylesheet" />
+    <title>DetailLayer1</title>
+    <style>
+        /*body {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }*/
+
+        .green {
+            color: #00C853;
+        }
+
+        .blue {
+            color: #42A5F5;
+        }
+
+        .yellow {
+            color: #F39C12;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="table-responsive">
+            @{
+                var viewshow = Model.Where(p => p.APP_ASSIGNER == RSI.Models.Entity.Employee.EmpNO).Any() || RSI.Models.Entity.Employee.EmpNO== "0012216" || RSI.Models.Entity.Employee.EmpNO == "1108477";
+                var reassign = Model.Where(p => p.PRODUCTSOURCER == RSI.Models.Entity.Employee.EmpNO && p.STATUS != "A").Any();
+                var checkreturn = Model.Where(p => p.CHECK_RETURN == "Y" && p.APP_ASSIGNER == RSI.Models.Entity.Employee.EmpNO).Any();
+                var form_no = Model.Select(p => p.FORM_NO).Distinct().FirstOrDefault();
+                var now_phase = Model.Select(p => p.NOW_PHASE).Distinct().FirstOrDefault();
+            }
+            <div class="text-center" style="padding-top:5px; padding-bottom:5px;">
+                @if (viewshow)
+                {
+                 <button class="btn bg-yellow" onclick="showDetailView('@Request.QueryString["part_type"]')">View</button>
+                }
+
+                @if (checkreturn)
+                {
+                 <button class="btn bg-green" onclick="Withdraw('@RSI.Models.Entity.Validate.EncryptValue(@Request.QueryString["rsi_no"])', '@RSI.Models.Entity.Validate.EncryptValue(@Request.QueryString["part_type"])', @form_no, @Request.QueryString["phase_id"], @now_phase, '@Request.QueryString["bu"]', '@Request.QueryString["projectname"]')">Withdraw</button>
+                }
+
+                @if (reassign)
+                {
+                 <button class="btn bg-purple" onclick="showReassign('@Request.QueryString["part_type"]')">Reassign</button>
+                }
+            </div>
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr class="bg-light-blue">
+                        <th class="text-center">Part Type</th>
+                        <th class="text-center">Material Parts</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Reviewer</th>
+                        <th class="text-center">Approved</th>
+                        <th class="text-center">Begin Date</th>
+                        <th class="text-center">End Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="vertical-align:middle;">@item.PART_TYPE</td>
+                            <td style="vertical-align:middle;">@item.MTL_PARTS</td>
+                            <td class="text-center" style="vertical-align:middle;">
+                                @if (item.STATUS.Equals("A"))
+                                {
+                                    <i class="fa fa-check-circle fa-2x green" onclick="showDetailLayer2(@item.RSI_NO, '@item.STATUS', '@Request.QueryString["form_status"]', '@item.PART_TYPE', @Request.QueryString["phase_id"])"></i>
+                                }
+
+                                @if (item.STATUS.Equals("U"))
+                                {
+                                    <i class="fa fa-circle fa-2x blue" onclick="showDetailLayer2(@item.RSI_NO, '@item.STATUS', '@Request.QueryString["form_status"]', '@item.PART_TYPE', @Request.QueryString["phase_id"])"></i>
+                                }
+
+                                @if (item.STATUS.Equals("R"))
+                                {
+                                    <i class="fa fa-circle fa-2x yellow" onclick="showDetailLayer2(@item.RSI_NO, '@item.STATUS', '@Request.QueryString["form_status"]', '@item.PART_TYPE', @Request.QueryString["phase_id"])"></i>
+                                }
+                            <td>@item.REVIEWER</td>
+                            <td class="text-center">
+                                @if (item.APPROVED.Equals("Y"))
+                                {
+                                    <i class="fa fa-check-circle fa-2x green"></i>
+                                }
+
+                                @if (item.APPROVED.Equals("N"))
+                                {
+                                    <i class="fa fa-circle fa-2x blue"></i>
+                                }
+
+                                @if (item.APPROVED.Equals("R"))
+                                {
+                                    <i class="fa fa-circle fa-2x yellow"></i>
+                                }
+                            </td>
+                            <td>@item.BEGIN_DATE.ToString("yyyy/MM/dd HH:mm")</td>
+                            <td>
+                                @if (!DateTime.Equals(item.END_DATE, DateTime.MinValue))
+                                {
+                                    <span>@item.END_DATE.ToString("yyyy/MM/dd HH:mm")</span>
+                                }
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="reAssign" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">ReAssign</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="mtl_part" />
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">EMP_NO</label>
+                            <div class="col-sm-5">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="emp_no" disabled>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" onclick="searchEmp()"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">EMP_NAME</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="emp_name" disabled>
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                            <label class="col-sm-2 control-label">Start Date</label>
+                            <div class="col-sm-7">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="startdate" style="z-index:10000;">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default calendar" type="button"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">End Date</label>
+                            <div class="col-sm-7">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="enddate" style="z-index:10000;">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default calendar" type="button"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>*@
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <input name="part_type" type="hidden" />
+                    <button type="button" class="btn btn-default resetAssign">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/script")
+    <script>
+        $(function () {
+            var trs = $('table.table tbody tr');
+            var temp_part_type = null;
+            var row_index = 0;
+            var temp_rowspan = 1;
+            $.each(trs, function (index, value) {
+                var tds = $(value).find('td');
+                var item_part_type = $(tds).eq(1).text();
+                if (index === 0) {
+                    temp_part_type = item_part_type;
+                    row_index = index;
+                    return;
+                }
+
+                if (temp_part_type === item_part_type) {
+                    temp_rowspan++;
+                    $(trs).eq(index).find('td').eq(1).addClass('hidden');
+                    $(trs).eq(index).find('td').eq(2).addClass('hidden');
+                } else {
+                    $(trs).eq(row_index).find('td').eq(1).attr('rowspan', temp_rowspan);
+                    $(trs).eq(row_index).find('td').eq(2).attr('rowspan', temp_rowspan);
+                    temp_part_type = item_part_type;
+                    temp_rowspan = 1;
+                    row_index = index;
+                }
+            });
+            $(trs).eq(row_index).find('td').eq(1).attr('rowspan', temp_rowspan);
+            $(trs).eq(row_index).find('td').eq(2).attr('rowspan', temp_rowspan);
+
+            $(trs).eq(0).find('td').eq(0).attr('rowspan', $(trs).length);
+            $(trs).not(':eq(0)').each(function (index, value) {
+                $(value).find('td').eq(0).addClass('hidden');
+            });
+        });
+
+        function showDetailView(part_type) {
+            var phase_id = '@Request.QueryString["phase_id"]';
+            var rsi_no = '@RSI.Models.Entity.Validate.EncryptValue(Request.QueryString["rsi_no"])';
+            var part_type = '@RSI.Models.Entity.Validate.EncryptValue(Request.QueryString["part_type"])';
+            var bu = '@RSI.Models.Entity.Validate.EncryptValue(Request.QueryString["bu"])';
+            if (phase_id === '10' || phase_id === '20' || phase_id === '25' || phase_id === '30') {
+                var url = "/RSI/RSI/Layer1_RDReview?rsi_no={0}&part_type={1}&phase_id={2}&BU={3}";
+                url = url.replace("{0}", rsi_no).replace("{1}", part_type).replace("{2}", phase_id).replace("{3}", bu);
+                window.open(url, "_blank", "scrollbars=yes,resizable=yes");
+            } else if (phase_id === '40' || phase_id === '50' || phase_id === '60') {
+                var url = "/RSI/RSI/Layer1View_Sourcer?rsi_no={0}&part_type={1}&phase_id={2}&BU={3}";
+                url = url.replace("{0}", rsi_no).replace("{1}", part_type).replace("{2}", phase_id).replace("{3}", bu);
+                window.open(url, "_blank", "scrollbars=yes,resizable=yes");
+            } else {
+                var url = "/RSI/RSI/Layer1View_PMConfirm?rsi_no={0}&part_type={1}&phase_id={2}&BU={3}";
+                url = url.replace("{0}", rsi_no).replace("{1}", part_type).replace("{2}", phase_id).replace("{3}", bu);
+                window.open(url, "_blank", "scrollbars=yes,resizable=yes");
+            }
+        }
+
+        function showReassign(part_type) {
+            $('input[name="part_type"]').val(part_type);
+            $('#reAssign').modal('show');
+        }
+
+        function searchEmp() {
+            var part_type = $('input[name="part_type"]').val();
+            var phase_id = '45';
+            var bu = '@Request.QueryString["bu"]';
+            var url = "/RSI/RSI/SearchEmp?phase_id={0}&part_type={1}&bu={2}";
+            url = url.replace('{0}', phase_id).replace('{1}', part_type).replace('{2}', bu);
+            window.open(url, "_blank", 'scrollbars=yes, width=1000, height=600');
+        }
+
+        function SetEmpInfo(emp_no, emp_name) {
+            $("#reAssign input#emp_no").val(emp_no);
+            $("#reAssign input#emp_name").val(emp_name);
+        }
+
+        $(document).on("change", "#reAssign input#emp_no", function () {
+            var emp_no = $(this).val();
+            var part_type = $('input[name="part_type"]').val();
+            var phase_id = '45';
+            var bu = '@Request.QueryString["bu"]';
+            $.ajax({
+                url: '/RSI/RSI/SearchEmp',
+                method: 'POST',
+                data: {
+                    search: emp_no,
+                    part_type: part_type,
+                    phase_id: phase_id,
+                    bu: bu
+                },
+                success: function (data) {
+                    if (data.length > 0) {
+                        $("#reAssign input#emp_name").val(data[0].EMP_NAME);
+                    }
+                }
+            });
+        });
+
+        $(document).on("click", "#reAssign .resetAssign", function () {
+            var rsi_no = '@Request.QueryString["rsi_no"]';
+            var part_type = $('input[name="part_type"]').val();
+            var reassign = $("#reAssign input#emp_no").val();
+            var projectname ='@Request.QueryString["projectname"]';
+            //var start_date = $("#reAssign input#startdate").val();
+            //var end_date = $("#reAssign input#enddate").val();
+            var bu =  '@Request.QueryString["bu"]';
+            var phase_id = '45';
+            if (reassign === "") {
+                alert("請輸入員工工號");
+                return false;
+            }
+
+            $.ajax({
+                url: '/RSI/Sourcer/ProductReview_ReSetAssign',
+                method: 'POST',
+                data: {
+                    rsi_no: rsi_no,
+                    reassign: reassign,
+                    part_type: part_type,
+                    bu: bu,
+                    //start_date: start_date,
+                    //end_date: end_date,
+                    phase_id: phase_id,
+                    projectname: projectname
+                },
+                success: function (data) {
+                    alert("指派完成");
+                    $('tr.active').removeClass('active');
+                    $('#reAssign').modal('hide');
+                    location.reload();
+                }
+            });
+        });
+
+        //var today = new Date();
+        //var dd = today.getDate();
+        //var mm = today.getMonth(); //January is 0!
+        //var yyyy = today.getFullYear();
+
+        //$("#startdate").datepicker({
+        //    dateFormat: "yy/mm/dd"
+        //});
+        //$("#startdate").datepicker("setDate", new Date(yyyy, mm, dd));
+        //$("#enddate").datepicker({
+        //    dateFormat: "yy/mm/dd"
+        //});
+        //$("#enddate").datepicker("setDate", new Date(yyyy, mm, dd + 6));
+
+        //$(document).on("click", ".calendar", function () {
+        //    var date = $(this).parent().prev();
+        //    var id_date = $(date).attr("id");
+        //    if (id_date !== "startdate") {
+        //        $(date).datepicker("show");
+        //    } else {
+        //        $(date).datepicker("show");
+        //    }
+        //});
+
+        //$(document).on("change", "#startdate", function () {
+        //    $("#enddate").val("");
+        //    var startdate = $(this).val();
+        //    var year = parseInt(startdate.split('/')[0]);
+        //    var month = parseInt(startdate.split('/')[1]) - 1;
+        //    var day = parseInt(startdate.split('/')[2]);
+        //    $("#enddate").datepicker('option', 'minDate', new Date(yyyy, month, day));
+        //    $("#enddate").datepicker('option', 'maxDate', new Date(yyyy, month, day + 6));
+        //});
+
+        function Withdraw(rsi_no, part_type, form_no, phase_id, now_phase, bu, projectname) {
+            if (confirm("確認要撤回嗎?")) {
+                $.ajax({
+                    url: "/RSI/Process/RejectForReturn",
+                    data: {
+                        rsi_no: rsi_no,
+                        part_type: part_type,
+                        phase_id: phase_id,
+                        now_phase: now_phase,
+                        bu: bu,
+                        projectname: projectname
+                    },
+                    method: "POST",
+                    success: function (data) {
+                        if (!data) {
+                            alert("存檔失敗");
+                            return false;
+                        }
+                        //alert("送出完成");
+                        $('#myModal').modal('hide');
+                        window.close();
+                    },
+                    error: function () {
+
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

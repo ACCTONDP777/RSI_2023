@@ -1,0 +1,219 @@
+﻿
+@{
+    ViewBag.Title = "DemoView";
+}
+
+<!-- Status bar overlay for full screen mode (PhoneGap) -->
+<div class="statusbar-overlay"></div>
+<!-- Panels overlay-->
+<div class="panel-overlay"></div>
+<!-- Left panel with reveal effect-->
+<div class="panel panel-right panel-reveal" style="background-color:#eee">
+    <div class="content-block c_font_size_15rem">
+        <div style="box-shadow: 0 0 10px #aaa;border-radius: 8px;">
+            <p class="c_padding_top_10px" style="color:orange">宿管联系方式</p>
+            <p id="p_manage" style="color:orange">@ViewBag.dormitory_manage_info</p>
+            <p style="color:orange">Hr管理人员</p>
+            <p id="p_hr" class="c_padding_bottom_10px" style="color:orange">@ViewBag.hr_info</p>
+        </div>
+        <p><a onclick="alert('暂未开放，敬请期待', '');">宿舍简介</a></p>
+        <p><a onclick="alert('暂未开放，敬请期待', '');">宿舍管理条例</a></p>
+        <p><a href="#" class="close-panel">关闭</a></p>
+    </div>
+</div>
+<div class="views">
+    <div class="view view-main">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="center sliding" style="font-size: 1.8rem;">
+                    <select id="sls_dorm" onchange="Index.GetDormInfo($(this))" style="border: none;background-color: #f7f7f8;font-size: 1.8rem;font-weight:500">
+                        @foreach (System.Data.DataRow row in ViewBag.dtDorm.Rows)
+                        {
+                            <option value="@row["dorm_id"]">@row["dorm_info"]</option>
+                        }
+                    </select>
+                </div>
+                &nbsp;
+                <div class="right">
+                    <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
+                </div>
+                <div class="subnavbar">
+                    <div class="buttons-row">
+                        <a href="#tab1" class="button tab-link active c_font_size_12rem">我的申请</a>
+                        <a href="#tab3" class="button tab-link c_font_size_12rem">事项追踪</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pages navbar-through toolbar-through">
+            <div data-page="index" class="page">
+                <div class="page-content">
+                    <div class="tabs">
+                        <div id="tab1" class="tab active">
+                            <div class="content-block" style="padding-top: 5%;">
+                                <div action="CheckInApply" class="action c_box_shadow_cccccc c_block_square c_float_left c_color_007aff">
+                                    <div class="c_text_center">
+                                        <i class="iconfont" style="font-size: 3rem;">&#xe732;</i>
+                                    </div>
+                                    <div class="div_square_font c_text_center c_font_size_12rem">我要住宿</div>
+                                </div>
+                                <div action="RepairApply" class="action c_box_shadow_cccccc c_block_square c_float_right c_color_007aff">
+                                    <div class="c_text_center">
+                                        <i class="iconfont" style="font-size: 3rem;">&#xe673;</i>
+                                    </div>
+                                    <div class="div_square_font c_text_center c_font_size_12rem">
+                                        我要报修
+                                    </div>
+                                </div>
+                                <div action="ChangeApply" class="action c_box_shadow_cccccc c_block_square c_float_left c_margintop_30px c_color_007aff">
+                                    <div class="c_text_center">
+                                        <i class="iconfont" style="font-size: 3rem;">&#xe61e;</i>
+                                    </div>
+                                    <div class="div_square_font c_text_center c_font_size_12rem">
+                                        我要换房
+                                    </div>
+                                </div>
+                                <div action="QuitApply" class="action c_box_shadow_cccccc c_block_square c_float_right c_margintop_30px c_color_007aff">
+
+                                    <div class="c_text_center">
+                                        <i class="iconfont" style="font-size: 3rem;">&#xe658;</i>
+                                    </div>
+                                    <div class="div_square_font c_text_center c_font_size_12rem">
+                                        我要退宿
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab3" class="tab">
+                            <div class="content-block" style="padding-top: 5%;">
+                                <div action="CheckInList" class="action c_box_shadow_cccccc c_block_square c_float_left c_color_007aff">
+                                    <div class="c_text_center">
+                                        <i class="iconfont" style="font-size: 3rem;">&#xe732;</i>
+                                    </div>
+                                    <div class="div_square_font c_text_center c_font_size_12rem">
+                                        我的住宿申请
+                                    </div>
+                                </div>
+                                <div action="RepairList" class="action c_box_shadow_cccccc c_block_square c_float_right c_color_007aff">
+                                    <div class="c_text_center">
+                                        <i class="iconfont" style="font-size: 3rem;">&#xe673;</i>
+                                    </div>
+                                    <div class="div_square_font c_text_center c_font_size_12rem">
+                                        我的报修记录
+                                    </div>
+                                </div>
+                                <div action="ChangeList" class="action c_box_shadow_cccccc c_block_square c_float_left c_margintop_30px c_color_007aff">
+                                    <div class="c_text_center">
+                                        <i class="iconfont" style="font-size: 3rem;">&#xe61e;</i>
+                                    </div>
+                                    <div class="div_square_font c_text_center c_font_size_12rem">
+                                        我的调换信息
+                                    </div>
+                                </div>
+                                <div action="QuitList" class="action c_box_shadow_cccccc c_block_square c_float_right c_margintop_30px c_color_007aff">
+
+                                    <div class="c_text_center">
+                                        <i class="iconfont" style="font-size: 3rem;">&#xe658;</i>
+                                    </div>
+                                    <div class="div_square_font c_text_center c_font_size_12rem">
+                                        我的退宿信息
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bottom Toolbar-->
+    </div>
+</div>
+
+
+@Scripts.Render("~/bundles/Common")
+
+<script>
+    $(function () {
+        Index.Init();
+    })
+
+    var Index = {
+        Init: function () {
+            function GetQueryString(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]); return null;
+            }
+
+            var msg = GetQueryString("msg");
+            if (msg == "success") {
+                myApp.alert("保存成功", '');
+            }
+            if (msg == "UpdateSuccess") {
+                myApp.alert("修改成功", '');
+            }
+            Index.Action();
+        },
+
+        GetDormInfo: function (o) {
+            var dormId = $(o).val();
+            if (C.CheckIsEmpty(dormId)) { } else {
+                $.ajax({
+                    url: "../Repair/GetDormInfo",
+                    type: "post",
+                    data: {
+                        DormId: encodeURI(dormId)
+                    },
+                    async: "false",
+                    success: function (data) {
+                        if (data != null) {
+                            var JsonData = $.parseJSON(data);
+                            var hrInfo = C.CheckIsEmpty(JsonData[0].hr_supervisor_empno) ? "无" : JsonData[0].hr_supervisor_empno;
+                            var MaInfo = C.CheckIsEmpty(JsonData[0].supervisor_contact_number) ? "无" : JsonData[0].supervisor_contact_number;
+                            $("#p_manage").html(MaInfo);
+                            $("#p_hr").html(hrInfo);
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert(textStatus + ": " + errorThrown);
+                    }
+                })
+            }
+        },
+
+        Action: function () {
+            $(".action").click(function () {
+                var action = $(this).attr("action");
+                switch (action) {
+                    case "RepairApply":
+                        myApp.alert("暂未开启，敬请期待", "");
+                        //window.location.href = '../controlName/actionName';
+                        break;
+                    case "RepairList":
+                        myApp.alert("暂未开启，敬请期待", "");
+                        break;
+                    case "CheckInList":
+                        myApp.alert("暂未开启，敬请期待", "");
+                        break;
+                    case "ChangeList":
+                        myApp.alert("暂未开启，敬请期待", "");
+                        break;
+                    case "QuitList":
+                        myApp.alert("暂未开启，敬请期待", "");
+                        break;
+                    case "CheckInApply":
+                        myApp.alert("暂未开启，敬请期待", "");
+                        break;
+                    case "ChangeApply":
+                        myApp.alert("暂未开启，敬请期待", "");
+                        break;
+                    case "QuitApply":
+                        myApp.alert("暂未开启，敬请期待", "");
+                        break;
+                }
+            })
+        },
+    }
+
+</script>
+

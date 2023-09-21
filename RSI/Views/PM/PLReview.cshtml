@@ -1,0 +1,179 @@
+﻿@model RSI.Models.Entity.H_Product_InfoEntity
+@{
+    ViewBag.Title = RSI.Models.Entity.Employee.GetSiteName(Request.QueryString["phase_id"], Request.QueryString["BU"]);
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section custom_css_reference {
+    <link href="@Url.Content("~/Content/Css/dataTables.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Third-Part/Select-1.2.6/css/select.bootstrap.min.css")" rel="stylesheet" />
+}
+
+@section custom_style{
+    <style>
+        table tbody tr td.whitespacepre {
+            white-space: pre !important;
+        }
+
+        .text-ellipsis {
+            max-width: 120px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+            .text-ellipsis:hover {
+                white-space: normal;
+            }
+
+        .fa-minus-circle, fa-plus-circle {
+            cursor: pointer;
+        }
+
+        table.dataTable tbody > tr.selected td, table.dataTable tbody > tr > .selected {
+            background-color: #9e9e9e;
+            /*color: #000;*/
+        }
+
+            table.dataTable tbody > tr.selected:hover td, table.dataTable tbody > tr > .selected:hover {
+                background-color: #9e9e9e;
+                /*color: #000;*/
+            }
+
+        .text-bold {
+            font-weight: bold;
+        }
+    </style>
+}
+
+@Html.Partial("~/Views/RSI/BasicPage.cshtml", Model)
+
+<div id="tabs" class="nav-tabs-custom" style="box-shadow: none; background: transparent;">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab1" class="tabMain" data-toggle="tab">Normal Parts</a></li>
+        <li><a href="#tab2" class="tabMain" data-toggle="tab">Special Parts</a></li>
+    </ul>
+
+    <div class="tab-content" style="background: transparent;">
+        <div id="tab1" class="active tab-pane">
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label>Ref. Model</label>
+                    <label class="rsi-model"></label>
+                </div>
+            </div>
+            <table id="normalTable" class="table table-bordered table-hover">
+                <thead>
+                    <tr class="bg-light-blue">
+                        <th class="text-center" style="vertical-align:middle;"><i class="fa fa-minus-circle fa-changeall" aria-hidden="true"></i></th>
+                        <th class="text-center" style="vertical-align:middle;">Partnumber_Top</th>
+                        <th class="text-center" style="vertical-align:middle;">Partnumber_Parent</th>
+                        <th class="text-center" style="vertical-align:middle;">Partnumber_Child</th>
+                        <th class="text-center" style="vertical-align:middle;">Part No</th>
+                        <th class="text-center" style="vertical-align:middle;">Partpath</th>
+                        <th class="text-center" style="vertical-align:middle;">Level</th>
+                        <th class="text-center" style="vertical-align:middle;">Material Group</th>
+                        <th class="text-center" style="vertical-align:middle;">Material Parts</th>
+                        <th class="text-center" style="vertical-align:middle;">Part Type</th>
+                        <th class="text-center" style="vertical-align:middle;">English Name</th>
+                        <th class="text-center" style="vertical-align:middle;">Part Level</th>
+                        <th class="text-center" style="vertical-align:middle;">Part Description</th>
+                        <th class="text-center" style="vertical-align:middle;">Vendor</th>
+                        <th class="text-center" style="vertical-align:middle;">Maker PN</th>
+                        <th class="text-center" style="vertical-align:middle;">Part Spec</th>
+                        <th class="text-center" style="vertical-align:middle;">Spec Def</th>
+                        <th class="text-center" style="vertical-align:middle;">Release Date</th>
+                        <th class="text-center" style="vertical-align:middle;">Usage</th>
+                        <th class="text-center" style="vertical-align:middle;">Unit</th>
+                        <th class="text-center" style="vertical-align:middle;">Eol</th>
+                        <th class="text-center" style="vertical-align:middle;">Uni Spec Stutas</th>
+                        <th class="text-center" style="vertical-align:middle;">Remark</th>
+                        <th class="text-center" style="vertical-align:middle;">Attach File</th>
+                        <th class="text-center" style="vertical-align:middle;">Modify Type</th>
+                        <th class="text-center" style="vertical-align:middle;">SN</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div id="tab2" class="tab-pane">
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label>Ref. Model</label>
+                    <label class="rsi-model"></label>
+                </div>
+            </div>
+
+            <div id="specialTabs" class="nav-tabs-custom" style="background: transparent;">
+                <ul class="nav nav-tabs"></ul>
+                <div class="tab-content" id="specialContent" style="padding-left:0px; padding-right:0px; background: transparent;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12 text-center">
+        <button class="btn bg-red btn-rejectmodal" data-toggle="modal" data-target="#rejectModal">Reject</button>
+        <button class="btn bg-green btn-modal" data-toggle="modal" data-target="#myModal">Submit</button>
+        @{
+            var dt = RSI.Models.Entity.RSI_ConfigEntityDAL.GetExportExcelConfig(Model.BU, Model.PartType, Request.QueryString["phase_id"]);
+            var exportexcel = dt.Rows.Count > 0 ? dt.Rows[0]["attribute5"] == null ? "hidden" : dt.Rows[0]["attribute5"].ToString() == "N" ? "hidden" : "" : "hidden";
+        }
+        <button class="btn bg-light-blue btn-exportExcel @exportexcel">Export</button>
+    </div>
+</div>
+
+<form id="exportExcel" action="/RSI/RD/ExportExcel" method="post">
+    <input type="hidden" name="rsi_no" id="rsi_no" />
+    <input type="hidden" name="projectname" id="projectname" />
+    <input type="hidden" name="bu" id="bu" />
+    <input type="hidden" name="part_type" id="part_type" />
+    <input type="hidden" name="phase_id" id="phase_id" />
+    <input type="hidden" name="form_no" id="form_no" value="@Request.QueryString["form_no"].ToString()" />
+    <input type="hidden" name="page_name" id="page_name" value="PLReivew" />
+</form>
+
+@Html.Partial("~/Views/Process/Index.cshtml")
+
+@Html.Action("DeatilApprove", "RSI", new { rsi_no = Request.QueryString["rsi_no"], part_type = Request.QueryString["part_type"], phase_id = Request.QueryString["phase_id"] })
+
+<div class="modal fade" id="fileManagement" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Download File</h4>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table" id="fileTable" style="width:100%;">
+                        <thead>
+                            <tr class="bg-light-blue">
+                                <th class="text-center">File Name</th>
+                                <th class="text-center">File Size(KB)</th>
+                                <th class="text-center">Upload by</th>
+                                <th class="text-center">Upload Date</th>
+                                <th class="text-center">Remark</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    string version = RSI.Models.Entity.RSI_ConfigEntityDAL.GetVersion();
+}
+
+@section custom_script_reference{
+    @Html.Partial("~/Views/RSI/LoadingPage.cshtml")
+    <script src="@Url.Content("~/Content/Scripts/jquery.dataTables.min.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Scripts/dataTables.bootstrap.min.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Third-Part/Select-1.2.6/js/dataTables.select.min.js?" + version)"></script>
+    <script src="@Url.Content("~/Content/Third-Part/Select-1.2.6/js/select.bootstrap.min.js?" + version)"></script>
+    <script src="@Url.Content("~/Scripts/PLReview.js?" + version)"></script>
+}
+

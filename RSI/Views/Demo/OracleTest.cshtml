@@ -1,0 +1,105 @@
+﻿@model IList<RSI.Models.Entity.BPS_Item_ConfigEntity>
+@{
+    ViewBag.Title = "Oracle連線測試";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section custom_css_reference {
+    <link href="@Url.Content("~/Content/Css/dataTables.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+}
+
+<div class="box box-primary">
+    <div class="box-header">
+        <h3 class="box-title">工单数据查询--@DateTime.Now.ToLongTimeString()</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <div class="table-responsive">
+            <table id="example1" class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr class="bg-light-blue">
+                        <th>ORGANIZATION_ID</th>
+                        <th>ORGANIZATION_CODE</th>
+                        <th>ITEM_CATEGORY</th>
+                        <th>ITEM_ID</th>
+                        <th>ITEM_NO</th>
+                        <th>ITEM_DESCRIPTION</th>
+                        <th>UOM</th>
+                        <th>VENDOR_ID</th>
+                        <th>VENDOR_SITE_ID</th>
+                        <th>VENDOR_NAME</th>
+                        <th>VENDOR_SITE_CODE</th>
+                        <th>LEAD_TIME</th>
+                        <th>SHIP_DAYS</th>
+                        <th>SHIP_AREA</th>
+                        <th>PACKING_TYPE</th>
+                        <th>PACKING_QTY</th>
+                        <th>MOQ</th>
+                        <th>SAFETY_STOCK</th>
+                        <th>SAFETY_STOCK_TO_VENDOR</th>
+                        <th>USAGE</th>
+                        <th>VENDOR_CODE</th>
+                        <th>ACTIVE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in Model)
+                    {
+                        <tr>
+                            <td>@m.ORGANIZATION_ID</td>
+                            <td>@m.ORGANIZATION_CODE</td>
+                            <td>@m.ITEM_CATEGORY</td>
+                            <td>@m.ITEM_ID</td>
+                            <td>@m.ITEM_NO</td>
+                            <td>@m.ITEM_DESCRIPTION</td>
+                            <td>@m.UOM</td>
+                            <td>@m.VENDOR_ID</td>
+                            <td>@m.VENDOR_SITE_ID</td>
+                            <td>@m.VENDOR_NAME</td>
+                            <td>@m.VENDOR_SITE_CODE</td>
+                            <td>@m.LEAD_TIME</td>
+                            <td>@m.SHIP_DAYS</td>
+                            <td>@m.SHIP_AREA</td>
+                            <td>@m.PACKING_TYPE</td>
+                            <td>@m.PACKING_QTY</td>
+                            <td>@m.MOQ</td>
+                            <td>@m.SAFETY_STOCK</td>
+                            <td>@m.SAFETY_STOCK_TO_VENDOR</td>
+                            <td>@m.USAGE</td>
+                            <td>@m.VENDOR_CODE</td>
+                            <td>@m.ACTIVE</td>
+                            @*<td>@wip.WONAME</td>
+                                <td>@wip.DATERELEASED</td>
+                                <td>@wip.ASSEMBLY</td>
+                                <td>@wip.BOMVERSION</td>
+                                <td>@wip.STARTQUANTITY</td>
+                                <td>@wip.QUANTITYCOMPLETED</td>
+                                <td>@wip.QUANTITYSHIPPED</td>*@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- /.box-body -->
+</div>
+
+@section custom_script_reference {
+    <script src="@Url.Content("~/Content/Scripts/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/Content/Scripts/dataTables.bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Content/Scripts/jquery.slimscroll.min.js")"></script>
+    <script src="@Url.Content("~/Content/Scripts/fastclick.js")"></script>
+}
+
+@section custom_script{
+    $(function () {
+    $('#example1').DataTable({
+    'paging': true,
+    'lengthChange': true,
+    'searching': true,
+    'ordering': true,
+    'info': true,
+    'autoWidth': true
+    })
+    })
+}

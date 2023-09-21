@@ -1,0 +1,83 @@
+﻿@using RSI.Models.Entity
+@model IList<WIPEntity>
+
+@{
+    ViewBag.Title = "表格范例";
+    ViewBag.SubTitle = "表格與搜尋";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section custom_css_reference {
+    <link href="@Url.Content("~/Content/Css/dataTables.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+}
+
+@section custom_script_reference {
+    <script src="@Url.Content("~/Content/Scripts/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/Content/Scripts/dataTables.bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Content/Scripts/jquery.slimscroll.min.js")"></script>
+    <script src="@Url.Content("~/Content/Scripts/fastclick.js")"></script>
+}
+
+@section custom_script {
+$(function () {
+    $('#example1').DataTable({
+        'paging'      : true,
+        'lengthChange': true,
+        'searching'   : true,
+        'ordering'    : true,
+        'info'        : true,
+        'autoWidth'   : true
+    })
+})
+}
+<!--------------------------
+    | 內容 |
+    -------------------------->
+<!-- 表格 -->
+<div class="box box-primary">
+    <div class="box-header">
+        <h3 class="box-title">工单数据查询--@DateTime.Now.ToLongTimeString()</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <div class="table-responsive">
+            <table id="example1" class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr class="bg-light-blue">
+                        <th>WO_NAME</th>
+                        <th>DATE_RELEASED</th>
+                        <th>ASSEMBLY</th>
+                        <th>BOM_VERSION</th>
+                        <th>START_QUANTITY</th>
+                        <th>QUANTITY_COMPLETED</th>
+                        <th>QUANTITY_SHIPPED</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (WIPEntity wip in Model)
+                    {
+                        <tr>
+                            <td>@wip.WO_NAME</td>
+                            <td>@wip.DATE_RELEASED</td>
+                            <td>@wip.ASSEMBLY</td>
+                            <td>@wip.BOM_VERSION</td>
+                            <td>@wip.START_QUANTITY</td>
+                            <td>@wip.QUANTITY_COMPLETED</td>
+                            <td>@wip.QUANTITY_SHIPPED</td>
+
+                            @*<td>@wip.WONAME</td>
+                            <td>@wip.DATERELEASED</td>
+                            <td>@wip.ASSEMBLY</td>
+                            <td>@wip.BOMVERSION</td>
+                            <td>@wip.STARTQUANTITY</td>
+                            <td>@wip.QUANTITYCOMPLETED</td>
+                            <td>@wip.QUANTITYSHIPPED</td>*@
+                        </tr> 
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- /.box-body -->
+</div>
+<!-- /.box -->

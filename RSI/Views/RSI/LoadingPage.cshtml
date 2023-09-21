@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+}
+<style>
+    .zhezhao {
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        filter: alpha(opacity=50);
+        -moz-opacity: 0.5;
+        opacity: 0.5;
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        display: block;
+        z-index: 2000;
+    }
+
+    .login {
+        position: fixed;
+        top: 105px;
+        left: 45%;
+        color: white;
+        display: block;
+        z-index: 2500;
+    }
+</style>
+<div class="zhezhao" id="zhezhao"></div>
+<div class="login" id="login">
+    @*<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>*@
+    <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+    <span class="sr-only">Loading...</span>
+    <span style="font-size: 2em;">Loading...</span>
+</div>
+<script type="text/javascript">
+    //document.onreadystatechange = function () {
+    //    if (document.readyState == "complete") {
+    //        $('#zhezhao').hide();
+    //        $('#login').hide();
+    //    }
+    //}
+
+    $(document).ajaxStop(function () {
+        $('#zhezhao').hide();
+        $('#login').hide();
+    });
+</script>

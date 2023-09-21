@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="RSI.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MVC_TemplateProject_MCAWebService_MCAWebService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://autcclone01.corpnet.auo.com/mca/service/mcawebservice.asmx</Value>
+    </Setting>
+    <Setting Name="MVC_TemplateProject_RFQWebService_WS_PartBOM" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://au3tqatsvm2/NEWPARTBOM_WebService/WS_PartBOM.asmx</Value>
+    </Setting>
+    <Setting Name="MVC_TemplateProject_RFQWebServiceForUpdateStatus_RFQWebService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://auhqplmapts01.corpnet.auo.com/RFQ/Content/WebService/RFQWebService.asmx</Value>
+    </Setting>
+    <Setting Name="MVC_TemplateProject_SRMValidateWebService_MainService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://pur.auo.com/SRMValidate/MainService.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

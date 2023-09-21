@@ -1,0 +1,1343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0669AE65-FE75-42F7-BEC3-DD7154058C7E}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RSI</RootNamespace>
+    <AssemblyName>MVC-TemplateProject</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AUO.Common.Authentication, Version=2.0.0.2, Culture=neutral, PublicKeyToken=21ad749f1c23fef5, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\auo\gfs\IT000\ITB00\Public\_Net_Dll_Reference\CAP\AUO.Common.Authentication.dll</HintPath>
+    </Reference>
+    <Reference Include="Com.Auo.EAP, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>\\auo\gfs\IT000\ITB00\Public\_Net_Dll_Reference\Com.Auo.EAP.dll</HintPath>
+    </Reference>
+    <Reference Include="Com.Auo.HttpModule20.Library, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\JudeLiWistron\Desktop\系統相關文件\Anne\Url參數加解密\Url參數加解密\DotNetFramework 2.0 dll\Release\Com.Auo.HttpModule20.Library.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NPOI, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.2.1100\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DemoController.cs" />
+    <Compile Include="Controllers\PMController.cs" />
+    <Compile Include="Controllers\ProcessController.cs" />
+    <Compile Include="Controllers\RDController.cs" />
+    <Compile Include="Controllers\RSIController.cs" />
+    <Compile Include="Controllers\SourcerController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity\BPS_Item_ConfigEntity.cs" />
+    <Compile Include="Models\Entity\C_MTL_PARTSEntity.cs" />
+    <Compile Include="Models\Entity\DASHBOARD_LAYER1_VEntity.cs" />
+    <Compile Include="Models\Entity\DASHBOARD_LAYER2_VEntity.cs" />
+    <Compile Include="Models\Entity\DASHBOARD_LIST_VEntity.cs" />
+    <Compile Include="Models\Entity\Employee.cs" />
+    <Compile Include="Models\Entity\FileManagementEntity.cs" />
+    <Compile Include="Models\Entity\H_Form_ApproveEntity.cs" />
+    <Compile Include="Models\Entity\H_Product_DetailEntity.cs" />
+    <Compile Include="Models\Entity\H_Product_InfoEntity.cs" />
+    <Compile Include="Models\Entity\JsonMessage.cs" />
+    <Compile Include="Models\Entity\ModelInfoEntity.cs" />
+    <Compile Include="Models\Entity\MterialGroupPartsEntity.cs" />
+    <Compile Include="Models\Entity\Parts_Type_DefEntity.cs" />
+    <Compile Include="Models\Entity\Part_InfoEntity.cs" />
+    <Compile Include="Models\Entity\RSIWebServiceEntity.cs" />
+    <Compile Include="Models\Entity\RSI_ConfigEntity.cs" />
+    <Compile Include="Models\Entity\To_Do_List_VEntity.cs" />
+    <Compile Include="Models\Entity\Validate.cs" />
+    <Compile Include="Models\Entity\WIPEntity.cs" />
+    <Compile Include="Models\Manager\BPS_Item_ConfigManager.cs" />
+    <Compile Include="Models\Manager\C_MTL_PARTSManager.cs" />
+    <Compile Include="Models\Manager\DASHBOARD_LAYER1_VManager.cs" />
+    <Compile Include="Models\Manager\DASHBOARD_LAYER2_VManager.cs" />
+    <Compile Include="Models\Manager\DASHBOARD_LIST_VManager.cs" />
+    <Compile Include="Models\Manager\FileManagementManager.cs" />
+    <Compile Include="Models\Manager\H_Form_ApproveManager.cs" />
+    <Compile Include="Models\Manager\H_Product_DetailManager.cs" />
+    <Compile Include="Models\Manager\H_Product_InfoManager.cs" />
+    <Compile Include="Models\Manager\ModelInfoManager.cs" />
+    <Compile Include="Models\Manager\MterialGroupPartsManager.cs" />
+    <Compile Include="Models\Manager\Parts_Type_DefManager.cs" />
+    <Compile Include="Models\Manager\Part_InfoManager.cs" />
+    <Compile Include="Models\Manager\RSIWebServiceManager.cs" />
+    <Compile Include="Models\Manager\To_Do_List_VManager.cs" />
+    <Compile Include="Models\Manager\WIPManager.cs" />
+    <Compile Include="Models\Utility\Auto_IdentifyAttribute.cs" />
+    <Compile Include="Models\Utility\ConfigHelper.cs" />
+    <Compile Include="Models\Utility\ExtendHelper.cs" />
+    <Compile Include="Models\Utility\OraDBAdapter.cs" />
+    <Compile Include="Models\Utility\SqlDBAdapter.cs" />
+    <Compile Include="Models\Utility\DBCS.cs" />
+    <Compile Include="Models\Utility\EAP.cs" />
+    <Compile Include="Models\Utility\Encrypt.cs" />
+    <Compile Include="Models\Utility\ExcelHelper.cs" />
+    <Compile Include="Models\Utility\LogHelper.cs" />
+    <Compile Include="Models\Utility\SqlExcute.cs" />
+    <Compile Include="Models\Utility\WebApiHelper.cs" />
+    <Compile Include="Models\Utility\XMLHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\CAP\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\DBCS_SERVICE\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\EAP\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\FLM\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\IDS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service\RSIWebService.asmx.cs">
+      <DependentUpon>RSIWebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Startup.cs" />
+    <Compile Include="Web References\MCAWebService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\RFQWebServiceForUpdateStatus\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\RFQWebService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\SRMValidateWebService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\AUO.Common.Authentication.dll" />
+    <Content Include="bin\MVC-TemplateProject.dll" />
+    <Content Include="bin\MVC-TemplateProject.pdb" />
+    <Content Include="Content\Css\AdminLTE.min.css" />
+    <Content Include="Content\Css\auo.css" />
+    <Content Include="Content\Css\bootstrap-datepicker.min.css" />
+    <Content Include="Content\Css\bootstrap.css" />
+    <Content Include="Content\Css\bootstrap.min.css" />
+    <Content Include="Content\Css\css.css" />
+    <Content Include="Content\Css\dataTables.bootstrap.min.css" />
+    <Content Include="Content\Css\daterangepicker.css" />
+    <Content Include="Content\Css\font-awesome.css" />
+    <Content Include="Content\Css\font-awesome.min.css" />
+    <Content Include="Content\Css\fullcalendar.min.css" />
+    <Content Include="Content\Css\fullcalendar.print.min.css" />
+    <Content Include="Content\Css\iCheck\all.css" />
+    <Content Include="Content\Css\iCheck\flat\aero%402x.png" />
+    <Content Include="Content\Css\iCheck\flat\aero.css" />
+    <Content Include="Content\Css\iCheck\flat\aero.png" />
+    <Content Include="Content\Css\iCheck\flat\blue%402x.png" />
+    <Content Include="Content\Css\iCheck\flat\blue.css" />
+    <Content Include="Content\Css\iCheck\flat\blue.png" />
+    <Content Include="Content\Css\iCheck\flat\flat%402x.png" />
+    <Content Include="Content\Css\iCheck\flat\flat.css" />
+    <Content Include="Content\Css\iCheck\flat\flat.png" />
+    <Content Include="Content\Css\iCheck\flat\green%402x.png" />
+    <Content Include="Content\Css\iCheck\flat\green.css" />
+    <Content Include="Content\Css\iCheck\flat\green.png" />
+    <Content Include="Content\Css\iCheck\flat\grey%402x.png" />
+    <Content Include="Content\Css\iCheck\flat\grey.css" />
+    <Content Include="Content\Css\iCheck\flat\grey.png" />
+    <Content Include="Content\Css\iCheck\flat\orange%402x.png" />
+    <Content Include="Content\Css\iCheck\flat\orange.css" />
+    <Content Include="Content\Css\iCheck\flat\orange.png" />
+    <Content Include="Content\Css\iCheck\flat\pink%402x.png" />
+    <Content Include="Content\Css\iCheck\flat\pink.css" />
+    <Content Include="Content\Css\iCheck\flat\pink.png" />
+    <Content Include="Content\Css\iCheck\flat\purple%402x.png" />
+    <Content Include="Content\Css\iCheck\flat\purple.css" />
+    <Content Include="Content\Css\iCheck\flat\purple.png" />
+    <Content Include="Content\Css\iCheck\flat\red%402x.png" />
+    <Content Include="Content\Css\iCheck\flat\red.css" />
+    <Content Include="Content\Css\iCheck\flat\red.png" />
+    <Content Include="Content\Css\iCheck\flat\yellow%402x.png" />
+    <Content Include="Content\Css\iCheck\flat\yellow.css" />
+    <Content Include="Content\Css\iCheck\flat\yellow.png" />
+    <Content Include="Content\Css\iCheck\flat\_all.css" />
+    <Content Include="Content\Css\iCheck\futurico\futurico%402x.png" />
+    <Content Include="Content\Css\iCheck\futurico\futurico.css" />
+    <Content Include="Content\Css\iCheck\futurico\futurico.png" />
+    <Content Include="Content\Css\iCheck\icheck.js" />
+    <Content Include="Content\Css\iCheck\icheck.min.js" />
+    <Content Include="Content\Css\iCheck\line\aero.css" />
+    <Content Include="Content\Css\iCheck\line\blue.css" />
+    <Content Include="Content\Css\iCheck\line\green.css" />
+    <Content Include="Content\Css\iCheck\line\grey.css" />
+    <Content Include="Content\Css\iCheck\line\line%402x.png" />
+    <Content Include="Content\Css\iCheck\line\line.css" />
+    <Content Include="Content\Css\iCheck\line\line.png" />
+    <Content Include="Content\Css\iCheck\line\orange.css" />
+    <Content Include="Content\Css\iCheck\line\pink.css" />
+    <Content Include="Content\Css\iCheck\line\purple.css" />
+    <Content Include="Content\Css\iCheck\line\red.css" />
+    <Content Include="Content\Css\iCheck\line\yellow.css" />
+    <Content Include="Content\Css\iCheck\line\_all.css" />
+    <Content Include="Content\Css\iCheck\minimal\aero%402x.png" />
+    <Content Include="Content\Css\iCheck\minimal\aero.css" />
+    <Content Include="Content\Css\iCheck\minimal\aero.png" />
+    <Content Include="Content\Css\iCheck\minimal\blue%402x.png" />
+    <Content Include="Content\Css\iCheck\minimal\blue.css" />
+    <Content Include="Content\Css\iCheck\minimal\blue.png" />
+    <Content Include="Content\Css\iCheck\minimal\green%402x.png" />
+    <Content Include="Content\Css\iCheck\minimal\green.css" />
+    <Content Include="Content\Css\iCheck\minimal\green.png" />
+    <Content Include="Content\Css\iCheck\minimal\grey%402x.png" />
+    <Content Include="Content\Css\iCheck\minimal\grey.css" />
+    <Content Include="Content\Css\iCheck\minimal\grey.png" />
+    <Content Include="Content\Css\iCheck\minimal\minimal%402x.png" />
+    <Content Include="Content\Css\iCheck\minimal\minimal.css" />
+    <Content Include="Content\Css\iCheck\minimal\minimal.png" />
+    <Content Include="Content\Css\iCheck\minimal\orange%402x.png" />
+    <Content Include="Content\Css\iCheck\minimal\orange.css" />
+    <Content Include="Content\Css\iCheck\minimal\orange.png" />
+    <Content Include="Content\Css\iCheck\minimal\pink%402x.png" />
+    <Content Include="Content\Css\iCheck\minimal\pink.css" />
+    <Content Include="Content\Css\iCheck\minimal\pink.png" />
+    <Content Include="Content\Css\iCheck\minimal\purple%402x.png" />
+    <Content Include="Content\Css\iCheck\minimal\purple.css" />
+    <Content Include="Content\Css\iCheck\minimal\purple.png" />
+    <Content Include="Content\Css\iCheck\minimal\red%402x.png" />
+    <Content Include="Content\Css\iCheck\minimal\red.css" />
+    <Content Include="Content\Css\iCheck\minimal\red.png" />
+    <Content Include="Content\Css\iCheck\minimal\yellow%402x.png" />
+    <Content Include="Content\Css\iCheck\minimal\yellow.css" />
+    <Content Include="Content\Css\iCheck\minimal\yellow.png" />
+    <Content Include="Content\Css\iCheck\minimal\_all.css" />
+    <Content Include="Content\Css\iCheck\polaris\polaris%402x.png" />
+    <Content Include="Content\Css\iCheck\polaris\polaris.css" />
+    <Content Include="Content\Css\iCheck\polaris\polaris.png" />
+    <Content Include="Content\Css\iCheck\square\aero%402x.png" />
+    <Content Include="Content\Css\iCheck\square\aero.css" />
+    <Content Include="Content\Css\iCheck\square\aero.png" />
+    <Content Include="Content\Css\iCheck\square\blue%402x.png" />
+    <Content Include="Content\Css\iCheck\square\blue.css" />
+    <Content Include="Content\Css\iCheck\square\blue.png" />
+    <Content Include="Content\Css\iCheck\square\green%402x.png" />
+    <Content Include="Content\Css\iCheck\square\green.css" />
+    <Content Include="Content\Css\iCheck\square\green.png" />
+    <Content Include="Content\Css\iCheck\square\grey%402x.png" />
+    <Content Include="Content\Css\iCheck\square\grey.css" />
+    <Content Include="Content\Css\iCheck\square\grey.png" />
+    <Content Include="Content\Css\iCheck\square\orange%402x.png" />
+    <Content Include="Content\Css\iCheck\square\orange.css" />
+    <Content Include="Content\Css\iCheck\square\orange.png" />
+    <Content Include="Content\Css\iCheck\square\pink%402x.png" />
+    <Content Include="Content\Css\iCheck\square\pink.css" />
+    <Content Include="Content\Css\iCheck\square\pink.png" />
+    <Content Include="Content\Css\iCheck\square\purple%402x.png" />
+    <Content Include="Content\Css\iCheck\square\purple.css" />
+    <Content Include="Content\Css\iCheck\square\purple.png" />
+    <Content Include="Content\Css\iCheck\square\red%402x.png" />
+    <Content Include="Content\Css\iCheck\square\red.css" />
+    <Content Include="Content\Css\iCheck\square\red.png" />
+    <Content Include="Content\Css\iCheck\square\square%402x.png" />
+    <Content Include="Content\Css\iCheck\square\square.css" />
+    <Content Include="Content\Css\iCheck\square\square.png" />
+    <Content Include="Content\Css\iCheck\square\yellow%402x.png" />
+    <Content Include="Content\Css\iCheck\square\yellow.css" />
+    <Content Include="Content\Css\iCheck\square\yellow.png" />
+    <Content Include="Content\Css\iCheck\square\_all.css" />
+    <Content Include="Content\Css\main.css" />
+    <Content Include="Content\Css\select2.min.css" />
+    <Content Include="Content\Css\skins\skin-blue-light.css" />
+    <Content Include="Content\Css\skins\skin-blue.css" />
+    <Content Include="Content\Css\skins\skin-green-light.css" />
+    <Content Include="Content\Css\skins\skin-green.css" />
+    <Content Include="Content\Css\skins\skin-navy-light.css" />
+    <Content Include="Content\Css\skins\skin-red-light.css" />
+    <Content Include="Content\Css\skins\skin-red.css" />
+    <Content Include="Content\Css\skins\skin-yellow-light.css" />
+    <Content Include="Content\Css\skins\skin-yellow.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Images\add_child.png" />
+    <Content Include="Content\Images\add_parent.png" />
+    <Content Include="Content\Images\arrow_left.png" />
+    <Content Include="Content\Images\arrow_right.png" />
+    <Content Include="Content\Images\bottom_arrow.png" />
+    <Content Include="Content\Images\car_icon.png" />
+    <Content Include="Content\Images\close_icon.png" />
+    <Content Include="Content\Images\fly_icon.png" />
+    <Content Include="Content\Images\footer_icon1.png" />
+    <Content Include="Content\Images\footer_icon2.png" />
+    <Content Include="Content\Images\fuwu_icon.png" />
+    <Content Include="Content\Images\GTS_logo.png" />
+    <Content Include="Content\Images\GTS_logo1.png" />
+    <Content Include="Content\Images\gts_search.png" />
+    <Content Include="Content\Images\help_icon.png" />
+    <Content Include="Content\Images\hotel_icon.png" />
+    <Content Include="Content\Images\hot_icon.png" />
+    <Content Include="Content\Images\index_icon_1.png" />
+    <Content Include="Content\Images\index_icon_2.png" />
+    <Content Include="Content\Images\index_icon_3.png" />
+    <Content Include="Content\Images\language.png" />
+    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\money_icon.png" />
+    <Content Include="Content\Images\news_icon.png" />
+    <Content Include="Content\Images\personal_icon1.png" />
+    <Content Include="Content\Images\personal_icon2.png" />
+    <Content Include="Content\Images\personal_icon3.png" />
+    <Content Include="Content\Images\personal_icon4.png" />
+    <Content Include="Content\Images\personal_icon5.png" />
+    <Content Include="Content\Images\personal_icon6.png" />
+    <Content Include="Content\Images\personal_icon7.png" />
+    <Content Include="Content\Images\personal_icon8.png" />
+    <Content Include="Content\Images\personal_icon9.png" />
+    <Content Include="Content\Images\quick_entry_icon1.png" />
+    <Content Include="Content\Images\quick_entry_icon2.png" />
+    <Content Include="Content\Images\quick_entry_icon3.png" />
+    <Content Include="Content\Images\quick_entry_icon4.png" />
+    <Content Include="Content\Images\quick_entry_icon5.png" />
+    <Content Include="Content\Images\renovate_icon.png" />
+    <Content Include="Content\Images\search.png" />
+    <Content Include="Content\Images\set_up.png" />
+    <Content Include="Content\Images\specialicon.png" />
+    <Content Include="Content\Images\top_arrow.png" />
+    <Content Include="Content\Images\top_banner.png" />
+    <Content Include="Content\Images\triangle_icon.png" />
+    <Content Include="Content\Images\unified_icon.png" />
+    <Content Include="Content\Images\welfare_icon.png" />
+    <Content Include="Content\Images\WriteProcess.png" />
+    <Content Include="Content\Scripts\adminlte.js" />
+    <Content Include="Content\Scripts\bootstrap-datepicker.min.js" />
+    <Content Include="Content\Scripts\bootstrap-filestyle.min.js" />
+    <Content Include="Content\Scripts\bootstrap.js" />
+    <Content Include="Content\Scripts\bootstrap.min.js" />
+    <Content Include="Content\Scripts\Common.js" />
+    <Content Include="Content\Scripts\dataTables.bootstrap.min.js" />
+    <Content Include="Content\Scripts\daterangepicker.js" />
+    <Content Include="Content\Scripts\fastclick.js" />
+    <Content Include="Content\Scripts\fullcalendar.min.js" />
+    <Content Include="Content\Scripts\icheck.min.js" />
+    <None Include="Content\Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Content\Scripts\jquery-1.10.2.js" />
+    <Content Include="Content\Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Content\Scripts\jquery-ui.js" />
+    <Content Include="Content\Scripts\jquery.dataTables.min.js" />
+    <Content Include="Content\Scripts\jquery.inputmask.date.extensions.js" />
+    <Content Include="Content\Scripts\jquery.inputmask.extensions.js" />
+    <Content Include="Content\Scripts\jquery.inputmask.js" />
+    <Content Include="Content\Scripts\jquery.js" />
+    <Content Include="Content\Scripts\jquery.slimscroll.min.js" />
+    <None Include="Content\Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Content\Scripts\jquery.validate.js" />
+    <Content Include="Content\Scripts\jquery.validate.min.js" />
+    <Content Include="Content\Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Content\Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Content\Scripts\Languagedic.js" />
+    <Content Include="Content\Scripts\modernizr-2.6.2.js" />
+    <Content Include="Content\Scripts\moment.js" />
+    <Content Include="Content\Scripts\respond.js" />
+    <Content Include="Content\Scripts\respond.min.js" />
+    <Content Include="Content\Scripts\select2.full.min.js" />
+    <None Include="Content\Scripts\_references.js" />
+    <Content Include="Content\Third-Part\Bootstrap-3-Typeahead-master\.gitignore" />
+    <Content Include="Content\Third-Part\Bootstrap-3-Typeahead-master\bootstrap3-typeahead.js" />
+    <Content Include="Content\Third-Part\Bootstrap-3-Typeahead-master\bootstrap3-typeahead.min.js" />
+    <Content Include="Content\Third-Part\Bootstrap-3-Typeahead-master\Gruntfile.js" />
+    <Content Include="Content\Third-Part\Bootstrap-3-Typeahead-master\typeaheadv4.png" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\css\buttons.bootstrap.css" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\css\buttons.bootstrap.min.css" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\css\buttons.bootstrap4.css" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\css\buttons.bootstrap4.min.css" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\css\buttons.dataTables.css" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\css\buttons.dataTables.min.css" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\css\buttons.foundation.css" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\css\buttons.foundation.min.css" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\css\buttons.jqueryui.css" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\css\buttons.jqueryui.min.css" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\css\buttons.semanticui.css" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\css\buttons.semanticui.min.css" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\js\buttons.bootstrap.js" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\js\buttons.bootstrap.min.js" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\js\buttons.bootstrap4.js" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\js\buttons.bootstrap4.min.js" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\js\buttons.colVis.js" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\js\buttons.colVis.min.js" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\js\buttons.flash.js" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\js\buttons.flash.min.js" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\js\buttons.foundation.js" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\js\buttons.foundation.min.js" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\js\buttons.html5.js" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\js\buttons.html5.min.js" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\js\buttons.jqueryui.js" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\js\buttons.jqueryui.min.js" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\js\buttons.print.js" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\js\buttons.print.min.js" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\js\buttons.semanticui.js" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\js\buttons.semanticui.min.js" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\js\dataTables.buttons.js" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\js\dataTables.buttons.min.js" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\swf\flashExport.swf" />
+    <Content Include="Content\Third-Part\datatables-rowsgroup-master\anotherExample.html" />
+    <Content Include="Content\Third-Part\datatables-rowsgroup-master\dataTables.rowsGroup.js" />
+    <Content Include="Content\Third-Part\datatables-rowsgroup-master\example.html" />
+    <Content Include="Content\Third-Part\Fixed-Header-Table-master\.gitignore" />
+    <Content Include="Content\Third-Part\Fixed-Header-Table-master\css\defaultTheme.css" />
+    <Content Include="Content\Third-Part\Fixed-Header-Table-master\demo\css\960.css" />
+    <Content Include="Content\Third-Part\Fixed-Header-Table-master\demo\css\demo.css" />
+    <Content Include="Content\Third-Part\Fixed-Header-Table-master\demo\css\myTheme.css" />
+    <Content Include="Content\Third-Part\Fixed-Header-Table-master\demo\css\reset.css" />
+    <Content Include="Content\Third-Part\Fixed-Header-Table-master\demo\demo.html" />
+    <Content Include="Content\Third-Part\Fixed-Header-Table-master\demo\demo.js" />
+    <Content Include="Content\Third-Part\Fixed-Header-Table-master\demo\images\bg.png" />
+    <Content Include="Content\Third-Part\Fixed-Header-Table-master\demo\js\demo.js" />
+    <Content Include="Content\Third-Part\Fixed-Header-Table-master\demo\test.html" />
+    <Content Include="Content\Third-Part\Fixed-Header-Table-master\jquery.fixedheadertable.js" />
+    <Content Include="Content\Third-Part\Fixed-Header-Table-master\jquery.fixedheadertable.min.js" />
+    <Content Include="Content\Third-Part\Fixed-Header-Table-master\lib\jquery.mousewheel.js" />
+    <Content Include="Content\Third-Part\FixedColumns-3.2.4\css\fixedColumns.bootstrap.css" />
+    <Content Include="Content\Third-Part\FixedColumns-3.2.4\css\fixedColumns.bootstrap.min.css" />
+    <Content Include="Content\Third-Part\FixedColumns-3.2.4\css\fixedColumns.bootstrap4.css" />
+    <Content Include="Content\Third-Part\FixedColumns-3.2.4\css\fixedColumns.bootstrap4.min.css" />
+    <Content Include="Content\Third-Part\FixedColumns-3.2.4\css\fixedColumns.dataTables.css" />
+    <Content Include="Content\Third-Part\FixedColumns-3.2.4\css\fixedColumns.dataTables.min.css" />
+    <Content Include="Content\Third-Part\FixedColumns-3.2.4\css\fixedColumns.foundation.css" />
+    <Content Include="Content\Third-Part\FixedColumns-3.2.4\css\fixedColumns.foundation.min.css" />
+    <Content Include="Content\Third-Part\FixedColumns-3.2.4\css\fixedColumns.jqueryui.css" />
+    <Content Include="Content\Third-Part\FixedColumns-3.2.4\css\fixedColumns.jqueryui.min.css" />
+    <Content Include="Content\Third-Part\FixedColumns-3.2.4\css\fixedColumns.semanticui.css" />
+    <Content Include="Content\Third-Part\FixedColumns-3.2.4\css\fixedColumns.semanticui.min.css" />
+    <Content Include="Content\Third-Part\FixedColumns-3.2.4\js\dataTables.fixedColumns.js" />
+    <Content Include="Content\Third-Part\FixedColumns-3.2.4\js\dataTables.fixedColumns.min.js" />
+    <Content Include="Content\Third-Part\FixedHeader-3.1.3\css\fixedHeader.bootstrap.css" />
+    <Content Include="Content\Third-Part\FixedHeader-3.1.3\css\fixedHeader.bootstrap.min.css" />
+    <Content Include="Content\Third-Part\FixedHeader-3.1.3\css\fixedHeader.bootstrap4.css" />
+    <Content Include="Content\Third-Part\FixedHeader-3.1.3\css\fixedHeader.bootstrap4.min.css" />
+    <Content Include="Content\Third-Part\FixedHeader-3.1.3\css\fixedHeader.dataTables.css" />
+    <Content Include="Content\Third-Part\FixedHeader-3.1.3\css\fixedHeader.dataTables.min.css" />
+    <Content Include="Content\Third-Part\FixedHeader-3.1.3\css\fixedHeader.foundation.css" />
+    <Content Include="Content\Third-Part\FixedHeader-3.1.3\css\fixedHeader.foundation.min.css" />
+    <Content Include="Content\Third-Part\FixedHeader-3.1.3\css\fixedHeader.jqueryui.css" />
+    <Content Include="Content\Third-Part\FixedHeader-3.1.3\css\fixedHeader.jqueryui.min.css" />
+    <Content Include="Content\Third-Part\FixedHeader-3.1.3\css\fixedHeader.semanticui.css" />
+    <Content Include="Content\Third-Part\FixedHeader-3.1.3\css\fixedHeader.semanticui.min.css" />
+    <Content Include="Content\Third-Part\FixedHeader-3.1.3\js\dataTables.fixedHeader.js" />
+    <Content Include="Content\Third-Part\FixedHeader-3.1.3\js\dataTables.fixedHeader.min.js" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\.gitignore" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\BUILD\BUILD.js" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\css\custom.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\css\kissui.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\css\sticky.min.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\index.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\feed.xml" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\images\logo.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\images\logo.svg" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\images\mini-logo.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\js\contents.js" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\js\doc42.js" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\js\sticky.min.js" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_includes\footer.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_includes\head.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_includes\header.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_includes\sidebar.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_includes\utils.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_layouts\default.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_layouts\doc.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_layouts\landing.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\book.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\css\custom.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\css\kissui.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\css\sticky.min.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\developers\build\index.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\developers\changelog\index.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\feed.xml" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\getting-started\examples.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\getting-started\install.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\getting-started\start.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\getting-started\welcome.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\hints\api\index.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\hints\attributes\index.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\hints\options\index.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\images\logo.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\images\logo.svg" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\images\mini-logo.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\index.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\intro\api\index.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\intro\attributes\index.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\intro\options\index.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\js\contents.js" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\js\doc42.js" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\js\sticky.min.js" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\support.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\themes\install.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\themes\list.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\wrappers\angularjs.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\wrappers\dart.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\wrappers\drupal.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\wrappers\ember.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\wrappers\gwt.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\wrappers\R.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\wrappers\rails.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\wrappers\wordpress.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_site\wrappers\yii.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\assets\css\bootstrap-responsive.min.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\assets\css\bootstrap.min.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\assets\css\demo.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\assets\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\assets\img\glyphicons-halflings.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\auto-position\index.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\.gitignore" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\css\agency.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\css\agency.min.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\gulpfile.js" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\about\1.jpg" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\about\2.jpg" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\about\3.jpg" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\about\4.jpg" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\header-bg.jpg" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\logos\aetuts.jpg" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\logos\creative-market.jpg" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\logos\designmodo.jpg" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\logos\envato.jpg" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\logos\microlancer.jpg" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\logos\themeforest.jpg" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\logos\wordpress.jpg" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\map-image.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\portfolio\dreams-preview.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\portfolio\dreams.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\portfolio\escape-preview.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\portfolio\escape.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\portfolio\golden-preview.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\portfolio\golden.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\portfolio\roundicons-free.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\portfolio\roundicons.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\portfolio\startup-framework-preview.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\portfolio\startup-framework.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\portfolio\treehouse-preview.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\portfolio\treehouse.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\team\1.jpg" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\team\2.jpg" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\img\team\3.jpg" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\index.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\js\agency.js" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\js\agency.min.js" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\js\contact_me.js" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\js\jqBootstrapValidation.js" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\mail\contact_me.php" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\css\font-awesome.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\jquery\jquery.js" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\jquery\jquery.min.js" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\custom-class\index.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\AB_Controls_Sticker_Book.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\AB_Controls_Title.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\configs\config1.PNG" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\configs\config10.PNG" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\configs\config2.1.PNG" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\configs\config2.PNG" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\configs\config3.1.PNG" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\configs\config3.PNG" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\configs\config6.1.PNG" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\configs\config6.2.PNG" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\configs\config6.PNG" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\configs\config8.1.PNG" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\configs\config8.PNG" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\configs\config9.PNG" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\data\Control_Treatment_Pairs.PNG" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\data\Store_List.PNG" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\data\Weekly_Store_Traffic.PNG" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\tools\line.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\tools\line2.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\tools\line3.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\tools\line4.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\tools\line5.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\tools\tool1.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\tools\tool10.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\tools\tool11.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\tools\tool12.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\tools\tool13.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\tools\tool14.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\tools\tool15.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\tools\tool16.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\tools\tool2.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\tools\tool3.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\tools\tool4.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\tools\tool5.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\tools\tool6.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\tools\tool7.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\tools\tool8.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\img\tools\tool9.png" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\index.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\resources\step.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\dynamic-start\resources\step.js" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\hello-world\index.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\hello-world\positions.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\hello-world\withoutBullets.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\hello-world\withoutButtons.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\hello-world\withProgress.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\hint\index.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\html-tooltip\index.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\index.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\multi-page\index.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\multi-page\second.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\programmatic\hint.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\programmatic\index.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\RTL\index.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\svg\d3.htm" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\withoutElement\index.html" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\intro.js" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\intro.min.js" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\introjs-rtl.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\introjs.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\minified\intro.min.js" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\minified\introjs-rtl.min.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\minified\introjs.min.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\themes\introjs-dark.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\themes\introjs-flattener.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\themes\introjs-modern.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\themes\introjs-nassim.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\themes\introjs-nazanin.css" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\themes\introjs-royal.css" />
+    <Content Include="Content\Third-Part\JQueryUI\calendar.js" />
+    <Content Include="Content\Third-Part\JQueryUI\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\Third-Part\JQueryUI\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\Third-Part\JQueryUI\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\Third-Part\JQueryUI\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\Third-Part\JQueryUI\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\Third-Part\JQueryUI\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\Third-Part\JQueryUI\jquery-ui.min.css" />
+    <Content Include="Content\Third-Part\JQueryUI\jquery-ui.min.js" />
+    <Content Include="Content\Third-Part\JQueryUI\lang\en.js" />
+    <Content Include="Content\Third-Part\JQueryUI\lang\zh-cn.js" />
+    <Content Include="Content\Third-Part\JQueryUI\lang\zh-tw.js" />
+    <Content Include="Content\Third-Part\JQueryUI\skin\blue\bg.jpg" />
+    <Content Include="Content\Third-Part\JQueryUI\skin\blue\btnbg.jpg" />
+    <Content Include="Content\Third-Part\JQueryUI\skin\blue\datepicker.css" />
+    <Content Include="Content\Third-Part\JQueryUI\skin\blue\down.jpg" />
+    <Content Include="Content\Third-Part\JQueryUI\skin\blue\left.gif" />
+    <Content Include="Content\Third-Part\JQueryUI\skin\blue\navLeft.gif" />
+    <Content Include="Content\Third-Part\JQueryUI\skin\blue\navRight.gif" />
+    <Content Include="Content\Third-Part\JQueryUI\skin\blue\qs.jpg" />
+    <Content Include="Content\Third-Part\JQueryUI\skin\blue\right.gif" />
+    <Content Include="Content\Third-Part\JQueryUI\skin\blue\up.jpg" />
+    <Content Include="Content\Third-Part\JQueryUI\skin\datePicker.gif" />
+    <Content Include="Content\Third-Part\JQueryUI\skin\default\datepicker.css" />
+    <Content Include="Content\Third-Part\JQueryUI\skin\default\img.gif" />
+    <Content Include="Content\Third-Part\JQueryUI\skin\WdatePicker.css" />
+    <Content Include="Content\Third-Part\JQueryUI\skin\whyGreen\bg.jpg" />
+    <Content Include="Content\Third-Part\JQueryUI\skin\whyGreen\datepicker.css" />
+    <Content Include="Content\Third-Part\JQueryUI\skin\whyGreen\img.gif" />
+    <Content Include="Content\Third-Part\JQueryUI\WdatePicker.js" />
+    <Content Include="Content\Third-Part\Select-1.2.6\css\select.bootstrap.css" />
+    <Content Include="Content\Third-Part\Select-1.2.6\css\select.bootstrap.min.css" />
+    <Content Include="Content\Third-Part\Select-1.2.6\css\select.bootstrap4.css" />
+    <Content Include="Content\Third-Part\Select-1.2.6\css\select.bootstrap4.min.css" />
+    <Content Include="Content\Third-Part\Select-1.2.6\css\select.dataTables.css" />
+    <Content Include="Content\Third-Part\Select-1.2.6\css\select.dataTables.min.css" />
+    <Content Include="Content\Third-Part\Select-1.2.6\css\select.foundation.css" />
+    <Content Include="Content\Third-Part\Select-1.2.6\css\select.foundation.min.css" />
+    <Content Include="Content\Third-Part\Select-1.2.6\css\select.jqueryui.css" />
+    <Content Include="Content\Third-Part\Select-1.2.6\css\select.jqueryui.min.css" />
+    <Content Include="Content\Third-Part\Select-1.2.6\css\select.semanticui.css" />
+    <Content Include="Content\Third-Part\Select-1.2.6\css\select.semanticui.min.css" />
+    <Content Include="Content\Third-Part\Select-1.2.6\js\dataTables.select.js" />
+    <Content Include="Content\Third-Part\Select-1.2.6\js\dataTables.select.min.js" />
+    <Content Include="Content\Third-Part\Select-1.2.6\js\select.bootstrap.js" />
+    <Content Include="Content\Third-Part\Select-1.2.6\js\select.bootstrap.min.js" />
+    <Content Include="Content\Third-Part\Select-1.2.6\js\select.bootstrap4.js" />
+    <Content Include="Content\Third-Part\Select-1.2.6\js\select.bootstrap4.min.js" />
+    <Content Include="Content\Third-Part\Select-1.2.6\js\select.dataTables.js" />
+    <Content Include="Content\Third-Part\Select-1.2.6\js\select.foundation.js" />
+    <Content Include="Content\Third-Part\Select-1.2.6\js\select.foundation.min.js" />
+    <Content Include="Content\Third-Part\Select-1.2.6\js\select.jqueryui.js" />
+    <Content Include="Content\Third-Part\Select-1.2.6\js\select.jqueryui.min.js" />
+    <Content Include="Content\Third-Part\Select-1.2.6\js\select.semanticui.js" />
+    <Content Include="Content\Third-Part\Select-1.2.6\js\select.semanticui.min.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Properties\DataSources\System.Data.DataTable.datasource" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Properties\DataSources\System.Data.DataSet.datasource" />
+    <Content Include="Properties\DataSources\Com.Auo.EAP.AuthWebService.AuthFunction.datasource" />
+    <Content Include="Properties\DataSources\Com.Auo.EAP.AuthWebService.AuthProfile.datasource" />
+    <Content Include="Properties\DataSources\Com.Auo.EAP.AuthWebService.AuthWcfInfo.datasource" />
+    <Content Include="Content\Third-Part\datatables-rowsgroup-master\LICENSE" />
+    <Content Include="Content\Third-Part\datatables-rowsgroup-master\README.md" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\css\common.scss" />
+    <Content Include="Content\Third-Part\Buttons-1.5.1\css\mixins.scss" />
+    <Content Include="Content\Third-Part\Bootstrap-3-Typeahead-master\.jscsrc" />
+    <Content Include="Content\Third-Part\Bootstrap-3-Typeahead-master\.jshintrc" />
+    <Content Include="Content\Third-Part\Bootstrap-3-Typeahead-master\bower.json" />
+    <Content Include="Content\Third-Part\Bootstrap-3-Typeahead-master\composer.json" />
+    <Content Include="Content\Third-Part\Bootstrap-3-Typeahead-master\package.json" />
+    <Content Include="Content\Third-Part\Bootstrap-3-Typeahead-master\README.md" />
+    <Content Include="Content\Third-Part\Bootstrap-3-Typeahead-master\yarn.lock" />
+    <Content Include="File\sourcerIndexTemplate.xlsx" />
+    <Content Include="Content\Third-Part\Fixed-Header-Table-master\css\.svn\entries" />
+    <Content Include="Content\Third-Part\Fixed-Header-Table-master\LICENSE.md" />
+    <Content Include="Content\Third-Part\Fixed-Header-Table-master\package.json" />
+    <Content Include="Content\Third-Part\Fixed-Header-Table-master\README.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\.spmignore" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\bower.json" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\changelog.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\component.json" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\developers\build.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\developers\release-history.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\extra\book.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\extra\help.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\getting-started\examples.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\getting-started\install.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\getting-started\quick-start.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\getting-started\welcome.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\hints\api.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\hints\attributes.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\hints\options.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\intro\api.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\intro\attributes.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\intro\options.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\themes\themes.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\themes\using-themes.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\wrappers\angularjs.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\wrappers\dart.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\wrappers\drupal.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\wrappers\ember.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\wrappers\gwt.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\wrappers\r.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\wrappers\rails.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\wrappers\wordpress.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\docs\wrappers\yii-framework.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\docs\_config.yml" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\less\agency.less" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\less\mixins.less" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\less\variables.less" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\LICENSE" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\package.json" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\README.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\scss\agency.scss" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\scss\_mixins.scss" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\scss\_variables.scss" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\less\animated.less" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\less\bordered-pulled.less" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\less\core.less" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\less\fixed-width.less" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\less\font-awesome.less" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\less\icons.less" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\less\larger.less" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\less\list.less" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\less\mixins.less" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\less\path.less" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\less\rotated-flipped.less" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\less\screen-reader.less" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\less\stacked.less" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\less\variables.less" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\scss\font-awesome.scss" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\scss\_animated.scss" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\scss\_core.scss" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\scss\_icons.scss" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\scss\_larger.scss" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\scss\_list.scss" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\scss\_mixins.scss" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\scss\_path.scss" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\scss\_screen-reader.scss" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\scss\_stacked.scss" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\example\bootstrap\v3\vendor\font-awesome\scss\_variables.scss" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\license.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\Makefile" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\package.json" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\README.md" />
+    <Content Include="Content\Third-Part\intro.js-2.5.0\yarn.lock" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\CAP\AuthorizationModuleService.disco" />
+    <None Include="Service References\CAP\configuration91.svcinfo" />
+    <None Include="Service References\CAP\configuration.svcinfo" />
+    <Content Include="Scripts\Layer1Return.js" />
+    <Content Include="Scripts\PLReview.js" />
+    <Content Include="Scripts\Layer1_RDReview.js" />
+    <Content Include="Scripts\RDBossReview.js" />
+    <Content Include="Scripts\RDReview.js" />
+    <Content Include="Scripts\RDReviewChange.js" />
+    <Content Include="Scripts\RDReviewSpecialTransaction.js" />
+    <Content Include="Scripts\Layer1_Sourcer.js" />
+    <Content Include="Scripts\SourcerProductReview.js" />
+    <Content Include="Scripts\SourcerBoss.js" />
+    <Content Include="Scripts\SourcerIndex.js" />
+    <Content Include="Service References\CAP\MVC_TemplateProject.CAP.AuoAuthenticationUserForModule.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CAP\MVC_TemplateProject.CAP.CheckTokenValidResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\CAP\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Service References\DBCS_SERVICE\MVC_TemplateProject.DBCS_SERVICE.DBConnectionString.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\CAP\AuthorizationModuleService.wsdl" />
+    <None Include="Service References\CAP\AuthorizationModuleService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CAP\AuthorizationModuleService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CAP\AuthorizationModuleService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CAP\AuthorizationModuleService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CAP\AuthorizationModuleService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DBCS_SERVICE\WCF_ConnectionInfo.wsdl" />
+    <None Include="Service References\DBCS_SERVICE\WCF_ConnectionInfo.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DBCS_SERVICE\WCF_ConnectionInfo1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DBCS_SERVICE\WCF_ConnectionInfo2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DBCS_SERVICE\WCF_ConnectionInfo3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DBCS_SERVICE\WCF_ConnectionInfo4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EAP\WcfService1.wsdl" />
+    <None Include="Service References\EAP\WcfService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EAP\WcfService11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EAP\WcfService12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EAP\WcfService13.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EAP\WcfService14.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EAP\WcfService15.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FLM\FLM.disco" />
+    <None Include="Service References\FLM\configuration91.svcinfo" />
+    <None Include="Service References\FLM\configuration.svcinfo" />
+    <None Include="Service References\DBCS_SERVICE\WCF_ConnectionInfo.disco" />
+    <None Include="Service References\DBCS_SERVICE\configuration91.svcinfo" />
+    <None Include="Service References\DBCS_SERVICE\configuration.svcinfo" />
+    <None Include="Service References\DBCS_SERVICE\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\EAP\WcfService1.disco" />
+    <None Include="Service References\EAP\configuration91.svcinfo" />
+    <None Include="Service References\EAP\configuration.svcinfo" />
+    <None Include="Service References\EAP\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Service References\FLM\MVC_TemplateProject.FLM.GetFileforExternalResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FLM\MVC_TemplateProject.FLM.GetFileResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FLM\MVC_TemplateProject.FLM.GetFileWithMarkStyleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FLM\MVC_TemplateProject.FLM.GetFileWithPictureMarkResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FLM\MVC_TemplateProject.FLM.PDFFileSetting.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\FLM\MVC_TemplateProject.FLM.WaterMarkerFontStyle.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\FLM\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\IDS\Mail.disco" />
+    <None Include="Service References\IDS\configuration91.svcinfo" />
+    <None Include="Service References\IDS\configuration.svcinfo" />
+    <None Include="Service References\IDS\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Service\RSIWebService.asmx" />
+    <Content Include="Views\Demo\OracleTest.cshtml" />
+    <Content Include="Views\RSI\BasicPage.cshtml" />
+    <Content Include="Views\RD\PartNoSearch.cshtml" />
+    <Content Include="Views\Process\Index.cshtml" />
+    <Content Include="Views\Sourcer\Index.cshtml" />
+    <Content Include="Views\Sourcer\Boss.cshtml" />
+    <Content Include="Views\PM\Confirm.cshtml" />
+    <Content Include="Views\PM\PortfolioDetail.cshtml" />
+    <Content Include="Views\RD\RDBossReview.cshtml" />
+    <Content Include="Views\RSI\DashBoard.cshtml" />
+    <Content Include="Views\RSI\DetailLayer1.cshtml" />
+    <Content Include="Views\RSI\DetailLayer2.cshtml" />
+    <Content Include="Views\PM\PLReview.cshtml" />
+    <Content Include="Views\RD\RDReview.cshtml" />
+    <Content Include="Views\Demo\CustomError.cshtml" />
+    <Content Include="Views\RSI\Layer1Return.cshtml" />
+    <Content Include="Views\RSI\SearchEmp.cshtml" />
+    <Content Include="Views\RSI\Layer1View_Sourcer.cshtml" />
+    <Content Include="Views\RSI\Layer1View_PMConfirm.cshtml" />
+    <Content Include="Views\Sourcer\ManagerDetail.cshtml" />
+    <Content Include="Views\RD\RDReview_Change.cshtml" />
+    <Content Include="Views\RD\RDReview_SpecialTransaction.cshtml" />
+    <Content Include="Views\RSI\Layer1_RDReview.cshtml" />
+    <Content Include="Views\Sourcer\ProductReview.cshtml" />
+    <Content Include="Views\RSI\NoMacAddress.cshtml" />
+    <Content Include="Views\RSI\Tips.cshtml" />
+    <Content Include="Views\RSI\DetailLayer1SourcerView.cshtml" />
+    <None Include="Service References\IDS\Mail.wsdl" />
+    <Content Include="Service References\IDS\RSI.IDS.GetMailSentLogResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Views\RSI\DeatilApprove.cshtml" />
+    <Content Include="Views\RSI\LoadingPage.cshtml" />
+    <Content Include="Views\Sourcer\MaterialSourcerReassign.cshtml" />
+    <Content Include="Views\Sourcer\ProductDocumentReview.cshtml" />
+    <Content Include="Views\RSI\Layer1View_SourcerDocument.cshtml" />
+    <Content Include="Views\Sourcer\ProductValuation.cshtml" />
+    <Content Include="Views\RSI\RFQSoucerDoc.cshtml" />
+    <None Include="Web References\MCAWebService\mcawebservice.disco" />
+    <Content Include="Web References\RFQWebServiceForUpdateStatus\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\RFQWebServiceForUpdateStatus\RFQWebService.disco" />
+    <Content Include="Web References\RFQWebService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\RFQWebServiceForUpdateStatus\RFQWebService.wsdl" />
+    <None Include="Web References\RFQWebService\WS_PartBOM.disco" />
+    <None Include="Web References\SRMValidateWebService\MainService.disco" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Demo\Demo.cshtml" />
+    <Content Include="Views\Demo\Element.cshtml" />
+    <Content Include="Views\Demo\Error.cshtml" />
+    <Content Include="Views\Demo\Form.cshtml" />
+    <Content Include="Views\Demo\Index.cshtml" />
+    <Content Include="Views\Demo\Login.cshtml" />
+    <Content Include="Views\Demo\Table.cshtml" />
+    <None Include="Service References\FLM\FLM.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FLM\FLM1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FLM\FLM2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FLM\FLM3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FLM\FLM4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FLM\FLM5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\FLM\FLMService.wsdl" />
+    <None Include="Web References\MCAWebService\mcawebservice.wsdl" />
+    <Content Include="Web References\MCAWebService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\RFQWebService\WS_PartBOM.wsdl" />
+    <None Include="Web References\SRMValidateWebService\MainService.wsdl" />
+    <Content Include="Web References\SRMValidateWebService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\CAP\" />
+    <WCFMetadataStorage Include="Service References\DBCS_SERVICE\" />
+    <WCFMetadataStorage Include="Service References\EAP\" />
+    <WCFMetadataStorage Include="Service References\FLM\" />
+    <WCFMetadataStorage Include="Service References\IDS\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://172.17.86.105/SRMValidate/MainService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\SRMValidateWebService\</RelPath>
+      <UpdateFromURL>http://172.17.86.105/SRMValidate/MainService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>MVC_TemplateProject_SRMValidateWebService_MainService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://au3tqatsvm2/NEWPARTBOM_WebService/WS_PartBOM.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\RFQWebService\</RelPath>
+      <UpdateFromURL>http://au3tqatsvm2/NEWPARTBOM_WebService/WS_PartBOM.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>MVC_TemplateProject_RFQWebService_WS_PartBOM</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://auhqplmapts01.corpnet.auo.com/RFQ/Content/WebService/RFQWebService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\RFQWebServiceForUpdateStatus\</RelPath>
+      <UpdateFromURL>http://auhqplmapts01.corpnet.auo.com/RFQ/Content/WebService/RFQWebService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>MVC_TemplateProject_RFQWebServiceForUpdateStatus_RFQWebService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://autcclone01.corpnet.auo.com/mca/service/mcawebservice.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\MCAWebService\</RelPath>
+      <UpdateFromURL>http://autcclone01.corpnet.auo.com/mca/service/mcawebservice.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>MVC_TemplateProject_MCAWebService_MCAWebService</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>4</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>4524</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:19711/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

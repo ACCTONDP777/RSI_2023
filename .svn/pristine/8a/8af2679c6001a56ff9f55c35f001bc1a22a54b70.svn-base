@@ -1,0 +1,593 @@
+2018-04-19 09:51:39,652 [ 6] INFO  --Begin:獲取Item_Configs資訊 - 【GetBPS_Item_Configs】:select organization_id, organization_code, item_category, item_id, item_no, item_description, 
+                                               uom, vendor_id, vendor_site_id, vendor_name, vendor_site_code, lead_time, ship_days, 
+                                               ship_area, packing_type, packing_qty, moq, safety_stock, safety_stock_to_vendor, usage,
+                                               created_by, created_date, last_updated_by, last_updated_date, vendor_code, active 
+                                               from c_bps_item_config
+
+2018-04-19 09:51:40,697 [ 6] INFO  --End:獲取Item_Configs資訊 - Completed
+2018-04-19 10:22:09,533 [ 8] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 10:22:11,049 [ 8] ERROR 取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+Oracle.ManagedDataAccess.Client.OracleException (0x80004005): ORA-00942: 表格或視觀表不存在
+   於 RSI.Models.Utility.OraDBAdapter.GetDataTable(String constr, String sql, OracleParameter[] param) 於 D:\RSI\RSI\Models\Utility\OraDBAdapter.cs: 行 68
+   於 RSI.Models.Utility.SqlExcute.GetOraDateTable(StringBuilder sqlText, OracleParameter[] param, String className, String classInfo) 於 D:\RSI\RSI\Models\Utility\SqlExcute.cs: 行 88
+2018-04-19 10:22:33,428 [ 6] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 10:22:33,662 [ 6] ERROR 取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+Oracle.ManagedDataAccess.Client.OracleException (0x80004005): ORA-00942: 表格或視觀表不存在
+   於 RSI.Models.Utility.OraDBAdapter.GetDataTable(String constr, String sql, OracleParameter[] param) 於 D:\RSI\RSI\Models\Utility\OraDBAdapter.cs: 行 68
+   於 RSI.Models.Utility.SqlExcute.GetOraDateTable(StringBuilder sqlText, OracleParameter[] param, String className, String classInfo) 於 D:\RSI\RSI\Models\Utility\SqlExcute.cs: 行 88
+2018-04-19 10:23:46,839 [ 8] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 10:23:47,784 [ 8] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 10:24:20,875 [15] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 10:24:20,890 [15] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 10:27:31,189 [ 7] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 10:27:32,166 [ 7] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 10:27:53,049 [23] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 10:27:53,094 [23] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 10:33:07,433 [14] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 10:33:07,437 [14] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 10:35:34,954 [15] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 10:35:34,958 [15] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 10:44:46,459 [41] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 10:44:46,466 [41] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 10:46:13,795 [42] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 10:46:13,801 [42] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 10:48:38,308 [39] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 10:48:38,315 [39] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 10:55:17,728 [53] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 10:55:17,734 [53] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 11:00:20,984 [68] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 11:00:20,991 [68] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 11:02:51,183 [69] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 11:02:51,187 [69] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 11:06:20,139 [73] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 11:06:20,142 [73] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 11:06:47,858 [73] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 11:06:47,864 [73] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 11:07:35,991 [77] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 11:07:35,998 [77] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 11:07:37,885 [96] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 11:07:37,888 [96] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 11:07:55,747 [73] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 11:07:55,753 [73] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 11:17:29,389 [81] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 11:17:30,404 [81] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 11:20:13,905 [32] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 11:20:15,282 [32] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 11:25:52,142 [76] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 11:25:52,179 [76] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 13:39:12,280 [ 6] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 13:39:13,285 [ 6] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 13:40:35,205 [11] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 13:40:35,226 [11] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 13:42:41,477 [13] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 13:42:41,480 [13] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 13:43:50,435 [13] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 13:43:50,439 [13] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 13:44:18,999 [18] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 13:44:19,004 [18] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 13:44:52,008 [ 6] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 13:44:52,011 [ 6] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 13:46:19,516 [29] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 13:46:19,522 [29] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 13:46:27,797 [22] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 13:46:27,803 [22] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 13:49:26,973 [15] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 13:49:27,925 [15] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 13:51:31,055 [10] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 13:51:31,078 [10] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 13:53:54,624 [10] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 13:53:54,628 [10] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 13:55:47,049 [ 8] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 13:55:47,056 [ 8] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 13:56:49,776 [ 6] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 13:56:49,780 [ 6] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 13:58:06,629 [ 9] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 13:58:06,636 [ 9] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 13:58:41,683 [15] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 13:58:41,689 [15] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 13:59:03,420 [12] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 13:59:03,426 [12] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:01:30,483 [12] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 14:01:30,490 [12] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:02:28,429 [37] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 14:02:28,436 [37] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:04:49,214 [31] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 14:04:49,221 [31] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:05:51,336 [44] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 14:05:51,341 [44] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:06:16,791 [12] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 14:06:16,793 [12] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:06:49,528 [44] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 14:06:49,534 [44] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:09:01,070 [37] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 14:09:01,073 [37] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:09:43,727 [44] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 14:09:44,680 [44] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:10:32,387 [37] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 14:10:33,352 [37] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:13:59,190 [42] INFO  --Begin:?取ERP工??据 - 【GetWIPInfo】:select wo.wip_entity_name wo_name,wo.date_released,wo.assembly,wo.bom_version,wo.start_quantity,wo.quantity_completed,wo.quantity_shipped
+                                 from gmfg.wip_gib_version wo
+                                 where wo.p_id=:p_id
+                                 and wo.wip_entity_name like 'S0%'
+                                 and wo.flag='Y'
+
+2018-04-19 14:13:59,240 [42] INFO  --End:?取ERP工??据 - Completed
+2018-04-19 14:14:02,221 [21] INFO  --Begin:獲取Item_Configs資訊 - 【GetBPS_Item_Configs】:select organization_id, organization_code, item_category, item_id, item_no, item_description, 
+                                               uom, vendor_id, vendor_site_id, vendor_name, vendor_site_code, lead_time, ship_days, 
+                                               ship_area, packing_type, packing_qty, moq, safety_stock, safety_stock_to_vendor, usage,
+                                               created_by, created_date, last_updated_by, last_updated_date, vendor_code, active 
+                                               from c_bps_item_config
+
+2018-04-19 14:14:02,238 [21] INFO  --End:獲取Item_Configs資訊 - Completed
+2018-04-19 14:14:06,544 [44] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 14:14:06,553 [44] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:19:31,192 [12] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT * FROM RSI_H_PRODUCT_INFO WHERE RSI_NO = :rsi_no
+
+2018-04-19 14:19:31,199 [12] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:21:49,291 [42] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 14:21:50,314 [42] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:22:22,853 [37] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 14:22:22,916 [37] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:28:59,198 [19] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 14:29:00,142 [19] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:32:01,291 [40] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 14:32:01,316 [40] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:35:21,442 [40] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 14:35:21,445 [40] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:36:58,382 [10] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 14:36:58,388 [10] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:37:02,270 [31] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 14:37:02,276 [31] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:37:48,776 [10] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 14:37:48,779 [10] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:42:21,895 [40] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 14:42:21,898 [40] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:42:54,810 [45] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 14:42:54,814 [45] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:48:46,473 [23] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 14:48:46,477 [23] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:49:49,566 [23] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 14:49:49,570 [23] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 14:59:39,671 [56] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 14:59:39,678 [56] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 15:00:22,854 [63] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 15:00:22,860 [63] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 15:00:36,065 [74] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 15:00:36,072 [74] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 15:02:55,885 [56] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE,  'ACD' RSI_Type
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 15:02:56,842 [56] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 15:04:06,588 [74] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE,  'ACD' RSI_Type
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 15:04:06,614 [74] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 15:25:13,767 [ 7] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE,  'ACD' RSI_Type
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 15:25:14,774 [ 7] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 15:26:37,412 [10] INFO  --Begin:獲取Item_Configs資訊 - 【GetBPS_Item_Configs】:select organization_id, organization_code, item_category, item_id, item_no, item_description, 
+                                               uom, vendor_id, vendor_site_id, vendor_name, vendor_site_code, lead_time, ship_days, 
+                                               ship_area, packing_type, packing_qty, moq, safety_stock, safety_stock_to_vendor, usage,
+                                               created_by, created_date, last_updated_by, last_updated_date, vendor_code, active 
+                                               from c_bps_item_config
+
+2018-04-19 15:26:37,449 [10] INFO  --End:獲取Item_Configs資訊 - Completed
+2018-04-19 15:27:08,938 [ 6] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE,  'ACD' RSI_Type
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 15:27:08,947 [ 6] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 15:27:49,073 [11] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE,  'ACD' RSI_Type
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 15:27:49,077 [11] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 15:28:40,468 [20] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE,  'ACD' RSI_Type
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 15:28:40,471 [20] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 15:28:41,690 [22] INFO  --Begin:?取ERP工??据 - 【GetWIPInfo】:select wo.wip_entity_name wo_name,wo.date_released,wo.assembly,wo.bom_version,wo.start_quantity,wo.quantity_completed,wo.quantity_shipped
+                                 from gmfg.wip_gib_version wo
+                                 where wo.p_id=:p_id
+                                 and wo.wip_entity_name like 'S0%'
+                                 and wo.flag='Y'
+
+2018-04-19 15:28:41,728 [22] INFO  --End:?取ERP工??据 - Completed
+2018-04-19 15:36:13,512 [41] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE,  'ACD' RSI_Type
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 15:36:13,519 [41] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 15:36:32,132 [28] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE,  'ACD' RSI_Type
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 15:36:32,138 [28] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 16:13:48,832 [ 9] INFO  --Begin:?取ERP工??据 - 【GetWIPInfo】:select wo.wip_entity_name wo_name,wo.date_released,wo.assembly,wo.bom_version,wo.start_quantity,wo.quantity_completed,wo.quantity_shipped
+                                 from gmfg.wip_gib_version wo
+                                 where wo.p_id=:p_id
+                                 and wo.wip_entity_name like 'S0%'
+                                 and wo.flag='Y'
+
+2018-04-19 16:13:50,295 [ 9] INFO  --End:?取ERP工??据 - Completed
+2018-04-19 16:13:53,116 [10] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE,  'ACD' RSI_Type
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 16:13:53,207 [10] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 16:14:58,951 [ 6] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE,  'ACD' RSI_Type
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 16:14:58,960 [ 6] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 16:15:06,686 [ 6] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE,  'ACD' RSI_Type
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 16:15:06,692 [ 6] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 16:29:06,647 [20] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE,  'ACD' RSI_Type
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 16:29:06,675 [20] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 17:16:25,411 [ 9] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE,  'ACD' PartType
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 17:16:26,579 [ 9] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 17:37:03,395 [28] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE,  'ACD' PartType
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 17:37:03,469 [28] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 17:37:07,253 [28] INFO  --Begin:?取ERP工??据 - 【GetWIPInfo】:select wo.wip_entity_name wo_name,wo.date_released,wo.assembly,wo.bom_version,wo.start_quantity,wo.quantity_completed,wo.quantity_shipped
+                                 from gmfg.wip_gib_version wo
+                                 where wo.p_id=:p_id
+                                 and wo.wip_entity_name like 'S0%'
+                                 and wo.flag='Y'
+
+2018-04-19 17:37:07,629 [28] INFO  --End:?取ERP工??据 - Completed
+2018-04-19 17:37:08,861 [18] INFO  --Begin:獲取Item_Configs資訊 - 【GetBPS_Item_Configs】:select organization_id, organization_code, item_category, item_id, item_no, item_description, 
+                                               uom, vendor_id, vendor_site_id, vendor_name, vendor_site_code, lead_time, ship_days, 
+                                               ship_area, packing_type, packing_qty, moq, safety_stock, safety_stock_to_vendor, usage,
+                                               created_by, created_date, last_updated_by, last_updated_date, vendor_code, active 
+                                               from c_bps_item_config
+
+2018-04-19 17:37:08,881 [18] INFO  --End:獲取Item_Configs資訊 - Completed
+2018-04-19 17:37:28,812 [28] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE,  'ACD' PartType
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 17:37:28,815 [28] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 17:37:49,781 [28] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE,  'ACD' PartType
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 17:37:49,784 [28] INFO  --End:取得H_Product_Info資訊 - Completed
+2018-04-19 17:38:26,878 [33] INFO  --Begin:取得H_Product_Info資訊 - 【GetH_Product_InfoEntities】:SELECT RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, TP, MODEL, REF_PRODUCT, MEMO, RFQ_TYPE, BL_NIT, POWER,
+                PM, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PM) AS PM_NAME,
+                PL_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PL_RD) AS PLRD_NAME,
+                ACD_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.ACD_RD) AS ACDRD_NAME,
+                EE_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.EE_RD) AS EERD_NAME,
+                OM_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.OM_RD) AS OMRD_NAME,
+                PACKING_RD, (SELECT DISTINCT EMP_NAME FROM GFIN.EMP_DATA_ALL E WHERE E.EMP_NO = P.PACKING_RD) AS PACKINGRD_NAME,
+                REQUEST_DATE,  'ACD' PartType
+                FROM gpo.RSI_H_PRODUCT_INFO P 
+                WHERE P.RSI_NO =:rsi_no 
+
+2018-04-19 17:38:26,885 [33] INFO  --End:取得H_Product_Info資訊 - Completed

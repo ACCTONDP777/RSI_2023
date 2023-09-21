@@ -1,0 +1,82 @@
+2021-09-29 14:14:26,155 [ 7] INFO  --Begin:確認RSI是否有啟動過表單 - 【Check_RSI_Status】:select count(*) as count
+                                   from gpo.rsi_h_product_info t 
+                                  where rfq_no = :rfq_no 
+                                    and rfq_ver = :rfq_ver
+                                    and eval_status = 'N' 
+
+2021-09-29 14:14:26,874 [ 7] INFO  --End:確認RSI是否有啟動過表單 - Completed
+2021-09-29 14:14:26,874 [ 7] INFO  --Begin: - 【InsertLog】:INSERT INTO RSI_H_SQL_LOG(PKG_NAME, PRC_NAME, STEP_NAME, SQL_LOG, LM_TIME, LM_USER) 
+                                    VALUES (:para1, :para2, :para3, :para4, sysdate, 'SYSTEM') 
+
+2021-09-29 14:14:26,905 [ 7] INFO   --End: - Completed
+2021-09-29 14:14:26,905 [ 7] INFO  --Begin:確認RSI是否存在 - 【Check_RSI_Exists】:select count(*) as count
+                                   from gpo.rsi_h_product_info t 
+                                  where rfq_no = :rfq_no 
+                                    and rfq_ver = :rfq_ver 
+
+2021-09-29 14:14:26,905 [ 7] INFO  --End:確認RSI是否存在 - Completed
+2021-09-29 14:14:26,921 [ 7] INFO  --Begin:GetRSI_NO - 【GetRSI_NO】:select max(rsi_no) rsi_no from RSI_H_PRODUCT_INFO where rsi_no like :rsi_no
+
+2021-09-29 14:14:26,921 [ 7] INFO  --End:GetRSI_NO - Completed
+2021-09-29 14:14:26,921 [ 7] INFO  --Begin:InsertH_Product_Info方法 - 【InsertH_Product_Info】:INSERT INTO RSI_H_PRODUCT_INFO
+                                  (RSI_NO, BU, PROJECT_NAME, RFQ_NO, RFQ_VER, APPLY_TYPE, LCM, 
+                                   TP, MODEL, REF_PRODUCT_RFQ, APPLY_REASON, RFQ_TYPE, BL_NIT, POWER, PM, PL_RD,
+                                   ACD_RD, EE_RD, OM_RD, PACKING_RD, TP_ACD_RD, TP_EE_RD, TP_OM_RD,
+                                   REQUEST_DATE, RSI_STATUS, REF_PRODUCT, REF_PRODUCT_MFG, REF_RSI_NO, CREATED_DATE,
+                                   REF_RFQ_NO, REF_RFQ_VER, EVAL_ACD, EVAL_OM, EVAL_EE, EVAL_PACKING, EVAL_TPACD, EVAL_TPOM,
+                                   EVAL_TPEE, EVAL_STATUS, BIDDING_PROJECT, SOURCING_POOL_NAME, PROCESS_TYPE, PRODUCT_COMBINATION_NAME, 
+                                   PRODUCT_TYPE_NAME, PROCESS_CLASS, ARRAY_FAB, JI_FAB, MODULE_FAB, SIZE_INCH, SURFACE_TREATMENT, 
+                                   SOP_YEAR, SOP_QUARTERLY, SOP_MONTH, RESOLUTION, PM_LCD_TYPE, PM_BRIGHTNESS, FCST_QTY, SAMPLE_REQUEST, SAMPLE_REQUEST_DATE, SAMPLE_REQUEST_QTY) 
+                                VALUES 
+                                  (:rsi_no, :bu, :project_name, :rfq_no, :rfq_ver, :apply_type, :lcm, :tp, :model, :ref_product_rfq,
+                                   :apply_reason, :rfq_type, :bl_nit, :power, :pm, :pl_rd, :acd_rd, :ee_rd, :om_rd, :packing_rd,
+                                   :tp_acd_rd, :tp_ee_rd, :tp_om_rd, TO_DATE(:request_date,  'yyyy/mm/dd'), 
+                                   :rsi_status, :ref_product, :ref_product_mfg, :ref_rsi_no, SYSDATE,
+                                   :ref_rfq_no, :ref_rfq_ver, :eval_acd, :eval_om, :eval_ee, :eval_packing, :eval_tpacd, :eval_tpom,
+                                   :eval_tpee, :eval_status , :bidding_project, :sourcing_pool_name, :process_type, :product_combination_name, 
+                                   :product_type_name, :process_class, :array_fab, :ji_fab, :module_fab, :size_inch, :surface_treatment, 
+                                   :sop_year, :sop_quarterly, :sop_month, :resolution, :pm_lcd_type, :pm_brightness, :fcst_qty, :sample_request, :sample_request_date, :sample_request_qty) 
+
+2021-09-29 14:14:26,921 [ 7] INFO  --End:InsertH_Product_Info方法 - Completed
+2021-09-29 14:15:42,691 [16] INFO  --Begin:確認RSI是否有啟動過表單 - 【Check_RSI_Status】:select count(*) as count
+                                   from gpo.rsi_h_product_info t 
+                                  where rfq_no = :rfq_no 
+                                    and rfq_ver = :rfq_ver
+                                    and eval_status = 'N' 
+
+2021-09-29 14:15:42,691 [16] INFO  --End:確認RSI是否有啟動過表單 - Completed
+2021-09-29 14:15:42,691 [16] INFO  --Begin: - 【InsertLog】:INSERT INTO RSI_H_SQL_LOG(PKG_NAME, PRC_NAME, STEP_NAME, SQL_LOG, LM_TIME, LM_USER) 
+                                    VALUES (:para1, :para2, :para3, :para4, sysdate, 'SYSTEM') 
+
+2021-09-29 14:15:42,691 [16] INFO   --End: - Completed
+2021-09-29 14:15:42,691 [16] INFO  --Begin:Update_Product_Info_Status方法 - 【Update_Product_Info_Status】:update gpo.rsi_h_product_info    set        acd_rd = :acd_rd, eval_acd = :eval_acd,        ee_rd = :ee_rd, eval_ee = :eval_ee,        om_rd = :om_rd, eval_om = :eval_om,        packing_rd = :packing_rd, eval_packing = :eval_packing,        tp_acd_rd = :tp_acd_rd, eval_tpacd = :eval_tpacd,        tp_ee_rd = :tp_ee_rd, eval_tpee = :eval_tpee,        tp_om_rd = :tp_om_rd, eval_tpom = :eval_tpom,    rsi_status = 'ContinueRSI'  where rsi_no = (select distinct rsi_no                    from gpo.rsi_h_product_info                   where rfq_no = :rfq_no                     and rfq_ver = :rfq_ver                ) 
+
+2021-09-29 14:15:42,691 [16] INFO  --End:Update_Product_Info_Status方法 - Completed
+2021-09-29 14:51:12,772 [ 7] INFO  --Begin:確認RSI是否有啟動過表單 - 【Check_RSI_Status】:select count(*) as count
+                                   from gpo.rsi_h_product_info t 
+                                  where rfq_no = :rfq_no 
+                                    and rfq_ver = :rfq_ver
+                                    and eval_status = 'N' 
+
+2021-09-29 14:51:13,194 [ 7] INFO  --End:確認RSI是否有啟動過表單 - Completed
+2021-09-29 14:51:13,194 [ 7] INFO  --Begin: - 【InsertLog】:INSERT INTO RSI_H_SQL_LOG(PKG_NAME, PRC_NAME, STEP_NAME, SQL_LOG, LM_TIME, LM_USER) 
+                                    VALUES (:para1, :para2, :para3, :para4, sysdate, 'SYSTEM') 
+
+2021-09-29 14:51:13,210 [ 7] INFO   --End: - Completed
+2021-09-29 14:51:13,210 [ 7] INFO  --Begin:Update_Product_Info_Status方法 - 【Update_Product_Info_Status】:update gpo.rsi_h_product_info    set        acd_rd = :acd_rd, eval_acd = :eval_acd,        ee_rd = :ee_rd, eval_ee = :eval_ee,        om_rd = :om_rd, eval_om = :eval_om,        packing_rd = :packing_rd, eval_packing = :eval_packing,        tp_acd_rd = :tp_acd_rd, eval_tpacd = :eval_tpacd,        tp_ee_rd = :tp_ee_rd, eval_tpee = :eval_tpee,        tp_om_rd = :tp_om_rd, eval_tpom = :eval_tpom,    rsi_status = 'ContinueRSI'  where rsi_no = (select distinct rsi_no                    from gpo.rsi_h_product_info                   where rfq_no = :rfq_no                     and rfq_ver = :rfq_ver                ) 
+
+2021-09-29 14:51:13,210 [ 7] INFO  --End:Update_Product_Info_Status方法 - Completed
+2021-09-29 14:54:53,779 [ 7] INFO  --Begin:確認RSI是否有啟動過表單 - 【Check_RSI_Status】:select count(*) as count
+                                   from gpo.rsi_h_product_info t 
+                                  where rfq_no = :rfq_no 
+                                    and rfq_ver = :rfq_ver
+                                    and eval_status = 'N' 
+
+2021-09-29 14:54:53,779 [ 7] INFO  --End:確認RSI是否有啟動過表單 - Completed
+2021-09-29 14:54:53,779 [ 7] INFO  --Begin: - 【InsertLog】:INSERT INTO RSI_H_SQL_LOG(PKG_NAME, PRC_NAME, STEP_NAME, SQL_LOG, LM_TIME, LM_USER) 
+                                    VALUES (:para1, :para2, :para3, :para4, sysdate, 'SYSTEM') 
+
+2021-09-29 14:54:53,779 [ 7] INFO   --End: - Completed
+2021-09-29 14:54:53,779 [ 7] INFO  --Begin:Update_Product_Info_Status方法 - 【Update_Product_Info_Status】:update gpo.rsi_h_product_info    set        acd_rd = :acd_rd, eval_acd = :eval_acd,        ee_rd = :ee_rd, eval_ee = :eval_ee,        om_rd = :om_rd, eval_om = :eval_om,        packing_rd = :packing_rd, eval_packing = :eval_packing,        tp_acd_rd = :tp_acd_rd, eval_tpacd = :eval_tpacd,        tp_ee_rd = :tp_ee_rd, eval_tpee = :eval_tpee,        tp_om_rd = :tp_om_rd, eval_tpom = :eval_tpom,    rsi_status = 'ContinueRSI'  where rsi_no = (select distinct rsi_no                    from gpo.rsi_h_product_info                   where rfq_no = :rfq_no                     and rfq_ver = :rfq_ver                ) 
+
+2021-09-29 14:54:53,779 [ 7] INFO  --End:Update_Product_Info_Status方法 - Completed

@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://flmtest.corpnet.auo.com/FLMPublic/FLM.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Com.Auo.FLM.Basic.Lib.AppCode.Utility" />
+  <xs:import schemaLocation="https://flmtest.corpnet.auo.com/FLMPublic/FLM.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:element name="UploadFile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sys_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="file_stream" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="file_name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="biz_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="security_level" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mark_style" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="preconvert_pdf" type="xs:boolean" />
+        <xs:element minOccurs="0" name="emp_no" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="remark" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UploadFileResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UploadFileResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="file_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="file_name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="emp_no" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="get_pdf" type="xs:boolean" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Com.Auo.FLM.Basic.Lib.AppCode.Utility" minOccurs="0" name="MyPDFSetting" nillable="true" type="q1:PDFFileSetting" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFileResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetFileResult" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="file_name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFileforExternal">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="file_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="file_name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="emp_no" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="get_pdf" type="xs:boolean" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Com.Auo.FLM.Basic.Lib.AppCode.Utility" minOccurs="0" name="MyPDFSetting" nillable="true" type="q2:PDFFileSetting" />
+        <xs:element minOccurs="0" name="strExternalCompany" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFileforExternalResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetFileforExternalResult" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="file_name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFileWithMarkStyle">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="file_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="file_name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="emp_no" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="get_pdf" type="xs:boolean" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Com.Auo.FLM.Basic.Lib.AppCode.Utility" minOccurs="0" name="MyMarkStyle" nillable="true" type="q3:WaterMarkerFontStyle" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Com.Auo.FLM.Basic.Lib.AppCode.Utility" minOccurs="0" name="MyPDFSetting" nillable="true" type="q4:PDFFileSetting" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFileWithMarkStyleResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetFileWithMarkStyleResult" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="file_name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFileWithPictureMark">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="file_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="file_name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="emp_no" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="get_pdf" type="xs:boolean" />
+        <xs:element minOccurs="0" name="pic_fileID" nillable="true" type="xs:string" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Com.Auo.FLM.Basic.Lib.AppCode.Utility" minOccurs="0" name="MyPictureStyle" nillable="true" type="q5:WaterMarkerPictureStyle" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Com.Auo.FLM.Basic.Lib.AppCode.Utility" minOccurs="0" name="MyPDFSetting" nillable="true" type="q6:PDFFileSetting" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFileWithPictureMarkResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetFileWithPictureMarkResult" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="file_name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConvertToPDF">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="strSysID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strBizID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strFileID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="location" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConvertToPDFResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ConvertToPDFResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteFile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="file_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="emp_no" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteFileResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteFileResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteFileByBizID">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sys_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="biz_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="emp_no" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteFileByBizIDResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteFileByBizIDResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetFileAttribute">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sys_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="biz_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="file_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="security_level" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mark_style" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="emp_no" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetFileAttributeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SetFileAttributeResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFileIDByBizID">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sys_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="biz_id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFileIDByBizIDResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetFileIDByBizIDResult" nillable="true" type="q7:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckFileID">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="file_id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckFileIDResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CheckFileIDResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckPDFStatus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sys_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="biz_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="file_id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckPDFStatusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CheckPDFStatusResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataTable" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+              <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEncryptUrl">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="queryString" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="user_name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEncryptUrlResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetEncryptUrlResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPDFFileSetting">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPDFFileSettingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Com.Auo.FLM.Basic.Lib.AppCode.Utility" minOccurs="0" name="GetPDFFileSettingResult" nillable="true" type="q8:PDFFileSetting" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWaterMarkerFontStyle">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWaterMarkerFontStyleResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Com.Auo.FLM.Basic.Lib.AppCode.Utility" minOccurs="0" name="GetWaterMarkerFontStyleResult" nillable="true" type="q9:WaterMarkerFontStyle" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFileGroup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sys_id" nillable="true" type="xs:string" />
+        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="biz_id_list" nillable="true" type="q10:ArrayOfstring" />
+        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="file_id_list" nillable="true" type="q11:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFileGroupResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetFileGroupResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataTable" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+              <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DecryptFile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="empNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sys_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="file_stream" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="file_name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="connection_string" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="provider_name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DecryptFileResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DecryptFileResult" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EncryptFile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sys_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="file_stream" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="file_name" nillable="true" type="xs:string" />
+        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="user_and_rights" nillable="true" type="q12:ArrayOfArrayOfstring" />
+        <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="org_and_rights" nillable="true" type="q13:ArrayOfArrayOfstring" />
+        <xs:element minOccurs="0" name="valid_days" type="xs:int" />
+        <xs:element minOccurs="0" name="offline_read" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EncryptFileResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="EncryptFileResult" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EncryptFileByEmail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sys_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="file_stream" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="file_name" nillable="true" type="xs:string" />
+        <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="email_and_rights" nillable="true" type="q14:ArrayOfArrayOfstring" />
+        <xs:element minOccurs="0" name="valid_days" type="xs:int" />
+        <xs:element minOccurs="0" name="offline_read" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EncryptFileByEmailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="EncryptFileByEmailResult" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EncryptFileWithOption">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sys_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="file_stream" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="file_name" nillable="true" type="xs:string" />
+        <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="user_and_rights" nillable="true" type="q15:ArrayOfArrayOfstring" />
+        <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="org_and_rights" nillable="true" type="q16:ArrayOfArrayOfstring" />
+        <xs:element minOccurs="0" name="valid_days" type="xs:int" />
+        <xs:element minOccurs="0" name="offline_read" type="xs:boolean" />
+        <xs:element minOccurs="0" name="encrypt_mode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EncryptFileWithOptionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="EncryptFileWithOptionResult" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EncryptFileByEmailWithOption">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sys_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="file_stream" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="file_name" nillable="true" type="xs:string" />
+        <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="email_and_rights" nillable="true" type="q17:ArrayOfArrayOfstring" />
+        <xs:element minOccurs="0" name="valid_days" type="xs:int" />
+        <xs:element minOccurs="0" name="offline_read" type="xs:boolean" />
+        <xs:element minOccurs="0" name="encrypt_mode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EncryptFileByEmailWithOptionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="EncryptFileByEmailWithOptionResult" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckFileEncrypt">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sys_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="file_stream" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="file_name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckFileEncryptResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CheckFileEncryptResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFileEncryptInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sys_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="file_stream" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="file_name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFileEncryptInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetFileEncryptInfoResult" nillable="true" type="q18:ArrayOfArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEncryptFileByFileID">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sys_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="file_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="file_name" nillable="true" type="xs:string" />
+        <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="user_and_rights" nillable="true" type="q19:ArrayOfArrayOfstring" />
+        <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="org_and_rights" nillable="true" type="q20:ArrayOfArrayOfstring" />
+        <xs:element minOccurs="0" name="valid_days" type="xs:int" />
+        <xs:element minOccurs="0" name="offline_read" type="xs:boolean" />
+        <xs:element minOccurs="0" name="emp_no" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEncryptFileByFileIDResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetEncryptFileByFileIDResult" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateFileInformation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sys_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="biz_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="file_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="new_biz_id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="edit_by" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="allow_handle" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="view_password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="security_level" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="mark_style" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateFileInformationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateFileInformationResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
